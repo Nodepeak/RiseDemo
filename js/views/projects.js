@@ -4,9 +4,7 @@ function renderProjects() {
     ${withDataState(() => `<div class="tracking-table-wrap"><table class="ptable"><thead><tr><th>Project</th><th>Fase</th><th>Woningen</th><th>Volgende mijlpaal</th><th>Signalen</th></tr></thead><tbody>
     ${projects
       .map((e) => {
-        let n = signals.filter(
-          (a) => a.project === e.id && !state.dismissed[a.id],
-        );
+        const n = e.id === attentionProjectId ? openSignals().filter((signal) => signal.project === e.id) : [];
         const next = primaryProjectMilestone(e.id);
         const planningHref = pageHref({
           view: "project",
@@ -17,7 +15,7 @@ function renderProjects() {
         <td><span class="np-mono np-mono--light">${e.id.toUpperCase()}</span><a href="${pageHref({ view: "project", projectId: e.id, section: "signalen" })}" data-action="nav" data-view="project" data-project="${e.id}" data-section="signalen"><b>${e.name}</b></a><em>${e.place}</em></td>
         <td>${e.phase}</td><td class="tabular">${e.homes}</td><td class="project-next"><a href="${planningHref}" data-action="nav" data-view="project" data-project="${e.id}" data-section="planning">${e.next} · ${formatPlanDate(next.date)}</a>
           <span>${renderMilestoneStatus(next.status)} <small>${milestoneDateNote(next)}</small></span></td>
-        <td>${n.map((a) => `<span class="mini-cert cert--${a.level}" title="${a.title}"></span>`).join("")} <span class="muted">${n.length}</span></td></tr>`;
+        <td>${n.length ? `${n.map((a) => `<span class="mini-cert cert--${a.level}" title="${a.title}"></span>`).join("")} <span class="muted">${n.length}</span>` : ""}</td></tr>`;
       })
       .join("")}
     ${renderScaledProjectRows()}
@@ -99,7 +97,7 @@ function renderScaledProjectRows() {
       <td><span class="np-mono np-mono--light">${escapeHtml(project.name.slice(0, 2))}</span><b>${escapeHtml(project.name)}</b><em>${escapeHtml(project.place)}</em></td>
       <td>${escapeHtml(project.phase)}</td><td class="tabular">${project.homes}</td>
       <td class="project-next"><a>${escapeHtml(project.next)} · ${formatPlanDate(project.date)}</a><span>${renderMilestoneStatus(project.status)}</span></td>
-      <td>${Array.from({ length: Math.min(project.signals, 4) }, (_, i) => `<span class="mini-cert cert--${["vast", "vermoed", "check"][i % 3]}"></span>`).join("")} <span class="muted">${project.signals}</span></td>
+      <td></td>
     </tr>`)
     .join("");
 }

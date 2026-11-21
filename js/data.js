@@ -459,7 +459,7 @@ const dossierGroups = {
       "Hoe wij werken: werkwijzen, formats, checklists en standaarddocumenten. Rise gebruikt dit als referentie bij projectvragen.",
   },
   kaders: {
-    name: "Kaders",
+    name: "Beleidsdossier",
     intro:
       "Beleid, normen en uitgangspunten waar onze projecten aan moeten voldoen. Werknaam was “Beleidsdossiers”.",
   },

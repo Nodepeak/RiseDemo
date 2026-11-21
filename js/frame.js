@@ -34,9 +34,7 @@ function renderNavigation() {
       ${projects
         .map((a) => {
           let s = state.expanded[a.id],
-            o = signals.filter(
-              (r) => r.project === a.id && !state.dismissed[r.id],
-            ).length;
+            o = a.id === attentionProjectId ? openSignals().filter((signal) => signal.project === a.id).length : 0;
           return `<div class="np ${e(a.id) ? "is-current" : ""}">
           <button class="np-head" data-action="toggle-project" data-id="${a.id}" aria-expanded="${!!s}">
             <span class="np-mono">${a.id.toUpperCase()}</span><span class="np-name">${a.name}</span>
@@ -150,7 +148,7 @@ function matchingProjects(query) {
 
 const contextFiles = [
   ["Bedrijfsdossier", "Werkwijzen en standaarden", "folder"],
-  ["Kaders", "Beleid en normen", "folder"],
+  ["Beleidsdossier", "Beleid en normen", "folder"],
   ["Bestand uploaden", "PDF, Word, mail", "clip", "aantekeningen-overleg.docx"],
 ];
 
@@ -334,6 +332,6 @@ function renderScaledNavProjects() {
   if (!isScaled()) return "";
   const extra = scaleData().extraProjects;
   const shown = state.navAllProjects ? extra : extra.slice(0, 4);
-  return `${shown.map((project) => `<div class="np"><button class="np-head" data-action="scale-item"><span class="np-mono">${escapeHtml(project.name.slice(0, 2))}</span><span class="np-name">${escapeHtml(project.name)}</span>${project.signals ? `<span class="np-count">${project.signals}</span>` : ""}</button></div>`).join("")}
+  return `${shown.map((project) => `<div class="np"><button class="np-head" data-action="scale-item"><span class="np-mono">${escapeHtml(project.name.slice(0, 2))}</span><span class="np-name">${escapeHtml(project.name)}</span></button></div>`).join("")}
     <button class="nav-subitem nav-more" data-action="nav-more" aria-expanded="${!!state.navAllProjects}">${icon(state.navAllProjects ? "back" : "chev", "nav-more-ic")}<span>${state.navAllProjects ? "Minder tonen" : `Nog ${extra.length - shown.length} projecten`}</span></button>`;
 }

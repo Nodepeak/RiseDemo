@@ -355,6 +355,8 @@ const signalFollowup = (id) => ({
   status: state.actionStatus["followup:" + id] ?? state.signalFollowups[id]?.status ?? "Open",
 });
 
+const attentionProjectId = "dk";
+
 const openSignals = (items = signals) => items.filter(
   ({ id }) => !state.dismissed[id] && signalFollowup(id).status !== "Afgerond",
 );
