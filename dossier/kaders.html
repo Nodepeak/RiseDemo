@@ -1,0 +1,241 @@
+<!doctype html>
+<!-- Gegenereerd met input/tools/genereer-html.cjs. De interactieve weergaven staan in js/views/. -->
+<html lang="nl" data-page="dossier/kaders.html">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kaders · Rise</title>
+  <link rel="icon" href="../assets/beeldmerk.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/rise.css">
+  <script src="../js/data.js" defer></script>
+  <script src="../js/project-tracking.js" defer></script>
+  <script src="../js/library-data.js" defer></script>
+  <script src="../js/replies.js" defer></script>
+  <script src="../js/components.js" defer></script>
+  <script src="../js/routes.js" defer></script>
+  <script src="../js/state.js" defer></script>
+  <script src="../js/views/desk.js" defer></script>
+  <script src="../js/views/projects.js" defer></script>
+  <script src="../js/views/actions.js" defer></script>
+  <script src="../js/views/meetings.js" defer></script>
+  <script src="../js/views/milestones.js" defer></script>
+  <script src="../js/views/signals.js" defer></script>
+  <script src="../js/views/documents.js" defer></script>
+  <script src="../js/views/library.js" defer></script>
+  <script src="../js/views/conversations.js" defer></script>
+  <script src="../js/views/settings.js" defer></script>
+  <script src="../js/frame.js" defer></script>
+  <script src="../js/navigation.js" defer></script>
+  <script src="../js/app.js" defer></script>
+</head>
+<body>
+  <div id="app" class="app">
+<aside class="nav" id="demo-navigation">
+    <a class="nav-logo" href="../index.html" data-action="nav" data-view="bureau" aria-label="Rise"><img src="../assets/logo.svg" alt="Rise" /></a>
+    <nav class="nav-main">
+      <a class="nav-item " data-action="nav" href="../index.html" data-view="bureau"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3zM3 9h18M10 9v10M13 12h5M13 15h3"/></svg><span>Overzicht</span></a>
+      <a class="nav-item " data-action="nav" href="../gesprekken.html" data-view="gesprekken"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg><span>Gesprekken</span></a>
+      <a class="nav-item " data-action="nav" href="../acties.html" data-view="acties"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><span>Acties</span></a>
+      <button class="nav-item is-in" data-action="toggle-dossier" aria-expanded="true"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h7l2 2h9v11H3z"/></svg><span>Dossier</span><svg class="ic caret is-open" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+      <div class="nav-sub"><a class="nav-subitem " data-action="nav" href="../dossier/bedrijf.html" data-view="dossier" data-dossier="bedrijf">Bedrijfsdossier</a><a class="nav-subitem is-on" data-action="nav" href="../dossier/kaders.html" data-view="dossier" data-dossier="kaders">Kaders</a></div>
+    </nav>
+    <div class="nav-label"><span>Projecten</span><a data-action="tab" href="../projecten/index.html" data-view="projecten" >Alle</a></div>
+    <nav class="nav-projects">
+      <div class="np ">
+          <button class="np-head" data-action="toggle-project" data-id="hk" aria-expanded="false">
+            <span class="np-mono">HK</span><span class="np-name">Havenkwartier</span>
+            <span class="np-count">2</span><svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+          </button>
+          
+        </div><div class="np ">
+          <button class="np-head" data-action="toggle-project" data-id="dk" aria-expanded="false">
+            <span class="np-mono">DK</span><span class="np-name">De Kade</span>
+            <span class="np-count">2</span><svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+          </button>
+          
+        </div><div class="np ">
+          <button class="np-head" data-action="toggle-project" data-id="pz" aria-expanded="false">
+            <span class="np-mono">PZ</span><span class="np-name">Parkzijde</span>
+            <span class="np-count">1</span><svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+          </button>
+          
+        </div><div class="np ">
+          <button class="np-head" data-action="toggle-project" data-id="mw" aria-expanded="false">
+            <span class="np-mono">MW</span><span class="np-name">Molenweide</span>
+            <span class="np-count">1</span><svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+          </button>
+          
+        </div>
+    </nav>
+    <div class="nav-foot">
+      <a class="nav-item " data-action="nav" href="../instellingen.html" data-view="instellingen"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/></svg><span>Instellingen</span></a>
+    </div>
+  </aside>
+  
+  <main class="main view-dossier">
+    <header class="top">
+    <button class="mobile-menu icon-btn" data-action="mobile-nav" aria-label="Navigatiemenu" aria-controls="demo-navigation" aria-expanded="false"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    <div class="crumbs"><span class="">Dossier</span><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg><span class="is-last">Kaders</span></div>
+    <button class="avatar" id="account-trigger" aria-expanded="false" data-action="avatar" aria-label="Account van Maartje Hoekstra">MH</button>
+  </header>
+    <div class="content" id="content"><section class="page library">
+    <header class="page-head"><div><p class="kicker">Dossier</p><h1>Kaders</h1>
+    <p>Zoek in de lokale documentcatalogus.</p></div></header>
+    <div class="library-tools">
+      <label for="library-search">Zoek documenten</label>
+      <input id="library-search" type="search" placeholder="Zoek op titel, onderwerp of locatie" value="">
+      <div class="library-filters"><div class="library-filter">
+      <span id="library-label-country">Land</span>
+      <button class="select-trigger " id="library-country"
+        aria-labelledby="library-label-country library-value-country" aria-expanded="false" aria-controls="choice-popover"
+        data-action="pop-library" data-key="country">
+        <span id="library-value-country">Nederland</span><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+      </button></div><div class="library-filter">
+      <span id="library-label-province">Provincie</span>
+      <button class="select-trigger " id="library-province"
+        aria-labelledby="library-label-province library-value-province" aria-expanded="false" aria-controls="choice-popover"
+        data-action="pop-library" data-key="province">
+        <span id="library-value-province">Alle</span><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+      </button></div><div class="library-filter">
+      <span id="library-label-municipality">Gemeente</span>
+      <button class="select-trigger " id="library-municipality"
+        aria-labelledby="library-label-municipality library-value-municipality" aria-expanded="false" aria-controls="choice-popover"
+        data-action="pop-library" data-key="municipality">
+        <span id="library-value-municipality">Alle</span><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+      </button></div><div class="library-filter">
+      <span id="library-label-topic">Onderwerp</span>
+      <button class="select-trigger " id="library-topic"
+        aria-labelledby="library-label-topic library-value-topic" aria-expanded="false" aria-controls="choice-popover"
+        data-action="pop-library" data-key="topic">
+        <span id="library-value-topic">Alle</span><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+      </button></div><button class="btn btn--ghost btn--sm" data-action="library-reset">Wis filters</button></div>
+    </div>
+    <div class="library-count" role="status">1.988 documenten</div>
+    <ul class="library-results"><li>
+      <div><span class="library-location">Nederland · Noord-Brabant · Geertruidenberg</span><h2>&quot;Parkeren doen we zo!&quot; Parkeerbeleidsplan Gemeente Geertruidenberg</h2>
+      <p>Gemeente Geertruidenberg · Building Regulations · 2016</p></div>
+    </li><li>
+      <div><span class="library-location">Nederland · Zuid-Holland · Nieuwkoop</span><h2>Aanpassing spelregels dakkapellen en dakopbouwen</h2>
+      <p>Gemeente Nieuwkoop · Welstand · 2011</p></div>
+    </li><li>
+      <div><span class="library-location">Nederland · Zuid-Holland · Wassenaar</span><h2>Aanpassing welstandscriteria zonnepanelen en -collectoren Bijlages 2-4</h2>
+      <p>Gemeente Wassenaar · Building Regulations · 2021</p></div>
+    </li><li>
+      <div><span class="library-location">Nederland · Groningen · Het Hogeland</span><h2>Aanvullende welstandsnota zonnepanelen Eemsmond</h2>
+      <p>Gemeente Het Hogeland · Building Regulations · 2017</p></div>
+    </li><li>
+      <div><span class="library-location">Nederland · Overijssel · Staphorst</span><h2>Aanwijzing toezichthouders fysieke leefomgeving gemeente Staphorst 2026</h2>
+      <p>Gemeente Staphorst · Building Regulations · 2026</p></div>
+    </li><li>
+      <div><span class="library-location">Nederland · Zeeland · Vlissingen</span><h2>Aanwijzingsbesluit Huisvestingsverordening Vlissingen 2023</h2>
+      <p>Gemeente Vlissingen · Building Regulations · 2024</p></div>
+    </li><li>
+      <div><span class="library-location">Nederland · Utrecht · Vijfheerenlanden</span><h2>Aanwijzingslijst adviesrecht en verplichte participatie bij buitenplanse omgevingsplanactiviteiten gemeente Vijfheerenlanden</h2>
+      <p>Gemeente Vijfheerenlanden · Building Regulations · 2026</p></div>
+    </li><li>
+      <div><span class="library-location">Nederland · Noord-Brabant · Geldrop-Mierlo</span><h2>Achtergronden</h2>
+      <p>Gemeente Geldrop-Mierlo · Building Regulations · 2025</p></div>
+    </li><li>
+      <div><span class="library-location">Nederland · Gelderland · Berg en Dal</span><h2>Actieplan wonen</h2>
+      <p>Gemeente Berg en Dal · Building Regulations · 2025</p></div>
+    </li><li>
+      <div><span class="library-location">Nederland · Groningen · Groningen</span><h2>Activiteiten Bindend Adviesrecht</h2>
+      <p>Gemeente Groningen · Building Regulations · 2026</p></div>
+    </li><li>
+      <div><span class="library-location">Nederland</span><h2>Activiteiten en milieuzonering</h2>
+      <p>Vereniging van Nederlandse Gemeenten (VNG) · Building Regulations · 2024</p></div>
+    </li><li>
+      <div><span class="library-location">Nederland · Groningen · Groningen</span><h2>Activiteitenlijst verplichte participatie</h2>
+      <p>Gemeente Groningen · Building Regulations · 2024</p></div>
+    </li><li>
+      <div><span class="library-location">Nederland · Utrecht · Utrecht</span><h2>Actualisatie Groenstructuurplan 2017-2030</h2>
+      <p>Gemeente Utrecht · Building Regulations · 2018</p></div>
+    </li><li>
+      <div><span class="library-location">Nederland · Drenthe · Hoogeveen</span><h2>Actualisatie hoogbouwnotitie</h2>
+      <p>Gemeente Hoogeveen · Building Regulations · 2025</p></div>
+    </li><li>
+      <div><span class="library-location">Nederland · Noord-Brabant · Valkenswaard</span><h2>Actualisatie Parkeervisie Valkenswaard</h2>
+      <p>Gemeente Valkenswaard · Building Regulations · 2023</p></div>
+    </li><li>
+      <div><span class="library-location">Nederland · Zuid-Holland · Rijswijk</span><h2>Actualisatie van de woonvisie 2015-2025</h2>
+      <p>Gemeente Rijswijk · Building Regulations · 2021</p></div>
+    </li><li>
+      <div><span class="library-location">Nederland · Gelderland · Culemborg</span><h2>Actualisatie Woonvisie Culemborg</h2>
+      <p>Gemeente Culemborg · Building Regulations · 2023</p></div>
+    </li><li>
+      <div><span class="library-location">Nederland · Zuid-Holland · 's-Gravenhage</span><h2>Actualisering van de normen ten aanzien van bezonning en windhinder</h2>
+      <p>Gemeente 's-Gravenhage · Building Regulations · 2010</p></div>
+    </li><li>
+      <div><span class="library-location">Nederland · Noord-Brabant · 's-Hertogenbosch</span><h2>Actualisering Welstandsnota 2011</h2>
+      <p>Gemeente 's-Hertogenbosch · Building Regulations · 2011</p></div>
+    </li><li>
+      <div><span class="library-location">Nederland · Fryslân · Leeuwarden</span><h2>Addendum 1 op de Omgevingsvisie Gemeente Leeuwarden - Wonen in de stad</h2>
+      <p>Gemeente Leeuwarden · Building Regulations · 2023</p></div>
+    </li><li>
+      <div><span class="library-location">Nederland · Zuid-Holland · Nieuwkoop</span><h2>Addendum bij de Woonvisie</h2>
+      <p>Gemeente Nieuwkoop · Building Regulations · 2024</p></div>
+    </li><li>
+      <div><span class="library-location">Nederland · Gelderland · Doetinchem</span><h2>Advies bestemming &quot;Wonen en zorg&quot;</h2>
+      <p>Gemeente Doetinchem · Building Regulations · 2017</p></div>
+    </li><li>
+      <div><span class="library-location">Nederland · Overijssel · Zwartewaterland</span><h2>Adviesrecht Omgevingswet</h2>
+      <p>Gemeente Zwartewaterland · Building Regulations · 2024</p></div>
+    </li><li>
+      <div><span class="library-location">Nederland · Utrecht · Utrecht</span><h2>Afspraken klimaatadaptief bouwen Utrecht</h2>
+      <p>Gemeente Utrecht · Building Regulations · 2021</p></div>
+    </li></ul>
+    <nav class="library-pagination" aria-label="Resultaatpagina’s">
+      <button class="btn btn--ghost" data-action="library-page" data-page="0" disabled>Vorige</button>
+      <span>Pagina 1 van 83</span>
+      <button class="btn btn--ghost" data-action="library-page" data-page="2" >Volgende</button>
+    </nav>
+    <details class="library-demo"><summary>Demobronnen gebruikt in Rise-gesprekken</summary><section class="">
+    
+    
+    <div class="split split--docs">
+      <div class="folders"><button class="fl is-on" data-action="folder" data-key="kaders" data-f="Alles"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h7l2 2h9v11H3z"/></svg><span>Alles</span><em>4</em></button><button class="fl " data-action="folder" data-key="kaders" data-f="Wonen &amp; doelgroepen"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h7l2 2h9v11H3z"/></svg><span>Wonen &amp; doelgroepen</span><em>1</em></button><button class="fl " data-action="folder" data-key="kaders" data-f="Mobiliteit"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h7l2 2h9v11H3z"/></svg><span>Mobiliteit</span><em>1</em></button><button class="fl " data-action="folder" data-key="kaders" data-f="Ruimtelijke kwaliteit"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h7l2 2h9v11H3z"/></svg><span>Ruimtelijke kwaliteit</span><em>1</em></button><button class="fl " data-action="folder" data-key="kaders" data-f="Duurzaamheid"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h7l2 2h9v11H3z"/></svg><span>Duurzaamheid</span><em>1</em></button>
+        <button class="fl fl--add" data-action="toast" data-text="Documenten toevoegen (niet in deze demo)"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Documenten toevoegen</span></button>
+      </div>
+      <div class="dossier-list">
+        <label class="dossier-search"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4-4"/></svg><input id="dossier-search" data-key="kaders" type="search" aria-label="Zoek op documentnaam" placeholder="Zoek op documentnaam" value=""></label>
+        <table class="dtable"><thead><tr><th>Document</th><th>Laatste wijziging</th></tr></thead><tbody>
+          <tr data-action="open-doc" data-doc="kd-woonvisie"><td><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg><div>
+              <a href="../documenten/kd-woonvisie.html" data-action="open-doc" data-doc="kd-woonvisie"><b>Woonvisie 2024 — gemeente Schiedam</b></a>
+              
+            </div></td>
+            <td class="num">2024</td></tr><tr data-action="open-doc" data-doc="kd-parkeren"><td><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg><div>
+              <a href="../documenten/kd-parkeren.html" data-action="open-doc" data-doc="kd-parkeren"><b>Parkeernota Schiedam 2026</b></a>
+              
+            </div></td>
+            <td class="num">okt 2026</td></tr><tr data-action="open-doc" data-doc="kd-welstand"><td><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg><div>
+              <a href="../documenten/kd-welstand.html" data-action="open-doc" data-doc="kd-welstand"><b>Welstandsnota Houten 2026</b></a>
+              
+            </div></td>
+            <td class="num">nov 2026</td></tr><tr data-action="open-doc" data-doc="kd-beng"><td><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg><div>
+              <a href="../documenten/kd-beng.html" data-action="open-doc" data-doc="kd-beng"><b>BENG en milieuprestatie (Bbl)</b></a>
+              
+            </div></td>
+            <td class="num">2026</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+  </section></details>
+  </section></div>
+    <div class="dock">
+    
+    <button type="button" class="dock-trigger" id="dock-trigger" data-action="dock-toggle" aria-expanded="false" aria-keyshortcuts="/">
+      <span class="dock-clip"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M8 12l6-6a3 3 0 0 1 4 4l-8 8a5 5 0 0 1-7-7l7-7"/></svg></span><span>Vraag Rise</span>
+    </button>
+  </div>
+  </main>
+  
+  
+  
+  <div class="routes ">
+    
+    <button class="routes-btn" id="demo-routes-trigger" aria-expanded="false" aria-controls="demo-route-options" data-action="routes">Demo-routes</button>
+  </div>
+  </div>
+  
+</body>
+</html>

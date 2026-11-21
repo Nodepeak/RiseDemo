@@ -1,0 +1,179 @@
+<!doctype html>
+<!-- Gegenereerd met input/tools/genereer-html.cjs. De interactieve weergaven staan in js/views/. -->
+<html lang="nl" data-page="projecten/havenkwartier/planning.html">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Havenkwartier · Planning · Rise</title>
+  <link rel="icon" href="../../assets/beeldmerk.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../assets/rise.css">
+  <script src="../../js/data.js" defer></script>
+  <script src="../../js/project-tracking.js" defer></script>
+  <script src="../../js/library-data.js" defer></script>
+  <script src="../../js/replies.js" defer></script>
+  <script src="../../js/components.js" defer></script>
+  <script src="../../js/routes.js" defer></script>
+  <script src="../../js/state.js" defer></script>
+  <script src="../../js/views/desk.js" defer></script>
+  <script src="../../js/views/projects.js" defer></script>
+  <script src="../../js/views/actions.js" defer></script>
+  <script src="../../js/views/meetings.js" defer></script>
+  <script src="../../js/views/milestones.js" defer></script>
+  <script src="../../js/views/signals.js" defer></script>
+  <script src="../../js/views/documents.js" defer></script>
+  <script src="../../js/views/library.js" defer></script>
+  <script src="../../js/views/conversations.js" defer></script>
+  <script src="../../js/views/settings.js" defer></script>
+  <script src="../../js/frame.js" defer></script>
+  <script src="../../js/navigation.js" defer></script>
+  <script src="../../js/app.js" defer></script>
+</head>
+<body>
+  <div id="app" class="app">
+<aside class="nav" id="demo-navigation">
+    <a class="nav-logo" href="../../index.html" data-action="nav" data-view="bureau" aria-label="Rise"><img src="../../assets/logo.svg" alt="Rise" /></a>
+    <nav class="nav-main">
+      <a class="nav-item " data-action="nav" href="../../index.html" data-view="bureau"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3zM3 9h18M10 9v10M13 12h5M13 15h3"/></svg><span>Overzicht</span></a>
+      <a class="nav-item " data-action="nav" href="../../gesprekken.html" data-view="gesprekken"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg><span>Gesprekken</span></a>
+      <a class="nav-item " data-action="nav" href="../../acties.html" data-view="acties"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><span>Acties</span></a>
+      <button class="nav-item " data-action="toggle-dossier" aria-expanded="false"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h7l2 2h9v11H3z"/></svg><span>Dossier</span><svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+      
+    </nav>
+    <div class="nav-label"><span>Projecten</span><a data-action="tab" href="../../projecten/index.html" data-view="projecten" >Alle</a></div>
+    <nav class="nav-projects">
+      <div class="np is-current">
+          <button class="np-head" data-action="toggle-project" data-id="hk" aria-expanded="true">
+            <span class="np-mono">HK</span><span class="np-name">Havenkwartier</span>
+            <svg class="ic caret is-open" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+          </button>
+          <div class="np-sub"><a class="nav-subitem " data-action="nav" href="../../projecten/havenkwartier/signalen.html" data-view="project" data-project="hk" data-section="signalen"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l2-6 4 12 2-6h6"/></svg><span>Signalen</span><em>2</em></a><a class="nav-subitem " data-action="nav" href="../../projecten/havenkwartier/acties.html" data-view="project" data-project="hk" data-section="acties"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><span>Acties</span></a><a class="nav-subitem is-on" data-action="nav" href="../../projecten/havenkwartier/planning.html" data-view="project" data-project="hk" data-section="planning"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h9M8 12h10M6 18h7"/></svg><span>Planning</span></a><a class="nav-subitem " data-action="nav" href="../../projecten/havenkwartier/vergaderingen.html" data-view="project" data-project="hk" data-section="vergaderingen"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15"/><path d="M4 10h16M9 3v4M15 3v4"/></svg><span>Vergaderingen</span></a><a class="nav-subitem " data-action="nav" href="../../projecten/havenkwartier/dossier.html" data-view="project" data-project="hk" data-section="dossier"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg><span>Projectdossier</span></a></div>
+        </div><div class="np ">
+          <button class="np-head" data-action="toggle-project" data-id="dk" aria-expanded="false">
+            <span class="np-mono">DK</span><span class="np-name">De Kade</span>
+            <span class="np-count">2</span><svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+          </button>
+          
+        </div><div class="np ">
+          <button class="np-head" data-action="toggle-project" data-id="pz" aria-expanded="false">
+            <span class="np-mono">PZ</span><span class="np-name">Parkzijde</span>
+            <span class="np-count">1</span><svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+          </button>
+          
+        </div><div class="np ">
+          <button class="np-head" data-action="toggle-project" data-id="mw" aria-expanded="false">
+            <span class="np-mono">MW</span><span class="np-name">Molenweide</span>
+            <span class="np-count">1</span><svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+          </button>
+          
+        </div>
+    </nav>
+    <div class="nav-foot">
+      <a class="nav-item " data-action="nav" href="../../instellingen.html" data-view="instellingen"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/></svg><span>Instellingen</span></a>
+    </div>
+  </aside>
+  
+  <main class="main view-project">
+    <header class="top">
+    <button class="mobile-menu icon-btn" data-action="mobile-nav" aria-label="Navigatiemenu" aria-controls="demo-navigation" aria-expanded="false"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    <div class="crumbs"><span class="">Havenkwartier</span><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg><span class="is-last">Planning</span></div>
+    <button class="avatar" id="account-trigger" aria-expanded="false" data-action="avatar" aria-label="Account van Maartje Hoekstra">MH</button>
+  </header>
+    <div class="content" id="content"><section class="page">
+    <header class="page-head page-head--project">
+    <div><p class="kicker">Havenkwartier · Schiedam · 212 woningen · Bestemmingsplan</p><h1>Planning</h1><p>Planning v4 · laatst aangepast 9 sep</p></div>
+  </header>
+    <section class="milestones" aria-labelledby="milestones-heading">
+    <h2 id="milestones-heading">Belangrijke mijlpalen</h2>
+    <div class="milestone-row">
+        <button id="milestone-toggle-0" class="milestone-toggle" data-action="milestone-toggle" data-id="hk" data-index="0" aria-expanded="false" aria-controls="milestone-detail-0">
+          <span><b>Stuurgroep met gemeente</b></span>
+          <span class="milestone-date"><b><time datetime="2026-12-02">2 dec</time></b></span>
+          <span class="milestone-status" data-status="Op koers">Op koers</span><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+        
+      </div><div class="milestone-row">
+        <button id="milestone-toggle-1" class="milestone-toggle" data-action="milestone-toggle" data-id="hk" data-index="1" aria-expanded="false" aria-controls="milestone-detail-1">
+          <span><b>Indiening ontwerp-bestemmingsplan</b></span>
+          <span class="milestone-date"><b><time datetime="2027-01-15">15 jan</time></b></span>
+          <span class="milestone-status" data-status="Onder druk">Onder druk</span><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+        
+      </div>
+  </section>
+    <section class="schedule" aria-labelledby="schedule-title">
+      <header class="section-header"><h2 id="schedule-title">Tijdlijn</h2></header>
+      <div class="gantt" tabindex="0" role="region" aria-label="Projectplanning september 2026 tot en met maart 2027">
+        <div class="g-head" aria-hidden="true"><span class="g-label"></span><div class="g-track"><span class="g-month" style="left:0%">sep</span><span class="g-month" style="left:14.150943396226415%">okt</span><span class="g-month" style="left:28.77358490566038%">nov</span><span class="g-month" style="left:42.924528301886795%">dec</span><span class="g-month" style="left:57.54716981132076%">jan</span><span class="g-month" style="left:72.16981132075472%">feb</span><span class="g-month" style="left:85.37735849056604%">mrt</span><span class="g-today" style="left:37.735849056603776%"><em>vandaag</em></span></div></div>
+        <div class="g-row ">
+            <div class="g-label"><b>Programma uitwerken</b><em><time datetime="2026-09-15">15 sep</time> – <time datetime="2026-11-18">18 nov</time> · Studio Rietveld</em>
+              <button class="ask" data-action="ask-about" data-label="Programma uitwerken" aria-label="Vraag Rise over Programma uitwerken" title="Vraag Rise over Programma uitwerken"><svg class="wing" viewBox="0 0 133 122" aria-hidden="true"><path d="M52.4 47.7L52.4 48.3L52.7 48.8L53.2 49.1L53.8 49.1L125.5 35.5L126 35L126.1 34.7L132.6 4.1L132.7 2.8L132.6 2.2L132.2 1.4L131.6 0.7L130.5 0.1L129.5 0L128.8 0.1L127.6 0.4L55.9 33.2L55.5 33.6L55.3 34.1ZM0 120L0 120.6L0.3 121.1L1.2 121.5L30.7 121.5L31.3 121.3L31.8 120.8L52.6 22.9L52.5 22L52.1 21.6L51.5 21.5L46.8 21.6L44.5 21.8L42.3 22.2L40 22.9L37.7 23.6L33.4 25.6L29.4 28.2L27.4 29.6L23.9 33L20.8 36.7L19.4 38.7L18.2 40.9L17.1 43L16.3 45.1L15.5 47.3L15 49.5Z" fill="currentColor"/></svg></button>
+            </div>
+            <div class="g-track" aria-hidden="true">
+              <i class="g-grid" style="left:0%"></i><i class="g-grid" style="left:14.150943396226415%"></i><i class="g-grid" style="left:28.77358490566038%"></i><i class="g-grid" style="left:42.924528301886795%"></i><i class="g-grid" style="left:57.54716981132076%"></i><i class="g-grid" style="left:72.16981132075472%"></i><i class="g-grid" style="left:85.37735849056604%"></i>
+              <i class="g-today-line" style="left:37.735849056603776%"></i>
+              <span class="bar is-done" style="left:6.60377358490566%;width:30.18867924528302%"></span>
+              
+            </div>
+          </div><div class="g-row ">
+            <div class="g-label"><b>Ruimtelijke onderbouwing</b><em><time datetime="2026-10-15">15 okt</time> – <time datetime="2026-12-18">18 dec</time></em>
+              <button class="ask" data-action="ask-about" data-label="Ruimtelijke onderbouwing" aria-label="Vraag Rise over Ruimtelijke onderbouwing" title="Vraag Rise over Ruimtelijke onderbouwing"><svg class="wing" viewBox="0 0 133 122" aria-hidden="true"><path d="M52.4 47.7L52.4 48.3L52.7 48.8L53.2 49.1L53.8 49.1L125.5 35.5L126 35L126.1 34.7L132.6 4.1L132.7 2.8L132.6 2.2L132.2 1.4L131.6 0.7L130.5 0.1L129.5 0L128.8 0.1L127.6 0.4L55.9 33.2L55.5 33.6L55.3 34.1ZM0 120L0 120.6L0.3 121.1L1.2 121.5L30.7 121.5L31.3 121.3L31.8 120.8L52.6 22.9L52.5 22L52.1 21.6L51.5 21.5L46.8 21.6L44.5 21.8L42.3 22.2L40 22.9L37.7 23.6L33.4 25.6L29.4 28.2L27.4 29.6L23.9 33L20.8 36.7L19.4 38.7L18.2 40.9L17.1 43L16.3 45.1L15.5 47.3L15 49.5Z" fill="currentColor"/></svg></button>
+            </div>
+            <div class="g-track" aria-hidden="true">
+              <i class="g-grid" style="left:0%"></i><i class="g-grid" style="left:14.150943396226415%"></i><i class="g-grid" style="left:28.77358490566038%"></i><i class="g-grid" style="left:42.924528301886795%"></i><i class="g-grid" style="left:57.54716981132076%"></i><i class="g-grid" style="left:72.16981132075472%"></i><i class="g-grid" style="left:85.37735849056604%"></i>
+              <i class="g-today-line" style="left:37.735849056603776%"></i>
+              <span class="bar " style="left:20.754716981132077%;width:30.18867924528302%"></span>
+              
+            </div>
+          </div><div class="g-row ">
+            <div class="g-label"><b>Stuurgroep met gemeente</b><em><time datetime="2026-12-02">2 dec</time></em>
+              <button class="ask" data-action="ask-about" data-label="Stuurgroep met gemeente" aria-label="Vraag Rise over Stuurgroep met gemeente" title="Vraag Rise over Stuurgroep met gemeente"><svg class="wing" viewBox="0 0 133 122" aria-hidden="true"><path d="M52.4 47.7L52.4 48.3L52.7 48.8L53.2 49.1L53.8 49.1L125.5 35.5L126 35L126.1 34.7L132.6 4.1L132.7 2.8L132.6 2.2L132.2 1.4L131.6 0.7L130.5 0.1L129.5 0L128.8 0.1L127.6 0.4L55.9 33.2L55.5 33.6L55.3 34.1ZM0 120L0 120.6L0.3 121.1L1.2 121.5L30.7 121.5L31.3 121.3L31.8 120.8L52.6 22.9L52.5 22L52.1 21.6L51.5 21.5L46.8 21.6L44.5 21.8L42.3 22.2L40 22.9L37.7 23.6L33.4 25.6L29.4 28.2L27.4 29.6L23.9 33L20.8 36.7L19.4 38.7L18.2 40.9L17.1 43L16.3 45.1L15.5 47.3L15 49.5Z" fill="currentColor"/></svg></button>
+            </div>
+            <div class="g-track" aria-hidden="true">
+              <i class="g-grid" style="left:0%"></i><i class="g-grid" style="left:14.150943396226415%"></i><i class="g-grid" style="left:28.77358490566038%"></i><i class="g-grid" style="left:42.924528301886795%"></i><i class="g-grid" style="left:57.54716981132076%"></i><i class="g-grid" style="left:72.16981132075472%"></i><i class="g-grid" style="left:85.37735849056604%"></i>
+              <i class="g-today-line" style="left:37.735849056603776%"></i>
+              
+              <span class="ms " title="2 dec" style="left:43.39622641509434%"></span>
+            </div>
+          </div><div class="g-row is-key">
+            <div class="g-label"><b>Indiening ontwerp-bestemmingsplan</b><em><time datetime="2027-01-15">15 jan</time> · na Programma + onderbouwing</em>
+              <button class="ask" data-action="ask-about" data-label="Indiening ontwerp-bestemmingsplan" aria-label="Vraag Rise over Indiening ontwerp-bestemmingsplan" title="Vraag Rise over Indiening ontwerp-bestemmingsplan"><svg class="wing" viewBox="0 0 133 122" aria-hidden="true"><path d="M52.4 47.7L52.4 48.3L52.7 48.8L53.2 49.1L53.8 49.1L125.5 35.5L126 35L126.1 34.7L132.6 4.1L132.7 2.8L132.6 2.2L132.2 1.4L131.6 0.7L130.5 0.1L129.5 0L128.8 0.1L127.6 0.4L55.9 33.2L55.5 33.6L55.3 34.1ZM0 120L0 120.6L0.3 121.1L1.2 121.5L30.7 121.5L31.3 121.3L31.8 120.8L52.6 22.9L52.5 22L52.1 21.6L51.5 21.5L46.8 21.6L44.5 21.8L42.3 22.2L40 22.9L37.7 23.6L33.4 25.6L29.4 28.2L27.4 29.6L23.9 33L20.8 36.7L19.4 38.7L18.2 40.9L17.1 43L16.3 45.1L15.5 47.3L15 49.5Z" fill="currentColor"/></svg></button>
+            </div>
+            <div class="g-track" aria-hidden="true">
+              <i class="g-grid" style="left:0%"></i><i class="g-grid" style="left:14.150943396226415%"></i><i class="g-grid" style="left:28.77358490566038%"></i><i class="g-grid" style="left:42.924528301886795%"></i><i class="g-grid" style="left:57.54716981132076%"></i><i class="g-grid" style="left:72.16981132075472%"></i><i class="g-grid" style="left:85.37735849056604%"></i>
+              <i class="g-today-line" style="left:37.735849056603776%"></i>
+              
+              <span class="ms is-key" title="15 jan" style="left:64.15094339622641%"></span>
+            </div>
+          </div><div class="g-row ">
+            <div class="g-label"><b>Ter inzage</b><em><time datetime="2027-02-01">1 feb</time> – <time datetime="2027-03-15">15 mrt</time> · na Indiening</em>
+              <button class="ask" data-action="ask-about" data-label="Ter inzage" aria-label="Vraag Rise over Ter inzage" title="Vraag Rise over Ter inzage"><svg class="wing" viewBox="0 0 133 122" aria-hidden="true"><path d="M52.4 47.7L52.4 48.3L52.7 48.8L53.2 49.1L53.8 49.1L125.5 35.5L126 35L126.1 34.7L132.6 4.1L132.7 2.8L132.6 2.2L132.2 1.4L131.6 0.7L130.5 0.1L129.5 0L128.8 0.1L127.6 0.4L55.9 33.2L55.5 33.6L55.3 34.1ZM0 120L0 120.6L0.3 121.1L1.2 121.5L30.7 121.5L31.3 121.3L31.8 120.8L52.6 22.9L52.5 22L52.1 21.6L51.5 21.5L46.8 21.6L44.5 21.8L42.3 22.2L40 22.9L37.7 23.6L33.4 25.6L29.4 28.2L27.4 29.6L23.9 33L20.8 36.7L19.4 38.7L18.2 40.9L17.1 43L16.3 45.1L15.5 47.3L15 49.5Z" fill="currentColor"/></svg></button>
+            </div>
+            <div class="g-track" aria-hidden="true">
+              <i class="g-grid" style="left:0%"></i><i class="g-grid" style="left:14.150943396226415%"></i><i class="g-grid" style="left:28.77358490566038%"></i><i class="g-grid" style="left:42.924528301886795%"></i><i class="g-grid" style="left:57.54716981132076%"></i><i class="g-grid" style="left:72.16981132075472%"></i><i class="g-grid" style="left:85.37735849056604%"></i>
+              <i class="g-today-line" style="left:37.735849056603776%"></i>
+              <span class="bar " style="left:72.16981132075472%;width:19.811320754716974%"></span>
+              
+            </div>
+          </div>
+        <div class="g-legend"><span><i class="lg-bar"></i>Gepland</span><span><i class="lg-ms"></i>Mijlpaal</span><span><i class="lg-today"></i>Vandaag in de demo</span></div>
+      </div>
+    </section>
+  </section></div>
+    <div class="dock">
+    
+    <button type="button" class="dock-trigger" id="dock-trigger" data-action="dock-toggle" aria-expanded="false" aria-keyshortcuts="/">
+      <span class="dock-clip"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M8 12l6-6a3 3 0 0 1 4 4l-8 8a5 5 0 0 1-7-7l7-7"/></svg></span><span>Vraag Rise</span>
+    </button>
+  </div>
+  </main>
+  
+  
+  
+  <div class="routes ">
+    
+    <button class="routes-btn" id="demo-routes-trigger" aria-expanded="false" aria-controls="demo-route-options" data-action="routes">Demo-routes</button>
+  </div>
+  </div>
+  
+</body>
+</html>

@@ -1,0 +1,23 @@
+function renderSettings() {
+  function toggle(key, label, description) {
+    const checked = state.settings[key] ?? true;
+    return `<label class="set-row">
+      <span><b>${label}</b><em>${description}</em></span>
+      <input type="checkbox" data-setting="${key}" ${checked ? "checked" : ""}>
+      <i class="toggle"></i>
+    </label>`;
+  }
+
+  return `<section class="page page--narrow">
+    <header class="page-head"><div><h1>Instellingen</h1><p>Hoe Rise met je samenwerkt.</p></div></header>
+    <h3 class="sub">Vooruitzicht</h3>
+    ${toggle("milestones", "Alleen signalen die een mijlpaal raken", "Op je overzicht toont Rise maximaal drie signalen tegelijk.")}
+    ${toggle("weekly", "Wekelijkse vooruitblik op maandag", "Een korte samenvatting van wat er die week aankomt.")}
+    <h3 class="sub">Rise en gespecialiseerde agents</h3>
+    ${toggle("agents", "Rise mag zelf agents inzetten", "Je ziet altijd welke agent meewerkt en wat die oplevert.")}
+    ${toggle("manual", "Concepten nooit automatisch versturen", "Mails, planningen en agenda’s blijven concept tot jouw akkoord.")}
+    <h3 class="sub">Bronnen</h3>
+    ${toggle("outlook", "Outlook — mail en agenda", "Gekoppeld · 4 projecten")}
+    ${toggle("sharepoint", "SharePoint — projectdossiers", "Gekoppeld")}
+  </section>`;
+}
