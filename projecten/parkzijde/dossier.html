@@ -24,6 +24,7 @@
   <script src="../../js/views/signals.js" defer></script>
   <script src="../../js/views/documents.js" defer></script>
   <script src="../../js/views/library.js" defer></script>
+  <script src="../../js/pip.js" defer></script>
   <script src="../../js/views/conversations.js" defer></script>
   <script src="../../js/views/settings.js" defer></script>
   <script src="../../js/experience.js" defer></script>
@@ -129,9 +130,30 @@
     <div class="dock ">
     
     <div class="pip-presence">
-
+      <div class="pip-bubble">
+        <button id="pip-tip-open" class="pip-tip-open" data-action="dock-open"><strong>Pip</strong><span></span></button>
+        <button class="icon-btn pip-tip-close" data-action="pip-tip-dismiss" aria-label="Verberg Pip-tip"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"></path></svg></button>
+      </div>
       <button type="button" class="dock-trigger" id="dock-trigger" data-action="dock-toggle" aria-expanded="false" aria-keyshortcuts="/">
-        <span class="pip-figure"><img class="pip-avatar" src="../../assets/pip-animated.svg" width="22" height="24" alt=""></span><span class="pip-trigger-label">Vraag Pip</span>
+        <span class="pip-figure"><svg class="pip-live" viewBox="0 0 280 310" data-state="noticed" aria-hidden="true" focusable="false">
+    <g class="pip-hop"><g class="pip-body"><g class="pip-breath"><g class="pip-react">
+      <path class="pip-back" d="M 75,246 C 48,244 48,217 60,177 C 78,115 105,58 132,47 C 159,36 176,53 163,94 L 132,205 C 121,244 98,266 75,246 Z" fill="none" stroke-width="30" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path class="pip-front" d="M 60,177 C 78,115 105,58 132,47 C 159,36 176,53 163,94" fill="none" stroke-width="30" stroke-linecap="round"></path>
+      <g class="pip-arm">
+        <path class="pip-front" d="M 69,237 C 82,201 101,177 134,161 C 163,147 191,144 216,125" fill="none" stroke-width="29" stroke-linecap="round"></path>
+        <path class="pip-tip" d="M 157,150 C 180,143 200,136 216,125" fill="none" stroke-width="10" stroke-linecap="round"></path>
+      </g>
+      <g class="pip-look"><g class="pip-talk">
+        <g class="pip-blink">
+          <rect class="pip-eye" x="135" y="43" width="7" height="15" rx="3.5"></rect>
+          <rect class="pip-eye" x="152" y="45" width="7" height="15" rx="3.5"></rect>
+        </g>
+        <path class="pip-happy" d="M 133,54 Q 138.5,45 144,54 M 150,56 Q 155.5,47 161,56" fill="none" stroke-width="5" stroke-linecap="round"></path>
+      </g></g>
+      <path class="pip-attention" d="M 187,33 L 192,23 M 201,48 L 212,43" fill="none" stroke-width="5" stroke-linecap="round"></path>
+      <g class="pip-dots"><circle cx="190" cy="30" r="5"></circle><circle cx="207" cy="19" r="6.5"></circle><circle cx="226" cy="9" r="8"></circle></g>
+    </g></g></g></g>
+  </svg></span><span class="pip-trigger-label">Vraag Pip</span>
       </button>
     </div>
   </div>

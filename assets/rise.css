@@ -1504,3 +1504,81 @@ sup[data-src]:hover { background: var(--accent); color: var(--accent-fg); }
 }
 .dock-body .b-table :is(th, td) { min-width: 88px; overflow-wrap: normal; }
 .dock-body .b-table :is(th, td):first-child { min-width: 150px; }
+
+/* ---- Pip leeft: rust, reacties en praten via beweging ---- */
+.pip-live { display: block; width: 100%; height: 100%; overflow: visible; }
+.pip-live g, .pip-live path { transform-box: view-box; }
+.pip-live .pip-back { stroke: #E95632; }
+.pip-live .pip-front { stroke: #F2643A; }
+.pip-live .pip-tip { stroke: #FF986B; }
+.pip-live .pip-eye { fill: #0D0F2B; }
+.pip-live .pip-happy, .pip-live .pip-attention { stroke: #0D0F2B; }
+.pip-live .pip-dots { fill: #0D0F2B; }
+.pip-live .pip-happy, .pip-live .pip-attention, .pip-live .pip-dots { opacity: 0; }
+.pip-hop { transform-origin: 110px 257px; transition: transform .35s cubic-bezier(.3, 1.5, .5, 1); }
+.pip-body { transform-origin: 110px 257px; transition: transform .5s cubic-bezier(.3, 1.3, .5, 1); }
+.pip-breath { transform-origin: 110px 257px; animation: pip-breathe 5.6s ease-in-out infinite; }
+.pip-react { transform-origin: 110px 257px; }
+.pip-arm { transform-origin: 82px 228px; }
+.pip-look { transform: translate(var(--pip-lx, 0px), var(--pip-ly, 0px)); transition: transform .24s ease-out; }
+.pip-talk { transform-origin: 147px 52px; }
+.pip-blink { transform-origin: 147px 52px; transition: transform .07s linear, opacity .15s; }
+html[data-pip-blink] .pip-blink { transform: scaleY(.1); }
+
+/* Hover: Pip komt even overeind en kijkt je aan. */
+.dock-trigger:hover .pip-hop { transform: translateY(-7px) rotate(-3deg); }
+.dock-trigger:hover .pip-blink { transform: scaleY(1.15); }
+.dock-trigger:active .pip-hop { transform: translateY(1px) scale(.97, .95); }
+
+/* Iets gezien: korte sprong en twee streepjes, daarna weer rustig. */
+.pip-live[data-state="noticed"] .pip-react { animation: pip-notice .8s ease-out 1.2s 2 both; }
+.pip-live[data-state="noticed"] .pip-attention { animation: pip-rays 3.2s ease-out 1.2s both; }
+html[data-pip-react="notice"] .pip-live .pip-react { animation: pip-notice .8s ease-out 2; }
+html[data-pip-react="notice"] .pip-live .pip-attention { animation: pip-rays 1.7s ease-out both; }
+
+/* Luisteren: leunt naar het paneel. */
+.pip-live[data-state="listening"] .pip-body { transform: rotate(7deg); }
+.pip-live[data-state="listening"] .pip-breath { animation-duration: 7s; }
+
+/* Nadenken: wiegen, omhoog kijken, gedachtebolletjes. */
+.pip-live[data-state="thinking"] .pip-body { animation: pip-think 2.6s ease-in-out infinite; }
+.pip-live[data-state="thinking"] .pip-talk { transform: translate(4px, -5px); transition: transform .3s; }
+.pip-live[data-state="thinking"] .pip-dots { opacity: 1; }
+.pip-live[data-state="thinking"] .pip-dots circle { animation: pip-dot 1.3s ease-in-out infinite; opacity: .15; }
+.pip-live[data-state="thinking"] .pip-dots circle:nth-child(2) { animation-delay: .2s; }
+.pip-live[data-state="thinking"] .pip-dots circle:nth-child(3) { animation-delay: .4s; }
+
+/* Praten: ritmisch knikken, gebaren met de arm, oogjes die meebewegen. */
+.pip-live[data-state="talking"] .pip-body, html[data-pip-talk] .pip-live .pip-body { animation: pip-talk-bob .46s ease-in-out infinite alternate; }
+.pip-live[data-state="talking"] .pip-arm, html[data-pip-talk] .pip-live .pip-arm { animation: pip-gesture 1.5s ease-in-out infinite; }
+.pip-live[data-state="talking"] .pip-talk, html[data-pip-talk] .pip-live .pip-talk { animation: pip-eye-talk .31s ease-in-out infinite alternate; }
+
+/* Korte reacties. */
+html[data-pip-react="happy"] .pip-live .pip-blink { opacity: 0; }
+html[data-pip-react="happy"] .pip-live .pip-happy { opacity: 1; transition: opacity .15s; }
+html[data-pip-react="happy"] .pip-live .pip-react { animation: pip-hop .75s cubic-bezier(.3, .7, .4, 1); }
+html[data-pip-react="nod"] .pip-live .pip-react { animation: pip-nod .5s ease-in-out; }
+html[data-pip-react="wave"] .pip-live .pip-arm { animation: pip-wave 1.4s ease-in-out; }
+html[data-pip-react="stretch"] .pip-live .pip-react { animation: pip-stretch 1.4s ease-in-out; }
+
+/* De tip komt rustig binnen, even na de pagina. */
+.pip-bubble { transform-origin: 100% 100%; animation: pip-bubble-in .45s cubic-bezier(.2, .9, .3, 1.15) 1.2s both; }
+
+@keyframes pip-breathe { 0%, 100% { transform: translateY(0) scaleY(1); } 50% { transform: translateY(-2.5px) scaleY(1.01); } }
+@keyframes pip-notice { 0%, 100% { transform: rotate(0) translateY(0); } 35% { transform: rotate(3deg) translateY(-12px); } 70% { transform: rotate(-3deg) translateY(0); } }
+@keyframes pip-rays { 0% { opacity: 0; } 12%, 70% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes pip-think { 0%, 100% { transform: rotate(-6deg) translateY(0); } 50% { transform: rotate(-2deg) translateY(-3px); } }
+@keyframes pip-dot { 0%, 100% { opacity: .15; } 40% { opacity: .55; } }
+@keyframes pip-talk-bob { from { transform: rotate(4deg) translateY(0); } to { transform: rotate(7deg) translateY(-4px) scaleY(1.015); } }
+@keyframes pip-gesture { 0%, 100% { transform: rotate(0); } 30% { transform: rotate(-7deg); } 60% { transform: rotate(3deg); } }
+@keyframes pip-eye-talk { from { transform: scaleY(1); } to { transform: scaleY(.78) translateY(1px); } }
+@keyframes pip-hop { 0%, 100% { transform: translateY(0) scale(1); } 15% { transform: translateY(0) scale(1.04, .95); } 45% { transform: translateY(-14px) scale(.98, 1.03); } 75% { transform: translateY(0) scale(1.03, .97); } }
+@keyframes pip-nod { 0%, 100% { transform: rotate(0); } 40% { transform: rotate(5deg) translateY(2px); } }
+@keyframes pip-wave { 0%, 100% { transform: rotate(0); } 20%, 60% { transform: rotate(-14deg); } 40%, 80% { transform: rotate(2deg); } }
+@keyframes pip-stretch { 0%, 100% { transform: scale(1); } 40% { transform: scale(.97, 1.05) translateY(-3px); } 70% { transform: scale(1.02, .98); } }
+@keyframes pip-bubble-in { from { opacity: 0; transform: translateY(8px) scale(.94); } to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .pip-live *, .pip-bubble { animation: none !important; transition: none !important; }
+  .pip-look { transform: none; }
+}

@@ -261,30 +261,51 @@ function sendFollowup(e, n, a = {}) {
     (state.scrollThread = !0));
 }
 
-function currentPipTip(context) {
+function currentPipTips(context) {
+  const tips = [];
+  const add = (text, action, prompt) => prompt && tips.push({ text, action, prompt });
   if (state.drawer) {
-    return { text: "Zal ik de urgentie en de eerste stap toelichten?", action: "Licht dit signaal toe", prompt: "Welke actie stel je voor bij dit signaal?" };
+    add("Zal ik de urgentie en de eerste stap toelichten?", "Licht dit signaal toe", "Welke actie stel je voor bij dit signaal?");
+    add("Ik kan ook uitleggen waarom Rise dit signaal laat zien.", "Waarom dit signaal?", "Waarom toont Rise dit signaal?");
+    return tips;
   }
   if (state.view === "doc") {
-    return { text: "Ik kan de kern van dit document voor je op een rij zetten.", action: "Vat het document samen", prompt: "Vat dit document samen" };
+    add("Ik kan de kern van dit document voor je op een rij zetten.", "Vat het document samen", "Vat dit document samen");
+    add("Wil je weten waar dit document vandaan komt en wat ervan afhangt?", "Bekijk de herkomst", context.suggestions[1]);
+    return tips;
   }
-  if (state.view === "project" && state.section === "vergaderingen") {
-    return { text: "Zal ik een agenda maken voor je volgende overleg?", action: "Bereid mijn overleg voor", prompt: context.suggestions[0] };
+  if (state.view === "project") {
+    if (state.section === "signalen" || state.section === "acties") {
+      const [signal] = sortSignalsByAction(openSignals()).filter((item) => context.projects.includes(item.project));
+      if (signal && state.section === "signalen") add(`Dit vraagt als eerste aandacht: ${signal.title}.`, "Laat zien wat voorrang heeft", context.suggestions[0]);
+      add("Ik kan laten zien welke acties nog openstaan en wanneer ze af moeten.", "Bekijk openstaande acties", "Welke acties staan open?");
+    }
+    if (state.section === "vergaderingen") add("Zal ik een agenda maken voor je volgende overleg?", "Bereid mijn overleg voor", context.suggestions[0]);
+    if (state.section === "planning") add("Ik houd de mijlpalen in de gaten. Zal ik laten zien welke onder druk staan?", "Bekijk de planning", context.suggestions[0]);
+    if (state.section === "dossier") add("Ik kan nagaan welke stukken nog ontbreken voor de aanvraag.", "Check het dossier", context.suggestions[0]);
+    add("Tip: druk op / om me vanaf elke pagina iets te vragen.", "Stel een vraag", context.suggestions.at(-1));
+    return tips;
   }
-  if (state.view === "acties" || (state.view === "project" && state.section === "acties")) {
-    return { text: "Ik kan laten zien welke acties nog openstaan en wanneer ze af moeten.", action: "Bekijk openstaande acties", prompt: "Welke acties staan open?" };
+  if (state.view === "acties") {
+    add("Ik kan laten zien welke acties nog openstaan en wanneer ze af moeten.", "Bekijk openstaande acties", "Welke acties staan open?");
   }
-  if (state.view === "bureau" || (state.view === "project" && state.section === "signalen")) {
-    const [signal] = sortSignalsByAction(openSignals()).filter((item) =>
-      !context.projects.length || context.projects.includes(item.project),
-    );
-    if (signal) return {
-      text: `Dit vraagt als eerste aandacht bij ${findProject(signal.project).name}. ${signal.title}.`,
-      action: "Laat zien wat voorrang heeft",
-      prompt: context.suggestions[0],
-    };
+  if (state.view === "bureau") {
+    const [signal] = sortSignalsByAction(openSignals());
+    if (signal) add(`Dit vraagt als eerste aandacht bij ${findProject(signal.project).name}. ${signal.title}.`, "Laat zien wat voorrang heeft", context.suggestions[0]);
   }
-  return null;
+  if (state.view === "bureau" || state.view === "projecten") {
+    add("Zal ik de risico’s van Havenkwartier en De Kade naast elkaar zetten?", "Vergelijk de risico’s", context.suggestions[1]);
+  }
+  if (state.view === "dossier") {
+    add("Ik ken deze kaders. Vraag me gerust wat er deze week aandacht vraagt.", "Wat vraagt aandacht?", context.suggestions[0]);
+  }
+  if (tips.length && state.view !== "gesprekken") add("Tip: druk op / om me vanaf elke pagina iets te vragen.", "Stel een vraag", context.suggestions[0]);
+  return tips;
+}
+
+function currentPipTip(context) {
+  const tips = currentPipTips(context);
+  return tips[Math.min(state.dock.tipIndex ?? 0, tips.length - 1)] ?? null;
 }
 
 function currentDockContext() {

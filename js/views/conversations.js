@@ -126,7 +126,7 @@ function renderDock() {
   const lastReply = conv?.messages.findLast((message) => message.role === "rise");
   const thinking = lastReply && lastReply.reveal < lastReply.total;
   const speaking = typeof pipSpeech !== "undefined" && Boolean(pipSpeech);
-  const pose = thinking || speaking ? "thinking" : open ? "listening" : tip && !tipDismissed ? "noticed" : "animated";
+  const pose = speaking || (thinking && lastReply.reveal > 0) ? "talking" : thinking ? "thinking" : open ? "listening" : tip && !tipDismissed ? "noticed" : "idle";
   const suggestions = about
     ? [`Waarom is “${about}” belangrijk?`, `Wat hangt af van “${about}”?`]
     : context.suggestions.filter((suggestion) => suggestion !== tip?.prompt);
@@ -157,7 +157,7 @@ function renderDock() {
         <button class="icon-btn pip-tip-close" data-action="pip-tip-dismiss" aria-label="Verberg Pip-tip">${icon("x")}</button>
       </div>` : ""}
       <button type="button" class="dock-trigger" id="dock-trigger" data-action="dock-toggle" aria-expanded="${open}"${open ? ' aria-controls="rise-assistant"' : ""} aria-keyshortcuts="/">
-        <span class="pip-figure">${pipIcon(pose)}</span><span class="pip-trigger-label">${open ? "Sluit Pip" : "Vraag Pip"}</span>
+        <span class="pip-figure">${pipFigure(pose)}</span><span class="pip-trigger-label">${open ? "Sluit Pip" : "Vraag Pip"}</span>
       </button>
     </div>
   </div>`;
