@@ -770,3 +770,12 @@ sup[data-src]:hover { background: var(--zon); color: var(--inkt); }
 .signal-actions li { display: flex; flex-wrap: wrap; gap: 2px 12px; justify-content: space-between; padding: 6px 0; border-top: 1px solid var(--line); }
 .signal-actions small { color: var(--muted); }
 .action-signal-scope { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; margin-bottom: 14px; color: var(--gv); }
+
+.signal-immediate { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; padding: 0 22px 14px; }
+.signal-immediate p { color: var(--gv); }
+.signal-immediate-button { max-width: 100%; white-space: normal; }
+.signal-immediate-button .ic { width: 13px; height: 13px; }
+.signal-entry--compact .signal-immediate-button, .drawer-next .signal-immediate-button { margin-top: 8px; }
+@media (max-width: 560px) {
+  .signal-immediate { padding-inline: 12px; }
+}

@@ -12,6 +12,16 @@ function renderSignalUrgency(deadline) {
   return `<span class="signal-urgency" data-urgency="${urgency}">${urgency}</span>`;
 }
 
+function renderImmediateSignalAction(signal, { compact = false } = {}) {
+  const proposed = signalActions[signal.id];
+  if (!proposed || signalFollowup(signal.id).status === "Afgerond") return "";
+  const index = signal.steps.findIndex((step) => step.primary);
+  const step = signal.steps[index];
+  const button = step ? `<button type="button" class="btn btn--ghost btn--sm signal-immediate-button" data-action="signal-step" data-id="${signal.id}" data-i="${index}">${escapeHtml(step.cta ?? step.label)} ${icon("chev")}</button>` : "";
+  if (compact) return button;
+  return `<div class="signal-immediate"><p>${escapeHtml(proposed.action)}</p>${button}</div>`;
+}
+
 function renderSignalCard(signal) {
   const description = approvedAcoustics(signal)
     ? `De vergunningaanvraag staat op ${formatPlanDate(deKadeForecast.permit)}`
@@ -22,6 +32,7 @@ function renderSignalCard(signal) {
         <p class="signal-project">${escapeHtml(findProject(signal.project).name)}</p>
         <h3><button id="overview-${signal.id}" class="signal-open" data-action="open-signal" data-id="${signal.id}">${escapeHtml(signal.title)} ${icon("arrow")}</button></h3>
         <p>${escapeHtml(description)}</p>
+        ${renderImmediateSignalAction(signal, { compact: true })}
       </div>
       ${renderSignalFacts(signal)}
     </div>
@@ -59,6 +70,7 @@ function renderSignalEntry(signal) {
   const expanded = state.selSignal[signal.project] === signal.id;
   return `<article class="signal-entry" id="${signal.id}">
     ${renderSignalSummary(signal)}
+    ${renderImmediateSignalAction(signal)}
     <button class="signal-disclosure" id="signal-toggle-${signal.id}" data-action="select-signal" data-id="${signal.id}" aria-expanded="${expanded}" aria-controls="signal-detail-${signal.id}">
       ${expanded ? "Sluit details" : "Bronnen en voorgestelde acties"} ${icon("chev")}
     </button>
@@ -124,11 +136,9 @@ function renderSignalImpact(signal) {
 }
 
 function renderSignalDetail(signal) {
-  const proposed = signalActions[signal.id];
   return `<div class="signal-detail">
     <section class="signal-section">
       <h3>Voorgestelde acties</h3>
-      ${proposed ? `<p>${escapeHtml(proposed.action)}</p>` : ""}
       ${renderSignalSteps(signal)}
       <button class="btn btn--link btn--sm signal-discuss" data-action="discuss-signal" data-id="${signal.id}">${riseIcon}Bespreek met Rise</button>
     </section>
@@ -183,6 +193,7 @@ function renderSignalDrawer() {
     ${done ? renderActionStatus("Afgerond") : proposed ? `<section class="drawer-next" aria-labelledby="drawer-next-heading">
       <div class="drawer-next-head"><h3 id="drawer-next-heading">Eerste stap</h3>${deadline ? `<span class="drawer-deadline">Uiterlijk ${renderDueDate(planDateIso(deadline))}</span>` : ""}</div>
       <p>${escapeHtml(proposed.action)}</p>
+      ${renderImmediateSignalAction(signal, { compact: true })}
     </section>` : ""}
     <div class="drawer-sections">
       ${renderSignalDrawerSection("sources", "Bronnen en onderbouwing", renderSignalEvidence(signal), `${sourceCount} ${sourceCount === 1 ? "bron" : "bronnen"}`)}
