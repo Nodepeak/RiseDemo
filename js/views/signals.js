@@ -1,42 +1,6 @@
-function renderSignalFacts(signal) {
-  const deadline = signalActions[signal.id]?.by;
-  return `<dl class="signal-facts">
-    <div><dt>Zekerheid</dt><dd>${certaintyBadge(signal.level)}</dd></div>
-    <div><dt>Urgentie</dt><dd>${renderSignalUrgency(deadline)}</dd></div>
-    <div><dt>Actie uiterlijk</dt><dd>${renderDueDate(deadline && planDateIso(deadline))}</dd></div>
-  </dl>`;
-}
-
 function renderSignalUrgency(deadline) {
   const urgency = signalUrgency(deadline);
   return `<span class="signal-urgency" data-urgency="${urgency}">${urgency}</span>`;
-}
-
-function renderImmediateSignalAction(signal, { compact = false } = {}) {
-  const proposed = signalActions[signal.id];
-  if (!proposed || signalFollowup(signal.id).status === "Afgerond") return "";
-  const index = signal.steps.findIndex((step) => step.primary);
-  const step = signal.steps[index];
-  const button = step ? `<button type="button" class="btn btn--ghost btn--sm signal-immediate-button" data-action="signal-step" data-id="${signal.id}" data-i="${index}">${escapeHtml(step.cta ?? step.label)} ${icon("chev")}</button>` : "";
-  if (compact) return button;
-  return `<div class="signal-immediate"><p>${escapeHtml(proposed.action)}</p>${button}</div>`;
-}
-
-function renderSignalCard(signal) {
-  const description = approvedAcoustics(signal)
-    ? `De vergunningaanvraag staat op ${formatPlanDate(deKadeForecast.permit)}`
-    : signal.hook;
-  return `<article class="signal-entry signal-entry--compact">
-    <div class="signal-summary">
-      <div class="signal-copy">
-        <p class="signal-project">${escapeHtml(findProject(signal.project).name)}</p>
-        <h3><button id="overview-${signal.id}" class="signal-open" data-action="open-signal" data-id="${signal.id}">${escapeHtml(signal.title)} ${icon("arrow")}</button></h3>
-        <p>${escapeHtml(description)}</p>
-        ${renderImmediateSignalAction(signal, { compact: true })}
-      </div>
-      ${renderSignalFacts(signal)}
-    </div>
-  </article>`;
 }
 
 function approvedAcoustics(signal) {
@@ -51,28 +15,37 @@ function signalDescription(signal) {
   };
 }
 
-function renderSignalSummary(signal) {
-  const status = signalFollowup(signal.id).status;
+function renderSignalBrief(signal, { overview = false, drawer = false } = {}) {
   const { what, why } = signalDescription(signal);
-  return `<div class="signal-summary">
-    <div class="signal-copy">
-      <h2>${escapeHtml(signal.title)}${status === "Afgerond" ? ' <span class="action-state" data-status="Afgerond">Afgerond</span>' : ""}</h2>
-      <dl class="signal-explanation">
-        <div><dt>Samenvatting</dt><dd>${escapeHtml(what)}</dd></div>
-        <div><dt>Waarom Rise dit toont</dt><dd>${escapeHtml(why)}</dd></div>
-      </dl>
-    </div>
-    ${renderSignalFacts(signal)}
+  const proposal = signalActions[signal.id];
+  const deadline = proposal?.by;
+  const done = signalFollowup(signal.id).status === "Afgerond";
+  const heading = overview ? "h3" : "h2";
+  const title = escapeHtml(signal.title);
+  return `<div class="signal-brief">
+    ${overview ? `<p class="signal-project">${escapeHtml(findProject(signal.project).name)}</p>` : ""}<header class="signal-brief-head">
+      <${heading}${drawer ? ' id="signal-drawer-title"' : ""}>${overview ? `<button id="overview-${signal.id}" class="signal-open" data-action="open-signal" data-id="${signal.id}">${title} ${icon("arrow")}</button>` : title}</${heading}>
+      <span class="signal-brief-urgency">${done ? renderActionStatus("Afgerond") : `Urgentie ${renderSignalUrgency(deadline)}`}</span>
+    </header>
+    <p class="signal-observation">${escapeHtml(what)}</p>
+    <dl class="signal-brief-details">
+      <div><dt>Impact</dt><dd>${escapeHtml(why)}</dd></div>
+      ${proposal && !done ? `<div><dt>Rise stelt voor</dt><dd>${escapeHtml(proposal.action)}${deadline ? ` <span class="signal-brief-date">Uiterlijk ${renderDueDate(planDateIso(deadline))}</span>` : ""}</dd></div>` : ""}
+    </dl>
+    <button type="button" class="btn btn--ghost btn--sm" data-action="discuss-signal" data-id="${signal.id}">${riseIcon}Bespreek met Rise</button>
   </div>`;
+}
+
+function renderSignalCard(signal) {
+  return `<article class="signal-entry">${renderSignalBrief(signal, { overview: true })}</article>`;
 }
 
 function renderSignalEntry(signal) {
   const expanded = state.selSignal[signal.project] === signal.id;
   return `<article class="signal-entry" id="${signal.id}">
-    ${renderSignalSummary(signal)}
-    ${renderImmediateSignalAction(signal)}
+    ${renderSignalBrief(signal)}
     <button class="signal-disclosure" id="signal-toggle-${signal.id}" data-action="select-signal" data-id="${signal.id}" aria-expanded="${expanded}" aria-controls="signal-detail-${signal.id}">
-      ${expanded ? "Sluit details" : "Bronnen en voorgestelde acties"} ${icon("chev")}
+      ${expanded ? "Sluit details" : "Onderbouwing en vervolg"} ${icon("chev")}
     </button>
     <div id="signal-detail-${signal.id}"${expanded ? "" : " hidden"}>
       ${expanded ? renderSignalDetail(signal) : ""}
@@ -140,7 +113,6 @@ function renderSignalDetail(signal) {
     <section class="signal-section">
       <h3>Voorgestelde acties</h3>
       ${renderSignalSteps(signal)}
-      <button class="btn btn--link btn--sm signal-discuss" data-action="discuss-signal" data-id="${signal.id}">${riseIcon}Bespreek met Rise</button>
     </section>
     <section class="signal-section">
       <h3>Herkomst en onderbouwing</h3>
@@ -169,10 +141,6 @@ function renderSignalDrawer() {
   if (!signal) return "";
   const project = findProject(signal.project);
   const route = { view: "project", projectId: project.id, section: "signalen" };
-  const { what, why } = signalDescription(signal);
-  const proposed = signalActions[signal.id];
-  const deadline = proposed?.by;
-  const done = signalFollowup(signal.id).status === "Afgerond";
   const sourceCount = signal.sources.length;
 
   return `<div class="scrim" data-action="close-drawer"></div>
@@ -181,27 +149,13 @@ function renderSignalDrawer() {
       <span class="drawer-project">${riseIcon}${escapeHtml(project.name)}</span>
       <button id="close-signal-drawer" class="icon-btn" data-action="close-drawer" aria-label="Sluit signaal">${icon("x")}</button>
     </header>
-    <div class="drawer-overview">
-      <h2 id="signal-drawer-title">${escapeHtml(signal.title)}</h2>
-      <p class="drawer-summary">${escapeHtml(what)}</p>
-      <div class="drawer-reason"><strong>Waarom Rise dit toont</strong><p>${escapeHtml(why)}</p></div>
-      <dl class="drawer-assessment">
-        <div><dt>Zekerheid</dt><dd>${certaintyBadge(signal.level)} <small>${escapeHtml(signal.certaintyScope)}</small></dd></div>
-        <div><dt>Urgentie</dt><dd>${renderSignalUrgency(deadline)}</dd></div>
-      </dl>
-    </div>
-    ${done ? renderActionStatus("Afgerond") : proposed ? `<section class="drawer-next" aria-labelledby="drawer-next-heading">
-      <div class="drawer-next-head"><h3 id="drawer-next-heading">Eerste stap</h3>${deadline ? `<span class="drawer-deadline">Uiterlijk ${renderDueDate(planDateIso(deadline))}</span>` : ""}</div>
-      <p>${escapeHtml(proposed.action)}</p>
-      ${renderImmediateSignalAction(signal, { compact: true })}
-    </section>` : ""}
+    ${renderSignalBrief(signal, { drawer: true })}
     <div class="drawer-sections">
       ${renderSignalDrawerSection("sources", "Bronnen en onderbouwing", renderSignalEvidence(signal), `${sourceCount} ${sourceCount === 1 ? "bron" : "bronnen"}`)}
       ${renderSignalDrawerSection("impact", "Gevolg voor de planning", renderSignalImpact(signal))}
       ${renderSignalDrawerSection("followup", "Acties en opvolging", renderSignalSteps(signal) + renderSignalFollowup(signal, true))}
     </div>
     <div class="drawer-footer">
-      <button class="btn btn--rise btn--sm" data-action="discuss-signal" data-id="${signal.id}">${riseIcon}Bespreek met Rise</button>
       <a class="btn btn--link btn--sm" href="${pageHref(route)}" data-action="nav" data-view="project" data-project="${project.id}" data-section="signalen">Alle projectsignalen</a>
     </div>
   </aside>`;

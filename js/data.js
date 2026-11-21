@@ -508,7 +508,6 @@ const signals = [
       },
       {
         label: "Zet het op de agenda van de stuurgroep (2 dec)",
-        cta: "Bereid de stuurgroep voor",
         primary: true,
         intent: "meeting-hk",
       },
@@ -564,7 +563,6 @@ const signals = [
       },
       {
         label: "Vraag Ruben om het concept van de gevelbelasting",
-        cta: "Maak een conceptmail aan Ruben",
         primary: true,
         intent: "draft-dk",
       },
@@ -621,7 +619,6 @@ const signals = [
     steps: [
       {
         label: "Vraag Joost of het onderzoek al is uitgezet",
-        cta: "Maak een conceptmail aan Joost",
         intent: "draft-pz",
         primary: !0,
       },
@@ -691,7 +688,6 @@ const signals = [
     steps: [
       {
         label: "Zet op agenda ontwerpteam (27 nov)",
-        cta: "Bereid het ontwerpteam voor",
         intent: "meeting",
         primary: !0,
       },

@@ -112,49 +112,40 @@
         <a class="btn btn--link" data-action="tab" data-view="projecten" href="projecten/index.html">3 andere signalen in je projecten</a>
       </header>
       
-      <div class="signal-register"><article class="signal-entry signal-entry--compact">
-    <div class="signal-summary">
-      <div class="signal-copy">
-        <p class="signal-project">De Kade</p>
-        <h3><button id="overview-s-dk2" class="signal-open" data-action="open-signal" data-id="s-dk2">Brandweeradvies trappenhuis staat open <svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></button></h3>
-        <p>Actie uit ontwerpteam nog niet afgerond</p>
-        <button type="button" class="btn btn--ghost btn--sm signal-immediate-button" data-action="signal-step" data-id="s-dk2" data-i="0">Bereid het ontwerpteam voor <svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
-      </div>
-      <dl class="signal-facts">
-    <div><dt>Zekerheid</dt><dd><span class="cert cert--check">Te controleren</span></dd></div>
-    <div><dt>Urgentie</dt><dd><span class="signal-urgency" data-urgency="Hoog">Hoog</span></dd></div>
-    <div><dt>Actie uiterlijk</dt><dd><time datetime="2026-11-27">27 nov</time></dd></div>
-  </dl>
-    </div>
-  </article><article class="signal-entry signal-entry--compact">
-    <div class="signal-summary">
-      <div class="signal-copy">
-        <p class="signal-project">Havenkwartier</p>
-        <h3><button id="overview-s-hk" class="signal-open" data-action="open-signal" data-id="s-hk">Sociale huur onder de afspraak <svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></button></h3>
-        <p>11 woningen minder dan afgesproken</p>
-        <button type="button" class="btn btn--ghost btn--sm signal-immediate-button" data-action="signal-step" data-id="s-hk" data-i="1">Bereid de stuurgroep voor <svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
-      </div>
-      <dl class="signal-facts">
-    <div><dt>Zekerheid</dt><dd><span class="cert cert--vast">Vastgesteld</span></dd></div>
-    <div><dt>Urgentie</dt><dd><span class="signal-urgency" data-urgency="Hoog">Hoog</span></dd></div>
-    <div><dt>Actie uiterlijk</dt><dd><time datetime="2026-12-02">2 dec</time></dd></div>
-  </dl>
-    </div>
-  </article><article class="signal-entry signal-entry--compact">
-    <div class="signal-summary">
-      <div class="signal-copy">
-        <p class="signal-project">Molenweide</p>
-        <h3><button id="overview-s-mw" class="signal-open" data-action="open-signal" data-id="s-mw">Nieuwe welstandsnota niet verwerkt <svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></button></h3>
-        <p>Haalbaarheidsstudie gaat uit van oude criteria</p>
-        <button type="button" class="btn btn--ghost btn--sm signal-immediate-button" data-action="signal-step" data-id="s-mw" data-i="0">Leg de welstandsnota naast de haalbaarheidsstudie <svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
-      </div>
-      <dl class="signal-facts">
-    <div><dt>Zekerheid</dt><dd><span class="cert cert--vast">Vastgesteld</span></dd></div>
-    <div><dt>Urgentie</dt><dd><span class="signal-urgency" data-urgency="Hoog">Hoog</span></dd></div>
-    <div><dt>Actie uiterlijk</dt><dd><time datetime="2026-12-04">4 dec</time></dd></div>
-  </dl>
-    </div>
-  </article></div>
+      <div class="signal-register"><article class="signal-entry"><div class="signal-brief">
+    <p class="signal-project">De Kade</p><header class="signal-brief-head">
+      <h3><button id="overview-s-dk2" class="signal-open" data-action="open-signal" data-id="s-dk2">Brandweeradvies trappenhuis staat open <svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></button></h3>
+      <span class="signal-brief-urgency">Urgentie <span class="signal-urgency" data-urgency="Hoog">Hoog</span></span>
+    </header>
+    <p class="signal-observation">Kroon Architecten zou het brandweeradvies voor trappenhuis blok B opvragen. Ik zie nog geen advies binnenkomen.</p>
+    <dl class="signal-brief-details">
+      <div><dt>Impact</dt><dd>Het advies kan de plattegrond van blok B veranderen. Dat is lastig als het pas na het DO komt.</dd></div>
+      <div><dt>Rise stelt voor</dt><dd>Vraag Kroon of het brandweeradvies voor blok B al binnen is. <span class="signal-brief-date">Uiterlijk <time datetime="2026-11-27">27 nov</time></span></dd></div>
+    </dl>
+    <button type="button" class="btn btn--ghost btn--sm" data-action="discuss-signal" data-id="s-dk2"><svg class="wing" viewBox="0 0 133 122" aria-hidden="true"><path d="M52.4 47.7L52.4 48.3L52.7 48.8L53.2 49.1L53.8 49.1L125.5 35.5L126 35L126.1 34.7L132.6 4.1L132.7 2.8L132.6 2.2L132.2 1.4L131.6 0.7L130.5 0.1L129.5 0L128.8 0.1L127.6 0.4L55.9 33.2L55.5 33.6L55.3 34.1ZM0 120L0 120.6L0.3 121.1L1.2 121.5L30.7 121.5L31.3 121.3L31.8 120.8L52.6 22.9L52.5 22L52.1 21.6L51.5 21.5L46.8 21.6L44.5 21.8L42.3 22.2L40 22.9L37.7 23.6L33.4 25.6L29.4 28.2L27.4 29.6L23.9 33L20.8 36.7L19.4 38.7L18.2 40.9L17.1 43L16.3 45.1L15.5 47.3L15 49.5Z" fill="currentColor"/></svg>Bespreek met Rise</button>
+  </div></article><article class="signal-entry"><div class="signal-brief">
+    <p class="signal-project">Havenkwartier</p><header class="signal-brief-head">
+      <h3><button id="overview-s-hk" class="signal-open" data-action="open-signal" data-id="s-hk">Sociale huur onder de afspraak <svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></button></h3>
+      <span class="signal-brief-urgency">Urgentie <span class="signal-urgency" data-urgency="Hoog">Hoog</span></span>
+    </header>
+    <p class="signal-observation">Programma v3 telt 53 sociale huurwoningen (25%). De overeenkomst vraagt er minimaal 64 (30%).</p>
+    <dl class="signal-brief-details">
+      <div><dt>Impact</dt><dd>Het programma ligt aan de basis van het ontwerp-bestemmingsplan. Een afwijking vraagt akkoord van de gemeente vóór indiening.</dd></div>
+      <div><dt>Rise stelt voor</dt><dd>Bespreek de afwijking in het woningprogramma met de gemeente in de stuurgroep. <span class="signal-brief-date">Uiterlijk <time datetime="2026-12-02">2 dec</time></span></dd></div>
+    </dl>
+    <button type="button" class="btn btn--ghost btn--sm" data-action="discuss-signal" data-id="s-hk"><svg class="wing" viewBox="0 0 133 122" aria-hidden="true"><path d="M52.4 47.7L52.4 48.3L52.7 48.8L53.2 49.1L53.8 49.1L125.5 35.5L126 35L126.1 34.7L132.6 4.1L132.7 2.8L132.6 2.2L132.2 1.4L131.6 0.7L130.5 0.1L129.5 0L128.8 0.1L127.6 0.4L55.9 33.2L55.5 33.6L55.3 34.1ZM0 120L0 120.6L0.3 121.1L1.2 121.5L30.7 121.5L31.3 121.3L31.8 120.8L52.6 22.9L52.5 22L52.1 21.6L51.5 21.5L46.8 21.6L44.5 21.8L42.3 22.2L40 22.9L37.7 23.6L33.4 25.6L29.4 28.2L27.4 29.6L23.9 33L20.8 36.7L19.4 38.7L18.2 40.9L17.1 43L16.3 45.1L15.5 47.3L15 49.5Z" fill="currentColor"/></svg>Bespreek met Rise</button>
+  </div></article><article class="signal-entry"><div class="signal-brief">
+    <p class="signal-project">Molenweide</p><header class="signal-brief-head">
+      <h3><button id="overview-s-mw" class="signal-open" data-action="open-signal" data-id="s-mw">Nieuwe welstandsnota niet verwerkt <svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></button></h3>
+      <span class="signal-brief-urgency">Urgentie <span class="signal-urgency" data-urgency="Hoog">Hoog</span></span>
+    </header>
+    <p class="signal-observation">Houten heeft een nieuwe welstandsnota met eisen voor dorpsranden. Volgens de haalbaarheidsstudie is die nog niet verwerkt.</p>
+    <dl class="signal-brief-details">
+      <div><dt>Impact</dt><dd>Kapvormen en materialen kunnen de bouwkosten veranderen, en daarmee de grondprijs in de intentieovereenkomst.</dd></div>
+      <div><dt>Rise stelt voor</dt><dd>Toets de welstandseisen vóór het gesprek met de grondeigenaar. <span class="signal-brief-date">Uiterlijk <time datetime="2026-12-04">4 dec</time></span></dd></div>
+    </dl>
+    <button type="button" class="btn btn--ghost btn--sm" data-action="discuss-signal" data-id="s-mw"><svg class="wing" viewBox="0 0 133 122" aria-hidden="true"><path d="M52.4 47.7L52.4 48.3L52.7 48.8L53.2 49.1L53.8 49.1L125.5 35.5L126 35L126.1 34.7L132.6 4.1L132.7 2.8L132.6 2.2L132.2 1.4L131.6 0.7L130.5 0.1L129.5 0L128.8 0.1L127.6 0.4L55.9 33.2L55.5 33.6L55.3 34.1ZM0 120L0 120.6L0.3 121.1L1.2 121.5L30.7 121.5L31.3 121.3L31.8 120.8L52.6 22.9L52.5 22L52.1 21.6L51.5 21.5L46.8 21.6L44.5 21.8L42.3 22.2L40 22.9L37.7 23.6L33.4 25.6L29.4 28.2L27.4 29.6L23.9 33L20.8 36.7L19.4 38.7L18.2 40.9L17.1 43L16.3 45.1L15.5 47.3L15 49.5Z" fill="currentColor"/></svg>Bespreek met Rise</button>
+  </div></article></div>
     </section>
   </section></div>
     <div class="dock">
