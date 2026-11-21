@@ -58,7 +58,7 @@ function renderMeetingAgenda(meeting, adopted) {
     </li>`).join("")}</ol>
     <div class="m-agenda-act">
       ${adopted ? "" : `<button class="btn btn--rise btn--sm" data-action="adopt-agenda" data-id="${meeting.id}">Neem over als agenda</button>`}
-      <button class="btn btn--ghost btn--sm" data-action="meeting-prep" data-id="${meeting.id}">${pipIcon()}Werk uit met Pip</button>
+      <button class="btn btn--ghost btn--sm" data-action="meeting-prep" data-id="${meeting.id}">${vickiIcon()}Werk uit met Vicki</button>
     </div>
   </section>`;
 }

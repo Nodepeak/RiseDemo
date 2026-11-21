@@ -261,7 +261,7 @@ function sendFollowup(e, n, a = {}) {
     (state.scrollThread = !0));
 }
 
-function currentPipTips(context) {
+function currentVickiTips(context) {
   const tips = [];
   const add = (text, action, prompt) => prompt && tips.push({ text, action, prompt });
   if (state.drawer) {
@@ -303,8 +303,8 @@ function currentPipTips(context) {
   return tips;
 }
 
-function currentPipTip(context) {
-  const tips = currentPipTips(context);
+function currentVickiTip(context) {
+  const tips = currentVickiTips(context);
   return tips[Math.min(state.dock.tipIndex ?? 0, tips.length - 1)] ?? null;
 }
 

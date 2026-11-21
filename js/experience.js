@@ -168,7 +168,7 @@ function paletteItems(query = "") {
   const add = (group, glyph, label, detail, run, keywords = "") => items.push({ group, glyph, label, detail, run, keywords });
 
   add("Opdrachten", "talk", "Nieuw gesprek", "Start een opdracht voor Rise", () => navigate({ view: "gesprekken", convId: null }));
-  add("Opdrachten", "spark", "Vraag Pip op deze pagina", "Open de assistent", () => setDockOpen(true), "assistent dock");
+  add("Opdrachten", "spark", "Vraag Vicki op deze pagina", "Open de assistent", () => setDockOpen(true), "assistent dock");
   const dark = resolvedTheme() === "dark";
   add("Opdrachten", dark ? "sun" : "moon", dark ? "Licht thema" : "Donker thema", "Wissel het kleurthema", () => setTheme(dark ? "light" : "dark"), "thema kleur modus dark light");
 

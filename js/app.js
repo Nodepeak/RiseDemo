@@ -129,7 +129,7 @@ function submitComposer(e) {
 function sendDockMessage(e) {
   let n = currentDockContext();
   if (!e.trim()) return;
-  stopPipSpeech();
+  stopVickiSpeech();
   let a = e.trim();
   state.dock.conv ||
     (state.dock.conv = {
@@ -221,17 +221,17 @@ function continueDockConversation() {
     (state.scrollThread = !0));
 }
 
-let pipSpeech = null;
+let vickiSpeech = null;
 
-function stopPipSpeech() {
-  if (!pipSpeech) return;
-  pipSpeech = null;
+function stopVickiSpeech() {
+  if (!vickiSpeech) return;
+  vickiSpeech = null;
   speechSynthesis.cancel();
 }
 
-function speakPipReply() {
-  if (pipSpeech) {
-    stopPipSpeech();
+function speakVickiReply() {
+  if (vickiSpeech) {
+    stopVickiSpeech();
     return render();
   }
   const answer = select("#dock-body")?.querySelectorAll(".msg--rise .msg-body");
@@ -244,25 +244,25 @@ function speakPipReply() {
   if (!text) return;
   const utterance = new SpeechSynthesisUtterance(text);
   utterance.lang = "nl-NL";
-  pipSpeech = utterance;
+  vickiSpeech = utterance;
   utterance.onend = () => {
-    if (pipSpeech !== utterance) return;
-    pipSpeech = null;
+    if (vickiSpeech !== utterance) return;
+    vickiSpeech = null;
     render();
   };
   utterance.onerror = () => {
-    if (pipSpeech !== utterance) return;
-    pipSpeech = null;
+    if (vickiSpeech !== utterance) return;
+    vickiSpeech = null;
     showToast("Voorlezen lukt op dit apparaat niet.");
   };
   speechSynthesis.speak(utterance);
   render();
 }
 
-window.addEventListener("pagehide", stopPipSpeech);
+window.addEventListener("pagehide", stopVickiSpeech);
 
 function setDockOpen(open) {
-  if (!open) stopPipSpeech();
+  if (!open) stopVickiSpeech();
   state.dock.open = open;
   state.nextFocus = open ? "dock-input" : "dock-trigger";
   render();
@@ -601,9 +601,9 @@ document.addEventListener("click", (e) => {
         : r
           ? (sendFollowup(r, o.text), render())
           : void 0;
-    case "pip-speak":
-      return speakPipReply();
-    case "pip-tip-dismiss":
+    case "vicki-speak":
+      return speakVickiReply();
+    case "vicki-tip-dismiss":
       state.dock.tipDismissed = true;
       state.nextFocus = "dock-trigger";
       return render();

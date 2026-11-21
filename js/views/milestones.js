@@ -45,7 +45,7 @@ function renderMilestoneOverview(projectId) {
           ${milestone.owner ? `<p>Verantwoordelijke: <strong>${escapeHtml(milestone.owner)}</strong></p>` : ""}
           ${renderRequirements(milestone)}
           ${renderMilestoneSignals(milestone)}
-          <button class="btn btn--rise btn--sm" data-action="ask-about" data-label="${escapeHtml(milestone.name)}">${pipIcon()}Vraag Pip over deze mijlpaal</button>
+          <button class="btn btn--rise btn--sm" data-action="ask-about" data-label="${escapeHtml(milestone.name)}">${vickiIcon()}Vraag Vicki over deze mijlpaal</button>
         </div>`
             : ""
         }
