@@ -92,8 +92,8 @@ function renderDocument() {
         ${e.body.map(a).join("")}
       </article>
       <aside class="doc-side">
-        <div class="side-card"><h5>Rise over dit document</h5><p>${e.summary}</p>
-          <button class="btn btn--rise btn--sm" data-action="dock-open">${riseIcon}Vraag Rise hierover</button></div>
+        <div class="side-card"><h5>Pip over dit document</h5><p>${e.summary}</p>
+          <button class="btn btn--rise btn--sm" data-action="dock-open">${pipIcon()}Vraag Pip hierover</button></div>
         ${
           tracking?.status
             ? `<div class="side-card"><h5>Documentstatus</h5><p>${tracking.version ? tracking.version + " · " : ""}${tracking.status}</p>

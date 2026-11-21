@@ -66,7 +66,7 @@ function renderThread(e, n = !1) {
           }
       });
       let i = a.reveal !== void 0 && a.reveal < a.total;
-      return `<div class="msg msg--rise" data-mi="${s}"><span class="msg-avatar">${riseIcon}</span><div class="msg-body">${r.join("")}${i && !r.length ? '<i class="dots"><b></b><b></b><b></b></i>' : ""}</div></div>`;
+      return `<div class="msg msg--rise" data-mi="${s}"><span class="msg-avatar">${pipIcon()}</span><div class="msg-body">${r.join("")}${i && !r.length ? '<i class="dots"><b></b><b></b><b></b></i>' : ""}</div></div>`;
     })
     .join("");
 }
@@ -102,8 +102,8 @@ function renderConversations() {
         <div class="thread" id="thread">${renderThread(e)}</div>
         <div class="conv-compose">${renderComposer("chat", { placeholder: "Stel een vervolgvraag of geef een nieuwe opdracht. Typ @ voor een project.", base: e.projects })}</div>`
           : `<div class="conv-empty">
-        <h1>Geef Rise een opdracht</h1>
-        <p>Geef Rise je opdracht. Rise kiest zelf welke skills erbij passen en laat zien welke bronnen het gebruikt.</p>
+        <h1>Geef Pip een opdracht</h1>
+        <p>Geef Pip je opdracht. Rise kiest zelf welke skills erbij passen en laat zien welke bronnen het gebruikt.</p>
         ${renderComposer("chat", { big: true, placeholder: "Beschrijf wat je wilt laten uitzoeken of maken." })}
         <section class="conversation-skills" aria-labelledby="conversation-skills">
           <h2 id="conversation-skills">Start met een voorbeeld</h2>
@@ -127,21 +127,21 @@ function renderDock() {
   return `<div class="dock">
     ${open ? `<section class="dock-panel" id="rise-assistant" aria-labelledby="rise-assistant-title">
       <header class="dock-head">
-        <div><h2 id="rise-assistant-title">${riseIcon} Rise-assistent</h2><p>${escapeHtml(context.label)}</p></div>
-        <button class="icon-btn" id="dock-close" data-action="dock-close" aria-label="Sluit Rise-assistent">${icon("x")}</button>
+        <div><h2 id="rise-assistant-title">${pipIcon()} Pip</h2><p>${escapeHtml(context.label)}</p></div>
+        <button class="icon-btn" id="dock-close" data-action="dock-close" aria-label="Sluit Pip">${icon("x")}</button>
         ${about ? `<button class="dock-topic" data-action="dock-about-x" aria-label="Verwijder onderwerp ${escapeHtml(about)}">${escapeHtml(about)} ${icon("x")}</button>` : ""}
       </header>
       <div class="dock-body" id="dock-body">${conv ? renderThread(conv, true) : `<div class="dock-starters">${suggestions.map((suggestion) => `<button class="dock-suggestion" data-action="dock-suggest" data-text="${escapeHtml(suggestion)}">${escapeHtml(suggestion)} ${icon("chev")}</button>`).join("")}</div>`}</div>
       <footer class="dock-footer">
         <form class="dock-bar" data-action-submit="dock-send">
-          <input id="dock-input" aria-label="Je vraag aan Rise" autocomplete="off" placeholder="Typ je vraag of opdracht" value="${escapeHtml(text)}">
+          <input id="dock-input" aria-label="Je vraag aan Pip" autocomplete="off" placeholder="Typ je vraag of opdracht" value="${escapeHtml(text)}">
           <button type="submit" class="dock-send" aria-label="Verstuur vraag">${icon("send")}</button>
         </form>
         ${conv ? '<button class="btn btn--link btn--sm" data-action="dock-continue">Verder in Gesprekken</button>' : ""}
       </footer>
     </section>` : ""}
     <button type="button" class="dock-trigger" id="dock-trigger" data-action="dock-toggle" aria-expanded="${open}"${open ? ' aria-controls="rise-assistant"' : ""} aria-keyshortcuts="/">
-      <span class="dock-clip">${open ? icon("x") : riseIcon}</span><span>${open ? "Sluit" : "Vraag Rise"}</span>${open ? "" : '<kbd class="kbd">/</kbd>'}
+      <span class="dock-clip">${open ? icon("x") : pipIcon(true)}</span><span>${open ? "Sluit Pip" : "Vraag Pip"}</span>${open ? "" : '<kbd class="kbd">/</kbd>'}
     </button>
   </div>`;
 }

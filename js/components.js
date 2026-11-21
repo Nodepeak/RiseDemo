@@ -23,6 +23,11 @@ const riseLogo =
   '<svg class="logo" viewBox="0.00 -863.20 2885.60 875.20" aria-hidden="true"><g transform="translate(0,-862.44) scale(7.1)"><path d="M52.4 47.7L52.4 48.3L52.7 48.8L53.2 49.1L53.8 49.1L125.5 35.5L126 35L126.1 34.7L132.6 4.1L132.7 2.8L132.6 2.2L132.2 1.4L131.6 0.7L130.5 0.1L129.5 0L128.8 0.1L127.6 0.4L55.9 33.2L55.5 33.6L55.3 34.1ZM0 120L0 120.6L0.3 121.1L1.2 121.5L30.7 121.5L31.3 121.3L31.8 120.8L52.6 22.9L52.5 22L52.1 21.6L51.5 21.5L46.8 21.6L44.5 21.8L42.3 22.2L40 22.9L37.7 23.6L33.4 25.6L29.4 28.2L27.4 29.6L23.9 33L20.8 36.7L19.4 38.7L18.2 40.9L17.1 43L16.3 45.1L15.5 47.3L15 49.5Z" fill="var(--accent)"/></g><g transform="translate(993.11,0) scale(0.2)"><path d="M419 -565C523 -565 594 -505 603 -410L518 -405C510 -457 473 -490 419 -490C348 -490 304 -442 304 -357C304 -272 348 -223 419 -223C476 -223 514 -257 521 -316L607 -310C597 -211 526 -148 419 -148C296 -148 218 -228 218 -357C218 -486 296 -565 419 -565ZM46 -357C46 -153 211 12 415 12C619 12 784 -153 784 -357C784 -561 619 -726 415 -726C211 -726 46 -561 46 -357ZM124 -357C124 -517 255 -649 415 -649C574 -649 707 -517 707 -357C707 -197 574 -65 415 -65C255 -65 124 -197 124 -357Z" fill="currentColor"/></g><path transform="translate(1206.31,0)" d="M75 -530V0H183V-309C183 -397 219 -442 302 -442H353V-530H303C235 -530 195 -499 177 -432L174 -530Z M453 -530V0H561V-530Z M999 -363 1110 -369C1092 -475 1004 -542 889 -542C757 -542 673 -479 673 -375C673 -273 770 -243 882 -219C939 -206 1006 -200 1006 -143C1006 -94 946 -78 900 -78C827 -78 781 -115 771 -174L660 -167C668 -56 765 12 901 12C1013 12 1118 -34 1118 -138C1118 -242 1033 -278 901 -302C847 -312 786 -331 785 -379C784 -425 827 -452 881 -452C935 -452 988 -419 999 -363Z M1186 -265C1186 -96 1286 12 1439 12C1547 12 1640 -51 1672 -152L1560 -160C1538 -110 1491 -80 1439 -80C1356 -80 1306 -137 1300 -234H1679V-269C1673 -458 1565 -542 1439 -542C1286 -542 1186 -434 1186 -265ZM1301 -315C1313 -400 1362 -450 1439 -450C1498 -450 1553 -415 1566 -315Z" fill="currentColor"/></svg>';
 
 // Iconen: één set, 24px-raster, lijndikte via CSS (.ic). Vormen afgeleid van Lucide (ISC-licentie).
+function pipIcon(animated = false) {
+  const file = animated ? "pip-animated.svg" : "pip.svg";
+  return `<img class="pip-avatar" src="${localPath("assets/" + file)}" width="22" height="24" alt="">`;
+}
+
 const iconPaths = {
   menu: '<path d="M4 6h16M4 12h16M4 18h16"/>',
   desk: '<rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/>',
@@ -110,7 +115,7 @@ function renderComposer(e, { big: n = !1, placeholder: a, base: s = [] } = {}) {
       }
       ${r}
     </div>
-    <textarea id="ta-${e}" data-comp="${e}" rows="${n ? 2 : 1}" aria-label="Vraag of opdracht voor Rise" placeholder="${a ?? "Vraag Rise iets of geef een opdracht. Typ @ voor een project."}">${escapeHtml(o.text)}</textarea>
+    <textarea id="ta-${e}" data-comp="${e}" rows="${n ? 2 : 1}" aria-label="Vraag of opdracht voor Pip" placeholder="${a ?? "Vraag Pip iets of geef een opdracht. Typ @ voor een project."}">${escapeHtml(o.text)}</textarea>
     <div class="comp-bar">
       <button type="button" class="comp-btn" id="composer-context-${e}" aria-expanded="${state.pop?.type === "context" && state.pop.comp === e}" aria-controls="choice-popover" data-action="pop-context" data-comp="${e}">${icon("plus")}<span>${isDesk ? "Bronnen" : "Context"}</span></button>
       <button type="button" class="comp-btn ${o.skill ? "is-set" : ""}" id="composer-skill-${e}" aria-expanded="${state.pop?.type === "skill" && state.pop.comp === e}" aria-controls="choice-popover" data-action="pop-skill" data-comp="${e}">${icon("spark")}<span>${o.skill ? "Skill wijzigen" : "Skill"}</span></button>

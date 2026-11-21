@@ -74,7 +74,7 @@ function renderDesk() {
 
     <div class="desk-ask">
       <h2><label for="ta-home">Waar wil je mee beginnen?</label></h2>
-      ${renderComposer("home", { big: true, placeholder: "Vraag Rise iets over je projecten, of geef een opdracht…" })}
+      ${renderComposer("home", { big: true, placeholder: "Vraag Pip iets over je projecten, of geef een opdracht…" })}
       <div class="desk-suggest">${deskSuggestions.map((text) => `<button type="button" data-action="desk-suggest" data-text="${escapeHtml(text)}">${icon("spark")}${escapeHtml(text)}</button>`).join("")}</div>
     </div>
 

@@ -74,7 +74,7 @@ function renderSchedule(project) {
           const { start, end, milestone } = dates;
           return `<div class="g-row ${row.key ? "is-key" : ""}">
             <div class="g-label"><b>${row.name}</b><em>${renderScheduleDates(dates)}${row.who ? " · " + row.who : ""}${row.dep ? " · na " + row.dep : ""}</em>
-              <button class="ask" data-action="ask-about" data-label="${escapeHtml(row.name)}" aria-label="Vraag Rise over ${escapeHtml(row.name)}" title="Vraag Rise over ${escapeHtml(row.name)}">${riseIcon}</button>
+              <button class="ask" data-action="ask-about" data-label="${escapeHtml(row.name)}" aria-label="Vraag Pip over ${escapeHtml(row.name)}" title="Vraag Pip over ${escapeHtml(row.name)}">${pipIcon()}</button>
             </div>
             <div class="g-track" aria-hidden="true">
               ${timelineMonths.map(({ date }) => `<i class="g-grid" style="left:${timelinePosition(date)}%"></i>`).join("")}
