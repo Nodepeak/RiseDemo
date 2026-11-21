@@ -1516,15 +1516,30 @@ sup[data-src]:hover { background: var(--accent); color: var(--accent-fg); }
 /* Kleuren en basis */
 .vicki-live { display: block; width: 100%; height: 100%; overflow: visible; --vk-ink: #0D0F2B; }
 .vicki-live g, .vicki-live path, .vicki-live ellipse, .vicki-live circle, .vicki-live text { transform-box: view-box; }
-.vicki-live .vk-ink, .vicki-live .vk-ear, .vicki-live .vk-mic { fill: var(--vk-ink); }
-.vicki-live .vk-line, .vicki-live .vk-band, .vicki-live .vk-boom { stroke: var(--vk-ink); }
+.vicki-live .vk-ink { fill: var(--vk-ink); }
+.vicki-live .vk-line { stroke: var(--vk-ink); }
+/* Uitstraling */
+.vicki-live .vk-body--drop, .vicki-live .vk-rim--drop { display: none; }
+.vicki-live[data-look="druppel"] .vk-body--drop, .vicki-live[data-look="druppel"] .vk-rim--drop { display: inline; }
+.vicki-live[data-look="druppel"] .vk-body--pebble, .vicki-live[data-look="druppel"] .vk-rim--pebble { display: none; }
+.vicki-live[data-look="inkt"] { --vk-ink: #FFF1E6; }
+.vicki-live[data-look="inkt"] :is(.vk-body, .vk-mitt) { fill: url(#vk-skin-inkt); }
+.vicki-live[data-look="inkt"] .vk-glint { display: none; }
+.vicki-live[data-look="inkt"] .vk-cheek { fill: #F2643A; }
+.vicki-live[data-look="inkt"] .vk-rim { opacity: .2; }
+.vicki-live[data-look="inkt"] .vk-rim--soft { opacity: .07; }
+.vicki-live[data-look="klei"] :is(.vk-body, .vk-mitt) { fill: url(#vk-skin-klei); stroke: #E7C6AE; stroke-width: 1.5; }
+.vicki-live[data-look="klei"] .vk-mitt { fill: url(#vk-skin-druppel); stroke: none; }
+.vicki-live[data-look="klei"] .vk-cheek { fill: #F7895E; }
+.vicki-live[data-look="klei"] .vk-rim { opacity: .9; }
+.vicki-live[data-look="klei"] .vk-rim--soft { opacity: .5; }
+.vicki-live[data-look="druppel"] :is(.vk-body, .vk-mitt) { fill: url(#vk-skin-druppel); }
 .vicki-live .vk-glint { fill: #fff; }
 .vicki-live .vk-glint--s { opacity: .7; }
 .vicki-live .vk-rim { stroke: #fff; opacity: .42; }
 .vicki-live .vk-rim--soft { opacity: .16; }
 .vicki-live .vk-cheek { fill: #FFC6B4; opacity: .5; transform-origin: 120px 136px; transition: opacity .3s, transform .3s; }
 .vicki-live .vk-shadow { fill: var(--fg); opacity: .13; transform-origin: 120px 238px; animation: vk-shadow 4.4s ease-in-out infinite; }
-.vicki-live .vk-mic-led { fill: #FFD27A; opacity: .3; transition: opacity .2s; }
 .vicki-live .vk-spark-star { fill: #FFC14D; }
 .vicki-live .vk-spark-glow { opacity: .55; }
 .vicki-live .vk-rays path { stroke: #F2643A; }
@@ -1550,8 +1565,8 @@ html[data-vicki-blink] .vk-blink { transform: scaleY(.08); }
 .vk-brow--r { transform-origin: 143px 86px; }
 .vk-m { opacity: 0; transition: opacity .05s; }
 .vk-hand { transition: transform .5s cubic-bezier(.3, 1.35, .5, 1); }
-.vk-hand--l { transform-origin: 30px 170px; }
-.vk-hand--r { transform-origin: 210px 170px; }
+.vk-hand--l { transform-origin: 36px 170px; }
+.vk-hand--r { transform-origin: 204px 170px; }
 .vk-hand-in { animation: vk-hand-bob 4.4s ease-in-out infinite; }
 .vk-hand--l .vk-hand-in { animation-delay: -.5s; }
 .vk-hand--r .vk-hand-in { animation-delay: -.8s; }
@@ -1603,7 +1618,6 @@ html[data-vicki-face="talk"] .vk-brow { animation: vk-brow-talk 1.1s ease-in-out
 
 /* Toestand: luistert (hand aan de headset, iets naar je toe) */
 .vicki-live[data-state="listening"] .vk-hand--r { transform: translate(-6px, -48px); }
-.vicki-live[data-state="listening"] .vk-mic-led { opacity: .7; }
 
 /* Toestand: denkt na (hand aan de kin, vonkje draait rond het hoofd) */
 .vicki-live[data-state="thinking"] .vk-float { animation: vk-think 3s ease-in-out infinite; }
@@ -1614,7 +1628,6 @@ html[data-vicki-face="talk"] .vk-brow { animation: vk-brow-talk 1.1s ease-in-out
 .vicki-live[data-state="talking"] .vk-breath, html[data-vicki-talk] .vicki-live .vk-breath { animation: vk-talk-bob .5s ease-in-out infinite alternate; }
 .vicki-live[data-state="talking"] .vk-hand--l, html[data-vicki-talk] .vicki-live .vk-hand--l { animation: vk-gest-l 1.7s ease-in-out infinite; }
 .vicki-live[data-state="talking"] .vk-hand--r, html[data-vicki-talk] .vicki-live .vk-hand--r { animation: vk-gest-r 1.7s ease-in-out -.6s infinite; }
-.vicki-live[data-state="talking"] .vk-mic-led, html[data-vicki-talk] .vicki-live .vk-mic-led { opacity: 1; animation: vk-led .3s ease-in-out infinite alternate; }
 
 /* Stemming: slaapt (dommelt weg na lange stilte, wordt wakker bij beweging) */
 html[data-vicki-mood="sleep"] .vicki-live .vk-float { animation: vk-float 6.5s ease-in-out infinite; }
@@ -1704,3 +1717,5 @@ html[data-vicki-react="toss"] .vicki-live .vk-hand--r { animation: vk-catch 1.4s
   .vicki-live *, .vicki-bubble { animation: none !important; transition: none !important; }
   .vk-face, .vk-eyes, .vk-lean { transform: none; }
 }
+[data-theme="dark"] .vicki-live .vk-shadow { fill: #000; opacity: .45; }
+[data-theme="dark"] .vicki-live[data-look="inkt"] .vk-body { stroke: oklch(1 0 0 / .16); stroke-width: 2; }
