@@ -103,7 +103,7 @@ function renderConversations() {
         <div class="conv-compose">${renderComposer("chat", { placeholder: "Stel een vervolgvraag of geef een nieuwe opdracht. Typ @ voor een project.", base: e.projects })}</div>`
           : `<div class="conv-empty">
         <h1>Geef Rise een opdracht</h1>
-        <p>Toets afspraken, vergelijk documenten of werk een overleg uit. Rise laat zien welke bronnen en agents meewerken.</p>
+        <p>Geef Rise je opdracht. Rise kiest zelf welke skills erbij passen en laat zien welke bronnen het gebruikt.</p>
         ${renderComposer("chat", { big: true, placeholder: "Beschrijf wat je wilt laten uitzoeken of maken." })}
         <section class="conversation-skills" aria-labelledby="conversation-skills">
           <h2 id="conversation-skills">Start met een voorbeeld</h2>

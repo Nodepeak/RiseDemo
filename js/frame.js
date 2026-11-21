@@ -166,10 +166,11 @@ function renderChoice({
   </button>`;
 }
 
-function renderChoicePopover(pop, title, placeholder, choices) {
+function renderChoicePopover(pop, title, placeholder, choices, description = "") {
   const position = `left:${pop.x}px;${pop.up ? `bottom:${pop.y}px` : `top:${pop.y}px`};--choice-space:${pop.space}px`;
   return `<div class="pop choice-pop" id="choice-popover" style="${position}" role="group" aria-label="${title}">
     <h6>${title}</h6>
+    ${description ? `<p class="choice-description">${escapeHtml(description)}</p>` : ""}
     ${placeholder ? `<label class="choice-search">${icon("search")}<input id="choice-search" aria-label="${placeholder}" placeholder="${placeholder}" autocomplete="off" value="${escapeHtml(pop.q)}"></label>` : ""}
     <div class="choice-options">${choices.map(renderChoice).join("") || '<p class="empty" role="status">Geen resultaten gevonden.</p>'}</div>
   </div>`;
@@ -209,16 +210,20 @@ function renderPopover() {
         attributes: `data-id="${id}"`,
         selected: current === id,
       }));
-    if (current && matchesChoice(query, "Geen skill Laat Rise zelf kiezen")) {
-      choices.push({
-        label: "Geen skill",
-        detail: "Laat Rise zelf kiezen",
-        leading: icon("x"),
+    if (matchesChoice(query, "Automatisch Rise kiest zelf")) {
+      choices.unshift({
+        label: "Automatisch",
+        detail: "Rise kiest wat bij je opdracht past",
+        leading: icon("spark"),
+        selected: !current,
         action: "choose-skill",
         attributes: 'data-id=""',
       });
     }
-    return renderChoicePopover(e, "Skill kiezen", "Zoek een skill", choices);
+    return renderChoicePopover(
+      e, "Skills", "Zoek een skill", choices,
+      "Rise kiest standaard zelf de juiste skill. Kies er zelf een als je een specifieke aanpak wilt meegeven. Via Context kun je ook kaders toevoegen.",
+    );
   }
   if (["context", "mention", "projects"].includes(e.type)) {
     const mention = e.type === "mention";
