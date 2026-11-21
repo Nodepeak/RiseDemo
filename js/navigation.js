@@ -13,6 +13,8 @@ function saveTrackingProgress() {
         agendaAdopted: state.agendaAdopted,
         dismissed: state.dismissed,
         deskComposerExpanded: state.deskComposerExpanded,
+        scenario: state.scenario,
+        navAllProjects: state.navAllProjects,
       }),
     );
   } catch {

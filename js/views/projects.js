@@ -1,3 +1,31 @@
+function renderProjects() {
+  return `<section class="page">
+    <header class="page-head"><div><h1>Projecten</h1><p>${projects.length + (isScaled() ? scaleData().extraProjects.length : 0)} lopende projecten. Kies een project om het te openen.</p></div><button class="btn btn--ghost" data-action="toast" data-text="Project toevoegen (niet in deze demo)">${icon("plus")}Project toevoegen</button></header>
+    ${withDataState(() => `<div class="tracking-table-wrap"><table class="ptable"><thead><tr><th>Project</th><th>Fase</th><th>Woningen</th><th>Volgende mijlpaal</th><th>Signalen</th></tr></thead><tbody>
+    ${projects
+      .map((e) => {
+        let n = signals.filter(
+          (a) => a.project === e.id && !state.dismissed[a.id],
+        );
+        const next = primaryProjectMilestone(e.id);
+        const planningHref = pageHref({
+          view: "project",
+          projectId: e.id,
+          section: "planning",
+        });
+        return `<tr data-action="nav" data-view="project" data-project="${e.id}" data-section="signalen">
+        <td><span class="np-mono np-mono--light">${e.id.toUpperCase()}</span><a href="${pageHref({ view: "project", projectId: e.id, section: "signalen" })}" data-action="nav" data-view="project" data-project="${e.id}" data-section="signalen"><b>${e.name}</b></a><em>${e.place}</em></td>
+        <td>${e.phase}</td><td class="tabular">${e.homes}</td><td class="project-next"><a href="${planningHref}" data-action="nav" data-view="project" data-project="${e.id}" data-section="planning">${e.next} · ${formatPlanDate(next.date)}</a>
+          <span>${renderMilestoneStatus(next.status)} <small>${milestoneDateNote(next)}</small></span></td>
+        <td>${n.map((a) => `<span class="mini-cert cert--${a.level}" title="${a.title}"></span>`).join("")} <span class="muted">${n.length}</span></td></tr>`;
+      })
+      .join("")}
+    ${renderScaledProjectRows()}
+    </tbody></table>${isScaled() ? `<div class="list-foot"><span>${projects.length + scaleData().extraProjects.length} projecten</span><span>Gesorteerd op naam</span></div>` : ""}</div>`,
+    { empty: { title: "Nog geen projecten", text: "Voeg een project toe of koppel een projectmap. Rise begint direct met lezen.", glyph: "grid", action: '<button class="btn btn--sm btn--rise" data-action="toast" data-text="Project toevoegen (niet in deze demo)">' + icon("plus") + 'Project toevoegen</button>' }, rows: 5, wrap: "tracking-table-wrap" })}
+  </section>`;
+}
+
 function renderProjectHeader(project, title, description = "") {
   return `<header class="page-head page-head--project">
     <div><p class="kicker">${project.name} · ${project.place} · ${project.homes} woningen · ${project.phase}</p><h1>${title}</h1>${description ? `<p>${description}</p>` : ""}</div>
@@ -15,7 +43,7 @@ function renderProjectSignals(project) {
     ${renderProjectHeader(project, "Signalen", "Op volgorde van het eerstvolgende actiemoment.")}
     <div class="legend" role="group" aria-label="Filter op zekerheid">${["alle", "vast", "vermoed", "check"].map((level) => `<button id="signal-filter-${level}" class="filter ${selected === level ? "is-on" : ""}" data-action="sig-filter" data-k="${level}" aria-pressed="${selected === level}">${level === "alle" ? "Alle" : certaintyBadge(level)} <em>${level === "alle" ? all.length : all.filter((signal) => signal.level === level).length}</em></button>`).join("")}</div>
     ${renderHiddenSignals(project.id)}
-    ${visible.length ? `<div class="signal-register">${visible.map(renderSignalEntry).join("")}</div>` : '<p class="empty">Geen signalen in deze selectie.</p>'}
+    ${withDataState(() => visible.length ? `<div class="signal-register">${visible.map(renderSignalEntry).join("")}</div>` : renderState({ title: "Geen signalen in deze selectie", text: "Kies een ander filter of bekijk alle signalen.", glyph: "pulse" }), { empty: { title: "Geen signalen voor dit project", text: "Rise vergelijkt nieuwe stukken met afspraken en planning. Zodra iets afwijkt, verschijnt het hier.", glyph: "pulse" }, rows: 3 })}
   </section>`;
 }
 
@@ -62,4 +90,16 @@ function renderSchedule(project) {
       </div>
     </section>
   </section>`;
+}
+
+function renderScaledProjectRows() {
+  if (!isScaled()) return "";
+  return scaleData()
+    .extraProjects.map((project) => `<tr data-action="scale-item">
+      <td><span class="np-mono np-mono--light">${escapeHtml(project.name.slice(0, 2))}</span><b>${escapeHtml(project.name)}</b><em>${escapeHtml(project.place)}</em></td>
+      <td>${escapeHtml(project.phase)}</td><td class="tabular">${project.homes}</td>
+      <td class="project-next"><a>${escapeHtml(project.next)} · ${formatPlanDate(project.date)}</a><span>${renderMilestoneStatus(project.status)}</span></td>
+      <td>${Array.from({ length: Math.min(project.signals, 4) }, (_, i) => `<span class="mini-cert cert--${["vast", "vermoed", "check"][i % 3]}"></span>`).join("")} <span class="muted">${project.signals}</span></td>
+    </tr>`)
+    .join("");
 }

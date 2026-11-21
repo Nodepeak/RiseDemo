@@ -114,8 +114,10 @@ function renderLibrary(demoDossier) {
           .map(escapeHtml)
           .join(" · ");
         return `<li>
-      <div><span class="library-location">${location}</span><h2>${escapeHtml(name)}</h2>
+      <span class="library-icon">${icon("doc")}</span>
+      <div class="library-main"><h2>${escapeHtml(name)}</h2>
       <p>${[publisher, topic, date?.slice(0, 4)].filter(Boolean).map(escapeHtml).join(" · ")}</p></div>
+      <span class="library-location">${location}</span>
     </li>`;
       },
     )

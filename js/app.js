@@ -22,7 +22,7 @@ function render() {
     ".library-demo",
     ".document-versions",
   ].filter((selector) => select(selector)?.open);
-  app.innerHTML = renderFrame();
+  morph(app, renderFrame());
   for (const form of app.querySelectorAll(".tracking-form")) {
     for (const [name, value] of trackingDrafts.get(form.id) ?? [])
       form.elements.namedItem(name).value = value;

@@ -74,7 +74,7 @@ function renderThread(e, n = !1) {
 function renderConversations() {
   let e = state.convs.find((o) => o.id === state.convId),
     n = state.convSearch.toLowerCase(),
-    a = state.convs.filter(
+    a = [...state.convs, ...(isScaled() ? scaleData().extraConversations : [])].filter(
       (o) =>
         !n ||
         o.title.toLowerCase().includes(n) ||
@@ -85,15 +85,15 @@ function renderConversations() {
     <aside class="conv-list">
       <button class="btn btn--rise conv-new" data-action="new-conv">${icon("plus")}Nieuw gesprek</button>
       <label class="search">${icon("search")}<input id="conv-search" placeholder="Zoek in gesprekken" value="${escapeHtml(state.convSearch)}" /></label>
-      ${s
+      ${withDataState(() => s
         .map((o) => {
           let r = a.filter((i) => i.group === o);
           return r.length
-            ? `<h5>${o}</h5>${r.map((i) => `<button class="cl ${i.id === state.convId ? "is-on" : ""}" data-action="open-conv" data-id="${i.id}"><b>${escapeHtml(i.title)}</b><em>${i.projects.map((d) => findProject(d).name).join(", ") || "Alle projecten"}${i.skill ? " · " + findSkill(i.skill).name : ""} · ${i.when}</em></button>`).join("")}`
+            ? `<h5>${o}</h5>${r.map((i) => `<button class="cl ${i.id === state.convId ? "is-on" : ""}" data-action="${i.placeholder ? "scale-item" : "open-conv"}" data-id="${i.id}"><b>${escapeHtml(i.title)}</b><em>${i.projects.map((d) => findProject(d).name).join(", ") || "Alle projecten"}${i.skill ? " · " + findSkill(i.skill).name : ""} · ${i.when}</em></button>`).join("")}`
             : "";
         })
-        .join("")}
-      ${a.length ? "" : '<p class="empty">Geen gesprekken gevonden.</p>'}
+        .join("") + (a.length ? "" : renderState({ title: "Geen gesprekken gevonden", text: n ? "Probeer een andere zoekterm." : "", glyph: "search", plain: true })),
+        { empty: { title: "Nog geen gesprekken", text: "Je gesprekken met Rise verschijnen hier.", glyph: "talk", plain: true }, rows: 5, wrap: "skeleton-list" })}
     </aside>
     <div class="conv-main">
       ${
@@ -141,7 +141,7 @@ function renderDock() {
       </footer>
     </section>` : ""}
     <button type="button" class="dock-trigger" id="dock-trigger" data-action="dock-toggle" aria-expanded="${open}"${open ? ' aria-controls="rise-assistant"' : ""} aria-keyshortcuts="/">
-      <span class="dock-clip">${icon(open ? "x" : "clip")}</span><span>${open ? "Sluit Rise" : "Vraag Rise"}</span>
+      <span class="dock-clip">${open ? icon("x") : riseIcon}</span><span>${open ? "Sluit" : "Vraag Rise"}</span>${open ? "" : '<kbd class="kbd">/</kbd>'}
     </button>
   </div>`;
 }

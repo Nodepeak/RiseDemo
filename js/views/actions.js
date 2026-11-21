@@ -68,7 +68,7 @@ function renderActions(project = null) {
   const key = actionFilterScope(project?.id);
   const signal = project ? findSignal(key) : null;
   const origin = state.actionOrigins[key] ?? "all";
-  const actions = projectActions(project?.id).filter((action) =>
+  const actions = [...projectActions(project?.id), ...(project ? [] : scaledActions())].filter((action) =>
     (!signal || action.signal?.id === signal.id) &&
     (origin === "all" || actionOrigin(action) === origin),
   );
@@ -101,10 +101,10 @@ function renderActions(project = null) {
         ).join("")}
       </select></label>
     </div>
-    ${visible.length ? `<div class="action-table-wrap"><table class="action-table">
+    ${withDataState(() => visible.length ? `<div class="action-table-wrap"><table class="action-table">
       <thead><tr><th scope="col">Actie</th><th scope="col">Eigenaar</th><th scope="col">Deadline</th><th scope="col">Herkomst</th><th scope="col">Status</th><th scope="col"><span class="visually-hidden">Opvolging</span></th></tr></thead>
       <tbody>${visible.map((action, index) => renderProjectAction(action, index, Boolean(project))).join("")}</tbody>
-    </table></div>` : '<p class="empty">Geen acties in deze selectie.</p>'}
+    </table>${visible.length > 12 ? `<div class="list-foot"><span>${visible.length} acties</span><span>Op deadline, eerstvolgende eerst</span></div>` : ""}</div>` : renderState({ title: filter === "done" ? "Nog niets afgerond" : "Geen open acties", text: filter === "done" ? "Afgeronde acties verschijnen hier, met hun herkomst." : "Alles is opgepakt. Nieuwe acties uit verslagen en signalen komen hier binnen.", glyph: "task" }), { empty: { title: "Nog geen acties", text: "Rise haalt acties uit vergaderverslagen en signalen. Zodra er een verslag is, verschijnen ze hier.", glyph: "task" }, rows: 6, wrap: "action-table-wrap" })}
   </section>`;
 }
 
