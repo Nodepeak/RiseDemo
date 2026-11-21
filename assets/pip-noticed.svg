@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 310" width="280" height="310" class="pip" data-state="noticed" data-motion="on" role="img" aria-labelledby="pip-title pip-desc">
+  <title id="pip-title">Pip, je digitale assistent</title>
+  <desc id="pip-desc">Een koraaloranje lintfiguur met een lange schuine lus, een uitstekende arm en twee donkerblauwe oogjes.</desc>
+  <style>/* Pip: transforms are split over nested groups to avoid conflicts. */
+.pip { overflow:visible; --pip-coral:#F2643A; --pip-back:#E95632; --pip-peach:#FF986B; --pip-ink:#0D0F2B; }
+.pip .pip-back { stroke:var(--pip-back); }
+.pip .pip-front { stroke:var(--pip-coral); }
+.pip .pip-tip { stroke:var(--pip-peach); }
+.pip .pip-eye { fill:var(--pip-ink); }
+.pip .pip-body { transform-origin:110px 257px; transition:transform .35s ease; }
+.pip .pip-breath { transform-origin:110px 257px; animation:pip-breathe 5.6s ease-in-out infinite; }
+.pip .pip-blink { transform-origin:147px 51px; animation:pip-blink 6.3s linear infinite; }
+.pip .pip-look { transform:translate(var(--pip-look-x,0px),var(--pip-look-y,0px)); transition:transform .18s ease-out; }
+.pip .pip-attention { opacity:0; transition:opacity .2s ease; }
+.pip .pip-ray { fill:none; stroke:var(--pip-ink); stroke-width:5; stroke-linecap:round; }
+.pip[data-state="listening"] .pip-body { transform:rotate(7deg); }
+.pip[data-state="listening"] .pip-breath { animation-duration:7s; }
+.pip[data-state="thinking"] .pip-body { animation:pip-think 2.6s ease-in-out infinite; }
+.pip[data-state="thinking"] .pip-look { transform:translate(2px,-2px); }
+.pip[data-state="thinking"] .pip-blink { animation-duration:4.7s; }
+.pip[data-state="noticed"] .pip-body { animation:pip-notice .85s ease-out 2; transform:rotate(-4deg); }
+.pip[data-state="noticed"] .pip-attention { opacity:1; }
+.pip[data-state="noticed"] .pip-breath { animation:none; }
+@keyframes pip-breathe { 0%,100% { transform:translateY(0) scaleY(1); } 50% { transform:translateY(-2px) scaleY(1.008); } }
+@keyframes pip-blink { 0%,42%,46%,100% { transform:scaleY(1); } 43.5%,44.5% { transform:scaleY(.08); } }
+@keyframes pip-think { 0%,100% { transform:rotate(-7deg) translateY(0); } 50% { transform:rotate(-3deg) translateY(-3px); } }
+@keyframes pip-notice { 0%,100% { transform:rotate(-4deg) translateY(0); } 35% { transform:rotate(2deg) translateY(-10px); } 70% { transform:rotate(-6deg) translateY(0); } }
+.pip[data-motion="off"] * { animation:none!important; transition:none!important; }
+.pip[data-motion="off"] .pip-look { transform:none; }
+@media (prefers-reduced-motion:reduce) { .pip * { animation:none!important; transition:none!important; } .pip .pip-look { transform:none; } }
+</style>
+  <g id="pip-body" class="pip-body">
+    <g class="pip-breath">
+      <path id="pip-loop" class="pip-back" d="M 75,246 C 48,244 48,217 60,177 C 78,115 105,58 132,47 C 159,36 176,53 163,94 L 132,205 C 121,244 98,266 75,246 Z" fill="none" stroke="#E95632" stroke-width="30" stroke-linecap="round" stroke-linejoin="round"/>
+      <path class="pip-front" d="M 60,177 C 78,115 105,58 132,47 C 159,36 176,53 163,94" fill="none" stroke="#F2643A" stroke-width="30" stroke-linecap="round"/>
+      <path id="pip-arm" class="pip-front" d="M 69,237 C 82,201 101,177 134,161 C 163,147 191,144 216,125" fill="none" stroke="#F2643A" stroke-width="29" stroke-linecap="round"/>
+      <path class="pip-tip" d="M 157,150 C 180,143 200,136 216,125" fill="none" stroke="#FF986B" stroke-width="10" stroke-linecap="round"/>
+      <g id="pip-eyes" class="pip-look">
+        <g class="pip-blink">
+          <rect class="pip-eye" x="135" y="43" width="7" height="15" rx="3.5" fill="#0D0F2B"/>
+          <rect class="pip-eye" x="152" y="45" width="7" height="15" rx="3.5" fill="#0D0F2B"/>
+        </g>
+      </g>
+      <g id="pip-attention" class="pip-attention" opacity="0" aria-hidden="true">
+        <path class="pip-ray" d="M 187,33 L 192,23 M 201,48 L 212,43" fill="none" stroke="#0D0F2B" stroke-width="5" stroke-linecap="round"/>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -129,6 +129,7 @@ function submitComposer(e) {
 function sendDockMessage(e) {
   let n = currentDockContext();
   if (!e.trim()) return;
+  stopPipSpeech();
   let a = e.trim();
   state.dock.conv ||
     (state.dock.conv = {
@@ -220,7 +221,48 @@ function continueDockConversation() {
     (state.scrollThread = !0));
 }
 
+let pipSpeech = null;
+
+function stopPipSpeech() {
+  if (!pipSpeech) return;
+  pipSpeech = null;
+  speechSynthesis.cancel();
+}
+
+function speakPipReply() {
+  if (pipSpeech) {
+    stopPipSpeech();
+    return render();
+  }
+  const answer = select("#dock-body")?.querySelectorAll(".msg--rise .msg-body");
+  const last = answer?.[answer.length - 1];
+  if (!last || typeof speechSynthesis === "undefined") return;
+  const copy = last.cloneNode(true);
+  copy.querySelectorAll("button, .b-sources, sup, .agent-steps").forEach((node) => node.remove());
+  copy.querySelectorAll("p, li, pre, h4, td, th").forEach((node) => node.append(". "));
+  const text = copy.textContent.trim().replace(/\s+/g, " ");
+  if (!text) return;
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = "nl-NL";
+  pipSpeech = utterance;
+  utterance.onend = () => {
+    if (pipSpeech !== utterance) return;
+    pipSpeech = null;
+    render();
+  };
+  utterance.onerror = () => {
+    if (pipSpeech !== utterance) return;
+    pipSpeech = null;
+    showToast("Voorlezen lukt op dit apparaat niet.");
+  };
+  speechSynthesis.speak(utterance);
+  render();
+}
+
+window.addEventListener("pagehide", stopPipSpeech);
+
 function setDockOpen(open) {
+  if (!open) stopPipSpeech();
   state.dock.open = open;
   state.nextFocus = open ? "dock-input" : "dock-trigger";
   render();
@@ -559,6 +601,12 @@ document.addEventListener("click", (e) => {
         : r
           ? (sendFollowup(r, o.text), render())
           : void 0;
+    case "pip-speak":
+      return speakPipReply();
+    case "pip-tip-dismiss":
+      state.dock.tipDismissed = true;
+      state.nextFocus = "dock-trigger";
+      return render();
     case "dock-toggle":
       return setDockOpen(!state.dock.open);
     case "dock-open":

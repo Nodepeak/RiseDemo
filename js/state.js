@@ -261,6 +261,32 @@ function sendFollowup(e, n, a = {}) {
     (state.scrollThread = !0));
 }
 
+function currentPipTip(context) {
+  if (state.drawer) {
+    return { text: "Zal ik de urgentie en de eerste stap toelichten?", action: "Licht dit signaal toe", prompt: "Welke actie stel je voor bij dit signaal?" };
+  }
+  if (state.view === "doc") {
+    return { text: "Ik kan de kern van dit document voor je op een rij zetten.", action: "Vat het document samen", prompt: "Vat dit document samen" };
+  }
+  if (state.view === "project" && state.section === "vergaderingen") {
+    return { text: "Zal ik een agenda maken voor je volgende overleg?", action: "Bereid mijn overleg voor", prompt: context.suggestions[0] };
+  }
+  if (state.view === "acties" || (state.view === "project" && state.section === "acties")) {
+    return { text: "Ik kan laten zien welke acties nog openstaan en wanneer ze af moeten.", action: "Bekijk openstaande acties", prompt: "Welke acties staan open?" };
+  }
+  if (state.view === "bureau" || (state.view === "project" && state.section === "signalen")) {
+    const [signal] = sortSignalsByAction(openSignals()).filter((item) =>
+      !context.projects.length || context.projects.includes(item.project),
+    );
+    if (signal) return {
+      text: `Dit vraagt als eerste aandacht bij ${findProject(signal.project).name}. ${signal.title}.`,
+      action: "Laat zien wat voorrang heeft",
+      prompt: context.suggestions[0],
+    };
+  }
+  return null;
+}
+
 function currentDockContext() {
   const signal = findSignal(state.drawer);
   if (signal) return {

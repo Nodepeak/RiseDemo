@@ -1481,3 +1481,26 @@ sup[data-src]:hover { background: var(--accent); color: var(--accent-fg); }
 .signal-proposal:hover { background: var(--hover); color: var(--accent-text); }
 
 .choice-description { margin: 0 8px 8px; color: var(--fg-3); font-size: var(--fs-xs); }
+
+.pip-presence { display: flex; align-items: end; justify-content: flex-end; gap: 8px; max-width: calc(100vw - 28px); }
+.dock .dock-trigger { display: grid; justify-items: center; gap: 0; height: auto; padding: 0; background: none; box-shadow: none; color: var(--fg); }
+.pip-figure { display: grid; place-items: center; width: 77px; height: 82px; filter: drop-shadow(0 6px 8px #e9563240); }
+.pip-figure .pip-avatar { width: 100%; height: 100%; }
+.pip-trigger-label { display: block; padding: 3px 10px; color: var(--primary-fg); background: var(--primary); border-radius: var(--r-full); font-size: var(--fs-xs); white-space: nowrap; }
+.pip-bubble { position: relative; max-width: 248px; margin-bottom: 9px; border: 1px solid var(--border-2); background: var(--panel); border-radius: 13px 13px 3px 13px; box-shadow: var(--shadow-md); }
+.pip-tip-open { display: grid; gap: 3px; width: 100%; padding: 9px 32px 9px 11px; color: var(--fg); font-size: 13px; line-height: 1.4; }
+.pip-tip-open strong { color: var(--accent-text); font-size: 12px; }
+.pip-tip-close { position: absolute; top: 3px; right: 3px; }
+.dock--open .pip-figure { position: absolute; top: -40px; right: 40px; z-index: 1; width: 61px; height: 65px; pointer-events: none; }
+.dock--open .dock-trigger { transform: none; }
+.dock--open .dock-panel { max-height: min(560px, calc(100dvh - 145px)); }
+.pip-panel-tip { padding: 10px 11px; background: var(--accent-soft); border-radius: var(--r-lg); }
+.pip-panel-tip p { margin-bottom: 8px; }
+.pip-panel-actions { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 2px 10px; padding-top: 6px; }
+.pip-status { color: var(--fg-3); font-size: var(--fs-xs); }
+@media (max-width: 720px) {
+  .pip-figure { width: 63px; height: 67px; }
+  .pip-bubble { max-width: min(228px, calc(100vw - 120px)); }
+}
+.dock-body .b-table :is(th, td) { min-width: 88px; overflow-wrap: normal; }
+.dock-body .b-table :is(th, td):first-child { min-width: 150px; }

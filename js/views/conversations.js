@@ -118,30 +118,47 @@ function renderConversations() {
 function renderDock() {
   const context = currentDockContext();
   if (state.dock.key !== context.key) {
+    if (typeof stopPipSpeech === "function") stopPipSpeech();
     state.dock = { open: false, conv: null, text: "", about: null, key: context.key };
   }
-  const { open, conv, text, about } = state.dock;
+  const { open, conv, text, about, tipDismissed } = state.dock;
+  const tip = about ? null : currentPipTip(context);
+  const lastReply = conv?.messages.findLast((message) => message.role === "rise");
+  const thinking = lastReply && lastReply.reveal < lastReply.total;
+  const speaking = typeof pipSpeech !== "undefined" && Boolean(pipSpeech);
+  const pose = thinking || speaking ? "thinking" : open ? "listening" : tip && !tipDismissed ? "noticed" : "animated";
   const suggestions = about
     ? [`Waarom is “${about}” belangrijk?`, `Wat hangt af van “${about}”?`]
-    : context.suggestions;
-  return `<div class="dock">
+    : context.suggestions.filter((suggestion) => suggestion !== tip?.prompt);
+  return `<div class="dock ${open ? "dock--open" : ""}">
     ${open ? `<section class="dock-panel" id="rise-assistant" aria-labelledby="rise-assistant-title">
       <header class="dock-head">
-        <div><h2 id="rise-assistant-title">${pipIcon()} Pip</h2><p>${escapeHtml(context.label)}</p></div>
+        <div><h2 id="rise-assistant-title">Pip</h2><p>${escapeHtml(context.label)}</p></div>
         <button class="icon-btn" id="dock-close" data-action="dock-close" aria-label="Sluit Pip">${icon("x")}</button>
         ${about ? `<button class="dock-topic" data-action="dock-about-x" aria-label="Verwijder onderwerp ${escapeHtml(about)}">${escapeHtml(about)} ${icon("x")}</button>` : ""}
       </header>
-      <div class="dock-body" id="dock-body">${conv ? renderThread(conv, true) : `<div class="dock-starters">${suggestions.map((suggestion) => `<button class="dock-suggestion" data-action="dock-suggest" data-text="${escapeHtml(suggestion)}">${escapeHtml(suggestion)} ${icon("chev")}</button>`).join("")}</div>`}</div>
+      <div class="dock-body" id="dock-body">${conv ? renderThread(conv, true) : `
+        ${tip ? `<div class="pip-panel-tip"><p>${escapeHtml(tip.text)}</p><button class="btn btn--rise btn--sm" data-action="dock-suggest" data-text="${escapeHtml(tip.prompt)}">${escapeHtml(tip.action)} ${icon("chev")}</button></div>` : ""}
+        <div class="dock-starters">${suggestions.map((suggestion) => `<button class="dock-suggestion" data-action="dock-suggest" data-text="${escapeHtml(suggestion)}">${escapeHtml(suggestion)} ${icon("chev")}</button>`).join("")}</div>`}</div>
       <footer class="dock-footer">
         <form class="dock-bar" data-action-submit="dock-send">
-          <input id="dock-input" aria-label="Je vraag aan Pip" autocomplete="off" placeholder="Typ je vraag of opdracht" value="${escapeHtml(text)}">
+          <input id="dock-input" aria-label="Je vraag aan Pip" autocomplete="off" placeholder="Vraag iets of geef een opdracht" value="${escapeHtml(text)}">
           <button type="submit" class="dock-send" aria-label="Verstuur vraag">${icon("send")}</button>
         </form>
-        ${conv ? '<button class="btn btn--link btn--sm" data-action="dock-continue">Verder in Gesprekken</button>' : ""}
+        ${conv ? `<div class="pip-panel-actions"><button class="btn btn--link btn--sm" data-action="dock-continue">Verder in Gesprekken</button>
+          ${!thinking && typeof speechSynthesis !== "undefined" ? `<button id="pip-voice" class="btn btn--link btn--sm" data-action="pip-speak">${speaking ? "Stop voorlezen" : "Lees antwoord voor"}</button>` : ""}
+          ${thinking || speaking ? `<span class="pip-status" role="status">${speaking ? "Pip leest voor…" : "Pip denkt na…"}</span>` : ""}
+        </div>` : ""}
       </footer>
     </section>` : ""}
-    <button type="button" class="dock-trigger" id="dock-trigger" data-action="dock-toggle" aria-expanded="${open}"${open ? ' aria-controls="rise-assistant"' : ""} aria-keyshortcuts="/">
-      <span class="dock-clip">${open ? icon("x") : pipIcon(true)}</span><span>${open ? "Sluit Pip" : "Vraag Pip"}</span>${open ? "" : '<kbd class="kbd">/</kbd>'}
-    </button>
+    <div class="pip-presence">
+      ${!open && tip && !tipDismissed ? `<div class="pip-bubble">
+        <button id="pip-tip-open" class="pip-tip-open" data-action="dock-open"><strong>Pip</strong><span>${escapeHtml(tip.text)}</span></button>
+        <button class="icon-btn pip-tip-close" data-action="pip-tip-dismiss" aria-label="Verberg Pip-tip">${icon("x")}</button>
+      </div>` : ""}
+      <button type="button" class="dock-trigger" id="dock-trigger" data-action="dock-toggle" aria-expanded="${open}"${open ? ' aria-controls="rise-assistant"' : ""} aria-keyshortcuts="/">
+        <span class="pip-figure">${pipIcon(pose)}</span><span class="pip-trigger-label">${open ? "Sluit Pip" : "Vraag Pip"}</span>
+      </button>
+    </div>
   </div>`;
 }

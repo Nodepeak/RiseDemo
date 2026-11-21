@@ -105,11 +105,17 @@
         <div class="side-card"><h5>Locatie</h5><p>Havenkwartier · Projectdossier · Contracten &amp; afspraken</p></div>
       </aside>
     </div></section></div>
-    <div class="dock">
+    <div class="dock ">
     
-    <button type="button" class="dock-trigger" id="dock-trigger" data-action="dock-toggle" aria-expanded="false" aria-keyshortcuts="/">
-      <span class="dock-clip"><img class="pip-avatar" src="../assets/pip-animated.svg" width="22" height="24" alt=""></span><span>Vraag Pip</span><kbd class="kbd">/</kbd>
-    </button>
+    <div class="pip-presence">
+      <div class="pip-bubble">
+        <button id="pip-tip-open" class="pip-tip-open" data-action="dock-open"><strong>Pip</strong><span>Ik kan de kern van dit document voor je op een rij zetten.</span></button>
+        <button class="icon-btn pip-tip-close" data-action="pip-tip-dismiss" aria-label="Verberg Pip-tip"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"></path></svg></button>
+      </div>
+      <button type="button" class="dock-trigger" id="dock-trigger" data-action="dock-toggle" aria-expanded="false" aria-keyshortcuts="/">
+        <span class="pip-figure"><img class="pip-avatar" src="../assets/pip-noticed.svg" width="22" height="24" alt=""></span><span class="pip-trigger-label">Vraag Pip</span>
+      </button>
+    </div>
   </div>
   </main>
   
