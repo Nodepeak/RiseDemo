@@ -470,12 +470,12 @@ const signals = [
     id: "s-hk",
     project: "hk",
     level: "vast",
-    title: "Sociale huur onder de afspraak",
+    title: "11 sociale huurwoningen onder de afspraak",
     certaintyScope: "Afwijking van de afspraak",
     hook: "11 woningen minder dan afgesproken",
     milestone: "Indiening ontwerp-bestemmingsplan",
-    what: "Programma v3 telt 53 sociale huurwoningen (25%). De overeenkomst vraagt er minimaal 64 (30%).",
-    why: "Het programma ligt aan de basis van het ontwerp-bestemmingsplan. Een afwijking vraagt akkoord van de gemeente vóór indiening.",
+    what: "Programma v3 bevat 53 sociale huurwoningen. Afgesproken is minimaal 64.",
+    why: "Voor indiening van het ontwerp-bestemmingsplan is akkoord van de gemeente nodig.",
     claims: [
       ["vast", "De overeenkomst noemt minimaal 30% sociale huur.", "hk-ao"],
       ["vast", "Programma v3 komt uit op 25%.", "hk-prog"],
@@ -503,27 +503,27 @@ const signals = [
     ],
     steps: [
       {
-        label: "Laat de afsprakenagent zoeken naar een gewijzigde afspraak",
+        label: "Zoek een gewijzigde afspraak",
         intent: "agreements",
       },
       {
-        label: "Zet het op de agenda van de stuurgroep (2 dec)",
+        label: "Maak een agendapunt voor de stuurgroep",
         primary: true,
         intent: "meeting-hk",
       },
-      { label: "Concept-vraag aan Ilse Bakker (gemeente)", intent: "draft-hk" },
+      { label: "Schrijf een conceptvraag aan Ilse", intent: "draft-hk" },
     ],
   },
   {
     id: "s-dk",
     project: "dk",
     level: "vermoed",
-    title: "Akoestisch rapport komt later",
+    title: "Akoestisch rapport schuift vier weken op",
     certaintyScope: "Gevolg voor de vergunningaanvraag",
     hook: "Indiening vergunning schuift mogelijk mee",
     milestone: "Aanvraag omgevingsvergunning",
-    what: "Akoestiek Zuid noemt 8 januari als opleverdatum in zijn mail. De planning gaat uit van 11 december.",
-    why: "Het definitief ontwerp voor de spoorgevel wacht op het rapport. Daardoor kan ook de vergunningaanvraag opschuiven.",
+    what: "De adviseur meldt 8 januari als opleverdatum. De planning rekent met 11 december.",
+    why: "Het ontwerp van de spoorgevel wacht op het rapport. De vergunningaanvraag kan daardoor later worden ingediend.",
     claims: [
       [
         "vast",
@@ -558,11 +558,11 @@ const signals = [
     ],
     steps: [
       {
-        label: "Laat de planningsagent de gevolgen doorrekenen",
+        label: "Reken de gevolgen voor de planning door",
         intent: "planning",
       },
       {
-        label: "Vraag Ruben om het concept van de gevelbelasting",
+        label: "Maak een conceptmail aan Ruben",
         primary: true,
         intent: "draft-dk",
       },
@@ -580,7 +580,7 @@ const signals = [
     certaintyScope: "Of het onderzoek is uitgezet",
     hook: "Offerte van Geolab Midden verloopt in december",
     milestone: "Aanvraag omgevingsvergunning",
-    what: "Het dossier bevat een offerte voor bodemonderzoek die op 12 december verloopt. De opdrachtbevestiging ontbreekt in het dossier.",
+    what: "De offerte verloopt op 12 december. In het dossier staat nog geen opdrachtbevestiging.",
     why: "Het onderzoek duurt circa zeven weken. Om de aanvraag van 2 maart te halen, moet de opdracht rond 5 januari uitstaan.",
     claims: [
       [
@@ -618,27 +618,27 @@ const signals = [
     ],
     steps: [
       {
-        label: "Vraag Joost of het onderzoek al is uitgezet",
+        label: "Maak een conceptmail aan Joost",
         intent: "draft-pz",
         primary: !0,
       },
       {
-        label: "Het is geregeld: koppel de bevestiging",
+        label: "Koppel de opdrachtbevestiging",
         intent: "resolved-pz",
       },
-      { label: "Zet het op de agenda van bouwteam #7", intent: "meeting" },
+      { label: "Bereid bouwteam #7 voor", intent: "meeting" },
     ],
   },
   {
     id: "s-hk2",
     project: "hk",
     level: "vermoed",
-    title: "Nieuwe parkeernorm verlaagt de opgave",
+    title: "Mogelijk zijn minder parkeerplaatsen nodig",
     certaintyScope: "Of parkeerzone A hier geldt",
     hook: "Mogelijk 13 parkeerplaatsen minder nodig",
     milestone: "Indiening ontwerp-bestemmingsplan",
     what: "De nieuwe parkeernota verlaagt de norm voor middenhuur in zone A van 0,8 naar 0,6. Het programma rekent nog met de oude norm.",
-    why: "Minder parkeerplaatsen kan ruimte geven in de businesscase. Dat kan ook helpen bij het gesprek over sociale huur.",
+    why: "Als de locatie in zone A valt, zijn mogelijk 13 parkeerplaatsen minder nodig.",
     claims: [
       [
         "vast",
@@ -660,7 +660,7 @@ const signals = [
       ["kd-parkeren", "kdp1"],
       ["hk-prog", "p-tab"],
     ],
-    steps: [{ label: "Toets met Rise welke parkeerzone hier geldt", intent: "signal-hk-parking", primary: !0 }],
+    steps: [{ label: "Controleer welke parkeerzone geldt", intent: "signal-hk-parking", primary: !0 }],
   },
   {
     id: "s-dk2",
@@ -670,8 +670,8 @@ const signals = [
     certaintyScope: "Of het advies al binnen is",
     hook: "Actie uit ontwerpteam nog niet afgerond",
     milestone: "DO gereed",
-    what: "Kroon Architecten zou het brandweeradvies voor trappenhuis blok B opvragen. Ik zie nog geen advies binnenkomen.",
-    why: "Het advies kan de plattegrond van blok B veranderen. Dat is lastig als het pas na het DO komt.",
+    what: "Het advies voor het trappenhuis van blok B staat nog niet in het dossier.",
+    why: "De plattegrond van blok B kan nog wijzigen vóór het definitief ontwerp.",
     claims: [
       ["vast", "De actie staat in het verslag van 30 oktober.", "dk-ot-okt"],
       [
@@ -687,7 +687,7 @@ const signals = [
     sources: [["dk-ot-okt", null]],
     steps: [
       {
-        label: "Zet op agenda ontwerpteam (27 nov)",
+        label: "Maak een agendapunt voor het ontwerpteam",
         intent: "meeting",
         primary: !0,
       },
@@ -701,8 +701,8 @@ const signals = [
     certaintyScope: "Welke nota de studie gebruikt",
     hook: "Haalbaarheidsstudie gaat uit van oude criteria",
     milestone: "Intentieovereenkomst",
-    what: "Houten heeft een nieuwe welstandsnota met eisen voor dorpsranden. Volgens de haalbaarheidsstudie is die nog niet verwerkt.",
-    why: "Kapvormen en materialen kunnen de bouwkosten veranderen, en daarmee de grondprijs in de intentieovereenkomst.",
+    what: "De haalbaarheidsstudie verwerkt de nieuwe eisen voor dorpsranden nog niet.",
+    why: "Andere eisen aan kapvorm en materiaal kunnen de bouwkosten en de afgesproken grondprijs beïnvloeden.",
     claims: [
       [
         "vast",
@@ -720,7 +720,7 @@ const signals = [
       ["mw-haalb", null],
       ["kd-welstand", null],
     ],
-    steps: [{ label: "Leg de welstandsnota naast de haalbaarheidsstudie", intent: "signal-mw-welstand", primary: !0 }],
+    steps: [{ label: "Toets de studie aan de welstandsnota", intent: "signal-mw-welstand", primary: !0 }],
   },
 ];
 
