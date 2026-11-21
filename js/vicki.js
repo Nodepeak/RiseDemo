@@ -4,8 +4,8 @@
 // reacties lopen via attributen en CSS-variabelen op <html>, omdat morph die
 // niet terugzet. Zo blijft Vicki bewegen terwijl de app opnieuw rendert.
 
-// Uitstraling: "klei" (standaard), "inkt" of "druppel".
-const VICKI_LOOK = "klei";
+// Uitstraling: "druppel" (Vonk, standaard), "klei" of "inkt".
+const VICKI_LOOK = "druppel";
 
 function vickiFigure(pose = "idle", look = VICKI_LOOK) {
   return `<svg class="vicki-live" viewBox="0 0 240 256" data-state="${pose}" data-look="${look}" aria-hidden="true" focusable="false">
