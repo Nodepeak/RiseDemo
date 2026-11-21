@@ -34,52 +34,58 @@
 <body>
   <div id="app" class="app">
 <aside class="nav" id="demo-navigation">
-    <a class="nav-logo" href="../../index.html" data-action="nav" data-view="bureau" aria-label="Rise"><img src="../../assets/logo.svg" alt="Rise" /></a>
-    <nav class="nav-main">
-      <a class="nav-item " data-action="nav" href="../../index.html" data-view="bureau"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3zM3 9h18M10 9v10M13 12h5M13 15h3"/></svg><span>Overzicht</span></a>
-      <a class="nav-item " data-action="nav" href="../../gesprekken.html" data-view="gesprekken"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg><span>Gesprekken</span></a>
-      <a class="nav-item " data-action="nav" href="../../acties.html" data-view="acties"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><span>Acties</span></a>
-      <button class="nav-item " data-action="toggle-dossier" aria-expanded="false"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h7l2 2h9v11H3z"/></svg><span>Dossier</span><svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+    <a class="nav-logo" href="../../index.html" data-action="nav" data-view="bureau" aria-label="Rise"><svg class="logo" viewBox="0.00 -863.20 2885.60 875.20" aria-hidden="true"><g transform="translate(0,-862.44) scale(7.1)"><path d="M52.4 47.7L52.4 48.3L52.7 48.8L53.2 49.1L53.8 49.1L125.5 35.5L126 35L126.1 34.7L132.6 4.1L132.7 2.8L132.6 2.2L132.2 1.4L131.6 0.7L130.5 0.1L129.5 0L128.8 0.1L127.6 0.4L55.9 33.2L55.5 33.6L55.3 34.1ZM0 120L0 120.6L0.3 121.1L1.2 121.5L30.7 121.5L31.3 121.3L31.8 120.8L52.6 22.9L52.5 22L52.1 21.6L51.5 21.5L46.8 21.6L44.5 21.8L42.3 22.2L40 22.9L37.7 23.6L33.4 25.6L29.4 28.2L27.4 29.6L23.9 33L20.8 36.7L19.4 38.7L18.2 40.9L17.1 43L16.3 45.1L15.5 47.3L15 49.5Z" fill="var(--accent)"></path></g><g transform="translate(993.11,0) scale(0.2)"><path d="M419 -565C523 -565 594 -505 603 -410L518 -405C510 -457 473 -490 419 -490C348 -490 304 -442 304 -357C304 -272 348 -223 419 -223C476 -223 514 -257 521 -316L607 -310C597 -211 526 -148 419 -148C296 -148 218 -228 218 -357C218 -486 296 -565 419 -565ZM46 -357C46 -153 211 12 415 12C619 12 784 -153 784 -357C784 -561 619 -726 415 -726C211 -726 46 -561 46 -357ZM124 -357C124 -517 255 -649 415 -649C574 -649 707 -517 707 -357C707 -197 574 -65 415 -65C255 -65 124 -197 124 -357Z" fill="currentColor"></path></g><path transform="translate(1206.31,0)" d="M75 -530V0H183V-309C183 -397 219 -442 302 -442H353V-530H303C235 -530 195 -499 177 -432L174 -530Z M453 -530V0H561V-530Z M999 -363 1110 -369C1092 -475 1004 -542 889 -542C757 -542 673 -479 673 -375C673 -273 770 -243 882 -219C939 -206 1006 -200 1006 -143C1006 -94 946 -78 900 -78C827 -78 781 -115 771 -174L660 -167C668 -56 765 12 901 12C1013 12 1118 -34 1118 -138C1118 -242 1033 -278 901 -302C847 -312 786 -331 785 -379C784 -425 827 -452 881 -452C935 -452 988 -419 999 -363Z M1186 -265C1186 -96 1286 12 1439 12C1547 12 1640 -51 1672 -152L1560 -160C1538 -110 1491 -80 1439 -80C1356 -80 1306 -137 1300 -234H1679V-269C1673 -458 1565 -542 1439 -542C1286 -542 1186 -434 1186 -265ZM1301 -315C1313 -400 1362 -450 1439 -450C1498 -450 1553 -415 1566 -315Z" fill="currentColor"></path></svg></a>
+    <button class="nav-search" type="button" data-action="palette-open" aria-keyshortcuts="Meta+K Control+K"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg><span>Zoeken</span><kbd class="kbd">⌘K</kbd></button>
+    <nav class="nav-main" aria-label="Hoofdnavigatie">
+      <a class="nav-item " data-action="nav" href="../../index.html" data-view="bureau"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="9" rx="1.5"></rect><rect x="14" y="3" width="7" height="5" rx="1.5"></rect><rect x="14" y="12" width="7" height="9" rx="1.5"></rect><rect x="3" y="16" width="7" height="5" rx="1.5"></rect></svg><span>Overzicht</span></a>
+      <a class="nav-item " data-action="nav" href="../../gesprekken.html" data-view="gesprekken"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg><span>Gesprekken</span></a>
+      <a class="nav-item " data-action="nav" href="../../acties.html" data-view="acties"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"></rect><path d="m8.5 12 2.5 2.5 4.5-5"></path></svg><span>Acties</span></a>
+      <button class="nav-item " data-action="toggle-dossier" aria-expanded="false"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"></path></svg><span>Dossier</span><svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button>
       
     </nav>
-    <div class="nav-label"><span>Projecten</span><a data-action="tab" href="../../projecten/index.html" data-view="projecten" >Alle</a></div>
-    <nav class="nav-projects">
+    <div class="nav-label"><span>Projecten</span><a data-action="tab" href="../../projecten/index.html" data-view="projecten">Alle</a></div>
+    <nav class="nav-projects" aria-label="Projecten">
       <div class="np is-current">
           <button class="np-head" data-action="toggle-project" data-id="hk" aria-expanded="true">
             <span class="np-mono">HK</span><span class="np-name">Havenkwartier</span>
-            <svg class="ic caret is-open" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+            <svg class="ic caret is-open" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
           </button>
-          <div class="np-sub"><a class="nav-subitem is-on" data-action="nav" href="../../projecten/havenkwartier/signalen.html" data-view="project" data-project="hk" data-section="signalen"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l2-6 4 12 2-6h6"/></svg><span>Signalen</span><em>2</em></a><a class="nav-subitem " data-action="nav" href="../../projecten/havenkwartier/acties.html" data-view="project" data-project="hk" data-section="acties"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><span>Acties</span></a><a class="nav-subitem " data-action="nav" href="../../projecten/havenkwartier/planning.html" data-view="project" data-project="hk" data-section="planning"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h9M8 12h10M6 18h7"/></svg><span>Planning</span></a><a class="nav-subitem " data-action="nav" href="../../projecten/havenkwartier/vergaderingen.html" data-view="project" data-project="hk" data-section="vergaderingen"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15"/><path d="M4 10h16M9 3v4M15 3v4"/></svg><span>Vergaderingen</span></a><a class="nav-subitem " data-action="nav" href="../../projecten/havenkwartier/dossier.html" data-view="project" data-project="hk" data-section="dossier"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg><span>Projectdossier</span></a></div>
+          <div class="np-sub"><a class="nav-subitem is-on" data-action="nav" href="../../projecten/havenkwartier/signalen.html" data-view="project" data-project="hk" data-section="signalen"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg><span>Signalen</span><em>2</em></a><a class="nav-subitem " data-action="nav" href="../../projecten/havenkwartier/acties.html" data-view="project" data-project="hk" data-section="acties"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"></rect><path d="m8.5 12 2.5 2.5 4.5-5"></path></svg><span>Acties</span></a><a class="nav-subitem " data-action="nav" href="../../projecten/havenkwartier/planning.html" data-view="project" data-project="hk" data-section="planning"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h10M6 12h9M11 18h7"></path></svg><span>Planning</span></a><a class="nav-subitem " data-action="nav" href="../../projecten/havenkwartier/vergaderingen.html" data-view="project" data-project="hk" data-section="vergaderingen"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg><span>Vergaderingen</span></a><a class="nav-subitem " data-action="nav" href="../../projecten/havenkwartier/dossier.html" data-view="project" data-project="hk" data-section="dossier"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"></path></svg><span>Projectdossier</span></a></div>
         </div><div class="np ">
           <button class="np-head" data-action="toggle-project" data-id="dk" aria-expanded="false">
             <span class="np-mono">DK</span><span class="np-name">De Kade</span>
-            <span class="np-count">2</span><svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+            <span class="np-count">2</span><svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
           </button>
           
         </div><div class="np ">
           <button class="np-head" data-action="toggle-project" data-id="pz" aria-expanded="false">
             <span class="np-mono">PZ</span><span class="np-name">Parkzijde</span>
-            <span class="np-count">1</span><svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+            <span class="np-count">1</span><svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
           </button>
           
         </div><div class="np ">
           <button class="np-head" data-action="toggle-project" data-id="mw" aria-expanded="false">
             <span class="np-mono">MW</span><span class="np-name">Molenweide</span>
-            <span class="np-count">1</span><svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+            <span class="np-count">1</span><svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
           </button>
           
         </div>
+      
     </nav>
     <div class="nav-foot">
-      <a class="nav-item " data-action="nav" href="../../instellingen.html" data-view="instellingen"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/></svg><span>Instellingen</span></a>
+      <a class="nav-item " data-action="nav" href="../../instellingen.html" data-view="instellingen"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7h-9M14 17H5"></path><circle cx="17" cy="17" r="3"></circle><circle cx="7" cy="7" r="3"></circle></svg><span>Instellingen</span></a>
     </div>
   </aside>
   
   <main class="main view-project">
     <header class="top">
-    <button class="mobile-menu icon-btn" data-action="mobile-nav" aria-label="Navigatiemenu" aria-controls="demo-navigation" aria-expanded="false"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
-    <div class="crumbs"><span class="">Havenkwartier</span><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg><span class="is-last">Signalen</span></div>
-    <button class="avatar" id="account-trigger" aria-expanded="false" data-action="avatar" aria-label="Account van Maartje Hoekstra">MH</button>
+    <button class="mobile-menu icon-btn" data-action="mobile-nav" aria-label="Navigatiemenu" aria-controls="demo-navigation" aria-expanded="false"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg></button>
+    <div class="crumbs"><span class="">Havenkwartier</span><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg><span class="is-last">Signalen</span></div>
+    <div class="top-actions">
+      <button class="icon-btn top-search" type="button" data-action="palette-open" aria-label="Zoeken" title="Zoeken  ⌘K"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg></button>
+      <button class="icon-btn" type="button" data-action="theme" data-value="dark" aria-label="Donker thema" title="Donker thema"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></button>
+      <button class="avatar" id="account-trigger" aria-expanded="false" data-action="avatar" aria-label="Account van Maartje Hoekstra">MH</button>
+    </div>
   </header>
     <div class="content" id="content"><section class="page">
     <header class="page-head page-head--project">
@@ -103,9 +109,9 @@
   </dl>
   </div>
     <button class="signal-disclosure" id="signal-toggle-s-hk" data-action="select-signal" data-id="s-hk" aria-expanded="false" aria-controls="signal-detail-s-hk">
-      Bronnen en voorgestelde acties <svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+      Bronnen en voorgestelde acties <svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
     </button>
-    <div id="signal-detail-s-hk" hidden>
+    <div id="signal-detail-s-hk" hidden="">
       
     </div>
   </article><article class="signal-entry" id="s-hk2">
@@ -124,9 +130,9 @@
   </dl>
   </div>
     <button class="signal-disclosure" id="signal-toggle-s-hk2" data-action="select-signal" data-id="s-hk2" aria-expanded="false" aria-controls="signal-detail-s-hk2">
-      Bronnen en voorgestelde acties <svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+      Bronnen en voorgestelde acties <svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
     </button>
-    <div id="signal-detail-s-hk2" hidden>
+    <div id="signal-detail-s-hk2" hidden="">
       
     </div>
   </article></div>
@@ -134,7 +140,7 @@
     <div class="dock">
     
     <button type="button" class="dock-trigger" id="dock-trigger" data-action="dock-toggle" aria-expanded="false" aria-keyshortcuts="/">
-      <span class="dock-clip"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M8 12l6-6a3 3 0 0 1 4 4l-8 8a5 5 0 0 1-7-7l7-7"/></svg></span><span>Vraag Rise</span>
+      <span class="dock-clip"><svg class="wing" viewBox="0 0 133 122" aria-hidden="true"><path d="M52.4 47.7L52.4 48.3L52.7 48.8L53.2 49.1L53.8 49.1L125.5 35.5L126 35L126.1 34.7L132.6 4.1L132.7 2.8L132.6 2.2L132.2 1.4L131.6 0.7L130.5 0.1L129.5 0L128.8 0.1L127.6 0.4L55.9 33.2L55.5 33.6L55.3 34.1ZM0 120L0 120.6L0.3 121.1L1.2 121.5L30.7 121.5L31.3 121.3L31.8 120.8L52.6 22.9L52.5 22L52.1 21.6L51.5 21.5L46.8 21.6L44.5 21.8L42.3 22.2L40 22.9L37.7 23.6L33.4 25.6L29.4 28.2L27.4 29.6L23.9 33L20.8 36.7L19.4 38.7L18.2 40.9L17.1 43L16.3 45.1L15.5 47.3L15 49.5Z" fill="currentColor"></path></svg></span><span>Vraag Rise</span><kbd class="kbd">/</kbd>
     </button>
   </div>
   </main>
@@ -143,7 +149,7 @@
   
   <div class="routes ">
     
-    <button class="routes-btn" id="demo-routes-trigger" aria-expanded="false" aria-controls="demo-route-options" data-action="routes">Demo-routes</button>
+    <button class="routes-btn" id="demo-routes-trigger" aria-expanded="false" aria-controls="demo-route-options" data-action="routes">Demo</button>
   </div>
   </div>
   

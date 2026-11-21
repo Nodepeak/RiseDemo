@@ -34,92 +34,115 @@
 <body>
   <div id="app" class="app">
 <aside class="nav" id="demo-navigation">
-    <a class="nav-logo" href="index.html" data-action="nav" data-view="bureau" aria-label="Rise"><img src="assets/logo.svg" alt="Rise" /></a>
-    <nav class="nav-main">
-      <a class="nav-item is-on" data-action="nav" href="index.html" data-view="bureau"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v14H3zM3 9h18M10 9v10M13 12h5M13 15h3"/></svg><span>Overzicht</span></a>
-      <a class="nav-item " data-action="nav" href="gesprekken.html" data-view="gesprekken"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg><span>Gesprekken</span></a>
-      <a class="nav-item " data-action="nav" href="acties.html" data-view="acties"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg><span>Acties</span></a>
-      <button class="nav-item " data-action="toggle-dossier" aria-expanded="false"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h7l2 2h9v11H3z"/></svg><span>Dossier</span><svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+    <a class="nav-logo" href="index.html" data-action="nav" data-view="bureau" aria-label="Rise"><svg class="logo" viewBox="0.00 -863.20 2885.60 875.20" aria-hidden="true"><g transform="translate(0,-862.44) scale(7.1)"><path d="M52.4 47.7L52.4 48.3L52.7 48.8L53.2 49.1L53.8 49.1L125.5 35.5L126 35L126.1 34.7L132.6 4.1L132.7 2.8L132.6 2.2L132.2 1.4L131.6 0.7L130.5 0.1L129.5 0L128.8 0.1L127.6 0.4L55.9 33.2L55.5 33.6L55.3 34.1ZM0 120L0 120.6L0.3 121.1L1.2 121.5L30.7 121.5L31.3 121.3L31.8 120.8L52.6 22.9L52.5 22L52.1 21.6L51.5 21.5L46.8 21.6L44.5 21.8L42.3 22.2L40 22.9L37.7 23.6L33.4 25.6L29.4 28.2L27.4 29.6L23.9 33L20.8 36.7L19.4 38.7L18.2 40.9L17.1 43L16.3 45.1L15.5 47.3L15 49.5Z" fill="var(--accent)"></path></g><g transform="translate(993.11,0) scale(0.2)"><path d="M419 -565C523 -565 594 -505 603 -410L518 -405C510 -457 473 -490 419 -490C348 -490 304 -442 304 -357C304 -272 348 -223 419 -223C476 -223 514 -257 521 -316L607 -310C597 -211 526 -148 419 -148C296 -148 218 -228 218 -357C218 -486 296 -565 419 -565ZM46 -357C46 -153 211 12 415 12C619 12 784 -153 784 -357C784 -561 619 -726 415 -726C211 -726 46 -561 46 -357ZM124 -357C124 -517 255 -649 415 -649C574 -649 707 -517 707 -357C707 -197 574 -65 415 -65C255 -65 124 -197 124 -357Z" fill="currentColor"></path></g><path transform="translate(1206.31,0)" d="M75 -530V0H183V-309C183 -397 219 -442 302 -442H353V-530H303C235 -530 195 -499 177 -432L174 -530Z M453 -530V0H561V-530Z M999 -363 1110 -369C1092 -475 1004 -542 889 -542C757 -542 673 -479 673 -375C673 -273 770 -243 882 -219C939 -206 1006 -200 1006 -143C1006 -94 946 -78 900 -78C827 -78 781 -115 771 -174L660 -167C668 -56 765 12 901 12C1013 12 1118 -34 1118 -138C1118 -242 1033 -278 901 -302C847 -312 786 -331 785 -379C784 -425 827 -452 881 -452C935 -452 988 -419 999 -363Z M1186 -265C1186 -96 1286 12 1439 12C1547 12 1640 -51 1672 -152L1560 -160C1538 -110 1491 -80 1439 -80C1356 -80 1306 -137 1300 -234H1679V-269C1673 -458 1565 -542 1439 -542C1286 -542 1186 -434 1186 -265ZM1301 -315C1313 -400 1362 -450 1439 -450C1498 -450 1553 -415 1566 -315Z" fill="currentColor"></path></svg></a>
+    <button class="nav-search" type="button" data-action="palette-open" aria-keyshortcuts="Meta+K Control+K"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg><span>Zoeken</span><kbd class="kbd">⌘K</kbd></button>
+    <nav class="nav-main" aria-label="Hoofdnavigatie">
+      <a class="nav-item is-on" data-action="nav" href="index.html" data-view="bureau"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="9" rx="1.5"></rect><rect x="14" y="3" width="7" height="5" rx="1.5"></rect><rect x="14" y="12" width="7" height="9" rx="1.5"></rect><rect x="3" y="16" width="7" height="5" rx="1.5"></rect></svg><span>Overzicht</span></a>
+      <a class="nav-item " data-action="nav" href="gesprekken.html" data-view="gesprekken"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg><span>Gesprekken</span></a>
+      <a class="nav-item " data-action="nav" href="acties.html" data-view="acties"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"></rect><path d="m8.5 12 2.5 2.5 4.5-5"></path></svg><span>Acties</span></a>
+      <button class="nav-item " data-action="toggle-dossier" aria-expanded="false"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"></path></svg><span>Dossier</span><svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button>
       
     </nav>
-    <div class="nav-label"><span>Projecten</span><a data-action="tab" href="projecten/index.html" data-view="projecten" >Alle</a></div>
-    <nav class="nav-projects">
+    <div class="nav-label"><span>Projecten</span><a data-action="tab" href="projecten/index.html" data-view="projecten">Alle</a></div>
+    <nav class="nav-projects" aria-label="Projecten">
       <div class="np ">
           <button class="np-head" data-action="toggle-project" data-id="hk" aria-expanded="false">
             <span class="np-mono">HK</span><span class="np-name">Havenkwartier</span>
-            <span class="np-count">2</span><svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+            <span class="np-count">2</span><svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
           </button>
           
         </div><div class="np ">
           <button class="np-head" data-action="toggle-project" data-id="dk" aria-expanded="false">
             <span class="np-mono">DK</span><span class="np-name">De Kade</span>
-            <span class="np-count">2</span><svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+            <span class="np-count">2</span><svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
           </button>
           
         </div><div class="np ">
           <button class="np-head" data-action="toggle-project" data-id="pz" aria-expanded="false">
             <span class="np-mono">PZ</span><span class="np-name">Parkzijde</span>
-            <span class="np-count">1</span><svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+            <span class="np-count">1</span><svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
           </button>
           
         </div><div class="np ">
           <button class="np-head" data-action="toggle-project" data-id="mw" aria-expanded="false">
             <span class="np-mono">MW</span><span class="np-name">Molenweide</span>
-            <span class="np-count">1</span><svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+            <span class="np-count">1</span><svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
           </button>
           
         </div>
+      
     </nav>
     <div class="nav-foot">
-      <a class="nav-item " data-action="nav" href="instellingen.html" data-view="instellingen"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/></svg><span>Instellingen</span></a>
+      <a class="nav-item " data-action="nav" href="instellingen.html" data-view="instellingen"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7h-9M14 17H5"></path><circle cx="17" cy="17" r="3"></circle><circle cx="7" cy="7" r="3"></circle></svg><span>Instellingen</span></a>
     </div>
   </aside>
   
   <main class="main view-bureau">
     <header class="top">
-    <button class="mobile-menu icon-btn" data-action="mobile-nav" aria-label="Navigatiemenu" aria-controls="demo-navigation" aria-expanded="false"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    <button class="mobile-menu icon-btn" data-action="mobile-nav" aria-label="Navigatiemenu" aria-controls="demo-navigation" aria-expanded="false"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg></button>
     <div class="crumbs"><span class="is-last">Overzicht</span></div>
-    <button class="avatar" id="account-trigger" aria-expanded="false" data-action="avatar" aria-label="Account van Maartje Hoekstra">MH</button>
+    <div class="top-actions">
+      <button class="icon-btn top-search" type="button" data-action="palette-open" aria-label="Zoeken" title="Zoeken  ⌘K"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg></button>
+      <button class="icon-btn" type="button" data-action="theme" data-value="dark" aria-label="Donker thema" title="Donker thema"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></button>
+      <button class="avatar" id="account-trigger" aria-expanded="false" data-action="avatar" aria-label="Account van Maartje Hoekstra">MH</button>
+    </div>
   </header>
     <div class="content" id="content"><section class="desk">
-    <div class="desk-hero ">
-      <img class="desk-watermark" src="assets/beeldmerk.svg" alt="">
+    <header class="desk-head">
       <div class="desk-hello">
-        <h1>Goedemorgen, Maartje.</h1>
-        <p class="lede">Rise heeft 14 nieuwe stukken gelezen in je vier projecten.</p>
+        <p class="kicker">vrijdag 20 november</p>
+        <h1>Goedemorgen, Maartje</h1>
+        <p class="lede">Rise las <b>14 nieuwe stukken</b> in je vier projecten. 6 signalen vragen om een besluit.</p>
       </div>
-      <div class="desk-ask">
-        <h2><label for="ta-home">Waar wil je mee beginnen?</label></h2>
-        <form class="composer composer--big" data-comp="home" data-action-submit="send">
+    </header>
+
+    <div class="desk-ask">
+      <h2><label for="ta-home">Waar wil je mee beginnen?</label></h2>
+      <form class="composer composer--big" data-comp="home" data-action-submit="send">
     <div class="comp-ctx">
-      <button type="button" id="composer-projects-home" class="comp-btn comp-project-picker"
-        data-action="pop-projects" data-comp="home" aria-label="Projecten kiezen"
-        aria-expanded="false" aria-controls="choice-popover">
-        <b aria-hidden="true">@</b><span>Alle projecten</span><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+      <button type="button" id="composer-projects-home" class="comp-btn comp-project-picker" data-action="pop-projects" data-comp="home" aria-label="Projecten kiezen" aria-expanded="false" aria-controls="choice-popover">
+        <b aria-hidden="true">@</b><span>Alle projecten</span><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
       </button>
       
     </div>
-    <textarea id="ta-home" data-comp="home" rows="2" aria-label="Vraag of opdracht voor Rise" placeholder="Stel je vraag aan Rise."></textarea>
+    <textarea id="ta-home" data-comp="home" rows="2" aria-label="Vraag of opdracht voor Rise" placeholder="Vraag Rise iets over je projecten, of geef een opdracht…"></textarea>
     <div class="comp-bar">
-      <button type="button" class="comp-btn" id="composer-context-home" aria-expanded="false" aria-controls="choice-popover" data-action="pop-context" data-comp="home"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Bronnen</span></button>
-      <button type="button" class="comp-btn " id="composer-skill-home" aria-expanded="false" aria-controls="choice-popover" data-action="pop-skill" data-comp="home"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/></svg><span>Skill</span></button>
+      <button type="button" class="comp-btn" id="composer-context-home" aria-expanded="false" aria-controls="choice-popover" data-action="pop-context" data-comp="home"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5v14"></path></svg><span>Bronnen</span></button>
+      <button type="button" class="comp-btn " id="composer-skill-home" aria-expanded="false" aria-controls="choice-popover" data-action="pop-skill" data-comp="home"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.9 5.8a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3z"></path></svg><span>Skill</span></button>
       <span class="comp-hint">Enter om te versturen</span>
-      <button type="submit" class="comp-send" aria-label="Verstuur"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg></button>
+      <button type="submit" class="comp-send" aria-label="Verstuur"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 7-7 7 7M12 19V5"></path></svg></button>
     </div>
   </form>
-      </div>
+      <div class="desk-suggest"><button type="button" data-action="desk-suggest" data-text="Wat vraagt deze week mijn aandacht?"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.9 5.8a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3z"></path></svg>Wat vraagt deze week mijn aandacht?</button><button type="button" data-action="desk-suggest" data-text="Welke acties lopen achter?"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.9 5.8a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3z"></path></svg>Welke acties lopen achter?</button><button type="button" data-action="desk-suggest" data-text="Bereid Bouwteam #7 van @Parkzijde voor"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.9 5.8a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3z"></path></svg>Bereid Bouwteam #7 van @Parkzijde voor</button></div>
     </div>
-    <section class="outlook">
-      <header class="outlook-head">
-        <div><h2>Signalen</h2><p>Op volgorde van het eerstvolgende actiemoment.</p></div>
-        <a class="btn btn--link" data-action="tab" data-view="projecten" href="projecten/index.html">3 andere signalen in je projecten</a>
-      </header>
-      
-      <div class="signal-register"><article class="signal-entry signal-entry--compact">
+
+    <div class="desk-stats"><div class="stats">
+      <a class="stat " href="projecten/index.html" data-action="tab" data-view="projecten">
+    <span><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>Open signalen</span><b>6</b><small>3 met hoge urgentie</small><svg class="ic stat-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10M7 17 17 7"></path></svg>
+  </a>
+      <a class="stat " href="acties.html" data-action="nav" data-view="acties">
+    <span><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"></rect><path d="m8.5 12 2.5 2.5 4.5-5"></path></svg>Acties deze week</span><b>3</b><small>Alles op schema</small><svg class="ic stat-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10M7 17 17 7"></path></svg>
+  </a>
+      <a class="stat " href="projecten/parkzijde/vergaderingen.html#pz-bt7" data-action="action-meeting" data-id="pz-bt7">
+    <span><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg>Overleggen deze week</span><b>2</b><small>Eerstvolgende: Bouwteam #7, 25 nov</small><svg class="ic stat-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10M7 17 17 7"></path></svg>
+  </a>
+      <a class="stat " href="projecten/index.html" data-action="tab" data-view="projecten">
+    <span><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h10M6 12h9M11 18h7"></path></svg>Mijlpalen onder druk</span><b>4<small> / 4</small></b><small>projecten met een risico</small><svg class="ic stat-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10M7 17 17 7"></path></svg>
+  </a>
+    </div></div>
+
+    <div class="desk-grid">
+      <section class="outlook" aria-labelledby="outlook-title">
+        <header class="outlook-head">
+          <div><h2 id="outlook-title">Signalen</h2><p>Op volgorde van het eerstvolgende actiemoment</p></div>
+          <a class="btn btn--quiet btn--sm" data-action="tab" data-view="projecten" href="projecten/index.html">Alle 6 bekijken <svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></a>
+        </header>
+        
+        <div class="signal-register"><article class="signal-entry signal-entry--compact">
     <div class="signal-summary">
       <div class="signal-copy">
         <p class="signal-project">De Kade</p>
-        <h3><button id="overview-s-dk2" class="signal-open" data-action="open-signal" data-id="s-dk2">Brandweeradvies trappenhuis staat open <svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></button></h3>
+        <h3><button id="overview-s-dk2" class="signal-open" data-action="open-signal" data-id="s-dk2">Brandweeradvies trappenhuis staat open <svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10M7 17 17 7"></path></svg></button></h3>
         <p>Actie uit ontwerpteam nog niet afgerond</p>
       </div>
       <dl class="signal-facts">
@@ -132,7 +155,7 @@
     <div class="signal-summary">
       <div class="signal-copy">
         <p class="signal-project">Havenkwartier</p>
-        <h3><button id="overview-s-hk" class="signal-open" data-action="open-signal" data-id="s-hk">Sociale huur onder de afspraak <svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></button></h3>
+        <h3><button id="overview-s-hk" class="signal-open" data-action="open-signal" data-id="s-hk">Sociale huur onder de afspraak <svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10M7 17 17 7"></path></svg></button></h3>
         <p>11 woningen minder dan afgesproken</p>
       </div>
       <dl class="signal-facts">
@@ -145,7 +168,7 @@
     <div class="signal-summary">
       <div class="signal-copy">
         <p class="signal-project">Molenweide</p>
-        <h3><button id="overview-s-mw" class="signal-open" data-action="open-signal" data-id="s-mw">Nieuwe welstandsnota niet verwerkt <svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></button></h3>
+        <h3><button id="overview-s-mw" class="signal-open" data-action="open-signal" data-id="s-mw">Nieuwe welstandsnota niet verwerkt <svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10M7 17 17 7"></path></svg></button></h3>
         <p>Haalbaarheidsstudie gaat uit van oude criteria</p>
       </div>
       <dl class="signal-facts">
@@ -154,13 +177,67 @@
     <div><dt>Actie uiterlijk</dt><dd><time datetime="2026-12-04">4 dec</time></dd></div>
   </dl>
     </div>
+  </article><article class="signal-entry signal-entry--compact">
+    <div class="signal-summary">
+      <div class="signal-copy">
+        <p class="signal-project">Parkzijde</p>
+        <h3><button id="overview-s-pz" class="signal-open" data-action="open-signal" data-id="s-pz">Bodemonderzoek nog niet bevestigd <svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10M7 17 17 7"></path></svg></button></h3>
+        <p>Offerte van Geolab Midden verloopt in december</p>
+      </div>
+      <dl class="signal-facts">
+    <div><dt>Zekerheid</dt><dd><span class="cert cert--check">Te controleren</span></dd></div>
+    <div><dt>Urgentie</dt><dd><span class="signal-urgency" data-urgency="Midden">Midden</span></dd></div>
+    <div><dt>Actie uiterlijk</dt><dd><time datetime="2026-12-12">12 dec</time></dd></div>
+  </dl>
+    </div>
   </article></div>
-    </section>
+      </section>
+
+      <aside class="desk-side">
+        <section aria-labelledby="agenda-title">
+          <header class="outlook-head"><div><h2 id="agenda-title">Komende overleggen</h2></div></header>
+          <div class="agenda-list"><a class="agenda-item" href="projecten/parkzijde/vergaderingen.html#pz-bt7" data-action="action-meeting" data-id="pz-bt7">
+    <span class="agenda-date"><small>wo</small><b>25</b></span>
+    <span><b class="t">Bouwteam #7</b><em>Parkzijde · 10:00 · Bouwkeet Parkzijde</em></span>
+  </a><a class="agenda-item" href="projecten/de-kade/vergaderingen.html#dk-ot" data-action="action-meeting" data-id="dk-ot">
+    <span class="agenda-date"><small>vr</small><b>27</b></span>
+    <span><b class="t">Ontwerpteam</b><em>De Kade · 13:30 · Teams</em></span>
+  </a><a class="agenda-item" href="projecten/havenkwartier/vergaderingen.html#hk-sg" data-action="action-meeting" data-id="hk-sg">
+    <span class="agenda-date"><small>wo</small><b>2</b></span>
+    <span><b class="t">Stuurgroep met gemeente</b><em>Havenkwartier · 14:00 · Stadskantoor Schiedam</em></span>
+  </a><a class="agenda-item" href="projecten/molenweide/vergaderingen.html#mw-ge" data-action="action-meeting" data-id="mw-ge">
+    <span class="agenda-date"><small>vr</small><b>4</b></span>
+    <span><b class="t">Gesprek grondeigenaar</b><em>Molenweide · 16:00 · Boerderij Verbeek</em></span>
+  </a></div>
+        </section>
+        <section aria-labelledby="health-title">
+          <header class="outlook-head"><div><h2 id="health-title">Projecten</h2></div>
+            </header>
+          <div class="health"><a href="projecten/havenkwartier/planning.html" data-action="nav" data-view="project" data-project="hk" data-section="planning">
+                <span class="np-mono">HK</span>
+                <span><b>Havenkwartier</b><em>Bestemmingsplan · Schiedam</em></span>
+                <span class="milestone-status" data-status="Onder druk">Onder druk</span>
+              </a><a href="projecten/de-kade/planning.html" data-action="nav" data-view="project" data-project="dk" data-section="planning">
+                <span class="np-mono">DK</span>
+                <span><b>De Kade</b><em>Definitief ontwerp · Zaandam</em></span>
+                <span class="milestone-status" data-status="Onder druk">Onder druk</span>
+              </a><a href="projecten/parkzijde/planning.html" data-action="nav" data-view="project" data-project="pz" data-section="planning">
+                <span class="np-mono">PZ</span>
+                <span><b>Parkzijde</b><em>Voorlopig ontwerp · Amersfoort</em></span>
+                <span class="milestone-status" data-status="Onder druk">Onder druk</span>
+              </a><a href="projecten/molenweide/planning.html" data-action="nav" data-view="project" data-project="mw" data-section="planning">
+                <span class="np-mono">MW</span>
+                <span><b>Molenweide</b><em>Haalbaarheid · Houten</em></span>
+                <span class="milestone-status" data-status="Aandacht nodig">Aandacht nodig</span>
+              </a></div>
+        </section>
+      </aside>
+    </div>
   </section></div>
     <div class="dock">
     
     <button type="button" class="dock-trigger" id="dock-trigger" data-action="dock-toggle" aria-expanded="false" aria-keyshortcuts="/">
-      <span class="dock-clip"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M8 12l6-6a3 3 0 0 1 4 4l-8 8a5 5 0 0 1-7-7l7-7"/></svg></span><span>Vraag Rise</span>
+      <span class="dock-clip"><svg class="wing" viewBox="0 0 133 122" aria-hidden="true"><path d="M52.4 47.7L52.4 48.3L52.7 48.8L53.2 49.1L53.8 49.1L125.5 35.5L126 35L126.1 34.7L132.6 4.1L132.7 2.8L132.6 2.2L132.2 1.4L131.6 0.7L130.5 0.1L129.5 0L128.8 0.1L127.6 0.4L55.9 33.2L55.5 33.6L55.3 34.1ZM0 120L0 120.6L0.3 121.1L1.2 121.5L30.7 121.5L31.3 121.3L31.8 120.8L52.6 22.9L52.5 22L52.1 21.6L51.5 21.5L46.8 21.6L44.5 21.8L42.3 22.2L40 22.9L37.7 23.6L33.4 25.6L29.4 28.2L27.4 29.6L23.9 33L20.8 36.7L19.4 38.7L18.2 40.9L17.1 43L16.3 45.1L15.5 47.3L15 49.5Z" fill="currentColor"></path></svg></span><span>Vraag Rise</span><kbd class="kbd">/</kbd>
     </button>
   </div>
   </main>
@@ -169,7 +246,7 @@
   
   <div class="routes ">
     
-    <button class="routes-btn" id="demo-routes-trigger" aria-expanded="false" aria-controls="demo-route-options" data-action="routes">Demo-routes</button>
+    <button class="routes-btn" id="demo-routes-trigger" aria-expanded="false" aria-controls="demo-route-options" data-action="routes">Demo</button>
   </div>
   </div>
   

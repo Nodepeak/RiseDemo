@@ -46,9 +46,9 @@ function renderDossier({ project, dossier, embedded = false }) {
                       signal.sources.some(([source]) => source === id),
                   );
                 return `<tr data-action="open-doc" data-doc="${id}"><td>${icon("doc")}<div>
-              <a href="${sourceHref(id)}" data-action="open-doc" data-doc="${id}"><b>${escapeHtml(doc.title)}</b></a>
+              <a href="${sourceHref(id)}" data-action="open-doc" data-doc="${id}"><b>${escapeHtml(doc.title)}</b></a>${attention ? '<span class="dossier-attention" role="img" aria-label="Vraagt aandacht" title="Vraagt aandacht"></span>' : ""}
               ${tracking?.status ? `<small class="dossier-doc-status">${escapeHtml(tracking.status)}</small>` : ""}
-            </div>${attention ? '<span class="dossier-attention" role="img" aria-label="Vraagt aandacht" title="Vraagt aandacht"></span>' : ""}</td>
+            </div></td>
             <td class="num">${escapeHtml(doc.date)}</td></tr>`;
               })
               .join("") ||

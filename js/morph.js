@@ -6,6 +6,9 @@
 (() => {
   const EXIT_SELECTOR = ".drawer, .scrim, .pop, .toast, .dock-panel, .routes-panel, .mobile-nav-scrim, .palette, .palette-scrim";
 
+  // Velden waarvan de app de waarde bij elke toetsaanslag in de state bijhoudt.
+  const CONTROLLED_SELECTOR = "textarea[data-comp], #dock-input, #choice-search, #dossier-search, #library-search, #conv-search, #palette-input";
+
   const keyOf = (node) =>
     node.nodeType === 1 ? node.id || node.getAttribute("data-key") || null : null;
 
@@ -48,13 +51,18 @@
     }
     syncAttributes(from, to);
     const active = document.activeElement === from;
-    if (from.tagName === "TEXTAREA") {
-      if (!active && from.value !== to.value) from.value = to.value;
+    // Velden: alleen overschrijven als de app-state een andere waarde geeft dan
+    // bij de vorige render. Zo blijft wat de gebruiker typt staan, maar werkt
+    // een programmatische wijziging (bijv. @vermelding invullen) wel door.
+    if (from.tagName === "TEXTAREA" || (from.tagName === "INPUT" && from.type !== "checkbox" && from.type !== "radio")) {
+      const next = from.tagName === "TEXTAREA" ? to.value : (to.getAttribute("value") ?? "");
+      const controlled = from.matches(CONTROLLED_SELECTOR);
+      if ((controlled || from.__rendered !== next) && from.value !== next) from.value = next;
+      from.__rendered = next;
       return;
     }
     if (from.tagName === "INPUT") {
-      if (from.type === "checkbox" || from.type === "radio") from.checked = to.hasAttribute("checked");
-      else if (!active && from.value !== (to.getAttribute("value") ?? "")) from.value = to.getAttribute("value") ?? "";
+      from.checked = to.hasAttribute("checked");
       return;
     }
     morphChildren(from, to);

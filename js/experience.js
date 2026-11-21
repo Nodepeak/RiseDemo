@@ -167,10 +167,10 @@ function paletteItems(query = "") {
   const items = [];
   const add = (group, glyph, label, detail, run, keywords = "") => items.push({ group, glyph, label, detail, run, keywords });
 
-  add("Acties", "talk", "Nieuw gesprek", "Start een opdracht voor Rise", () => navigate({ view: "gesprekken", convId: null }));
-  add("Acties", "spark", "Vraag Rise op deze pagina", "Open de assistent", () => setDockOpen(true), "assistent dock");
+  add("Opdrachten", "talk", "Nieuw gesprek", "Start een opdracht voor Rise", () => navigate({ view: "gesprekken", convId: null }));
+  add("Opdrachten", "spark", "Vraag Rise op deze pagina", "Open de assistent", () => setDockOpen(true), "assistent dock");
   const dark = resolvedTheme() === "dark";
-  add("Acties", dark ? "sun" : "moon", dark ? "Licht thema" : "Donker thema", "Wissel het kleurthema", () => setTheme(dark ? "light" : "dark"), "thema kleur modus dark light");
+  add("Opdrachten", dark ? "sun" : "moon", dark ? "Licht thema" : "Donker thema", "Wissel het kleurthema", () => setTheme(dark ? "light" : "dark"), "thema kleur modus dark light");
 
   add("Ga naar", "desk", "Overzicht", "", () => navigate({ view: "bureau" }), "home bureau start");
   add("Ga naar", "talk", "Gesprekken", "", () => navigate({ view: "gesprekken", convId: state.convId }));
@@ -199,7 +199,7 @@ function paletteItems(query = "") {
 
   const q = query.trim();
   if (!q) return items.filter((item, index) => item.group !== "Documenten" && !(item.group === "Projecten" && item.label.includes(" · ")) && index < 40);
-  return items.filter((item) => matchesChoice(q, item.label, item.detail, item.group, item.keywords)).slice(0, 40);
+  return items.filter((item) => matchesChoice(q, item.label, item.detail, item.keywords)).slice(0, 40);
 }
 
 function highlightMatch(text, query) {

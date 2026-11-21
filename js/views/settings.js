@@ -10,6 +10,8 @@ function renderSettings() {
 
   return `<section class="page page--narrow">
     <header class="page-head"><div><h1>Instellingen</h1><p>Hoe Rise met je samenwerkt.</p></div></header>
+    <h3 class="sub">Weergave</h3>
+    <div class="theme-picker" role="group" aria-label="Thema">${themeChoices.map(([value, label]) => `<button type="button" class="theme-option" data-action="theme" data-value="${value}" aria-pressed="${themeChoice() === value}"><span class="theme-swatch theme-swatch--${value}"><i></i><i></i></span>${label}</button>`).join("")}</div>
     <h3 class="sub">Vooruitzicht</h3>
     ${toggle("milestones", "Alleen signalen die een mijlpaal raken", "Op je overzicht toont Rise maximaal drie signalen tegelijk.")}
     ${toggle("weekly", "Wekelijkse vooruitblik op maandag", "Een korte samenvatting van wat er die week aankomt.")}
