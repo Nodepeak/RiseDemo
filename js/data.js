@@ -505,10 +505,10 @@ const signals = [
       {
         label: "Laat de afsprakenagent zoeken naar een gewijzigde afspraak",
         intent: "agreements",
-        primary: !0,
       },
       {
         label: "Zet het op de agenda van de stuurgroep (2 dec)",
+        primary: true,
         intent: "meeting-hk",
       },
       { label: "Concept-vraag aan Ilse Bakker (gemeente)", intent: "draft-hk" },
@@ -560,10 +560,10 @@ const signals = [
       {
         label: "Laat de planningsagent de gevolgen doorrekenen",
         intent: "planning",
-        primary: !0,
       },
       {
         label: "Vraag Ruben om het concept van de gevelbelasting",
+        primary: true,
         intent: "draft-dk",
       },
       {
