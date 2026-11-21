@@ -27,7 +27,7 @@ function renderSignalBrief(signal, { overview = false, drawer = false } = {}) {
       <p class="signal-observation">${escapeHtml(what)}</p>
       <p class="signal-impact"><strong>Impact</strong> ${escapeHtml(why)}</p>
       <div class="signal-controls">
-        <button type="button" class="btn btn--ghost btn--sm" data-action="discuss-signal" data-id="${signal.id}">${pipIcon()}Bespreek met Pip</button>
+        <button type="button" class="btn btn--ghost btn--sm" data-action="discuss-signal" data-id="${signal.id}">${vickiIcon()}Bespreek met Vicki</button>
         ${overview ? `<button type="button" id="overview-${signal.id}" class="btn btn--link btn--sm" data-action="open-signal" data-id="${signal.id}" aria-label="Onderbouwing voor ${title}">Onderbouwing</button>` : ""}
       </div>
     </div>

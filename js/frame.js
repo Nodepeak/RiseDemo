@@ -85,14 +85,14 @@ const demoWalkthroughs = [
   ],
   [
     "Signaal openen en bespreken",
-    "Lees de onderbouwing en kies een vervolgstap of “Bespreek met Pip”.",
+    "Lees de onderbouwing en kies een vervolgstap of “Bespreek met Vicki”.",
     () => {
       (navigate({ view: "bureau" }), (state.drawer = "s-dk"), render());
     },
   ],
   [
     "Assistent bij een projectonderdeel",
-    "Rise weet dat je naar de planning van De Kade kijkt. Kies een vraag of klik op het Pip-poppetje naast een taak.",
+    "Rise weet dat je naar de planning van De Kade kijkt. Kies een vraag of klik op het Vicki-poppetje naast een taak.",
     () => {
       (navigate({ view: "project", projectId: "dk", section: "planning" }),
         (state.dock.open = !0),

@@ -24,7 +24,7 @@
   <script src="js/views/signals.js" defer></script>
   <script src="js/views/documents.js" defer></script>
   <script src="js/views/library.js" defer></script>
-  <script src="js/pip.js" defer></script>
+  <script src="js/vicki.js" defer></script>
   <script src="js/views/conversations.js" defer></script>
   <script src="js/views/settings.js" defer></script>
   <script src="js/experience.js" defer></script>
@@ -128,28 +128,72 @@
   </section></div>
     <div class="dock ">
     
-    <div class="pip-presence">
+    <div class="vicki-presence">
       
       <button type="button" class="dock-trigger" id="dock-trigger" data-action="dock-toggle" aria-expanded="false" aria-keyshortcuts="/">
-        <span class="pip-figure"><svg class="pip-live" viewBox="0 0 280 310" data-state="idle" aria-hidden="true" focusable="false">
-    <g class="pip-hop"><g class="pip-body"><g class="pip-breath"><g class="pip-react">
-      <path class="pip-back" d="M 75,246 C 48,244 48,217 60,177 C 78,115 105,58 132,47 C 159,36 176,53 163,94 L 132,205 C 121,244 98,266 75,246 Z" fill="none" stroke-width="30" stroke-linecap="round" stroke-linejoin="round"></path>
-      <path class="pip-front" d="M 60,177 C 78,115 105,58 132,47 C 159,36 176,53 163,94" fill="none" stroke-width="30" stroke-linecap="round"></path>
-      <g class="pip-arm">
-        <path class="pip-front" d="M 69,237 C 82,201 101,177 134,161 C 163,147 191,144 216,125" fill="none" stroke-width="29" stroke-linecap="round"></path>
-        <path class="pip-tip" d="M 157,150 C 180,143 200,136 216,125" fill="none" stroke-width="10" stroke-linecap="round"></path>
-      </g>
-      <g class="pip-look"><g class="pip-talk">
-        <g class="pip-blink">
-          <rect class="pip-eye" x="135" y="43" width="7" height="15" rx="3.5"></rect>
-          <rect class="pip-eye" x="152" y="45" width="7" height="15" rx="3.5"></rect>
+        <span class="vicki-figure"><svg class="vicki-live" viewBox="0 0 240 256" data-state="idle" aria-hidden="true" focusable="false">
+    <defs>
+      <radialGradient id="vk-skin" cx="36%" cy="26%" r="82%">
+        <stop offset="0" stop-color="#FFA987"></stop><stop offset=".42" stop-color="#F7703F"></stop><stop offset="1" stop-color="#DC4524"></stop>
+      </radialGradient>
+      <radialGradient id="vk-mitt" cx="35%" cy="30%" r="80%">
+        <stop offset="0" stop-color="#FF9C74"></stop><stop offset="1" stop-color="#E2532F"></stop>
+      </radialGradient>
+      <radialGradient id="vk-glow" cx="50%" cy="50%" r="50%">
+        <stop offset="0" stop-color="#FFD27A" stop-opacity=".9"></stop><stop offset="1" stop-color="#FFD27A" stop-opacity="0"></stop>
+      </radialGradient>
+    </defs>
+    <ellipse class="vk-shadow" cx="120" cy="238" rx="50" ry="7"></ellipse>
+    <g class="vk-float"><g class="vk-lean"><g class="vk-react"><g class="vk-breath">
+      <path class="vk-band" d="M47,104 C38,14 202,14 193,104" fill="none" stroke-width="7" stroke-linecap="round"></path>
+      <path class="vk-body" d="M120,38 C176,38 198,72 198,126 C198,184 168,212 120,212 C72,212 42,184 42,126 C42,72 64,38 120,38 Z" fill="url(#vk-skin)"></path>
+      <path class="vk-rim" d="M66,78 C76,58 94,48 116,46" fill="none" stroke-width="6" stroke-linecap="round"></path>
+      <path class="vk-rim vk-rim--soft" d="M184,150 C180,176 164,194 140,202" fill="none" stroke-width="4" stroke-linecap="round"></path>
+      <rect class="vk-ear" x="31" y="96" width="18" height="36" rx="9"></rect>
+      <rect class="vk-ear" x="191" y="96" width="18" height="36" rx="9"></rect>
+      <g class="vk-face">
+        <ellipse class="vk-cheek" cx="78" cy="136" rx="11" ry="6.5"></ellipse>
+        <ellipse class="vk-cheek" cx="162" cy="136" rx="11" ry="6.5"></ellipse>
+        <g class="vk-eyes"><g class="vk-eyes-in">
+          <g class="vk-eye-open"><g class="vk-blink">
+            <ellipse class="vk-ink" cx="98" cy="114" rx="10.5" ry="14"></ellipse>
+            <ellipse class="vk-ink" cx="142" cy="114" rx="10.5" ry="14"></ellipse>
+            <circle class="vk-glint" cx="101.5" cy="108" r="3.8"></circle><circle class="vk-glint" cx="145.5" cy="108" r="3.8"></circle>
+            <circle class="vk-glint vk-glint--s" cx="95" cy="120" r="1.7"></circle><circle class="vk-glint vk-glint--s" cx="139" cy="120" r="1.7"></circle>
+          </g></g>
+          <path class="vk-eye-happy vk-line" d="M87,118 Q98,102 109,118 M131,118 Q142,102 153,118" fill="none" stroke-width="6" stroke-linecap="round"></path>
+          <path class="vk-eye-shut vk-line" d="M87,114 Q98,123 109,114 M131,114 Q142,123 153,114" fill="none" stroke-width="5" stroke-linecap="round"></path>
+        </g></g>
+        <path class="vk-brow vk-brow--l vk-line" d="M86,89 Q96,82 108,86" fill="none" stroke-width="5" stroke-linecap="round"></path>
+        <path class="vk-brow vk-brow--r vk-line" d="M132,86 Q144,82 154,89" fill="none" stroke-width="5" stroke-linecap="round"></path>
+        <g class="vk-mouth">
+          <path class="vk-m vk-line" data-m="smile" d="M109,140 Q120,150 131,140" fill="none" stroke-width="5" stroke-linecap="round"></path>
+          <path class="vk-m vk-ink" data-m="grin" d="M105,137 Q120,161 135,137 Q120,142 105,137 Z" stroke-linejoin="round"></path>
+          <path class="vk-m vk-ink" data-m="a" d="M110,139 Q120,155 130,139 Q120,143 110,139 Z"></path>
+          <path class="vk-m vk-ink" data-m="e" d="M107,140 Q120,150 133,140 Q120,145 107,140 Z"></path>
+          <ellipse class="vk-m vk-ink" data-m="o" cx="120" cy="144" rx="5.5" ry="6.5"></ellipse>
+          <ellipse class="vk-m vk-ink" data-m="yawn" cx="120" cy="146" rx="8" ry="10"></ellipse>
+          <path class="vk-m vk-line" data-m="m" d="M112,143 L128,143" fill="none" stroke-width="5" stroke-linecap="round"></path>
+          <path class="vk-m vk-line" data-m="hmm" d="M111,145 Q116,140 121,144 T131,142" fill="none" stroke-width="4.5" stroke-linecap="round"></path>
         </g>
-        <path class="pip-happy" d="M 133,54 Q 138.5,45 144,54 M 150,56 Q 155.5,47 161,56" fill="none" stroke-width="5" stroke-linecap="round"></path>
+      </g>
+      <path class="vk-boom" d="M199,130 C200,156 178,162 154,158" fill="none" stroke-width="4" stroke-linecap="round"></path>
+      <circle class="vk-mic" cx="151" cy="157.5" r="5.5"></circle>
+      <circle class="vk-mic-led" cx="151" cy="157.5" r="2.6"></circle>
+      <g class="vk-hand vk-hand--l"><g class="vk-hand-in"><circle cx="30" cy="170" r="15" fill="url(#vk-mitt)"></circle><path class="vk-rim" d="M21,164 Q24,159 30,158" fill="none" stroke-width="3" stroke-linecap="round"></path></g></g>
+      <g class="vk-hand vk-hand--r"><g class="vk-hand-in"><circle cx="210" cy="170" r="15" fill="url(#vk-mitt)"></circle><path class="vk-rim" d="M201,164 Q204,159 210,158" fill="none" stroke-width="3" stroke-linecap="round"></path></g></g>
+    </g></g></g>
+      <g class="vk-spark"><g class="vk-spark-in">
+        <circle cx="204" cy="40" r="20" fill="url(#vk-glow)" class="vk-spark-glow"></circle>
+        <path class="vk-spark-star" d="M204,27 C206,36 207,38 217,40 C207,42 206,44 204,53 C202,44 201,42 191,40 C201,38 202,36 204,27 Z"></path>
       </g></g>
-      <path class="pip-attention" d="M 187,33 L 192,23 M 201,48 L 212,43" fill="none" stroke-width="5" stroke-linecap="round"></path>
-      <g class="pip-dots"><circle cx="190" cy="30" r="5"></circle><circle cx="207" cy="19" r="6.5"></circle><circle cx="226" cy="9" r="8"></circle></g>
-    </g></g></g></g>
-  </svg></span><span class="pip-trigger-label">Vraag Pip</span>
+      <g class="vk-rays vk-line"><path d="M222,26 L229,19 M226,44 L235,45 M209,16 L211,7" fill="none" stroke-width="4" stroke-linecap="round"></path></g>
+      <g class="vk-bursts">
+        <path d="M44,52 l2,6 6,2 -6,2 -2,6 -2,-6 -6,-2 6,-2 Z"></path><path d="M196,84 l1.6,4.8 4.8,1.6 -4.8,1.6 -1.6,4.8 -1.6,-4.8 -4.8,-1.6 4.8,-1.6 Z"></path><path d="M70,20 l1.4,4 4,1.4 -4,1.4 -1.4,4 -1.4,-4 -4,-1.4 4,-1.4 Z"></path>
+      </g>
+      <g class="vk-zzz"><text x="184" y="48">z</text><text x="198" y="30">z</text><text x="214" y="12">z</text></g>
+    </g>
+  </svg></span><span class="vicki-trigger-label">Vraag Vicki</span>
       </button>
     </div>
   </div>
