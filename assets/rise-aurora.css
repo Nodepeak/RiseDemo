@@ -326,3 +326,14 @@
 :root[data-stijl="aurora"] .dock-bar:focus-within { box-shadow: inset 0 0 0 1px var(--border-3); }
 :root[data-stijl="aurora"] .dock-footer { border-top: 0; }
 :root[data-stijl="aurora"] .dock-suggestion { border-radius: 14px; }
+
+/* Minder lucht bovenin nu de titelbalk leeg is (desktop) */
+@media (min-width: 721px) {
+  :root[data-stijl="aurora"] .page { padding-top: 12px; }
+  :root[data-stijl="aurora"] .desk { padding-top: 16px; }
+  :root[data-stijl="aurora"] .gs-col:not(.gs-col--conv) { padding-top: 20px; }
+}
+
+/* Signalen: elke signaalkaart is een eigen vlak, geen kaart-in-kaart */
+:root[data-stijl="aurora"] .signal-register:has(.signal-entry--split) { background: transparent; box-shadow: none; border-radius: 0; overflow: visible; display: grid; gap: 20px; }
+:root[data-stijl="aurora"] .signal-register .signal-entry--split + .signal-entry--split { border-top: 0; }
