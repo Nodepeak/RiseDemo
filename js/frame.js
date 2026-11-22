@@ -293,7 +293,7 @@ function renderPopover() {
 
 function renderWalkthroughMenu() {
   return `<div class="routes ${state.routes ? "is-open" : ""}">
-    ${state.routes ? `<div class="routes-panel" id="demo-route-options"><h6>Datastaat van lijsten</h6><div class="scenario" role="group" aria-label="Datastaat">${scenarios.map(([value, label]) => `<button type="button" data-action="scenario" data-value="${value}" aria-pressed="${currentScenario() === value}">${label}</button>`).join("")}</div><p class="scenario-note">Bekijk hoe overzichten eruitzien tijdens laden, zonder inhoud, bij een fout of met een grote portefeuille.</p><hr/><h6>Ontwerproutes uit de briefing</h6>${demoWalkthroughs.map(([e], n) => `<button class="route" data-action="route" data-i="${n}"><i>${n + 1}</i>${e}</button>`).join("")}</div>` : ""}
+    ${state.routes ? `<div class="routes-panel" id="demo-route-options"><h6>Datastaat van lijsten</h6><div class="scenario" role="group" aria-label="Datastaat">${scenarios.map(([value, label]) => `<button type="button" data-action="scenario" data-value="${value}" aria-pressed="${currentScenario() === value}">${label}</button>`).join("")}</div><p class="scenario-note">Bekijk hoe overzichten eruitzien tijdens laden, zonder inhoud, bij een fout of met een grote portefeuille.</p><hr/><h6>Stijl</h6><div class="scenario" role="group" aria-label="Stijl">${[["aurora", "Nieuw"], ["huidig", "Vorige"]].map(([value, label]) => `<button type="button" data-action="stijl" data-value="${value}" aria-pressed="${(document.documentElement.dataset.stijl || "aurora") === value}">${label}</button>`).join("")}</div><hr/><h6>Ontwerproutes uit de briefing</h6>${demoWalkthroughs.map(([e], n) => `<button class="route" data-action="route" data-i="${n}"><i>${n + 1}</i>${e}</button>`).join("")}</div>` : ""}
     <button class="routes-btn" id="demo-routes-trigger" aria-expanded="${state.routes}" aria-controls="demo-route-options" data-action="routes">${state.routes ? "Sluit" : "Demo"}</button>
   </div>`;
 }
@@ -342,7 +342,7 @@ function renderFrame() {
   ${renderSignalDrawer()}
   ${renderPopover()}
   ${state.toast ? `<div class="toast" role="status">${escapeHtml(state.toast)}${state.toastUndo ? ` <button class="toast-undo" data-action="${state.toastUndo.action ?? "restore-signal"}" data-id="${state.toastUndo.id ?? state.toastUndo}">Ongedaan maken</button>` : ""}</div>` : ""}
-  ${renderWalkthroughMenu()}
+  ${"" /* Demo-menu verborgen op verzoek; renderWalkthroughMenu() blijft beschikbaar */}
   ${renderPalette()}`;
 }
 

@@ -471,7 +471,7 @@ function renderDock() {
       <footer class="dock-footer">
         <form class="dock-bar" data-action-submit="dock-send">
           <input id="dock-input" aria-label="Je vraag aan Vicki" autocomplete="off" placeholder="Vraag iets of geef een opdracht" value="${escapeHtml(text)}">
-          <button type="submit" class="dock-send" aria-label="Verstuur vraag">${icon("send")}</button>
+          <button type="submit" class="dock-send" aria-label="Verstuur vraag">${icon("arrow")}</button>
         </form>
         ${conv ? `<div class="vicki-panel-actions"><button class="btn btn--link btn--sm" data-action="dock-continue">Verder in Gesprekken</button>
           ${!thinking && typeof speechSynthesis !== "undefined" ? `<button id="vicki-voice" class="btn btn--link btn--sm" data-action="vicki-speak">${speaking ? "Stop voorlezen" : "Lees antwoord voor"}</button>` : ""}

@@ -124,7 +124,7 @@ function renderComposer(e, { big: n = !1, placeholder: a, base: s = [] } = {}) {
       <button type="button" class="comp-btn" id="composer-context-${e}" aria-expanded="${state.pop?.type === "context" && state.pop.comp === e}" aria-controls="choice-popover" data-action="pop-context" data-comp="${e}">${icon("plus")}<span>${isDesk ? "Bronnen" : "Context"}</span></button>
       <button type="button" class="comp-btn ${o.skill ? "is-set" : ""}" id="composer-skill-${e}" aria-expanded="${state.pop?.type === "skill" && state.pop.comp === e}" aria-controls="choice-popover" data-action="pop-skill" data-comp="${e}">${icon("spark")}<span>${o.skill ? "Skill wijzigen" : "Skill"}</span></button>
       <span class="comp-hint">Enter om te versturen</span>
-      <button type="submit" class="comp-send" aria-label="Verstuur">${icon("send")}</button>
+      <button type="submit" class="comp-send" aria-label="Verstuur">${icon("arrow")}</button>
     </div>
   </form>`;
 }

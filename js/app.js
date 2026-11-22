@@ -905,6 +905,14 @@ document.addEventListener("click", (e) => {
         render(),
         select("#dock-input")?.focus()
       );
+    case "vicki-kleur":
+      try { localStorage.setItem("rise:vicki", o.value); } catch {}
+      document.documentElement.dataset.vicki = o.value;
+      return render();
+    case "stijl":
+      try { localStorage.setItem("rise:stijl-v2", o.value); } catch {}
+      document.documentElement.dataset.stijl = o.value;
+      return render();
     case "routes":
       return ((state.routes = !state.routes), render());
     case "route": {

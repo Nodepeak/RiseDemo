@@ -12,7 +12,7 @@ const themeChoices = [
 
 function themeChoice() {
   try {
-    return localStorage.getItem("rise:thema") || "light";
+    return localStorage.getItem("rise:thema-v2") || "light";
   } catch {
     return "light";
   }
@@ -25,7 +25,7 @@ function resolvedTheme(choice = themeChoice()) {
 
 function setTheme(choice) {
   try {
-    localStorage.setItem("rise:thema", choice);
+    localStorage.setItem("rise:thema-v2", choice);
   } catch {
     // Zonder opslag geldt de keuze alleen voor deze pagina.
   }

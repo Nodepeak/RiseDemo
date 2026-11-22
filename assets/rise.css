@@ -1,3 +1,4 @@
+@import url("rise-aurora.css");
 /* ==========================================================================
    Rise — interface stylesheet
    --------------------------------------------------------------------------
@@ -2873,3 +2874,19 @@ a.m-src:hover, button.m-src:hover { color: var(--accent-text); }
   .gs-dock { bottom: 14px; }
   .gs-bar .gs-back span, .gs-bar .gs-ghost span { display: none; }
 }
+
+/* ===== 28. Kleur van Vicki: één tint-draaiing op alle Vicki-figuren ===== */
+:root { --vk-hue: 0deg; --vk-sat: 1; }
+:root[data-vicki="roze"], .vicki-option[data-vicki-kleur="roze"] { --vk-hue: -32deg; --vk-sat: 1; }
+:root[data-vicki="paars"], .vicki-option[data-vicki-kleur="paars"] { --vk-hue: -95deg; --vk-sat: .9; }
+:root[data-vicki="blauw"], .vicki-option[data-vicki-kleur="blauw"] { --vk-hue: 190deg; --vk-sat: 1; }
+:root[data-vicki="groen"], .vicki-option[data-vicki-kleur="groen"] { --vk-hue: 95deg; --vk-sat: .85; }
+.vicki-option[data-vicki-kleur="oranje"] { --vk-hue: 0deg; --vk-sat: 1; }
+:root:not([data-vicki="oranje"]) .vicki-live .vk-float,
+:root:not([data-vicki="oranje"]) img[src$="vicki.svg"],
+.vicki-option img { filter: hue-rotate(var(--vk-hue)) saturate(var(--vk-sat)); }
+.vicki-picker { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.vicki-option { display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 16px 0 8px; border-radius: 99px; font-size: var(--fs-sm); font-weight: 500; color: var(--fg-2); background: var(--surface); box-shadow: inset 0 0 0 1px var(--border-2); transition: box-shadow var(--dur-2); }
+.vicki-option img { width: 28px; height: 28px; }
+.vicki-option:hover { box-shadow: inset 0 0 0 1px var(--border-3); }
+.vicki-option[aria-pressed="true"] { color: var(--fg); box-shadow: inset 0 0 0 1.5px var(--fg), 0 0 0 3px var(--ring); }

@@ -1,0 +1,328 @@
+/* ==========================================================================
+   Rise Aurora — nieuwe huisstijl als laag over rise.css
+   --------------------------------------------------------------------------
+   Alleen actief met <html data-stijl="aurora"> (Demo-menu → Stijl, of
+   aurora.html). Opbouw en inhoud blijven gelijk; alleen de looks wijzigen.
+   Principes uit de huisstijl:
+     · licht is urgentie: kleur zit in een gloed of wolk, niet in randen
+     · dun en groot: koppen en cijfers in Outfit, licht; tekst in Geist
+     · warm papier: crème achtergrond, witte vlakken, grote radii
+     · één gloed per scherm
+   ========================================================================== */
+
+@font-face { font-family: 'Outfit'; src: url('outfit.woff2') format('woff2'); font-weight: 100 900; font-display: swap; }
+
+/* ---- 1. Tokens ---- */
+:root[data-stijl="aurora"] {
+  --paper: #F5F1ED;
+  --paper-tint: #FFE6D4;
+  --bg: var(--paper);
+  --panel: var(--surface);
+  --surface: #FFFFFF;
+  --surface-glass: rgb(255 255 255 / .72);
+  --surface-2: #EEE8E2;
+  --hover: rgb(40 25 10 / .045);
+  --active: rgb(40 25 10 / .07);
+  --border: rgb(40 25 10 / .08);
+  --border-2: rgb(40 25 10 / .12);
+  --border-3: rgb(40 25 10 / .2);
+  --fg: #17130F;
+  --fg-2: #3B322B;
+  --fg-3: #6D6259;
+  --fg-4: #A0958B;
+  --accent: #FF6B2C;
+  --accent-hover: #F2581A;
+  --accent-text: #B8400F;
+  --accent-soft: #FFF1E8;
+  --accent-soft-2: #FFE6D4;
+  --accent-border: #FFD2B5;
+  --primary: #17130F;
+  --primary-hover: #2B241E;
+  --primary-fg: #FFFFFF;
+  --ring: rgb(255 107 44 / .4);
+  --success: #7CCB3C;
+  --display: 'Outfit', 'Helvetica Neue', Arial, sans-serif;
+  --mono: 'Geist', ui-sans-serif, system-ui, sans-serif;
+  --r-card: 28px;
+  --r-hero: 32px;
+  --r-xl: 20px;
+  --r-lg: 16px;
+  --r-md: 12px;
+  --r-sm: 10px;
+  --card-edge: 0 1px 0 var(--border), 0 24px 48px -36px rgb(60 30 0 / .35);
+  --card-lift: 0 1px 0 var(--border), 0 30px 60px -34px rgb(60 30 0 / .42);
+  --shadow-panel: none;
+  --glow-shadow: 0 26px 50px -26px rgb(255 107 44 / .55);
+  --aurora-glow-op: .2;
+}
+:root[data-stijl="aurora"][data-theme="dark"] {
+  --paper: #13100D;
+  --paper-tint: #3A1C10;
+  --surface: #1E1914;
+  --surface-glass: rgb(30 25 20 / .72);
+  --surface-2: #2A231D;
+  --hover: rgb(255 235 210 / .05);
+  --active: rgb(255 235 210 / .08);
+  --border: rgb(255 235 210 / .1);
+  --border-2: rgb(255 235 210 / .14);
+  --border-3: rgb(255 235 210 / .22);
+  --fg: #F6EFE8;
+  --fg-2: #DDD3C8;
+  --fg-3: #ABA093;
+  --fg-4: #7D7368;
+  --accent-text: #FF9A6A;
+  --accent-soft: #2E1B12;
+  --accent-soft-2: #3A1C10;
+  --accent-border: #5A2A16;
+  --primary: #F6EFE8;
+  --primary-hover: #FFFFFF;
+  --primary-fg: #17130F;
+  --card-edge: 0 1px 0 var(--border), 0 24px 48px -30px rgb(0 0 0 / .6);
+  --card-lift: 0 1px 0 var(--border-2), 0 30px 60px -30px rgb(0 0 0 / .7);
+  --aurora-glow-op: .18;
+}
+
+/* ---- 2. Shell: één doorlopend vlak, zonder kaders ---- */
+:root[data-stijl="aurora"] body { background: linear-gradient(180deg, var(--paper) 0, var(--paper) 65%, color-mix(in oklab, var(--paper-tint) 50%, var(--paper)) 100%) fixed; font-size: 14.5px; }
+:root[data-stijl="aurora"] .app { position: relative; isolation: isolate; }
+:root[data-stijl="aurora"] .app::before {
+  content: ""; position: fixed; z-index: -1; pointer-events: none; left: 58%; bottom: -640px; width: 900px; aspect-ratio: 1; border-radius: 50%;
+  translate: -50% 0; filter: blur(90px); opacity: var(--aurora-glow-op);
+  background: radial-gradient(circle at 38% 34%, #FFC48A 0, #FF7A1A 42%, rgb(194 65 12 / .7) 72%, transparent 100%);
+  animation: aurora-drift 18s ease-in-out infinite alternate;
+}
+:root[data-stijl="aurora"] .app::after {
+  content: ""; position: fixed; z-index: -1; pointer-events: none; right: -160px; top: -220px; width: 560px; aspect-ratio: 1; border-radius: 50%;
+  filter: blur(80px); opacity: calc(var(--aurora-glow-op) * .45); background: radial-gradient(circle, #FFC48A, transparent 70%);
+  animation: aurora-drift 24s ease-in-out infinite alternate-reverse;
+}
+@keyframes aurora-drift { to { transform: translate(-4%, -5%) scale(1.06); } }
+@media (prefers-reduced-motion: reduce) { :root[data-stijl="aurora"] .app::before, :root[data-stijl="aurora"] .app::after { animation: none; } }
+
+:root[data-stijl="aurora"] .main { margin: 0; border-radius: 0; background: transparent; box-shadow: none; }
+:root[data-stijl="aurora"] .top { height: 60px; padding: 0 28px 0 28px; border-bottom: 0; background: transparent; }
+:root[data-stijl="aurora"] .crumbs { font-size: 13.5px; }
+:root[data-stijl="aurora"] .content { background: transparent; }
+:root[data-stijl="aurora"] .icon-btn { border-radius: 50%; }
+:root[data-stijl="aurora"] .top-actions .icon-btn { width: 38px; height: 38px; background: var(--surface-2); }
+:root[data-stijl="aurora"] .top-actions .icon-btn:hover { background: var(--active); }
+:root[data-stijl="aurora"] .avatar { background: var(--accent); color: #17130F; box-shadow: none; }
+
+/* Zijbalk: tekst op papier, actief item als inktpil */
+:root[data-stijl="aurora"] .nav { padding: 22px 14px 16px 18px; background: transparent; }
+:root[data-stijl="aurora"] .nav-logo { margin: 4px 0 22px; }
+:root[data-stijl="aurora"] .nav-search { height: 40px; padding: 0 12px 0 14px; margin-bottom: 18px; border-radius: 99px; background: var(--surface-2); box-shadow: none; color: var(--fg-3); }
+:root[data-stijl="aurora"] .nav-search:hover { background: var(--active); box-shadow: none; }
+:root[data-stijl="aurora"] .nav-main, :root[data-stijl="aurora"] .nav-projects { gap: 3px; }
+:root[data-stijl="aurora"] .nav-item, :root[data-stijl="aurora"] .np-head { height: 40px; padding: 0 14px; border-radius: 99px; font-size: 14px; font-weight: 450; color: var(--fg-2); }
+:root[data-stijl="aurora"] .nav-item .ic { color: var(--fg-3); }
+:root[data-stijl="aurora"] .nav-item:hover, :root[data-stijl="aurora"] .np-head:hover { background: var(--hover); }
+:root[data-stijl="aurora"] .nav-item.is-on { color: var(--primary-fg); background: var(--primary); box-shadow: none; }
+:root[data-stijl="aurora"] .nav-item.is-on .ic { color: var(--accent); }
+:root[data-stijl="aurora"] .np.is-current > .np-head { background: var(--surface); box-shadow: 0 1px 0 var(--border); }
+:root[data-stijl="aurora"] .nav-sub, :root[data-stijl="aurora"] .np-sub { margin-left: 22px; }
+:root[data-stijl="aurora"] .nav-sub::before, :root[data-stijl="aurora"] .np-sub::before { display: none; }
+:root[data-stijl="aurora"] .nav-subitem { height: 34px; padding: 0 12px; border-radius: 99px; font-size: 13.5px; }
+:root[data-stijl="aurora"] .nav-subitem.is-on { color: var(--fg); background: var(--surface); box-shadow: 0 1px 0 var(--border); }
+:root[data-stijl="aurora"] .nav-label { margin-top: 30px; padding: 0 14px; font-size: 12.5px; font-weight: 400; color: var(--fg-3); }
+:root[data-stijl="aurora"] .np-count, :root[data-stijl="aurora"] .nav-subitem em { background: transparent; box-shadow: none; font-family: var(--font); }
+:root[data-stijl="aurora"] .nav-foot { border-top: 0; }
+
+/* ---- 3. Typografie: koppen en cijfers dun en groot ---- */
+:root[data-stijl="aurora"] .page-head h1, :root[data-stijl="aurora"] .desk-hello h1, :root[data-stijl="aurora"] .gs-hello h1, :root[data-stijl="aurora"] .gs-title h1, :root[data-stijl="aurora"] .gs-q, :root[data-stijl="aurora"] .m-head h1, :root[data-stijl="aurora"] .doc-head h1, :root[data-stijl="aurora"] .lib-head h1 {
+  font-family: var(--display); font-weight: 300; letter-spacing: -0.035em;
+}
+:root[data-stijl="aurora"] .page-head h1 { font-size: 46px; line-height: 50px; }
+:root[data-stijl="aurora"] .page-head .kicker { font-family: var(--font); font-size: 13px; color: var(--fg-3); }
+:root[data-stijl="aurora"] .gs-hello h1, :root[data-stijl="aurora"] .gs-title h1 { font-size: 44px; line-height: 48px; }
+:root[data-stijl="aurora"] .gs-q { font-size: 40px; line-height: 46px; letter-spacing: -0.03em; }
+:root[data-stijl="aurora"] .gs-q--next { font-size: 28px; line-height: 34px; }
+:root[data-stijl="aurora"] .desk-sec h2, :root[data-stijl="aurora"] .section-header h2, :root[data-stijl="aurora"] .gs-head h2, :root[data-stijl="aurora"] .brief-head h2, :root[data-stijl="aurora"] .m-sec h2, :root[data-stijl="aurora"] .page h2.h2 {
+  font-family: var(--display); font-weight: 300; font-size: 24px; line-height: 30px; letter-spacing: -0.02em;
+}
+:root[data-stijl="aurora"] .brief-head h2 { font-size: 20px; }
+:root[data-stijl="aurora"] .desk-label, :root[data-stijl="aurora"] .sa-kind, :root[data-stijl="aurora"] .brief-src, :root[data-stijl="aurora"] .slider-pos, :root[data-stijl="aurora"] .page-head .kicker, :root[data-stijl="aurora"] .desk-head .kicker {
+  font-family: var(--font); letter-spacing: 0; text-transform: none;
+}
+:root[data-stijl="aurora"] .desk-label { font-size: 14px; color: var(--fg-2); }
+:root[data-stijl="aurora"] .first-signal h2, :root[data-stijl="aurora"] .first-signal h3, :root[data-stijl="aurora"] .first h2, :root[data-stijl="aurora"] .first h3 { font-family: var(--display); font-weight: 300; letter-spacing: -0.025em; }
+:root[data-stijl="aurora"] .sa-what { font-family: var(--display); font-weight: 300; font-size: 24px; line-height: 30px; letter-spacing: -0.02em; }
+:root[data-stijl="aurora"] .first-count b, :root[data-stijl="aurora"] .later-count b, :root[data-stijl="aurora"] .line-count b { font-family: var(--display); font-weight: 300; }
+
+/* ---- 4. Primitieven: pillen, zachte vlakken, geen randen ---- */
+:root[data-stijl="aurora"] .btn { border-radius: 99px; height: 40px; padding: 0 18px; font-weight: 500; }
+:root[data-stijl="aurora"] .btn--sm { height: 32px; padding: 0 14px; border-radius: 99px; font-size: 12.5px; }
+:root[data-stijl="aurora"] .btn--link, :root[data-stijl="aurora"] .btn--link.btn--sm { height: auto; padding: 2px 0; }
+:root[data-stijl="aurora"] .btn--rise, :root[data-stijl="aurora"] .btn--pill { background: var(--primary); color: var(--primary-fg); box-shadow: none; }
+:root[data-stijl="aurora"] .btn--rise:hover, :root[data-stijl="aurora"] .btn--pill:hover { background: var(--primary-hover); box-shadow: 0 14px 28px -16px rgb(23 19 15 / .6); }
+:root[data-stijl="aurora"] .btn--ghost { background: var(--surface-2); box-shadow: none; }
+:root[data-stijl="aurora"] .btn--ghost:hover { background: var(--active); box-shadow: none; }
+:root[data-stijl="aurora"] .btn--accent, :root[data-stijl="aurora"] .sa-go { box-shadow: var(--glow-shadow); }
+:root[data-stijl="aurora"] .chip, :root[data-stijl="aurora"] .chip--proj, :root[data-stijl="aurora"] .chip--scope { border-radius: 99px; background: var(--surface-2); box-shadow: none; }
+:root[data-stijl="aurora"] .kbd { background: transparent; box-shadow: none; }
+
+/* Filters en tabs: zachte baan met witte keuze */
+:root[data-stijl="aurora"] .filter-bar, :root[data-stijl="aurora"] .filters, :root[data-stijl="aurora"] .gs-seg, :root[data-stijl="aurora"] .seg, :root[data-stijl="aurora"] .scenario { background: var(--surface-2); box-shadow: none; border-radius: 99px; padding: 4px; }
+:root[data-stijl="aurora"] .filter { height: 32px; padding: 0 14px; border-radius: 99px; }
+:root[data-stijl="aurora"] .filter.is-on, :root[data-stijl="aurora"] .gs-seg button[aria-pressed="true"] { background: var(--surface); box-shadow: 0 1px 0 var(--border), 0 6px 14px -10px rgb(60 30 0 / .35); }
+:root[data-stijl="aurora"] .ptabs { gap: 4px; width: fit-content; max-width: 100%; padding: 4px; border-bottom: 0; border-radius: 99px; background: var(--surface-2); }
+:root[data-stijl="aurora"] .ptab { height: 36px; padding: 0 16px; border-radius: 99px; font-size: 13.5px; }
+:root[data-stijl="aurora"] .ptab.is-on { background: var(--surface); box-shadow: 0 1px 0 var(--border), 0 6px 14px -10px rgb(60 30 0 / .35); }
+:root[data-stijl="aurora"] .ptab.is-on::after { display: none; }
+:root[data-stijl="aurora"] .ptab em { font-family: var(--font); }
+
+/* Invoer: de promptbalk met warme gloed */
+:root[data-stijl="aurora"] .composer, :root[data-stijl="aurora"] .gs-ask { border-radius: 28px; background: var(--surface); box-shadow: var(--glow-shadow), 0 0 0 1px var(--border); }
+:root[data-stijl="aurora"] .composer:focus-within, :root[data-stijl="aurora"] .gs-ask:focus-within { box-shadow: var(--glow-shadow), 0 0 0 1px var(--accent-border), 0 0 0 4px var(--accent-soft-2); }
+:root[data-stijl="aurora"] .comp-send, :root[data-stijl="aurora"] .gs-send { width: 40px; height: 40px; border-radius: 50%; color: var(--primary-fg); background: var(--primary); }
+:root[data-stijl="aurora"] .gs-ask { padding: 16px 12px 12px 22px; }
+:root[data-stijl="aurora"] .gs-scope, :root[data-stijl="aurora"] .gs-tool, :root[data-stijl="aurora"] .gs-ideas button { height: 32px; background: var(--surface-2); box-shadow: none; }
+:root[data-stijl="aurora"] .gs-ideas button { background: var(--surface); box-shadow: 0 0 0 1px var(--border); }
+:root[data-stijl="aurora"] time, :root[data-stijl="aurora"] .mono, :root[data-stijl="aurora"] [class*="date"], :root[data-stijl="aurora"] [class*="when"] { font-variant-numeric: tabular-nums; }
+:root[data-stijl="aurora"] .sig-left h2 { font-family: var(--display); font-weight: 300; font-size: 24px; line-height: 30px; letter-spacing: -0.025em; }
+
+:root[data-stijl="aurora"] .gs-round { width: 38px; height: 38px; background: var(--surface-2); box-shadow: none; }
+:root[data-stijl="aurora"] .gs-find { background: var(--surface); box-shadow: 0 0 0 1px var(--border); }
+
+/* ---- 5. Vlakken: wit, groot afgerond, zachte schaduw, geen randen ---- */
+:root[data-stijl="aurora"] .brief, :root[data-stijl="aurora"] .first, :root[data-stijl="aurora"] .fw, :root[data-stijl="aurora"] .prep, :root[data-stijl="aurora"] .signal-entry--split, :root[data-stijl="aurora"] .worklist, :root[data-stijl="aurora"] .tracking-table-wrap, :root[data-stijl="aurora"] .state:not(.state--plain),
+:root[data-stijl="aurora"] .m-sheet, :root[data-stijl="aurora"] .m-card, :root[data-stijl="aurora"] .m-stage, :root[data-stijl="aurora"] .doc, :root[data-stijl="aurora"] .library-results, :root[data-stijl="aurora"] .lib-card, :root[data-stijl="aurora"] .set-card, :root[data-stijl="aurora"] .gs-memory, :root[data-stijl="aurora"] .agent, :root[data-stijl="aurora"] .draft {
+  border: 0; border-radius: var(--r-card); background: var(--surface); box-shadow: var(--card-edge);
+}
+:root[data-stijl="aurora"] .gs-memory, :root[data-stijl="aurora"] .agent { background: var(--surface); }
+:root[data-stijl="aurora"] .gs-src { border-radius: 20px; background: var(--surface); box-shadow: var(--card-edge); }
+:root[data-stijl="aurora"] .gs-src.is-model { background: linear-gradient(180deg, var(--surface) 0, var(--accent-soft) 100%); box-shadow: var(--card-edge); }
+:root[data-stijl="aurora"] .brief { padding: 26px 30px 18px; }
+:root[data-stijl="aurora"] .brief-text { font-size: 19px; line-height: 30px; color: var(--fg-2); }
+
+/* Kaartlijsten en tabellen: wit vlak, geen rand */
+:root[data-stijl="aurora"] .signal-register, :root[data-stijl="aurora"] .meeting-rows, :root[data-stijl="aurora"] .milestones, :root[data-stijl="aurora"] .dossier-milestone, :root[data-stijl="aurora"] .action-table-wrap, :root[data-stijl="aurora"] .gantt, :root[data-stijl="aurora"] .dossier-list .dtable-wrap {
+  border: 0; border-radius: 24px; background: var(--surface); box-shadow: var(--card-edge);
+}
+:root[data-stijl="aurora"] .library-results { border-radius: 24px; }
+:root[data-stijl="aurora"] .dossier-list .dtable { border-radius: 24px; overflow: hidden; background: var(--surface); box-shadow: var(--card-edge); }
+:root[data-stijl="aurora"] .action-filters { box-shadow: none; background: var(--surface-2); border-radius: 99px; }
+:root[data-stijl="aurora"] select { border-radius: 99px; box-shadow: none; background-color: var(--surface-2); }
+:root[data-stijl="aurora"] .search, :root[data-stijl="aurora"] .dossier-search, :root[data-stijl="aurora"] .choice-search { border: 0; border-radius: 99px; background: var(--surface-2); box-shadow: none; }
+:root[data-stijl="aurora"] .search:focus-within, :root[data-stijl="aurora"] .dossier-search:focus-within, :root[data-stijl="aurora"] .choice-search:focus-within { background: var(--surface); box-shadow: 0 0 0 3px var(--ring); }
+:root[data-stijl="aurora"] .fl { border-radius: 99px; }
+:root[data-stijl="aurora"] .fl--add { border: 0; box-shadow: none; background: transparent; color: var(--fg-3); }
+
+/* Lijsten in een vlak: alleen een zachte lijn tussen rijen */
+:root[data-stijl="aurora"] .ptable td, :root[data-stijl="aurora"] .dtable td, :root[data-stijl="aurora"] .action-table td { border-top-color: var(--border); }
+:root[data-stijl="aurora"] .ptable th, :root[data-stijl="aurora"] .dtable th, :root[data-stijl="aurora"] .action-table th { border-bottom: 0; }
+:root[data-stijl="aurora"] .tracking-table-wrap { overflow: hidden; padding: 6px 10px; }
+
+/* ---- 6. Licht is urgentie: de spotlight kleurt mee met de urgentie ---- */
+:root[data-stijl="aurora"] .first { overflow: hidden; }
+:root[data-stijl="aurora"] .first-count, :root[data-stijl="aurora"] .first-count[data-urgency="Hoog"] { background: var(--surface-2); box-shadow: none; }
+:root[data-stijl="aurora"] .first-count[data-urgency="Hoog"] { color: var(--accent-text); background: var(--accent-soft-2); }
+
+/* ---- 7. Gesprekken ---- */
+:root[data-stijl="aurora"] .gs-page, :root[data-stijl="aurora"] .gs-conv { background: transparent; }
+:root[data-stijl="aurora"] .gs-sec { border-top: 0; margin-top: 14px; padding: 18px 22px 10px; border-radius: var(--r-card); background: var(--surface); box-shadow: var(--card-edge); }
+:root[data-stijl="aurora"] .gs-sec:first-of-type { padding-top: 18px; }
+:root[data-stijl="aurora"] .gs-sec-head b { font-family: var(--display); font-weight: 400; font-size: 19px; letter-spacing: -0.015em; }
+:root[data-stijl="aurora"] .gs-row { border-radius: 16px; }
+:root[data-stijl="aurora"] .gs-row:hover, :root[data-stijl="aurora"] .gs-it:hover { background: var(--surface-2); }
+:root[data-stijl="aurora"] .gs-phase > header b { font-family: var(--display); font-weight: 300; font-size: 22px; letter-spacing: -0.015em; }
+:root[data-stijl="aurora"] .gs-dock::before { background: none; backdrop-filter: blur(10px); -webkit-mask-image: linear-gradient(transparent, #000 55%); mask-image: linear-gradient(transparent, #000 55%); }
+:root[data-stijl="aurora"] .gs-turn + .gs-turn { border-top-color: var(--border); }
+
+/* ---- 8. Overlays ---- */
+:root[data-stijl="aurora"] .pop, :root[data-stijl="aurora"] .drawer, :root[data-stijl="aurora"] .toast, :root[data-stijl="aurora"] .dock-panel, :root[data-stijl="aurora"] .palette, :root[data-stijl="aurora"] .m-dialog { border-radius: 24px; box-shadow: 0 1px 0 var(--border), 0 30px 70px -30px rgb(60 30 0 / .45); }
+:root[data-stijl="aurora"] .pop-item { border-radius: 14px; }
+:root[data-stijl="aurora"] .routes-btn, :root[data-stijl="aurora"] .routes-panel { border-radius: 99px; }
+:root[data-stijl="aurora"] .routes-panel { border-radius: 24px; }
+
+/* ---- 9. Kleine filters en mobiel ---- */
+:root[data-stijl="aurora"] .legend, :root[data-stijl="aurora"] .library-filters { box-shadow: none; background: var(--surface-2); border-radius: 99px; }
+@media (max-width: 760px) {
+  :root[data-stijl="aurora"] .page-head h1 { font-size: 34px; line-height: 38px; }
+  :root[data-stijl="aurora"] .gs-hello h1, :root[data-stijl="aurora"] .gs-title h1 { font-size: 32px; line-height: 36px; }
+  :root[data-stijl="aurora"] .gs-q { font-size: 26px; line-height: 31px; }
+  :root[data-stijl="aurora"] .brief { padding: 20px 20px 14px; }
+  :root[data-stijl="aurora"] .brief-text { font-size: 16.5px; line-height: 26px; }
+  :root[data-stijl="aurora"] .sig-left h2, :root[data-stijl="aurora"] .sa-what { font-size: 21px; line-height: 27px; }
+  :root[data-stijl="aurora"] .gs-sec { padding: 14px 16px 8px; }
+  :root[data-stijl="aurora"] .gs-head h2 { font-size: 20px; }
+}
+
+/* Geen paginatitel bovenin op desktop: het menu laat al zien waar je bent */
+@media (min-width: 721px) { :root[data-stijl="aurora"] .top .crumbs { visibility: hidden; } }
+
+/* Overzicht: één gloed per kaart (bij het voorstel), geen afgesneden volgende kaart,
+   en het afwijzen-kruisje rechtsboven waar je een sluitknop verwacht. */
+:root[data-stijl="aurora"] .first .first-signal { background: var(--surface); }
+:root[data-stijl="aurora"] .slide { flex-basis: 100%; }
+:root[data-stijl="aurora"] .slide:not(.is-active) { opacity: 0; }
+:root[data-stijl="aurora"] .first-signal, :root[data-stijl="aurora"] .sig-left { position: relative; }
+:root[data-stijl="aurora"] .first-signal .first-links, :root[data-stijl="aurora"] .sig-left .first-links { position: static; }
+:root[data-stijl="aurora"] .first-signal .first-meta, :root[data-stijl="aurora"] .sig-left .first-meta { padding-right: 40px; }
+:root[data-stijl="aurora"] .first-signal .verdict, :root[data-stijl="aurora"] .sig-left .verdict { position: absolute; top: 20px; right: 20px; margin: 0; }
+:root[data-stijl="aurora"] .first-signal .verdict-menu, :root[data-stijl="aurora"] .sig-left .verdict-menu { top: calc(100% + 6px); bottom: auto; right: 0; }
+/* Overzicht even breed als de andere pagina's, zodat de linkerrand niet verspringt */
+:root[data-stijl="aurora"] .desk { max-width: 1040px; }
+:root[data-stijl="aurora"] .verdict-menu p { font-family: var(--font); font-size: 12.5px; letter-spacing: 0; text-transform: none; }
+
+/* Vicki's tekstballon: gewoon wit */
+:root[data-stijl="aurora"] .vicki-bubble { border: 0; background: var(--surface); border-radius: 20px 20px 6px 20px; box-shadow: 0 1px 0 var(--border), 0 24px 50px -24px rgb(60 30 0 / .4); }
+
+/* Vooruit-tijdlijn: rustig, weinig kleur, ronde markeringen */
+:root[data-stijl="aurora"] .fw { padding: 22px 28px 20px; }
+:root[data-stijl="aurora"] .fw-axis { font-size: 11.5px; color: var(--fg-4); margin-bottom: 4px; }
+:root[data-stijl="aurora"] .fw-axis .fw-now { font-weight: 500; }
+:root[data-stijl="aurora"] .fw-lane { height: 54px; border-radius: 16px; }
+:root[data-stijl="aurora"] .fw-name { font-size: 14px; gap: 10px; }
+:root[data-stijl="aurora"] .fw-track { background: linear-gradient(var(--border), var(--border)) 0 50% / 100% 1px no-repeat; }
+:root[data-stijl="aurora"] .fw-track::before { top: 12px; bottom: 12px; width: 1.5px; opacity: .45; }
+:root[data-stijl="aurora"] .fw-ms { width: 10px; height: 10px; margin: -5px 0 0 -5px; transform: none; border-radius: 50%; background: var(--fg-4); box-shadow: 0 0 0 4px var(--surface); }
+:root[data-stijl="aurora"] .fw-ms[data-s="aandacht"] { background: color-mix(in oklab, var(--accent) 45%, var(--surface)); }
+:root[data-stijl="aurora"] .fw-ms[data-s="druk"] { background: var(--accent); }
+:root[data-stijl="aurora"] .fw-ms--ghost { background: var(--surface) !important; box-shadow: inset 0 0 0 1.5px var(--accent), 0 0 0 4px var(--surface); }
+:root[data-stijl="aurora"] .fw-slip { border-top: 1.5px dotted var(--accent); opacity: .5; }
+:root[data-stijl="aurora"] .fw-sig { width: 6px; height: 6px; margin: -3px 0 0 -3px; background: var(--fg-2); box-shadow: 0 0 0 3px var(--surface); }
+:root[data-stijl="aurora"] .fw-label { top: calc(50% + 10px); font-size: 11.5px; color: var(--fg-3); }
+:root[data-stijl="aurora"] .fw-key { margin-top: 14px; gap: 4px 22px; font-size: 12px; color: var(--fg-3); }
+:root[data-stijl="aurora"] .fw-key .fw-ms[data-s="druk"] { box-shadow: none; }
+
+
+/* Thema-voorbeelden: vaste kleuren, zodat Licht er in donkere modus ook licht uitziet */
+:root[data-stijl="aurora"] .theme-option { padding: 8px 8px 12px; border-radius: 20px; background: var(--surface); box-shadow: 0 1px 0 var(--border), 0 14px 30px -24px rgb(60 30 0 / .35); }
+:root[data-stijl="aurora"] .theme-option[aria-pressed="true"] { box-shadow: inset 0 0 0 1.5px var(--fg), 0 0 0 3px var(--ring); }
+:root[data-stijl="aurora"] .theme-swatch { position: relative; height: 92px; border-radius: 14px; grid-template-columns: 30% 1fr; box-shadow: none;
+  --sw-side: #F5F1ED; --sw-main: #F5F1ED; --sw-card: #FFFFFF; --sw-ink: #17130F; --sw-line: #E6DED6; --sw-side-line: #DCD3CA; --sw-pill: #17130F; }
+:root[data-stijl="aurora"] .theme-swatch--dark { --sw-side: #13100D; --sw-main: #13100D; --sw-card: #241D17; --sw-ink: #F6EFE8; --sw-line: #3A3029; --sw-side-line: #3A3029; --sw-pill: #F6EFE8; box-shadow: none; }
+:root[data-stijl="aurora"] .theme-swatch i:first-child {
+  background: var(--sw-side);
+  background-image: linear-gradient(var(--sw-pill), var(--sw-pill)), linear-gradient(var(--sw-side-line), var(--sw-side-line)), linear-gradient(var(--sw-side-line), var(--sw-side-line)), linear-gradient(var(--sw-side-line), var(--sw-side-line));
+  background-size: 64% 8px, 50% 4px, 58% 4px, 44% 4px;
+  background-position: 9px 14px, 13px 34px, 13px 46px, 13px 58px;
+  background-repeat: no-repeat;
+}
+:root[data-stijl="aurora"] .theme-swatch i:first-child { border-radius: 0; background-color: var(--sw-side); }
+:root[data-stijl="aurora"] .theme-swatch i:last-child { margin: 10px 10px 0 4px; border-radius: 10px 10px 0 0; background: var(--sw-card); box-shadow: none; }
+:root[data-stijl="aurora"] .theme-swatch i:last-child::before { left: 12px; top: 14px; width: 46%; height: 7px; background: var(--sw-ink); box-shadow: 0 14px 0 -1px var(--sw-line), 0 24px 0 -1px var(--sw-line); }
+:root[data-stijl="aurora"] .theme-swatch i:last-child::after { right: 10px; top: 12px; width: 26%; height: 30px; border-radius: 8px; background: radial-gradient(110% 90% at 100% 100%, rgb(255 107 44 / .55), transparent 70%), var(--sw-ink); }
+:root[data-stijl="aurora"] .theme-swatch--dark i:last-child::after { background: radial-gradient(110% 90% at 100% 100%, rgb(255 107 44 / .55), transparent 70%), #0E0B09; }
+:root[data-stijl="aurora"] .theme-swatch { background: var(--sw-main); }
+:root[data-stijl="aurora"] .theme-swatch--system::after { content: ""; position: absolute; top: 0; right: 0; bottom: 0; left: 52%; pointer-events: none; border-radius: 0 14px 14px 0;
+  background:
+    linear-gradient(#3A3029, #3A3029) 16px 38px / 50% 4px no-repeat,
+    linear-gradient(#3A3029, #3A3029) 16px 48px / 38% 4px no-repeat,
+    linear-gradient(#F6EFE8, #F6EFE8) 16px 24px / 44% 7px no-repeat,
+    linear-gradient(#241D17, #241D17) 4px 10px / calc(100% - 14px) 100% no-repeat,
+    #13100D; }
+
+/* Eén verstuurknop in de hele app: zwarte cirkel met pijl naar rechtsboven */
+:root[data-stijl="aurora"] .comp-send, :root[data-stijl="aurora"] .gs-send, :root[data-stijl="aurora"] .dock-send, :root[data-stijl="aurora"] .brief .comp-send, :root[data-stijl="aurora"] .brief .composer:focus-within .comp-send {
+  display: grid; place-items: center; flex: none; width: 40px; height: 40px; border: 0; border-radius: 50%;
+  color: var(--primary-fg); background: var(--primary); box-shadow: none; transform: none;
+}
+:root[data-stijl="aurora"] .dock-send { width: 36px; height: 36px; }
+:root[data-stijl="aurora"] .comp-send:hover, :root[data-stijl="aurora"] .gs-send:hover, :root[data-stijl="aurora"] .dock-send:hover { background: var(--primary-hover); }
+:root[data-stijl="aurora"] .comp-send .ic, :root[data-stijl="aurora"] .gs-send .ic, :root[data-stijl="aurora"] .dock-send .ic { width: 15px; height: 15px; stroke-width: 2.2; }
+:root[data-stijl="aurora"] .dock-bar { height: 48px; padding: 4px 6px 4px 16px; border-radius: 99px; box-shadow: inset 0 0 0 1px var(--border-2); }
+:root[data-stijl="aurora"] .dock-bar:focus-within { box-shadow: inset 0 0 0 1px var(--border-3); }
+:root[data-stijl="aurora"] .dock-footer { border-top: 0; }
+:root[data-stijl="aurora"] .dock-suggestion { border-radius: 14px; }
