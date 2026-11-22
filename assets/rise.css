@@ -2579,3 +2579,87 @@ a.m-src:hover, button.m-src:hover { color: var(--accent-text); }
 .m-dialog-close { position: absolute; top: 12px; right: 12px; z-index: 1; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; color: var(--fg-3); }
 .m-dialog-close:hover { color: var(--fg); background: var(--hover); }
 .m-dialog-close .ic { width: 16px; height: 16px; }
+
+/* ===== 26. Gesprekken: werkplek met Vicki ===== */
+/* Lijst */
+.conv-list .cl { gap: 3px; padding: 10px 12px; }
+.cl-top { display: flex; align-items: baseline; gap: 8px; min-width: 0; }
+.cl-top b { flex: 1; min-width: 0; }
+.cl-top time { flex: none; font-family: var(--mono); font-size: 10.5px; color: var(--fg-4); }
+.cl-preview { font-size: 12.5px; line-height: 18px; color: var(--fg-3); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.cl-meta { display: flex; align-items: center; gap: 8px; margin-top: 2px; font-size: 11.5px; color: var(--fg-4); min-width: 0; }
+.cl-meta > span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cl-status { flex: none; margin-left: auto; font-style: normal; font-size: 11px; font-weight: 550; color: var(--fg-3); }
+.cl-status[data-tone="ask"] { color: var(--accent-text); }
+.cl-status[data-tone="ask"]::before { content: ""; display: inline-block; width: 6px; height: 6px; margin-right: 5px; border-radius: 50%; background: var(--accent); vertical-align: 1px; }
+.cl-status[data-tone="made"]::before { content: "✓ "; color: var(--ok, oklch(0.6 0.13 150)); }
+
+/* Start */
+.conv-start { max-width: 780px; padding-top: 72px; }
+.cs-head { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+.cs-vicki { width: 48px; height: 48px; flex: none; filter: drop-shadow(0 8px 14px oklch(0.6 0.16 40 / .25)); animation: cs-float 5s ease-in-out infinite; }
+@keyframes cs-float { 50% { transform: translateY(-3px) rotate(-2deg); } }
+.conv-start .cs-head h1 { margin: 0; font-size: 28px; line-height: 34px; letter-spacing: -0.025em; }
+.cs-head p { margin-top: 4px; font-size: 14px; color: var(--fg-3); }
+.cs-propose { margin-top: 36px; }
+.cs-propose h2, .conv-start .conversation-skills h2 { margin-bottom: 12px; font-family: var(--mono); font-size: 11px; font-weight: 400; letter-spacing: .05em; text-transform: uppercase; color: var(--fg-4); }
+.cs-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.cs-card { display: grid; grid-template-columns: 36px minmax(0, 1fr); grid-template-rows: auto auto; gap: 4px 12px; align-items: start; padding: 16px; border-radius: 14px; text-align: left; background: var(--surface); box-shadow: var(--card-edge); transition: transform var(--dur-2) var(--ease-out), box-shadow var(--dur-2); }
+.cs-card:hover { transform: translateY(-2px); box-shadow: var(--card-edge), 0 18px 32px -22px oklch(0.25 0.03 55 / .45); }
+.cs-icon { grid-row: 1 / 3; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 10px; color: var(--fg-2); background: var(--surface-2); box-shadow: inset 0 0 0 1px var(--border); }
+.cs-icon .ic { width: 17px; height: 17px; }
+.cs-card:first-child .cs-icon { color: var(--accent-text); background: color-mix(in oklch, var(--accent) 10%, var(--surface)); box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--accent) 24%, transparent); }
+.cs-body b { display: block; font-size: 14px; line-height: 20px; font-weight: 600; }
+.cs-body small { display: block; margin-top: 2px; font-size: 12.5px; color: var(--fg-3); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cs-gives { grid-column: 2; display: inline-flex; align-items: center; gap: 6px; margin-top: 8px; font-size: 12px; color: var(--fg-4); }
+.cs-gives .ic { width: 12px; height: 12px; }
+.cs-card:hover .cs-gives { color: var(--accent-text); }
+.conv-start .conversation-skills { margin-top: 28px; }
+.conv-start .skill-card { height: 32px; font-size: 13px; }
+.conv-start .skill-card > .ic:last-child { display: none; }
+
+/* Gesprek */
+.conv-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 28px; }
+.conv-head h2 { font-size: 16px; line-height: 22px; }
+.conv-head .conv-ctx { margin-top: 6px; }
+.conv-sheet-toggle { display: inline-flex; align-items: center; gap: 6px; height: 30px; padding: 0 12px 0 10px; border-radius: 99px; font-size: 12.5px; color: var(--fg-3); box-shadow: inset 0 0 0 1px var(--border-2); }
+.conv-sheet-toggle:hover { color: var(--fg); background: var(--hover); }
+.conv-sheet-toggle[aria-pressed="true"] { color: var(--fg); background: var(--surface); }
+.conv-sheet-toggle .ic { width: 14px; height: 14px; }
+.conv-split { flex: 1; min-height: 0; display: grid; grid-template-columns: minmax(0, 1fr); }
+.conv-split.has-sheet { grid-template-columns: minmax(0, 1fr) 300px; }
+.conv-col { display: flex; flex-direction: column; min-height: 0; min-width: 0; }
+.msg-meta { display: flex; align-items: baseline; gap: 8px; font-size: 12px; color: var(--fg-4); }
+.msg-meta b { font-weight: 600; color: var(--fg-2); }
+.msg-meta span { font-family: var(--mono); font-size: 11px; }
+.msg-working { color: var(--accent-text); animation: pulse-text 1.4s ease-in-out infinite; }
+@keyframes pulse-text { 50% { opacity: .45; } }
+.msg-tools { display: flex; gap: 4px; margin-top: -2px; opacity: 0; transition: opacity var(--dur-2); }
+.msg--rise:hover .msg-tools, .msg--rise:last-child .msg-tools, .msg-tools:focus-within { opacity: 1; }
+.msg-tools button { display: inline-flex; align-items: center; gap: 5px; height: 26px; padding: 0 9px 0 7px; border-radius: 99px; font-size: 12px; color: var(--fg-3); }
+.msg-tools button:hover { color: var(--fg); background: var(--hover); }
+.msg-tools .ic { width: 13px; height: 13px; }
+.msg.is-flash .msg-body { animation: msg-flash 1.2s var(--ease-out); }
+@keyframes msg-flash { 0%, 40% { background: color-mix(in oklch, var(--accent) 8%, transparent); box-shadow: 0 0 0 8px color-mix(in oklch, var(--accent) 8%, transparent); border-radius: 8px; } }
+
+/* Werkblad */
+.conv-sheet { display: flex; flex-direction: column; gap: 22px; padding: 20px 18px 40px; overflow-y: auto; border-left: 1px solid var(--border); background: var(--surface-2); }
+.conv-sheet h3 { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; font-family: var(--mono); font-size: 10.5px; font-weight: 400; letter-spacing: .06em; text-transform: uppercase; color: var(--fg-4); }
+.conv-sheet h3 span { color: var(--fg-3); }
+.conv-sheet ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.conv-sheet li > a, .conv-sheet li > button { display: flex; align-items: flex-start; gap: 10px; width: 100%; padding: 8px; border-radius: 10px; text-align: left; color: inherit; text-decoration: none; transition: background var(--dur-1); }
+.conv-sheet li > a:hover, .conv-sheet li > button:hover { background: var(--surface); box-shadow: 0 0 0 1px var(--border); }
+.conv-sheet li b { display: block; font-size: 13px; line-height: 18px; font-weight: 550; }
+.conv-sheet li small { display: block; margin-top: 1px; font-size: 11.5px; color: var(--fg-4); }
+.conv-sheet li .ic { flex: none; width: 15px; height: 15px; margin-top: 2px; color: var(--fg-3); }
+.sm-icon { display: grid; place-items: center; flex: none; width: 28px; height: 28px; border-radius: 8px; background: var(--surface); box-shadow: inset 0 0 0 1px var(--border); }
+.sm-icon .ic { margin: 0 !important; color: var(--accent-text) !important; }
+.sheet-ctx .np-dot { flex: none; margin-top: 6px; }
+.sheet-all { padding: 8px; font-size: 13px; color: var(--fg-3); }
+.sheet-trust { display: flex; gap: 8px; margin-top: auto; padding: 12px; border-radius: 10px; font-size: 11.5px; line-height: 17px; color: var(--fg-4); box-shadow: inset 0 0 0 1px var(--border); }
+.sheet-trust .ic { flex: none; width: 13px; height: 13px; margin-top: 2px; }
+
+@media (max-width: 1180px) { .conv-split.has-sheet { grid-template-columns: minmax(0, 1fr); } .conv-sheet { display: none; } .conv-sheet-toggle { display: none; } }
+@media (max-width: 760px) { .cs-grid { grid-template-columns: minmax(0, 1fr); } .conv-start { padding-top: 28px; } .cs-head h1 { font-size: 22px !important; line-height: 28px !important; } .conv-head { padding: 12px 14px; } }
+@media (prefers-reduced-motion: reduce) { .cs-vicki, .msg-working { animation: none; } }
+.conv-sheet { padding-bottom: 136px; }

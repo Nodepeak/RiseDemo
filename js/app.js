@@ -737,6 +737,40 @@ document.addEventListener("click", (e) => {
         render(),
         select("#ta-chat")?.focus()
       );
+    case "conv-propose": {
+      const proposal = convProposals()[+o.i];
+      if (!proposal) return;
+      const conversation = startConversation(proposal.start);
+      return navigate({ view: "gesprekken", convId: conversation.id });
+    }
+    case "conv-sheet":
+      state.convSheet = state.convSheet === false;
+      return render();
+    case "conv-jump": {
+      const target = select(`#thread .msg[data-mi="${o.mi}"]`);
+      target?.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+      target?.classList.add("is-flash");
+      setTimeout(() => target?.classList.remove("is-flash"), 1200);
+      return;
+    }
+    case "msg-copy": {
+      const body = select(`#thread .msg[data-mi="${o.mi}"] .msg-body`);
+      const text = [...(body?.querySelectorAll(".b-text, pre, .b-agenda, .b-table") ?? [])].map((node) => node.innerText.trim()).join("\n\n");
+      return copyDraft(text);
+    }
+    case "msg-agenda": {
+      const conversation = state.convs.find((item) => item.id === state.convId);
+      const projectId = conversation?.projects[0];
+      const meeting = projectId && nextProjectMeeting(projectId);
+      if (!meeting) return showToast(projectId ? "Er staat geen overleg gepland voor dit project." : "Kies eerst een project voor dit gesprek.");
+      const message = conversation.messages[+o.mi];
+      const text = stripHtml(message.blocks.find((block) => block.type === "text")?.html ?? "");
+      const agenda = agendaOf(meeting);
+      const entry = addAgendaItem(meeting, { title: conversation.title, note: text.length > 140 ? text.slice(0, 137).replace(/\s+\S*$/, "") + "…" : text, by: "gesprek" });
+      if (entry && agenda.stage === "sent") { entry.late = true; agenda.late.push(entry.id); }
+      saveTrackingProgress();
+      return showToast(agenda.stage === "sent" ? `De agenda van ${meeting.title} is al verstuurd. Toegevoegd als aanvulling.` : `Op de agenda van ${meeting.title} gezet (${meetingDay(meeting.date, meetingDayShort)})`);
+    }
     case "open-conv":
       return ((state.convId = o.id), (state.scrollThread = !0), render());
     case "msg-action": {

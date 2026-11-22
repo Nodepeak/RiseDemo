@@ -20,7 +20,7 @@ function renderMessageBlock(e, n, a) {
       return `<div class="draft"><div class="draft-head"><span>Concept · niet verstuurd</span><b>Aan: ${e.to}</b><b>Onderwerp: ${e.subject}</b></div><pre>${escapeHtml(e.body)}</pre><div class="b-actions"><button class="btn btn--rise btn--sm" data-action="copy-draft">Kopieer</button><button class="btn btn--ghost btn--sm" data-action="toast" data-text="Opent in Outlook als concept (niet in deze demo)">Open als concept in Outlook</button></div></div>`;
     case "agenda": {
       let s = findMeeting(e.meeting);
-      return `<div class="draft"><div class="draft-head"><span>Concept-agenda</span><b>${s.title} · ${findProject(s.project).name} · ${formatIsoDate(s.date)} om ${s.time}</b></div><ol class="b-agenda">${s.proposal.map(([o, r]) => `<li><b>${o}</b><span>${r}</span></li>`).join("")}</ol></div>`;
+      return `<div class="draft"><div class="draft-head"><span>Concept-agenda</span><b>${s.title} · ${findProject(s.project).name} · ${formatIsoDate(s.date)} om ${s.time}</b></div><ol class="b-agenda">${agendaOf(s).items.map(({ title, note }) => `<li><b>${escapeHtml(title)}</b><span>${escapeHtml(note)}</span></li>`).join("")}</ol></div>`;
     }
     default:
       return "";
@@ -66,7 +66,13 @@ function renderThread(e, n = !1) {
           }
       });
       let i = a.reveal !== void 0 && a.reveal < a.total;
-      return `<div class="msg msg--rise" data-mi="${s}"><span class="msg-avatar">${vickiIcon()}</span><div class="msg-body">${r.join("")}${i && !r.length ? '<i class="dots"><b></b><b></b><b></b></i>' : ""}</div></div>`;
+      const read = new Set(a.blocks.filter((block) => block.type === "sources").flatMap((block) => block.items.map(([doc]) => doc))).size;
+      const meta = n ? "" : `<div class="msg-meta"><b>Vicki</b>${i ? `<span class="msg-working">werkt…</span>` : read ? `<span>${read} ${read === 1 ? "stuk" : "stukken"} gelezen</span>` : ""}</div>`;
+      const tools = n || i || !a.blocks.some((block) => block.type === "text") ? "" : `<div class="msg-tools">
+        <button type="button" data-action="msg-copy" data-mi="${s}">${icon("clip")}Kopieer</button>
+        <button type="button" data-action="msg-agenda" data-mi="${s}">${icon("cal")}Zet op de agenda</button>
+      </div>`;
+      return `<div class="msg msg--rise" data-mi="${s}"><span class="msg-avatar">${vickiIcon()}</span><div class="msg-body">${meta}${r.join("")}${i && !r.length ? '<i class="dots"><b></b><b></b><b></b></i>' : ""}${tools}</div></div>`;
     })
     .join("");
 }
@@ -89,7 +95,7 @@ function renderConversations() {
         .map((o) => {
           let r = a.filter((i) => i.group === o);
           return r.length
-            ? `<h5>${o}</h5>${r.map((i) => `<button class="cl ${i.id === state.convId ? "is-on" : ""}" data-action="${i.placeholder ? "scale-item" : "open-conv"}" data-id="${i.id}"><b>${escapeHtml(i.title)}</b><em>${i.projects.map((d) => findProject(d).name).join(", ") || "Alle projecten"}${i.skill ? " · " + findSkill(i.skill).name : ""} · ${i.when}</em></button>`).join("")}`
+            ? `<h5>${o}</h5>${r.map((i) => renderConvRow(i)).join("")}`
             : "";
         })
         .join("") + (a.length ? "" : renderState({ title: "Geen gesprekken gevonden", text: n ? "Probeer een andere zoekterm." : "", glyph: "search", plain: true })),
@@ -98,20 +104,148 @@ function renderConversations() {
     <div class="conv-main">
       ${
         e
-          ? `<header class="conv-head"><h2>${escapeHtml(e.title)}</h2><div class="conv-ctx"><span class="comp-ctx-label">Context</span>${e.projects.length ? e.projects.map((o) => `<span class="chip chip--proj chip--static"><b>@</b>${findProject(o).name}</span>`).join("") : '<span class="chip chip--scope">Alle projecten</span>'}${e.skill ? `<span class="chip chip--skill chip--static">${icon("spark")}${findSkill(e.skill).name}</span>` : ""}</div></header>
-        <div class="thread" id="thread">${renderThread(e)}</div>
-        <div class="conv-compose">${renderComposer("chat", { placeholder: "Stel een vervolgvraag of geef een nieuwe opdracht. Typ @ voor een project.", base: e.projects })}</div>`
-          : `<div class="conv-empty">
-        <h1>Geef Vicki een opdracht</h1>
-        ${renderComposer("chat", { big: true, placeholder: "Beschrijf wat je wilt laten uitzoeken of maken." })}
-        <section class="conversation-skills" aria-labelledby="conversation-skills">
-          <h2 id="conversation-skills">Start met een voorbeeld</h2>
-          <div class="skill-grid">${skills.map(({ id, name, desc }) => `<button class="skill-card" data-action="chat-skill" data-id="${id}">${icon("spark")}<span><b title="${escapeHtml(desc)}">${escapeHtml(name)}</b></span>${icon("chev")}</button>`).join("")}</div>
-        </section>
+          ? `<header class="conv-head"><div><h2>${escapeHtml(e.title)}</h2><div class="conv-ctx">${e.projects.length ? e.projects.map((o) => `<span class="chip chip--proj chip--static"><b>@</b>${findProject(o).name}</span>`).join("") : '<span class="chip chip--scope">Alle projecten</span>'}${e.skill ? `<span class="chip chip--skill chip--static">${icon("spark")}${findSkill(e.skill).name}</span>` : ""}</div></div>
+          <button type="button" class="conv-sheet-toggle" data-action="conv-sheet" aria-pressed="${state.convSheet !== false}">${icon("layers")}<span>Werkblad</span></button></header>
+        <div class="conv-split ${state.convSheet === false ? "" : "has-sheet"}">
+          <div class="conv-col">
+            <div class="thread" id="thread">${renderThread(e)}</div>
+            <div class="conv-compose">${renderComposer("chat", { placeholder: "Stel een vervolgvraag of geef een nieuwe opdracht. Typ @ voor een project.", base: e.projects })}</div>
+          </div>
+          ${state.convSheet === false ? "" : renderConvSheet(e)}
         </div>`
+          : renderConvStart()
       }
     </div>
   </section>`;
+}
+
+/* ── Gesprekken: werkplek in plaats van een chatvenster ─────────────── */
+const stripHtml = (html = "") => html.replace(/<sup[^>]*>.*?<\/sup>/g, "").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+
+function convPreview(conversation) {
+  const reply = conversation.messages.findLast((message) => message.role === "rise");
+  const text = reply?.blocks.find((block) => block.type === "text");
+  const agent = reply?.blocks.find((block) => block.type === "agent");
+  return stripHtml(text?.html ?? agent?.result ?? "");
+}
+
+function convStatus(conversation) {
+  const waiting = conversation.messages.some((message) => message.role === "rise" && message.blocks.some((block, index) => block.type === "agent" && block.need && !message.answered?.[index]));
+  if (waiting) return { tone: "ask", text: "Wacht op jou" };
+  const blocks = conversation.messages.flatMap((message) => message.blocks ?? []);
+  if (blocks.some((block) => block.type === "draft")) return { tone: "made", text: "Concept klaar" };
+  if (blocks.some((block) => block.type === "agenda")) return { tone: "made", text: "Agenda klaar" };
+  return null;
+}
+
+function renderConvRow(conversation) {
+  const status = conversation.placeholder ? null : convStatus(conversation);
+  const preview = conversation.placeholder ? "" : convPreview(conversation);
+  const names = conversation.projects.map((id) => findProject(id).name).join(", ") || "Alle projecten";
+  return `<button class="cl ${conversation.id === state.convId ? "is-on" : ""}" data-action="${conversation.placeholder ? "scale-item" : "open-conv"}" data-id="${conversation.id}">
+    <span class="cl-top"><b>${escapeHtml(conversation.title)}</b><time>${escapeHtml(conversation.when)}</time></span>
+    ${preview ? `<span class="cl-preview">${escapeHtml(preview)}</span>` : ""}
+    <span class="cl-meta"><span>${escapeHtml(names)}</span>${status ? `<i class="cl-status" data-tone="${status.tone}">${status.text}</i>` : ""}</span>
+  </button>`;
+}
+
+/* Wat Vicki nu voor je kan doen: afgeleid uit agenda's, signalen en kansen */
+function convProposals() {
+  const list = [];
+  const nextMeeting = meetings
+    .filter((meeting) => meeting.date >= demoTodayIso && agendaOf(meeting).stage === "concept")
+    .sort((a, b) => a.date.localeCompare(b.date))[0];
+  if (nextMeeting) {
+    const name = findProject(nextMeeting.project).name;
+    list.push({
+      glyph: "cal",
+      title: `Werk de agenda van ${nextMeeting.title.toLowerCase()} uit`,
+      meta: `${name} · ${meetingDay(nextMeeting.date, meetingDayShort)}`,
+      gives: "Concept-agenda met onderbouwing",
+      start: { text: `Bereid ${nextMeeting.title} van @${name.replace(/\s/g, "")} voor`, projects: [nextMeeting.project], skill: "overleg" },
+    });
+  }
+  const open = sortSignalsByAction(openSignals());
+  const chance = open.find((signal) => signalLinks[signal.id]?.soort === "vooruitwerken");
+  if (chance) {
+    const intent = chance.steps.find((step) => step.intent?.startsWith("vooruitwerken"))?.intent;
+    list.push({
+      glyph: "forward",
+      title: "Reken door wat vooruitwerken oplevert",
+      meta: `${findProject(chance.project).name} · ${chance.title.toLowerCase()}`,
+      gives: signalLinks[chance.id].label,
+      start: { text: `Wat levert het op als we bij @${findProject(chance.project).name.replace(/\s/g, "")} vooruitwerken?`, projects: [chance.project], origin: intent ? { intent } : { signal: chance.id } },
+    });
+  }
+  const first = open.find((signal) => signal !== chance);
+  if (first) list.push({
+    glyph: "pulse",
+    title: `Zoek uit: ${first.title.charAt(0).toLowerCase() + first.title.slice(1)}`,
+    meta: `${findProject(first.project).name} · ${certaintyLabels[first.level].toLowerCase()}`,
+    gives: "Wat vastligt en wat je nu kunt doen",
+    start: { text: "", projects: [first.project], origin: { signal: first.id } },
+  });
+  list.push({
+    glyph: "spark",
+    title: "Wat vraagt deze week mijn aandacht?",
+    meta: `${projects.length} projecten`,
+    gives: "Overzicht op volgorde van actiemoment",
+    start: { text: "Wat vraagt deze week mijn aandacht?", projects: [] },
+  });
+  return list.slice(0, 4);
+}
+
+function renderConvStart() {
+  const docs = Object.keys(documents).length;
+  return `<div class="conv-empty conv-start">
+    <header class="cs-head">
+      <img class="cs-vicki" src="${localPath("assets/vicki.svg")}" width="48" height="48" alt="">
+      <div><h1>Waar zal ik aan werken, ${escapeHtml(profile.first)}?</h1>
+      <p>Ik ken je ${projects.length} projecten, ${docs} stukken in het dossier en ons procesmodel.</p></div>
+    </header>
+    ${renderComposer("chat", { big: true, placeholder: "Beschrijf wat je wilt laten uitzoeken of maken. Typ @ voor een project." })}
+    <section class="cs-propose" aria-labelledby="cs-propose-title">
+      <h2 id="cs-propose-title">Dit kan ik nu voor je doen</h2>
+      <div class="cs-grid">${convProposals().map((proposal, index) => `<button type="button" class="cs-card" data-action="conv-propose" data-i="${index}">
+        <span class="cs-icon">${icon(proposal.glyph)}</span>
+        <span class="cs-body"><b>${escapeHtml(proposal.title)}</b><small>${escapeHtml(proposal.meta)}</small></span>
+        <span class="cs-gives">${icon("arrow")}${escapeHtml(proposal.gives)}</span>
+      </button>`).join("")}</div>
+    </section>
+    <section class="conversation-skills" aria-labelledby="conversation-skills">
+      <h2 id="conversation-skills">Of kies een vaardigheid</h2>
+      <div class="skill-grid">${skills.map(({ id, name, desc }) => `<button class="skill-card" data-action="chat-skill" data-id="${id}" title="${escapeHtml(desc)}">${icon("spark")}<span><b>${escapeHtml(name)}</b></span></button>`).join("")}</div>
+    </section>
+  </div>`;
+}
+
+/* Werkblad: wat Vicki gebruikte en wat het gesprek opleverde */
+function renderConvSheet(conversation) {
+  const made = [];
+  const docs = new Map();
+  conversation.messages.forEach((message, mi) => {
+    if (message.role !== "rise") return;
+    const shown = message.reveal === undefined || message.reveal >= message.total;
+    if (!shown) return;
+    const hasProduct = message.blocks.some((block) => ["draft", "agenda", "table"].includes(block.type));
+    for (const block of message.blocks) {
+      if (block.type === "draft") made.push({ mi, glyph: "mail", title: `Conceptmail aan ${stripHtml(block.to)}`, meta: "Niet verstuurd" });
+      if (block.type === "agenda") { const meeting = findMeeting(block.meeting); made.push({ mi, glyph: "cal", title: `Agenda ${meeting.title.toLowerCase()}`, meta: findProject(meeting.project).name }); }
+      if (block.type === "table") made.push({ mi, glyph: "grid", title: block.head.slice(0, 2).map(stripHtml).join(" en "), meta: `Tabel · ${block.rows.length} rijen` });
+      if (block.type === "agent" && !hasProduct) made.push({ mi, glyph: "spark", title: stripHtml(block.result), meta: block.agent });
+      if (block.type === "sources") for (const [doc] of block.items) if (documents[doc]) docs.set(doc, documents[doc]);
+    }
+  });
+  const signal = conversation.origin?.signal && findSignal(conversation.origin.signal);
+  return `<aside class="conv-sheet" aria-label="Werkblad">
+    ${made.length ? `<section><h3>Opgeleverd</h3><ul class="sheet-made">${made.map((item) => `<li><button type="button" data-action="conv-jump" data-mi="${item.mi}"><span class="sm-icon">${icon(item.glyph)}</span><span><b>${escapeHtml(item.title)}</b><small>${escapeHtml(item.meta)}</small></span></button></li>`).join("")}</ul></section>` : ""}
+    ${docs.size ? `<section><h3>Gelezen <span>${docs.size}</span></h3><ul class="sheet-docs">${[...docs].map(([id, doc]) => `<li><a href="${sourceHref(id)}" data-action="open-doc" data-doc="${id}">${icon("doc")}<span><b>${escapeHtml(doc.title)}</b><small>${escapeHtml([doc.kind, doc.date].filter(Boolean).join(" · "))}</small></span></a></li>`).join("")}</ul></section>` : ""}
+    <section><h3>Context</h3><ul class="sheet-ctx">
+      ${conversation.projects.length ? conversation.projects.map((id) => { const project = findProject(id); return `<li><a href="${pageHref({ view: "project", projectId: id, section: "signalen" })}" data-action="nav" data-view="project" data-project="${id}" data-section="signalen"><i class="np-dot" data-status="${escapeHtml(primaryProjectMilestone(id)?.status ?? "Op koers")}"></i><span><b>${escapeHtml(project.name)}</b><small>${escapeHtml(project.phase)}</small></span></a></li>`; }).join("") : `<li><span class="sheet-all">Alle projecten</span></li>`}
+      ${signal ? `<li><button type="button" data-action="open-signal" data-id="${signal.id}">${icon("pulse")}<span><b>${escapeHtml(signal.title)}</b><small>Signaal</small></span></button></li>` : ""}
+    </ul></section>
+    <p class="sheet-trust">${icon("lock")}Vicki werkt alleen met je dossier. Er gaat niets naar buiten zonder jouw akkoord.</p>
+  </aside>`;
 }
 
 function renderDock() {

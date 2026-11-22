@@ -372,9 +372,8 @@ const demoReplies = {
         type: "actions",
         items: [
           {
-            label: "Neem over als concept-agenda",
+            label: "Open de agenda",
             adoptAgenda: true,
-            toast: "Concept-agenda opgeslagen in deze demo",
             go: {
               view: "project",
               projectId: "dk",
@@ -422,7 +421,7 @@ const demoReplies = {
           "Open signalen van Parkzijde meegenomen",
           "Planning tot DO gecontroleerd",
         ],
-        result: "Concept-agenda met 4 punten",
+        result: "3 punten op de concept-agenda gezet",
       },
       { type: "agenda", meeting: "pz-bt7" },
       {
@@ -441,15 +440,13 @@ const demoReplies = {
         type: "actions",
         items: [
           {
-            label: "Zet agenda in bouwteam #7",
-            adoptAgenda: true,
+            label: "Open de agenda van bouwteam #7",
             go: {
               view: "project",
               projectId: "pz",
               section: "vergaderingen",
               meetingId: "pz-bt7",
             },
-            toast: "Agenda toegevoegd aan Bouwteam #7 (concept)",
           },
           { label: "Stuur concept naar Joost", intent: "draft-pz" },
         ],
@@ -485,7 +482,7 @@ const demoReplies = {
         type: "actions",
         items: [
           {
-            label: "Zet agenda in stuurgroep 2 dec",
+            label: "Open de agenda van de stuurgroep",
             adoptAgenda: true,
             go: {
               view: "project",
@@ -493,7 +490,6 @@ const demoReplies = {
               section: "vergaderingen",
               meetingId: "hk-sg",
             },
-            toast: "Agenda toegevoegd aan stuurgroep (concept)",
           },
         ],
       },
@@ -506,7 +502,7 @@ const demoReplies = {
       { type: "agenda", meeting: "mw-ge" },
       { type: "sources", items: [["mw-hov", null], ["mw-haalb", null]] },
       { type: "actions", items: [{
-        label: "Neem over als concept-agenda",
+        label: "Open de agenda",
         adoptAgenda: true,
         go: { view: "project", projectId: "mw", section: "vergaderingen", meetingId: "mw-ge" },
       }] },

@@ -57,6 +57,7 @@ function addAgendaItem(meeting, item, quiet = false) {
 
 function agendaOrigin(meeting, item) {
   if (item.late) return { glyph: "plus", text: "Aanvulling" };
+  if (item.by === "gesprek") return { glyph: "talk", text: "Uit gesprek met Vicki" };
   if (item.source?.startsWith("s-")) return { glyph: "pulse", text: "Signaal" };
   if (item.source && meetings.some((other) => other.doc === item.source)) return { glyph: "cal", text: "Uit vorig overleg" };
   if (item.source) return { glyph: "doc", text: "Uit het dossier" };
