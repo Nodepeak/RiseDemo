@@ -9,7 +9,7 @@
     root.dataset.theme = "light";
   }
   /* Stijl: de huisstijl "aurora" is standaard; "huidig" is de vorige look,
-     te kiezen via ?stijl=huidig of het Demo-menu. Nieuwe sleutel, zodat een
+     te bekijken via ?stijl=huidig. Nieuwe sleutel, zodat een
      eerder bewaarde testkeuze de nieuwe standaard niet overschrijft. */
   try {
     const asked = new URLSearchParams(location.search).get("stijl");

@@ -73,61 +73,6 @@ function renderTopbar() {
   </header>`;
 }
 
-const demoWalkthroughs = [
-  [
-    "Vraag op Overzicht, verder in gesprek",
-    "Druk op Enter. Het gesprek gaat verder in Gesprekken.",
-    () => {
-      state.comp.home.text = "Wat vraagt deze week mijn aandacht?";
-      state.nextFocus = "ta-home";
-      navigate({ view: "bureau" });
-    },
-  ],
-  [
-    "Signaal openen en bespreken",
-    "Lees de onderbouwing en kies een vervolgstap of “Bespreek met Vicki”.",
-    () => {
-      (navigate({ view: "bureau" }), (state.drawer = "s-dk"), render());
-    },
-  ],
-  [
-    "Assistent bij een projectonderdeel",
-    "Vicki weet dat je naar de planning van De Kade kijkt. Kies een vraag of klik op het Vicki-poppetje naast een taak.",
-    () => {
-      (navigate({ view: "project", projectId: "dk", section: "planning" }),
-        (state.dock.open = !0),
-        (state.dock.key = "p-dk-planning"),
-        render());
-    },
-  ],
-  [
-    "Vicki schakelt een agent in",
-    "Kijk hoe de afsprakenagent werkt en wat hij van je nodig heeft.",
-    () => {
-      let e = startConversation({
-        text: "Welke afspraken moet ik bewaken bij @Havenkwartier?",
-      });
-      navigate({ view: "gesprekken", convId: e.id });
-    },
-  ],
-  [
-    "Zelf skill en projecten toevoegen",
-    "Kies “Skill” en typ @ om projecten toe te voegen. Probeer “Vergelijk de risico’s” met twee projecten.",
-    () => {
-      state.comp.chat = emptyComposer();
-      state.nextFocus = "ta-chat";
-      navigate({ view: "gesprekken", convId: null });
-    },
-  ],
-  [
-    "Bron openen vanuit een antwoord",
-    "Klik op een bronnummer of op een bron onder het antwoord.",
-    () => {
-      navigate({ view: "gesprekken", convId: "c-1" });
-    },
-  ],
-];
-
 function normalizeChoice(text = "") {
   return text.toLocaleLowerCase("nl").normalize("NFD").replace(/\p{M}/gu, "");
 }
@@ -291,13 +236,6 @@ function renderPopover() {
     : "";
 }
 
-function renderWalkthroughMenu() {
-  return `<div class="routes ${state.routes ? "is-open" : ""}">
-    ${state.routes ? `<div class="routes-panel" id="demo-route-options"><h6>Datastaat van lijsten</h6><div class="scenario" role="group" aria-label="Datastaat">${scenarios.map(([value, label]) => `<button type="button" data-action="scenario" data-value="${value}" aria-pressed="${currentScenario() === value}">${label}</button>`).join("")}</div><p class="scenario-note">Bekijk hoe overzichten eruitzien tijdens laden, zonder inhoud, bij een fout of met een grote portefeuille.</p><hr/><h6>Stijl</h6><div class="scenario" role="group" aria-label="Stijl">${[["aurora", "Nieuw"], ["huidig", "Vorige"]].map(([value, label]) => `<button type="button" data-action="stijl" data-value="${value}" aria-pressed="${(document.documentElement.dataset.stijl || "aurora") === value}">${label}</button>`).join("")}</div><hr/><h6>Ontwerproutes uit de briefing</h6>${demoWalkthroughs.map(([e], n) => `<button class="route" data-action="route" data-i="${n}"><i>${n + 1}</i>${e}</button>`).join("")}</div>` : ""}
-    <button class="routes-btn" id="demo-routes-trigger" aria-expanded="${state.routes}" aria-controls="demo-route-options" data-action="routes">${state.routes ? "Sluit" : "Demo"}</button>
-  </div>`;
-}
-
 function renderPage() {
   let e = findProject(state.projectId);
   switch (state.view) {
@@ -342,7 +280,6 @@ function renderFrame() {
   ${renderSignalDrawer()}
   ${renderPopover()}
   ${state.toast ? `<div class="toast" role="status">${escapeHtml(state.toast)}${state.toastUndo ? ` <button class="toast-undo" data-action="${state.toastUndo.action ?? "restore-signal"}" data-id="${state.toastUndo.id ?? state.toastUndo}">Ongedaan maken</button>` : ""}</div>` : ""}
-  ${"" /* Demo-menu verborgen op verzoek; renderWalkthroughMenu() blijft beschikbaar */}
   ${renderPalette()}`;
 }
 

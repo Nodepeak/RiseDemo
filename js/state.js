@@ -41,7 +41,6 @@ const state = {
   pop: null,
   toast: null,
   toastUndo: null,
-  routes: !1,
   agendaAdopted: {},
   onAgenda: {},
   planDraft: {},

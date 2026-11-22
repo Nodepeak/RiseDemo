@@ -43,7 +43,7 @@
       <a class="nav-item is-on" data-action="nav" href="gesprekken.html" data-view="gesprekken"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg><span>Gesprekken</span></a>
       <a class="nav-item " data-action="nav" href="acties.html" data-view="acties"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"></rect><path d="m8.5 12 2.5 2.5 4.5-5"></path></svg><span>Acties</span></a>
       <button class="nav-item " data-action="toggle-dossier" aria-expanded="false"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"></path></svg><span>Dossier</span><svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button>
-
+      
     </nav>
     <div class="nav-label"><span>Projecten</span><a data-action="tab" href="projecten/index.html" data-view="projecten">Alle</a></div>
     <nav class="nav-projects" aria-label="Projecten">
@@ -52,33 +52,33 @@
             <span class="np-dot" data-status="Onder druk" aria-hidden="true"></span><span class="np-name">Havenkwartier</span>
             <svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
           </button>
-
+          
         </div><div class="np ">
           <button class="np-head" data-action="toggle-project" data-id="dk" aria-expanded="false">
             <span class="np-dot" data-status="Onder druk" aria-hidden="true"></span><span class="np-name">De Kade</span>
             <span class="np-count" aria-label="2 open signalen">2</span><svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
           </button>
-
+          
         </div><div class="np ">
           <button class="np-head" data-action="toggle-project" data-id="pz" aria-expanded="false">
             <span class="np-dot" data-status="Onder druk" aria-hidden="true"></span><span class="np-name">Parkzijde</span>
             <svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
           </button>
-
+          
         </div><div class="np ">
           <button class="np-head" data-action="toggle-project" data-id="mw" aria-expanded="false">
             <span class="np-dot" data-status="Aandacht nodig" aria-hidden="true"></span><span class="np-name">Molenweide</span>
             <svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
           </button>
-
+          
         </div>
-
+      
     </nav>
     <div class="nav-foot">
       <a class="nav-item " data-action="nav" href="instellingen.html" data-view="instellingen"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7h-9M14 17H5"></path><circle cx="17" cy="17" r="3"></circle><circle cx="7" cy="7" r="3"></circle></svg><span>Instellingen</span></a>
     </div>
   </aside>
-
+  
   <main class="main view-gesprekken">
     <header class="top">
     <button class="mobile-menu icon-btn" data-action="mobile-nav" aria-label="Navigatiemenu" aria-controls="demo-navigation" aria-expanded="false"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg></button>
@@ -89,39 +89,116 @@
       <button class="avatar" id="account-trigger" aria-expanded="false" data-action="avatar" aria-label="Account van Maartje Hoekstra">MH</button>
     </div>
   </header>
-    <div class="content" id="content"><section class="convs">
-    <aside class="conv-list">
-      <button class="btn btn--rise conv-new" data-action="new-conv"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5v14"></path></svg>Nieuw gesprek</button>
-      <label class="search"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg><input id="conv-search" placeholder="Zoek in gesprekken" value=""></label>
-      <h5>Deze week</h5><button class="cl " data-action="open-conv" data-id="c-1"><b>Parkeernorm Havenkwartier na nieuwe nota</b><em>Havenkwartier · Gisteren</em></button><button class="cl " data-action="open-conv" data-id="c-2"><b>Verslag ontwerpteam De Kade uitgewerkt</b><em>De Kade · Notulen en actiepunten · Di 18 nov</em></button><h5>Eerder</h5><button class="cl " data-action="open-conv" data-id="c-3"><b>Welke stukken mis ik nog voor de aanvraag?</b><em>Parkzijde · Do 13 nov</em></button><button class="cl " data-action="open-conv" data-id="c-4"><b>Grondprijs Molenweide tegen referenties</b><em>Molenweide · Documenten vergelijken · Ma 3 nov</em></button>
-    </aside>
-    <div class="conv-main">
-      <div class="conv-empty">
-        <h1>Geef Vicki een opdracht</h1>
-        <form class="composer composer--big" data-comp="chat" data-action-submit="send">
-    <div class="comp-ctx">
-      <span class="comp-ctx-label">Context</span>
-      <span class="chip chip--scope" title="Rise kijkt in al je projecten">Alle projecten</span>
-    </div>
-    <textarea id="ta-chat" data-comp="chat" rows="2" aria-label="Vraag of opdracht voor Vicki" placeholder="Beschrijf wat je wilt laten uitzoeken of maken."></textarea>
-    <div class="comp-bar">
-      <button type="button" class="comp-btn" id="composer-context-chat" aria-expanded="false" aria-controls="choice-popover" data-action="pop-context" data-comp="chat"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5v14"></path></svg><span>Context</span></button>
-      <button type="button" class="comp-btn " id="composer-skill-chat" aria-expanded="false" aria-controls="choice-popover" data-action="pop-skill" data-comp="chat"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.9 5.8a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3z"></path></svg><span>Skill</span></button>
-      <span class="comp-hint">Enter om te versturen</span>
-      <button type="submit" class="comp-send" aria-label="Verstuur"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 7-7 7 7M12 19V5"></path></svg></button>
+    <div class="content" id="content"><div class="gs-page" id="gs-home"><div class="gs-col">
+    <header class="gs-hello">
+      <img src="assets/vicki.svg" width="36" height="36" alt="">
+      <div><h1>Wat wil je uitzoeken?</h1><p>Ik ken de dossiers van je 4 projecten, 20 stukken en ons procesmodel.</p></div>
+    </header>
+    <form class="gs-ask is-big" data-comp="chat" data-action-submit="send">
+    <textarea id="ta-chat" data-comp="chat" rows="2" aria-label="Vraag of opdracht voor Vicki" placeholder="Vraag iets, of typ @ voor een project"></textarea>
+    <div class="gs-ask-bar">
+      <button type="button" class="gs-scope" id="gs-scope" data-action="pop-scope" aria-expanded="false" aria-controls="choice-popover" aria-label="Waar gaat je vraag over? Nu: Alle projecten"><span class="gs-scope-dot"></span><span>Alle projecten</span><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button>
+      
+      <button type="button" class="gs-tool " id="composer-skill-chat" aria-expanded="false" aria-controls="choice-popover" data-action="pop-skill" data-comp="chat"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.9 5.8a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3z"></path></svg><span>Skill</span></button>
+      <button type="submit" class="gs-send" aria-label="Verstuur"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10M7 17 17 7"></path></svg></button>
     </div>
   </form>
-        <section class="conversation-skills" aria-labelledby="conversation-skills">
-          <h2 id="conversation-skills">Start met een voorbeeld</h2>
-          <div class="skill-grid"><button class="skill-card" data-action="chat-skill" data-id="afspraken"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.9 5.8a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3z"></path></svg><span><b title="Toetst stukken aan gemaakte afspraken en overeenkomsten">Afspraken toetsen</b></span><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button><button class="skill-card" data-action="chat-skill" data-id="vergelijk"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.9 5.8a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3z"></path></svg><span><b title="Zet versies of documenten naast elkaar">Documenten vergelijken</b></span><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button><button class="skill-card" data-action="chat-skill" data-id="planning"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.9 5.8a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3z"></path></svg><span><b title="Rekent door welke mijlpalen geraakt worden">Planning en afhankelijkheden</b></span><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button><button class="skill-card" data-action="chat-skill" data-id="overleg"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.9 5.8a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3z"></path></svg><span><b title="Agenda op basis van afspraken, acties en signalen">Overleg voorbereiden</b></span><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button><button class="skill-card" data-action="chat-skill" data-id="notulen"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.9 5.8a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3z"></path></svg><span><b title="Maakt een verslag met besluiten en acties">Notulen en actiepunten</b></span><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button></div>
-        </section>
-        </div>
+    <div class="gs-ideas"><button type="button" data-action="conv-propose" data-i="0" title="Concept-agenda met onderbouwing"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg>Bereid bouwteam #7 voor</button><button type="button" data-action="conv-propose" data-i="1" title="Scheelt ± 8 weken"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m13 17 5-5-5-5"></path><path d="m6 17 5-5-5-5"></path></svg>Vooruitwerken bij Parkzijde?</button><button type="button" data-action="conv-propose" data-i="2" title="Wat vastligt en wat je nu kunt doen"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>Brandweeradvies trappenhuis staat open</button></div>
+    <div class="gs-head">
+      <h2>Je gesprekken</h2>
+          <div class="gs-seg" role="group" aria-label="Indeling"><button type="button" data-action="conv-mode" data-value="project" aria-pressed="true">Per project</button><button type="button" data-action="conv-mode" data-value="recent" aria-pressed="false">Recent</button></div>
+          <button type="button" class="gs-round" data-action="conv-find" aria-label="Zoek in gesprekken"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg></button>
     </div>
-  </section></div>
+    <section class="gs-sec">
+        <header class="gs-sec-head"><span class="np-dot" data-status="Onder druk" aria-hidden="true"></span><b>Havenkwartier</b><em>Omgevingsplanwijziging · 5 gesprekken</em>
+          <button type="button" class="gs-more" data-action="conv-scope" data-id="hk">Projecthistorie<svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button></header>
+        <div class="gs-rows"><button type="button" class="gs-row" data-action="open-conv" data-id="c-1">
+    <span class="gs-row-main"><b>Parkeernorm Havenkwartier na nieuwe nota</b>
+      <small><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg><span>Ongeveer 13 parkeerplaatsen minder nodig</span></small></span>
+    <span></span>
+    <time>Gisteren</time>
+  </button><button type="button" class="gs-row" data-action="open-conv" data-id="h-hk1">
+    <span class="gs-row-main"><b>Klopt programma v3 met de afspraken?</b>
+      <small><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m21.7 18-8-14a2 2 0 0 0-3.4 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3"></path><path d="M12 9v4M12 17h.01"></path></svg><span>11 sociale huurwoningen onder de afspraak</span></small></span>
+    <span></span>
+    <time>18 nov</time>
+  </button></div>
+      </section><section class="gs-sec">
+        <header class="gs-sec-head"><span class="np-dot" data-status="Onder druk" aria-hidden="true"></span><b>De Kade</b><em>Definitief ontwerp · 5 gesprekken</em>
+          <button type="button" class="gs-more" data-action="conv-scope" data-id="dk">Projecthistorie<svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button></header>
+        <div class="gs-rows"><button type="button" class="gs-row" data-action="open-conv" data-id="h-dk1">
+    <span class="gs-row-main"><b>Wat betekent de vertraging van het akoestisch rapport?</b>
+      <small><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m21.7 18-8-14a2 2 0 0 0-3.4 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3"></path><path d="M12 9v4M12 17h.01"></path></svg><span>Aanvraag van 22 januari komt onder druk</span></small></span>
+    <span></span>
+    <time>Gisteren</time>
+  </button><button type="button" class="gs-row" data-action="open-conv" data-id="c-2">
+    <span class="gs-row-main"><b>Verslag ontwerpteam De Kade uitgewerkt</b>
+      <small><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"></path></svg><span>Concept-verslag met 2 besluiten en 1 actiepunt</span></small></span>
+    <span></span>
+    <time>18 nov</time>
+  </button></div>
+      </section><section class="gs-sec">
+        <header class="gs-sec-head"><span class="np-dot" data-status="Onder druk" aria-hidden="true"></span><b>Parkzijde</b><em>Voorlopig ontwerp · 6 gesprekken</em>
+          <button type="button" class="gs-more" data-action="conv-scope" data-id="pz">Projecthistorie<svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button></header>
+        <div class="gs-rows"><button type="button" class="gs-row" data-action="open-conv" data-id="c-3">
+    <span class="gs-row-main"><b>Welke stukken mis ik nog voor de aanvraag?</b>
+      <small><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg><span>Bodemonderzoek en stikstofberekening ontbreken</span></small></span>
+    <span></span>
+    <time>13 nov</time>
+  </button><button type="button" class="gs-row" data-action="open-conv" data-id="h-pz1">
+    <span class="gs-row-main"><b>Wat is er besloten in bouwteam #6?</b>
+      <small><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"></rect><path d="m8.5 12 2.5 2.5 4.5-5"></path></svg><span>2 besluiten, actie voor Joost: offertes bodemonderzoek</span></small></span>
+    <span></span>
+    <time>30 okt</time>
+  </button></div>
+      </section><section class="gs-sec">
+        <header class="gs-sec-head"><span class="np-dot" data-status="Aandacht nodig" aria-hidden="true"></span><b>Molenweide</b><em>Haalbaarheid · 4 gesprekken</em>
+          <button type="button" class="gs-more" data-action="conv-scope" data-id="mw">Projecthistorie<svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button></header>
+        <div class="gs-rows"><button type="button" class="gs-row" data-action="open-conv" data-id="h-mw1">
+    <span class="gs-row-main"><b>Wat vraagt de welstandsnota voor dorpsranden?</b>
+      <small><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m21.7 18-8-14a2 2 0 0 0-3.4 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3"></path><path d="M12 9v4M12 17h.01"></path></svg><span>Eisen aan kapvorm en materiaal, studie nog niet bijgewerkt</span></small></span>
+    <span></span>
+    <time>10 nov</time>
+  </button><button type="button" class="gs-row" data-action="open-conv" data-id="h-mw2">
+    <span class="gs-row-main"><b>Verslag haalbaarheidsoverleg</b>
+      <small><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"></rect><path d="m8.5 12 2.5 2.5 4.5-5"></path></svg><span>Bod pas na de herziene studie</span></small></span>
+    <span></span>
+    <time>6 nov</time>
+  </button></div>
+      </section><section class="gs-sec">
+        <header class="gs-sec-head"><span class="gs-mark gs-mark--x" aria-hidden="true"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 2 7l10 5 10-5z"></path><path d="m2 17 10 5 10-5M2 12l10 5 10-5"></path></svg></span><b>Projectoverstijgend</b><em>Over meer projecten of het hele portfolio · 3</em>
+          <button type="button" class="gs-more" data-action="conv-scope" data-id="x">Alles<svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button></header>
+        <div class="gs-rows"><button type="button" class="gs-row" data-action="open-conv" data-id="h-x1">
+    <span class="gs-row-main"><b>Welke projecten raakt de nieuwe BENG-norm?</b>
+      <small><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg><span>De Kade en Parkzijde moeten herrekenen</span></small></span>
+    <span></span>
+    <time>17 nov</time>
+  </button><button type="button" class="gs-row" data-action="open-conv" data-id="h-x2">
+    <span class="gs-row-main"><b>Risico's van De Kade en Parkzijde vergeleken</b>
+      <small><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect></svg><span>Bij beide is de vergunningsdatum het grootste risico</span></small></span>
+    <span></span>
+    <time>10 nov</time>
+  </button></div>
+      </section><section class="gs-sec">
+        <header class="gs-sec-head"><span class="gs-mark gs-mark--dossier" aria-hidden="true"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path></svg></span><b>Dossier</b><em>Bedrijfsdossier en kaders · 3</em>
+          <button type="button" class="gs-more" data-action="conv-scope" data-id="dossier">Alles<svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button></header>
+        <div class="gs-rows"><button type="button" class="gs-row" data-action="open-conv" data-id="h-d1">
+    <span class="gs-row-main"><b>Standaardclausules anterieure overeenkomst</b>
+      <small><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"></path></svg><span>7 standaardclausules, 2 met een keuze</span></small></span>
+    <span></span>
+    <time>14 nov</time>
+  </button><button type="button" class="gs-row" data-action="open-conv" data-id="h-d2">
+    <span class="gs-row-main"><b>Wat hoort er in een stuurgroepverslag?</b>
+      <small><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"></path></svg><span>6 vaste onderdelen</span></small></span>
+    <span></span>
+    <time>21 okt</time>
+  </button></div>
+      </section>
+  </div></div></div>
     <div class="dock ">
-
+    
     <div class="vicki-presence">
-
+      
       <button type="button" class="dock-trigger" id="dock-trigger" data-action="dock-toggle" aria-expanded="false" aria-keyshortcuts="/">
         <span class="vicki-figure"><svg class="vicki-live" viewBox="0 0 240 256" data-state="idle" data-look="druppel" aria-hidden="true" focusable="false">
     <defs>
@@ -183,13 +260,6 @@
     </div>
   </div>
   </main>
-
-
-
-  <div class="routes ">
-
-    <button class="routes-btn" id="demo-routes-trigger" aria-expanded="false" aria-controls="demo-route-options" data-action="routes">Demo</button>
-  </div>
   </div>
 
 </body>

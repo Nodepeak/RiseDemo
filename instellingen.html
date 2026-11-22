@@ -43,7 +43,7 @@
       <a class="nav-item " data-action="nav" href="gesprekken.html" data-view="gesprekken"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg><span>Gesprekken</span></a>
       <a class="nav-item " data-action="nav" href="acties.html" data-view="acties"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"></rect><path d="m8.5 12 2.5 2.5 4.5-5"></path></svg><span>Acties</span></a>
       <button class="nav-item " data-action="toggle-dossier" aria-expanded="false"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"></path></svg><span>Dossier</span><svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button>
-
+      
     </nav>
     <div class="nav-label"><span>Projecten</span><a data-action="tab" href="projecten/index.html" data-view="projecten">Alle</a></div>
     <nav class="nav-projects" aria-label="Projecten">
@@ -52,33 +52,33 @@
             <span class="np-dot" data-status="Onder druk" aria-hidden="true"></span><span class="np-name">Havenkwartier</span>
             <svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
           </button>
-
+          
         </div><div class="np ">
           <button class="np-head" data-action="toggle-project" data-id="dk" aria-expanded="false">
             <span class="np-dot" data-status="Onder druk" aria-hidden="true"></span><span class="np-name">De Kade</span>
             <span class="np-count" aria-label="2 open signalen">2</span><svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
           </button>
-
+          
         </div><div class="np ">
           <button class="np-head" data-action="toggle-project" data-id="pz" aria-expanded="false">
             <span class="np-dot" data-status="Onder druk" aria-hidden="true"></span><span class="np-name">Parkzijde</span>
             <svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
           </button>
-
+          
         </div><div class="np ">
           <button class="np-head" data-action="toggle-project" data-id="mw" aria-expanded="false">
             <span class="np-dot" data-status="Aandacht nodig" aria-hidden="true"></span><span class="np-name">Molenweide</span>
             <svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
           </button>
-
+          
         </div>
-
+      
     </nav>
     <div class="nav-foot">
       <a class="nav-item is-on" data-action="nav" href="instellingen.html" data-view="instellingen"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7h-9M14 17H5"></path><circle cx="17" cy="17" r="3"></circle><circle cx="7" cy="7" r="3"></circle></svg><span>Instellingen</span></a>
     </div>
   </aside>
-
+  
   <main class="main view-instellingen">
     <header class="top">
     <button class="mobile-menu icon-btn" data-action="mobile-nav" aria-label="Navigatiemenu" aria-controls="demo-navigation" aria-expanded="false"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg></button>
@@ -92,7 +92,9 @@
     <div class="content" id="content"><section class="page page--narrow">
     <header class="page-head"><div><h1>Instellingen</h1></div></header>
     <h3 class="sub">Weergave</h3>
-    <div class="theme-picker" role="group" aria-label="Thema"><button type="button" class="theme-option" data-action="theme" data-value="light" aria-pressed="false"><span class="theme-swatch theme-swatch--light"><i></i><i></i></span>Licht</button><button type="button" class="theme-option" data-action="theme" data-value="dark" aria-pressed="false"><span class="theme-swatch theme-swatch--dark"><i></i><i></i></span>Donker</button><button type="button" class="theme-option" data-action="theme" data-value="system" aria-pressed="true"><span class="theme-swatch theme-swatch--system"><i></i><i></i></span>Systeem</button></div>
+    <div class="theme-picker" role="group" aria-label="Thema"><button type="button" class="theme-option" data-action="theme" data-value="light" aria-pressed="true"><span class="theme-swatch theme-swatch--light"><i></i><i></i></span>Licht</button><button type="button" class="theme-option" data-action="theme" data-value="dark" aria-pressed="false"><span class="theme-swatch theme-swatch--dark"><i></i><i></i></span>Donker</button><button type="button" class="theme-option" data-action="theme" data-value="system" aria-pressed="false"><span class="theme-swatch theme-swatch--system"><i></i><i></i></span>Systeem</button></div>
+    <h3 class="sub">Kleur van Vicki</h3>
+    <div class="vicki-picker" role="group" aria-label="Kleur van Vicki"><button type="button" class="vicki-option" data-action="vicki-kleur" data-value="oranje" data-vicki-kleur="oranje" aria-pressed="true"><img src="assets/vicki.svg" alt="">Oranje</button><button type="button" class="vicki-option" data-action="vicki-kleur" data-value="roze" data-vicki-kleur="roze" aria-pressed="false"><img src="assets/vicki.svg" alt="">Roze</button><button type="button" class="vicki-option" data-action="vicki-kleur" data-value="paars" data-vicki-kleur="paars" aria-pressed="false"><img src="assets/vicki.svg" alt="">Paars</button><button type="button" class="vicki-option" data-action="vicki-kleur" data-value="blauw" data-vicki-kleur="blauw" aria-pressed="false"><img src="assets/vicki.svg" alt="">Blauw</button><button type="button" class="vicki-option" data-action="vicki-kleur" data-value="groen" data-vicki-kleur="groen" aria-pressed="false"><img src="assets/vicki.svg" alt="">Groen</button></div>
     <h3 class="sub">Vooruitzicht</h3>
     <label class="set-row">
       <span><b>Alleen signalen die een mijlpaal raken</b><em>Op je overzicht laat Vicki maximaal drie signalen tegelijk.</em></span>
@@ -128,9 +130,9 @@
     </label>
   </section></div>
     <div class="dock ">
-
+    
     <div class="vicki-presence">
-
+      
       <button type="button" class="dock-trigger" id="dock-trigger" data-action="dock-toggle" aria-expanded="false" aria-keyshortcuts="/">
         <span class="vicki-figure"><svg class="vicki-live" viewBox="0 0 240 256" data-state="idle" data-look="druppel" aria-hidden="true" focusable="false">
     <defs>
@@ -192,13 +194,6 @@
     </div>
   </div>
   </main>
-
-
-
-  <div class="routes ">
-
-    <button class="routes-btn" id="demo-routes-trigger" aria-expanded="false" aria-controls="demo-route-options" data-action="routes">Demo</button>
-  </div>
   </div>
 
 </body>

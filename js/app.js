@@ -909,16 +909,6 @@ document.addEventListener("click", (e) => {
       try { localStorage.setItem("rise:vicki", o.value); } catch {}
       document.documentElement.dataset.vicki = o.value;
       return render();
-    case "stijl":
-      try { localStorage.setItem("rise:stijl-v2", o.value); } catch {}
-      document.documentElement.dataset.stijl = o.value;
-      return render();
-    case "routes":
-      return ((state.routes = !state.routes), render());
-    case "route": {
-      let [, i, d] = demoWalkthroughs[+o.i];
-      return ((state.routes = !1), d(), showToast(i));
-    }
     case "copy-draft":
       return copyDraft(a.closest(".draft").querySelector("pre").textContent);
     case "toast":

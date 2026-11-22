@@ -162,7 +162,7 @@
 :root[data-stijl="aurora"] .kbd { background: transparent; box-shadow: none; }
 
 /* Filters en tabs: zachte baan met witte keuze */
-:root[data-stijl="aurora"] .filter-bar, :root[data-stijl="aurora"] .filters, :root[data-stijl="aurora"] .gs-seg, :root[data-stijl="aurora"] .seg, :root[data-stijl="aurora"] .scenario { background: var(--surface-2); box-shadow: none; border-radius: 99px; padding: 4px; }
+:root[data-stijl="aurora"] .filter-bar, :root[data-stijl="aurora"] .filters, :root[data-stijl="aurora"] .gs-seg, :root[data-stijl="aurora"] .seg { background: var(--surface-2); box-shadow: none; border-radius: 99px; padding: 4px; }
 :root[data-stijl="aurora"] .filter { height: 32px; padding: 0 14px; border-radius: 99px; }
 :root[data-stijl="aurora"] .filter.is-on, :root[data-stijl="aurora"] .gs-seg button[aria-pressed="true"] { background: var(--surface); box-shadow: 0 1px 0 var(--border), 0 6px 14px -10px rgb(60 30 0 / .35); }
 :root[data-stijl="aurora"] .ptabs { gap: 4px; width: fit-content; max-width: 100%; padding: 4px; border-bottom: 0; border-radius: 99px; background: var(--surface-2); }
@@ -232,8 +232,6 @@
 /* ---- 8. Overlays ---- */
 :root[data-stijl="aurora"] .pop, :root[data-stijl="aurora"] .drawer, :root[data-stijl="aurora"] .toast, :root[data-stijl="aurora"] .dock-panel, :root[data-stijl="aurora"] .palette, :root[data-stijl="aurora"] .m-dialog { border-radius: 24px; box-shadow: 0 1px 0 var(--border), 0 30px 70px -30px rgb(60 30 0 / .45); }
 :root[data-stijl="aurora"] .pop-item { border-radius: 14px; }
-:root[data-stijl="aurora"] .routes-btn, :root[data-stijl="aurora"] .routes-panel { border-radius: 99px; }
-:root[data-stijl="aurora"] .routes-panel { border-radius: 24px; }
 
 /* ---- 9. Kleine filters en mobiel ---- */
 :root[data-stijl="aurora"] .legend, :root[data-stijl="aurora"] .library-filters { box-shadow: none; background: var(--surface-2); border-radius: 99px; }

@@ -4,7 +4,7 @@
    echt nieuw zijn. Elementen met een exit-animatie (data-exit) krijgen eerst
    de klasse .is-leaving voordat ze verdwijnen. */
 (() => {
-  const EXIT_SELECTOR = ".drawer, .scrim, .pop, .toast, .dock-panel, .routes-panel, .mobile-nav-scrim, .palette, .palette-scrim";
+  const EXIT_SELECTOR = ".drawer, .scrim, .pop, .toast, .dock-panel, .mobile-nav-scrim, .palette, .palette-scrim";
 
   // Velden waarvan de app de waarde bij elke toetsaanslag in de state bijhoudt.
   const CONTROLLED_SELECTOR = "textarea[data-comp], #dock-input, #choice-search, #dossier-search, #library-search, #conv-search, #palette-input";

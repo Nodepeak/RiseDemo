@@ -46,14 +46,7 @@ matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
   }
 });
 
-/* ---------- Datastaten (demo-routes → "Datastaat") ---------- */
-const scenarios = [
-  ["normaal", "Normaal"],
-  ["laden", "Laden"],
-  ["leeg", "Leeg"],
-  ["fout", "Fout"],
-  ["veel", "Veel data"],
-];
+/* ---------- Datastaten (laden, leeg, fout, veel) ---------- */
 const currentScenario = () => state.scenario ?? "normaal";
 
 function renderSkeletonRows(count = 4) {
