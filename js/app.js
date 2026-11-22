@@ -113,9 +113,11 @@ function submitComposer(e) {
   if (e === "home" || !state.convs.find((o) => o.id === state.convId)) {
     let o = startConversation({
       text: s,
-      projects: n.projects,
+      projects: n.dossier ? [] : n.projects,
       skill: n.skill,
+      dossier: n.dossier,
     });
+    state.convScope = null;
     ((state.comp[e] = emptyComposer()),
       navigate({ view: "gesprekken", convId: o.id }));
   } else {
@@ -730,9 +732,58 @@ document.addEventListener("click", (e) => {
         render()
       );
     }
+    case "conv-home":
+      state.convId = null;
+      state.convScope = null;
+      state.comp.chat = emptyComposer();
+      render();
+      select(".gs-page")?.scrollTo(0, 0);
+      return;
+    case "conv-scope": {
+      if (!o.id) return;
+      state.convId = null;
+      state.convScope = o.id;
+      state.comp.chat = { ...emptyComposer(), projects: findProject(o.id) ? [o.id] : [], dossier: o.id === "dossier" };
+      render();
+      select(".gs-page")?.scrollTo(0, 0);
+      return;
+    }
+    case "conv-mode":
+      state.convMode = o.value;
+      return render();
+    case "conv-find":
+      state.convFind = !state.convFind;
+      if (!state.convFind) state.convSearch = "";
+      state.nextFocus = state.convFind ? "conv-search" : null;
+      return render();
+    case "conv-forget": {
+      state.convForget[o.key] = true;
+      return showToast("Vicki vergeet dit voor dit project");
+    }
+    case "pop-scope":
+      return openPopover("scope", a, { comp: "chat" });
+    case "pop-move":
+      return openPopover("move", a, {});
+    case "choose-scope": {
+      const comp = state.comp.chat;
+      comp.dossier = o.id === "dossier";
+      comp.projects = findProject(o.id) ? [o.id] : [];
+      return closeChoicePopover();
+    }
+    case "move-conv": {
+      const conversation = state.convs.find((item) => item.id === state.convId);
+      if (!conversation) return closeChoicePopover();
+      if (o.id === "dossier") Object.assign(conversation, { scope: "dossier", projects: [] });
+      else if (o.id === "x") Object.assign(conversation, { scope: undefined, projects: conversation.projects.length > 1 ? conversation.projects : [] });
+      else Object.assign(conversation, { scope: undefined, projects: [o.id] });
+      if (state.convScope && state.convScope !== o.id) state.convScope = null;
+      closeChoicePopover();
+      return showToast(`Verplaatst naar ${convScopeName(o.id)}`);
+    }
     case "new-conv":
       return (
         (state.convId = null),
+        (state.convScope = null),
         (state.comp.chat = emptyComposer()),
         render(),
         select("#ta-chat")?.focus()
@@ -747,14 +798,14 @@ document.addEventListener("click", (e) => {
       state.convSheet = state.convSheet === false;
       return render();
     case "conv-jump": {
-      const target = select(`#thread .msg[data-mi="${o.mi}"]`);
+      const target = select(`#thread [data-mi="${o.mi}"]`);
       target?.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
       target?.classList.add("is-flash");
       setTimeout(() => target?.classList.remove("is-flash"), 1200);
       return;
     }
     case "msg-copy": {
-      const body = select(`#thread .msg[data-mi="${o.mi}"] .msg-body`);
+      const body = select(`#thread [data-mi="${o.mi}"]`);
       const text = [...(body?.querySelectorAll(".b-text, pre, .b-agenda, .b-table") ?? [])].map((node) => node.innerText.trim()).join("\n\n");
       return copyDraft(text);
     }
@@ -772,7 +823,11 @@ document.addEventListener("click", (e) => {
       return showToast(agenda.stage === "sent" ? `De agenda van ${meeting.title} is al verstuurd. Toegevoegd als aanvulling.` : `Op de agenda van ${meeting.title} gezet (${meetingDay(meeting.date, meetingDayShort)})`);
     }
     case "open-conv":
-      return ((state.convId = o.id), (state.scrollThread = !0), render());
+      state.convId = o.id;
+      state.comp.chat = emptyComposer();
+      render();
+      select("#thread")?.scrollTo(0, 0);
+      return;
     case "msg-action": {
       let i =
           state.dock.conv && e.target.closest(".dock") ? state.dock.conv : r,

@@ -3,6 +3,7 @@ const emptyComposer = () => ({
   projects: [],
   skill: null,
   files: [],
+  dossier: false,
 });
 
 const state = {
@@ -31,6 +32,10 @@ const state = {
   convs: structuredClone(initialConversations),
   convId: null,
   convSearch: "",
+  convScope: null,
+  convMode: "project",
+  convFind: false,
+  convForget: {},
   comp: { home: emptyComposer(), chat: emptyComposer() },
   dock: { open: !1, conv: null, text: "", about: null, key: "" },
   pop: null,
@@ -227,6 +232,7 @@ function startConversation({
   skill: a = null,
   origin: s = null,
   pageLabel: o,
+  dossier = false,
 }) {
   let r = [...new Set([...projectsFromMentions(e || ""), ...n])],
     i = {
@@ -234,8 +240,8 @@ function startConversation({
       title: "Nieuw gesprek",
       projects: r,
       skill: a,
-      when: "Nu",
-      group: "Vandaag",
+      date: demoTodayIso,
+      scope: dossier ? "dossier" : undefined,
       origin: s,
       messages: [],
     };

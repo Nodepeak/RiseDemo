@@ -225,6 +225,19 @@ function renderPopover() {
       "Vicki kiest standaard zelf de juiste skill. Kies er zelf een als je een specifieke aanpak wilt meegeven. Via Context kun je ook kaders toevoegen.",
     );
   }
+  if (e.type === "scope" || e.type === "move") {
+    const move = e.type === "move";
+    const conversation = move ? state.convs.find((item) => item.id === state.convId) : null;
+    const comp = state.comp.chat;
+    const current = move ? convScopeOf(conversation) : comp.dossier ? "dossier" : comp.projects.length === 1 ? comp.projects[0] : "x";
+    const action = move ? "move-conv" : "choose-scope";
+    const choices = [
+      { label: move ? "Projectoverstijgend" : "Alle projecten", detail: move ? "Over meer projecten of het hele portfolio" : "Vicki kijkt in al je projecten", leading: icon("layers"), action, attributes: 'data-id="x"', selected: current === "x" },
+      ...matchingProjects(query).map(({ id, name, phase }) => ({ label: name, detail: phase, leading: `<i class="np-mono np-mono--light">${id.toUpperCase()}</i>`, action, attributes: `data-id="${id}"`, selected: current === id })),
+      { label: move ? "Dossier" : "Alleen het dossier", detail: "Bedrijfsdossier en kaders", leading: icon("book"), action, attributes: 'data-id="dossier"', selected: current === "dossier" },
+    ].filter((choice) => !query || matchesChoice(query, choice.label, choice.detail));
+    return renderChoicePopover(e, move ? "Verplaats gesprek" : "Waar gaat je vraag over?", "", choices, move ? "Vicki koppelde dit gesprek aan wat hij gebruikte. Klopt dat niet, kies dan een andere plek." : "");
+  }
   if (["context", "mention", "projects"].includes(e.type)) {
     const mention = e.type === "mention";
     const sourcesOnly = e.type === "context" && e.comp === "home";

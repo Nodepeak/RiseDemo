@@ -12,9 +12,9 @@ const themeChoices = [
 
 function themeChoice() {
   try {
-    return localStorage.getItem("rise:theme") || "system";
+    return localStorage.getItem("rise:thema") || "light";
   } catch {
-    return "system";
+    return "light";
   }
 }
 
@@ -25,7 +25,7 @@ function resolvedTheme(choice = themeChoice()) {
 
 function setTheme(choice) {
   try {
-    localStorage.setItem("rise:theme", choice);
+    localStorage.setItem("rise:thema", choice);
   } catch {
     // Zonder opslag geldt de keuze alleen voor deze pagina.
   }
@@ -143,8 +143,8 @@ const scaleData = (() => {
       title: `${pick(["Wat betekent", "Vergelijk", "Vat samen:", "Controleer"])} ${pick(scaleTasks).toLowerCase()}`,
       projects: [pick(projects).id],
       skill: null,
-      when: index < 6 ? "Deze week" : `${1 + (index % 28)} ${pick(["okt", "sep", "aug"])}`,
-      group: index < 6 ? "Deze week" : "Eerder",
+      date: new Date(Date.UTC(2026, 10, 18) - index * 2.3 * 86400000).toISOString().slice(0, 10),
+      outcome: { glyph: "check", text: pick(["Samenvatting met 3 punten", "Vergelijking in een tabel", "2 risico's gevonden", "Conceptmail klaargezet"]) },
       messages: [],
       placeholder: true,
     }));

@@ -1273,3 +1273,141 @@ const initialConversations = [
     ],
   },
 ];
+
+/* ── Gespreksgeschiedenis ─────────────────────────────────────────────
+   Elk gesprek heeft een datum, een uitkomst en een plek: één project,
+   projectoverstijgend (meer of geen projecten) of het dossier. */
+Object.assign(initialConversations.find(({ id }) => id === "c-1"), { date: "2026-11-19", outcome: { glyph: "check", text: "Ongeveer 13 parkeerplaatsen minder nodig" } });
+Object.assign(initialConversations.find(({ id }) => id === "c-2"), { date: "2026-11-18", outcome: { glyph: "doc", text: "Concept-verslag met 2 besluiten en 1 actiepunt" } });
+Object.assign(initialConversations.find(({ id }) => id === "c-3"), { date: "2026-11-13", outcome: { glyph: "check", text: "Bodemonderzoek en stikstofberekening ontbreken" } });
+Object.assign(initialConversations.find(({ id }) => id === "c-4"), { date: "2026-11-03", outcome: { glyph: "check", text: "Ligt ongeveer 12% boven de referenties" } });
+
+const pastConversation = (id, date, projects, title, question, answer, sources, outcome, extra = {}) => ({
+  id, date, projects, title, skill: null, outcome, ...extra,
+  messages: [
+    { role: "user", text: question },
+    { role: "rise", blocks: [{ type: "text", html: answer }, { type: "sources", items: sources }] },
+  ],
+});
+
+initialConversations.push(
+  pastConversation("h-pz1", "2026-10-30", ["pz"], "Wat is er besloten in bouwteam #6?", "Wat is er besloten in bouwteam #6 van @Parkzijde?",
+    "<p>Er zijn twee besluiten genomen: het VO gaat verder met de compacte variant, en de planning houdt de aanvraag op 2 maart. Joost de Wit vraagt offertes op voor het bodemonderzoek.</p>",
+    [["pz-bt6", "pzb1"]], { glyph: "task", text: "2 besluiten, actie voor Joost: offertes bodemonderzoek" }),
+  pastConversation("h-pz2", "2026-10-15", ["pz"], "Wat verandert er in planning v4?", "Wat is er veranderd in planning v4 van @Parkzijde?",
+    "<p>De aanvraag omgevingsvergunning schuift naar 2 maart. De onderhandeling over de anterieure overeenkomst staat pas na de VO-raming, half januari.</p>",
+    [["pz-plan", "pzp1"]], { glyph: "cal", text: "Aanvraag omgevingsvergunning nu op 2 maart" }),
+  pastConversation("h-pz3", "2026-09-08", ["pz"], "Ontwerpbrief voor Atelier Noord", "Zet een ontwerpbrief op voor Atelier Noord voor het VO van @Parkzijde.",
+    "<p>Ik heb de brief opgezet volgens de stappen voor het voorlopig ontwerp in ons procesmodel: programma, randvoorwaarden van de gemeente en de planning tot de aanvraag.</p>",
+    [["bd-werkwijze", null]], { glyph: "doc", text: "Ontwerpbrief v1 in het projectdossier" }),
+  pastConversation("h-pz4", "2026-08-12", ["pz"], "Haalbaarheidsrapport samengevat voor de stuurgroep", "Vat het haalbaarheidsrapport van @Parkzijde samen voor de stuurgroep.",
+    "<p>Een notitie van twee pagina's volgens ons format: conclusie, financiële uitkomst, risico's en het gevraagde besluit om door te gaan naar het VO.</p>",
+    [["bd-format-sg", null]], { glyph: "doc", text: "Notitie van 2 pagina's, gebruikt bij het besluit" }),
+  pastConversation("h-pz5", "2026-06-24", ["pz"], "Welke onderzoeken zijn nodig voor de aanvraag?", "Welke onderzoeken hebben we straks nodig voor de aanvraag van @Parkzijde?",
+    "<p>Volgens de checklist zes onderzoeken, waaronder een verkennend bodemonderzoek en een stikstofberekening. De andere vier zijn standaard voor een BOPA.</p>",
+    [["bd-check-ov", "bdc1"]], { glyph: "task", text: "6 onderzoeken, waaronder bodem en stikstof" }),
+
+  pastConversation("h-hk1", "2026-11-18", ["hk"], "Klopt programma v3 met de afspraken?", "Klopt het woningbouwprogramma v3 van @Havenkwartier nog met de anterieure overeenkomst?",
+    "<p>Niet helemaal. De overeenkomst vraagt minstens 30% sociale huur. Programma v3 komt 11 woningen tekort.</p>",
+    [["hk-prog", null], ["hk-ao", "p42"]], { glyph: "alert", text: "11 sociale huurwoningen onder de afspraak" }),
+  pastConversation("h-hk2", "2026-10-06", ["hk"], "Mail van de gemeente over het programma", "Wat vraagt de gemeente in de mail over ruimte in het programma van @Havenkwartier?",
+    "<p>De gemeente wil weten hoe het programma zich verhoudt tot de woonvisie, en vraagt om een voorstel vóór de volgende stuurgroep.</p>",
+    [["hk-mail-gem", null]], { glyph: "mail", text: "Kern van de mail en wat je moet beantwoorden" }),
+  pastConversation("h-hk3", "2026-09-11", ["hk"], "Verslag stuurgroep 9 september", "Werk mijn aantekeningen van de stuurgroep van @Havenkwartier uit.",
+    "<p>Het verslag staat klaar volgens het format, met drie besluiten en vier acties.</p>",
+    [["hk-sg-sep", null], ["bd-format-sg", null]], { glyph: "doc", text: "Verslag met 3 besluiten en 4 acties" }),
+  pastConversation("h-hk4", "2025-05-20", ["hk"], "Afspraken in de concept-overeenkomst", "Welke afspraken staan er in de concept anterieure overeenkomst van @Havenkwartier?",
+    "<p>Veertien afspraken, waarvan drie met een termijn. De belangrijkste: minstens 30% sociale huur en een exploitatiebijdrage in twee termijnen.</p>",
+    [["hk-ao", null]], { glyph: "task", text: "14 afspraken, 3 met een termijn" }),
+
+  pastConversation("h-dk1", "2026-11-19", ["dk"], "Wat betekent de vertraging van het akoestisch rapport?", "Wat betekent het als het akoestisch rapport van @DeKade vier weken later komt?",
+    "<p>Het rapport is nodig voor de aanvraag van 22 januari. Zonder buffer in de planning komt die datum onder druk.</p>",
+    [["dk-mail-ak", null], ["dk-plan", null]], { glyph: "alert", text: "Aanvraag van 22 januari komt onder druk" }),
+  pastConversation("h-dk2", "2026-10-02", ["dk"], "Planning v7 nagelopen", "Loop planning v7 van @DeKade na op afhankelijkheden.",
+    "<p>Twee stappen hangen zonder buffer aan elkaar: het akoestisch rapport en de aanvraag omgevingsvergunning.</p>",
+    [["dk-plan", null]], { glyph: "cal", text: "2 afhankelijkheden zonder buffer" }),
+  pastConversation("h-dk3", "2026-09-15", ["dk"], "Wat moet nog langs de brandweer?", "Welke onderdelen van het VO van @DeKade moeten nog langs de brandweer?",
+    "<p>Het trappenhuis van blok B. De rest valt binnen de standaard voor de aanvraag.</p>",
+    [["bd-check-ov", null]], { glyph: "task", text: "Trappenhuis blok B vraagt advies" }),
+  pastConversation("h-dk4", "2026-08-04", ["dk"], "VO naast het programma van eisen", "Leg het VO van @DeKade naast het programma van eisen.",
+    "<p>Vier afwijkingen, waarvan één met een kostengevolg: de bergingen in blok A.</p>",
+    [["dk-plan", null]], { glyph: "check", text: "4 afwijkingen, 1 met kostengevolg" }),
+
+  pastConversation("h-mw1", "2026-11-10", ["mw"], "Wat vraagt de welstandsnota voor dorpsranden?", "Wat vraagt de nieuwe welstandsnota voor de dorpsrand bij @Molenweide?",
+    "<p>Andere eisen aan kapvorm en materiaal. De haalbaarheidsstudie rekent nog met de oude criteria.</p>",
+    [["kd-welstand", null], ["mw-haalb", null]], { glyph: "alert", text: "Eisen aan kapvorm en materiaal, studie nog niet bijgewerkt" }),
+  pastConversation("h-mw2", "2026-11-06", ["mw"], "Verslag haalbaarheidsoverleg", "Wat is er afgesproken in het haalbaarheidsoverleg van @Molenweide?",
+    "<p>Het bod aan de familie Verbeek volgt pas na de herziene haalbaarheidsstudie.</p>",
+    [["mw-hov", null]], { glyph: "task", text: "Bod pas na de herziene studie" }),
+  pastConversation("h-mw3", "2026-08-20", ["mw"], "Eerste verkenning van de kavel", "Wat kan er ongeveer op de kavel van @Molenweide?",
+    "<p>Uitgaande van de huidige regels ongeveer 64 grondgebonden woningen. Dat is het uitgangspunt voor de haalbaarheidsstudie.</p>",
+    [["mw-haalb", null]], { glyph: "check", text: "64 woningen als uitgangspunt" }),
+
+  pastConversation("h-x1", "2026-11-17", ["dk", "pz", "mw"], "Welke projecten raakt de nieuwe BENG-norm?", "Welke van onze projecten raakt de BENG-aanscherping?",
+    "<p>De Kade en Parkzijde moeten de milieuprestatie herrekenen. Molenweide zit nog vóór het ontwerp en kan de nieuwe norm direct meenemen.</p>",
+    [["kd-beng", null]], { glyph: "check", text: "De Kade en Parkzijde moeten herrekenen" }),
+  pastConversation("h-x2", "2026-11-10", ["dk", "pz"], "Risico's van De Kade en Parkzijde vergeleken", "Vergelijk de risico's van @DeKade en @Parkzijde.",
+    "<p>Bij allebei is de vergunningsdatum het grootste risico: bij De Kade door het akoestisch rapport, bij Parkzijde door het bodemonderzoek.</p>",
+    [["dk-plan", null], ["pz-plan", null]], { glyph: "grid", text: "Bij beide is de vergunningsdatum het grootste risico" }, { skill: "vergelijk" }),
+  pastConversation("h-x3", "2026-10-28", [], "Kwartaaloverzicht voor de directie", "Maak een kort overzicht van onze vier projecten voor de directie.",
+    "<p>Per project de fase, de eerstvolgende mijlpaal en het grootste risico, op één pagina.</p>",
+    [["dk-plan", null], ["pz-plan", null], ["hk-prog", null], ["mw-haalb", null]], { glyph: "doc", text: "Overzicht van één pagina" }),
+
+  pastConversation("h-d1", "2026-11-14", [], "Standaardclausules anterieure overeenkomst", "Welke clausules gebruiken we standaard in een anterieure overeenkomst?",
+    "<p>Zeven vaste clausules. Bij twee maak je per project een keuze: de verdeling van het kostenverhaal en de termijn voor de openbare ruimte.</p>",
+    [["bd-ao-std", null]], { glyph: "doc", text: "7 standaardclausules, 2 met een keuze" }, { scope: "dossier" }),
+  pastConversation("h-d2", "2026-10-21", [], "Wat hoort er in een stuurgroepverslag?", "Wat moet er in een stuurgroepverslag volgens ons format?",
+    "<p>Zes vaste onderdelen, met besluiten en acties altijd apart en met een eigenaar.</p>",
+    [["bd-format-sg", null]], { glyph: "doc", text: "6 vaste onderdelen" }, { scope: "dossier" }),
+  pastConversation("h-d3", "2026-09-30", [], "Wat kunnen we vooruitwerken?", "Welke stappen in ons procesmodel kunnen we vooruitwerken?",
+    "<p>Twaalf stappen kunnen eerder starten. De anterieure overeenkomst parallel aan het VO levert het meeste tijd op.</p>",
+    [["bd-werkwijze", null]], { glyph: "forward", text: "12 stappen, de anterieure overeenkomst levert het meest op" }, { scope: "dossier" }),
+);
+
+/* Projecthistorie: fases (nieuwste eerst), het besluit dat de fase opende en wat Vicki onthoudt */
+const projectHistory = {
+  pz: {
+    phases: [
+      { name: "Voorlopig ontwerp", from: "2026-08-28", gate: { title: "Haalbaarheidsbesluit", text: "De stuurgroep besloot door te gaan naar het VO", date: "2026-08-27" } },
+      { name: "Haalbaarheid", from: "2026-04-01" },
+    ],
+    memory: [
+      { level: "vast", text: "Parkzijde volgt de BOPA-route. De aanvraag staat op 2 maart.", date: "2026-10-15" },
+      { level: "vermoed", text: "De anterieure overeenkomst kan parallel aan het VO starten. Dat scheelt ongeveer 8 weken.", date: "2026-11-20" },
+      { level: "check", text: "Er is nog geen opdrachtbevestiging voor het bodemonderzoek.", date: "2026-11-13" },
+    ],
+  },
+  hk: {
+    phases: [
+      { name: "Omgevingsplanwijziging", from: "2026-06-01", gate: { title: "Principeverzoek akkoord", text: "De gemeente werkt mee aan de omgevingsplanwijziging", date: "2026-05-28" } },
+      { name: "Haalbaarheid en afspraken", from: "2025-03-01" },
+    ],
+    memory: [
+      { level: "vast", text: "Minstens 30% sociale huur, vastgelegd in de anterieure overeenkomst.", date: "2025-06-12" },
+      { level: "vermoed", text: "Met de nieuwe parkeernota zijn ongeveer 13 parkeerplaatsen minder nodig.", date: "2026-11-19" },
+      { level: "check", text: "Programma v3 heeft 11 sociale huurwoningen te weinig.", date: "2026-11-18" },
+    ],
+  },
+  dk: {
+    phases: [
+      { name: "Definitief ontwerp", from: "2026-10-06", gate: { title: "Ontwikkelbesluit", text: "Het VO is vastgesteld, door naar het DO", date: "2026-10-05" } },
+      { name: "Voorlopig ontwerp", from: "2026-07-27" },
+    ],
+    memory: [
+      { level: "vast", text: "Het akoestisch rapport komt vier weken later dan gepland.", date: "2026-11-19" },
+      { level: "vermoed", text: "Daardoor komt de aanvraag van 22 januari onder druk.", date: "2026-11-19" },
+      { level: "check", text: "Het brandweeradvies voor het trappenhuis van blok B heeft nog geen eigenaar.", date: "2026-11-18" },
+    ],
+  },
+  mw: {
+    phases: [
+      { name: "Haalbaarheid", from: "2026-09-15", gate: { title: "Initiatiebesluit", text: "Start van de haalbaarheidsstudie", date: "2026-09-14" } },
+      { name: "Initiatief", from: "2026-07-01" },
+    ],
+    memory: [
+      { level: "vast", text: "De haalbaarheidsstudie rekent nog met de oude welstandscriteria.", date: "2026-11-10" },
+      { level: "vermoed", text: "De gevraagde grondprijs ligt ongeveer 12% boven de referenties.", date: "2026-11-03" },
+      { level: "check", text: "Het bod aan de grondeigenaar wacht op de herziene studie.", date: "2026-11-06" },
+    ],
+  },
+};
