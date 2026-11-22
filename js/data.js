@@ -12,8 +12,8 @@ const projects = [
     name: "Havenkwartier",
     place: "Schiedam",
     homes: 212,
-    phase: "Bestemmingsplan",
-    next: "Indiening ontwerp-bestemmingsplan",
+    phase: "Omgevingsplanwijziging",
+    next: "Ontwerpbesluit omgevingsplan",
     nextDate: "15 jan",
     team: "Gemeente Schiedam, Studio Rietveld (stedenbouw)",
   },
@@ -63,7 +63,7 @@ const documents = {
       ["h", "Artikel 3 — Kostenverhaal"],
       [
         "p",
-        "3.1 Ontwikkelaar betaalt aan de gemeente een exploitatiebijdrage van € 1.240.000, te voldoen in twee termijnen. De eerste termijn van 50% vervalt op het moment dat het bestemmingsplan onherroepelijk is.",
+        "3.1 Ontwikkelaar betaalt aan de gemeente een exploitatiebijdrage van € 1.240.000, te voldoen in twee termijnen. De eerste termijn van 50% vervalt op het moment dat de omgevingsplanwijziging onherroepelijk is.",
       ],
       ["h", "Artikel 4 — Woningbouwprogramma"],
       [
@@ -149,11 +149,11 @@ const documents = {
     date: "10 sep 2026",
     author: "Stadsas",
     summary:
-      "Voortgang ruimtelijke onderbouwing, planning bestemmingsplan bevestigd op 15 januari.",
+      "Voortgang ruimtelijke onderbouwing, planning omgevingsplanwijziging bevestigd op 15 januari.",
     body: [
       [
         "p",
-        "Besluit: de indiening van het ontwerp-bestemmingsplan blijft gepland op 15 januari 2027.",
+        "Besluit: het ontwerpbesluit omgevingsplan gaat zoals gepland op 15 januari 2027 ter inzage.",
       ],
       [
         "p",
@@ -246,6 +246,11 @@ const documents = {
         "Indiening aanvraag omgevingsvergunning: 2 maart 2027. Benodigd: DO, constructief ontwerp, verkennend bodemonderzoek, stikstofberekening.",
         "pzp1",
       ],
+      [
+        "mark",
+        "Route: omgevingsvergunning met een buitenplanse omgevingsplanactiviteit (BOPA). Onderhandeling anterieure overeenkomst start na de VO-raming en vastgoedexploitatie, half januari.",
+        "pzp2",
+      ],
       ["p", "Het DO wordt op 15 februari 2027 vastgesteld in het bouwteam."],
     ],
   },
@@ -326,18 +331,37 @@ const documents = {
     project: null,
     dossier: "bedrijf",
     folder: "Werkwijzen",
-    title: "Werkwijze ontwikkelproces",
-    kind: "Werkwijze",
-    date: "jan 2026",
+    title: "Procesmodel vastgoedontwikkeling",
+    kind: "Procesmodel",
+    date: "21 nov 2026",
     author: "Stadsas",
     summary:
-      "Hoe Stadsas een project doorloopt, van acquisitie tot oplevering, met beslismomenten per fase.",
+      "Ons ontwikkelproces van initiatief tot exploitatie: 7 fasen, 5 besluitmomenten en 109 stappen, met per stap wat hard nodig is, wat al op een concept kan en wat elkaar beïnvloedt. Vicki gebruikt dit om te zien welke verbanden er zijn.",
     body: [
-      ["p", "Elke fase eindigt met een go/no-go in het investeringscomité."],
+      ["p", "Elke fase eindigt met een besluit (gate) van directie of investeringscommissie. Per stap legt het model vast welke stukken nodig zijn om te starten en welke pas om af te ronden."],
       [
-        "p",
-        "Afwijkingen van gemaakte afspraken met overheden worden binnen twee weken gemeld aan de directie.",
+        "table",
+        [
+          ["Fase", "Besluit aan het eind"],
+          ["1 Initiatief", "Initiatiebesluit"],
+          ["2 Haalbaarheid", "Haalbaarheidsbesluit"],
+          ["3 Planvorming", "Ontwikkelbesluit"],
+          ["4 Ontwerp, vergunning & contractering", "Investeringsbesluit (start bouw)"],
+          ["5 Realisatie", "–"],
+          ["6 Oplevering & nazorg", "Projectafsluiting"],
+          ["7 Exploitatie (optioneel)", "–"],
+        ],
+        "pm-fasen",
       ],
+      ["h", "Hard, concept of pas bij afronding"],
+      ["p", "Hard betekent: de definitieve versie is nodig om te starten. Concept: een tussenversie volstaat, je kunt vooruitwerken. Afronding: niet nodig om te starten, wel om af te ronden."],
+      ["mark", "Aanvraag omgevingsvergunning: het brandveiligheidsadvies is een harde voorwaarde. Vooroverleg met de brandweer kan al op het VO; late brandweereisen dwingen vaak tot herontwerp van trappenhuizen of gevels.", "pm-brand"],
+      ["mark", "Definitief ontwerp: vraagt definitieve onderzoeksrapporten (geluid, bodem, ecologie). Ook de aanvraag omgevingsvergunning heeft ze hard nodig. Rapporten verlopen: actualiseer ze vóór indiening als de procedure lang duurt.", "pm-onderzoek"],
+      ["mark", "Programma en exploitatie sturen elkaar: de programmamix bepaalt het rendement en andersom. De anterieure overeenkomst legt programma en kostenverhaal vast en is nodig voordat de omgevingsplanwijziging ter inzage gaat.", "pm-programma"],
+      ["mark", "Mobiliteits- en parkeerplan: start op het VO, zodat de parkeeroplossing in het DO landt. Risico: de gemeente accepteert een lagere parkeernorm niet.", "pm-parkeren"],
+      ["mark", "Gemeentelijke kaders, zoals welstandsnota en woonvisie, zijn harde input voor programma en haalbaarheidsberekening. Die berekening is de basis voor het bod en de intentieovereenkomst met de grondeigenaar.", "pm-kaders"],
+      ["h", "Vooruitwerken"],
+      ["mark", "Anterieure overeenkomst: de onderhandeling kan parallel aan het VO starten, zonder te wachten op de definitieve VO-raming en exploitatie. Risico: toezeggingen over het programma komen terug als het VO nog wijzigt.", "pm-ao"],
     ],
   },
   "bd-ao-std": {
@@ -456,7 +480,7 @@ const dossierGroups = {
   bedrijf: {
     name: "Bedrijfsdossier",
     intro:
-      "Hoe wij werken: werkwijzen, formats, checklists en standaarddocumenten. Rise gebruikt dit als referentie bij projectvragen.",
+      "Hoe wij werken: werkwijzen, formats, checklists en standaarddocumenten. Vicki gebruikt dit als referentie bij projectvragen.",
   },
   kaders: {
     name: "Beleidsdossier",
@@ -473,10 +497,11 @@ const signals = [
     title: "11 sociale huurwoningen onder de afspraak",
     certaintyScope: "Afwijking van de afspraak",
     hook: "11 woningen minder dan afgesproken",
-    milestone: "Indiening ontwerp-bestemmingsplan",
+    milestone: "Ontwerpbesluit omgevingsplan",
     what: "Programma v3 bevat 53 sociale huurwoningen. Afgesproken is minimaal 64.",
-    why: "Voor indiening van het ontwerp-bestemmingsplan is akkoord van de gemeente nodig.",
+    why: "Het programma ligt vast in de anterieure overeenkomst. Zonder akkoord van de gemeente op de afwijking kan het ontwerpbesluit omgevingsplan niet ter inzage.",
     claims: [
+      ["vast", "Volgens ons procesmodel legt de anterieure overeenkomst het programma vast. Wijkt het programma af, dan moeten de exploitatie en de overeenkomst mee voordat de omgevingsplanwijziging ter inzage gaat.", "bd-werkwijze"],
       ["vast", "De overeenkomst noemt minimaal 30% sociale huur.", "hk-ao"],
       ["vast", "Programma v3 komt uit op 25%.", "hk-prog"],
       [
@@ -486,16 +511,17 @@ const signals = [
       ],
       [
         "vermoed",
-        "Zonder akkoord kan de gemeente het ontwerp-bestemmingsplan aanhouden.",
+        "Zonder akkoord kan de gemeente het ontwerpbesluit omgevingsplan aanhouden.",
         null,
       ],
     ],
     consequence: [
       ["Programma v3", "nu"],
       ["Stuurgroep met gemeente", "2 dec"],
-      ["Ontwerp-bestemmingsplan", "15 jan"],
+      ["Ontwerpbesluit omgevingsplan", "15 jan"],
     ],
     sources: [
+      ["bd-werkwijze", "pm-programma"],
       ["hk-ao", "p42"],
       ["hk-prog", "p-tab"],
       ["hk-mail-gem", "pm1"],
@@ -525,6 +551,7 @@ const signals = [
     what: "De adviseur meldt 8 januari als opleverdatum. De planning rekent met 11 december.",
     why: "Het ontwerp van de spoorgevel wacht op het rapport. De vergunningaanvraag kan daardoor later worden ingediend.",
     claims: [
+      ["vast", "Volgens ons procesmodel kan het DO pas af met definitieve onderzoeksrapporten. Een concept is genoeg om te ontwerpen, niet om af te ronden.", "bd-werkwijze"],
       [
         "vast",
         "Het rapport komt op 8 januari (mail van 19 november).",
@@ -552,6 +579,7 @@ const signals = [
       ["Aanvraag omgevingsvergunning", "12 feb"],
     ],
     sources: [
+      ["bd-werkwijze", "pm-onderzoek"],
       ["dk-mail-ak", "pa1"],
       ["dk-plan", "pp1"],
       ["dk-ot-okt", null],
@@ -583,6 +611,7 @@ const signals = [
     what: "De offerte verloopt op 12 december. In het dossier staat nog geen opdrachtbevestiging.",
     why: "Het onderzoek duurt circa zeven weken. Om de aanvraag van 2 maart te halen, moet de opdracht rond 5 januari uitstaan.",
     claims: [
+      ["vast", "Volgens ons procesmodel heeft de aanvraag omgevingsvergunning definitieve onderzoeksrapporten nodig, dus ook het bodemonderzoek.", "bd-werkwijze"],
       [
         "vast",
         "De aanvraag van 2 maart vraagt een verkennend bodemonderzoek.",
@@ -611,6 +640,7 @@ const signals = [
       ["Aanvraag omgevingsvergunning", "2 mrt"],
     ],
     sources: [
+      ["bd-werkwijze", "pm-onderzoek"],
       ["pz-plan", "pzp1"],
       ["pz-offerte", "pzo1"],
       ["pz-bt6", "pzb1"],
@@ -630,16 +660,47 @@ const signals = [
     ],
   },
   {
+    id: "s-pz2",
+    project: "pz",
+    level: "vermoed",
+    title: "Anterieure overeenkomst kan nu al starten",
+    certaintyScope: "Tijdwinst door vooruitwerken",
+    hook: "Scheelt ongeveer 8 weken",
+    milestone: "Aanvraag omgevingsvergunning",
+    what: "De planning start de onderhandeling over de anterieure overeenkomst pas half januari, na de VO-raming en exploitatie.",
+    why: "Bij een BOPA wil de gemeente het kostenverhaal geregeld hebben voordat de vergunning wordt verleend. Parallel aan het VO starten scheelt ongeveer 8 weken.",
+    claims: [
+      ["vast", "Parkzijde volgt de BOPA-route. De onderhandeling staat gepland na de VO-raming, half januari.", "pz-plan"],
+      ["vast", "Volgens ons procesmodel kan de onderhandeling al parallel aan het VO starten.", "bd-werkwijze"],
+      ["vermoed", "Rekenend met de middenwaarden uit het model (rest VO 4 weken, VO-raming 2,5, exploitatie 1,5) scheelt dat ongeveer 8 weken.", null],
+      ["check", "Risico: toezeggingen over het programma komen terug als het VO nog wijzigt. Spreek af dat het programma voorlopig is tot de VO-raming.", null],
+    ],
+    consequence: [
+      ["Startgesprek gemeente", "nu"],
+      ["Concept anterieure overeenkomst", "± jan"],
+      ["Vergunningverlening zonder wachten op kostenverhaal", "na 2 mrt"],
+    ],
+    sources: [
+      ["pz-plan", "pzp2"],
+      ["bd-werkwijze", "pm-ao"],
+    ],
+    steps: [
+      { label: "Maak een conceptmail aan de gemeente", intent: "draft-pz-ao", primary: !0 },
+      { label: "Reken de tijdwinst door", intent: "vooruitwerken-pz" },
+    ],
+  },
+  {
     id: "s-hk2",
     project: "hk",
     level: "vermoed",
     title: "Mogelijk zijn minder parkeerplaatsen nodig",
     certaintyScope: "Of parkeerzone A hier geldt",
     hook: "Mogelijk 13 parkeerplaatsen minder nodig",
-    milestone: "Indiening ontwerp-bestemmingsplan",
+    milestone: "Ontwerpbesluit omgevingsplan",
     what: "De nieuwe parkeernota verlaagt de norm voor middenhuur in zone A van 0,8 naar 0,6. Het programma rekent nog met de oude norm.",
     why: "Als de locatie in zone A valt, zijn mogelijk 13 parkeerplaatsen minder nodig.",
     claims: [
+      ["vast", "Volgens ons procesmodel bepaalt het mobiliteitsplan hoeveel parkeerplaatsen het ontwerp moet bevatten. Een lagere norm vraagt instemming van de gemeente.", "bd-werkwijze"],
       [
         "vast",
         "De parkeernota 2026 hanteert 0,6 voor middenhuur in zone A.",
@@ -654,9 +715,10 @@ const signals = [
     consequence: [
       ["Parkeernota", "1 okt"],
       ["Programma v4", "?"],
-      ["Ontwerp-bestemmingsplan", "15 jan"],
+      ["Ontwerpbesluit omgevingsplan", "15 jan"],
     ],
     sources: [
+      ["bd-werkwijze", "pm-parkeren"],
       ["kd-parkeren", "kdp1"],
       ["hk-prog", "p-tab"],
     ],
@@ -673,6 +735,7 @@ const signals = [
     what: "Het advies voor het trappenhuis van blok B staat nog niet in het dossier.",
     why: "De plattegrond van blok B kan nog wijzigen vóór het definitief ontwerp.",
     claims: [
+      ["vast", "Volgens ons procesmodel is het brandweeradvies een harde voorwaarde voor de aanvraag omgevingsvergunning. Late brandweereisen dwingen vaak tot herontwerp van trappenhuizen.", "bd-werkwijze"],
       ["vast", "De actie staat in het verslag van 30 oktober.", "dk-ot-okt"],
       [
         "check",
@@ -684,7 +747,8 @@ const signals = [
       ["Brandweeradvies", "?"],
       ["DO gereed", "8 jan"],
     ],
-    sources: [["dk-ot-okt", null]],
+    sources: [
+      ["bd-werkwijze", "pm-brand"],["dk-ot-okt", null]],
     steps: [
       {
         label: "Maak een agendapunt voor het ontwerpteam",
@@ -704,6 +768,7 @@ const signals = [
     what: "De haalbaarheidsstudie verwerkt de nieuwe eisen voor dorpsranden nog niet.",
     why: "Andere eisen aan kapvorm en materiaal kunnen de bouwkosten en de afgesproken grondprijs beïnvloeden.",
     claims: [
+      ["vast", "Volgens ons procesmodel is de welstandsnota harde input voor de haalbaarheidsberekening, en die is de basis voor het bod aan de grondeigenaar.", "bd-werkwijze"],
       [
         "vast",
         "De studie zegt zelf dat de nota nog niet is verwerkt.",
@@ -713,10 +778,11 @@ const signals = [
     ],
     consequence: [
       ["Welstandsnota", "nov"],
-      ["Haalbaarheidsstudie", "dec"],
+      ["Haalbaarheidsstudie", "27 nov"],
       ["Intentieovereenkomst", "12 feb"],
     ],
     sources: [
+      ["bd-werkwijze", "pm-kaders"],
       ["mw-haalb", null],
       ["kd-welstand", null],
     ],
@@ -729,8 +795,9 @@ const schedules = {
     version: "Planning v7 · laatst aangepast 2 okt",
     rows: [
       {
-        name: "Schetsontwerp",
-        start: [8, 1, 2026],
+        name: "Voorlopig ontwerp",
+        who: "Kroon Architecten",
+        start: [6, 27, 2026],
         end: [9, 2, 2026],
         done: !0,
       },
@@ -784,7 +851,8 @@ const schedules = {
       },
       {
         name: "Ruimtelijke onderbouwing",
-        start: [9, 15, 2026],
+        who: "Studio Rietveld",
+        start: [9, 22, 2026],
         end: [11, 18, 2026],
       },
       {
@@ -792,16 +860,16 @@ const schedules = {
         milestone: [11, 2, 2026],
       },
       {
-        name: "Indiening ontwerp-bestemmingsplan",
+        name: "Ontwerpbesluit omgevingsplan",
         milestone: [0, 15, 2027],
         key: !0,
         dep: "Programma + onderbouwing",
       },
       {
-        name: "Ter inzage",
-        start: [1, 1, 2027],
-        end: [2, 15, 2027],
-        dep: "Indiening",
+        name: "Ter inzage (6 weken)",
+        start: [0, 28, 2027],
+        end: [2, 11, 2027],
+        dep: "Ontwerpbesluit omgevingsplan",
       },
     ],
   },
@@ -817,8 +885,31 @@ const schedules = {
       { name: "Bouwteam #7", milestone: [10, 25, 2026] },
       {
         name: "Verkennend bodemonderzoek",
+        who: "Geolab Midden (offerte, nog geen opdracht)",
+        start: [0, 5, 2027],
+        end: [1, 23, 2027],
+        signal: "s-pz",
       },
-      { name: "Definitief ontwerp", start: [11, 15, 2026], end: [1, 15, 2027] },
+      {
+        name: "Definitief ontwerp",
+        who: "Atelier Noord",
+        start: [11, 15, 2026],
+        end: [1, 15, 2027],
+        dep: "VO, start vooruitlopend op het ontwikkelbesluit",
+      },
+      {
+        name: "Ontwikkelbesluit",
+        milestone: [0, 22, 2027],
+        dep: "VO-raming en vastgoedexploitatie",
+      },
+      {
+        name: "Anterieure overeenkomst",
+        who: "Gemeente Amersfoort",
+        start: [0, 15, 2027],
+        end: [4, 14, 2027],
+        dep: "VO-raming en vastgoedexploitatie",
+        signal: "s-pz2",
+      },
       {
         name: "Aanvraag omgevingsvergunning",
         milestone: [2, 2, 2027],
@@ -832,11 +923,13 @@ const schedules = {
     rows: [
       {
         name: "Haalbaarheidsstudie",
+        who: "Stadsas",
         start: [9, 1, 2026],
-        end: [11, 20, 2026],
+        end: [10, 27, 2026],
       },
-      { name: "Gesprek grondeigenaar", milestone: [11, 4, 2026] },
-      { name: "Intentieovereenkomst", milestone: [1, 12, 2027], key: !0 },
+      { name: "Gesprek grondeigenaar", milestone: [11, 4, 2026], dep: "Haalbaarheidsstudie" },
+      { name: "Intentieovereenkomst", milestone: [1, 12, 2027], key: !0, dep: "Bod grondeigenaar" },
+      { name: "Haalbaarheidsbesluit", milestone: [2, 5, 2027], dep: "Intentieovereenkomst en haalbaarheidsrapport" },
     ],
   },
 };
@@ -923,7 +1016,7 @@ const meetings = [
         "s-hk",
       ],
       [
-        "Planning bestemmingsplan",
+        "Planning omgevingsplanwijziging",
         "Indiening blijft 15 januari, afhankelijk van het programma.",
         "hk-sg-sep",
       ],
@@ -970,7 +1063,7 @@ const meetings = [
     time: "14:00",
     place: "Stadskantoor",
     people: ["Ilse Bakker", "Studio Rietveld"],
-    decisions: ["Indiening ontwerp-bestemmingsplan blijft 15 januari."],
+    decisions: ["Ontwerpbesluit omgevingsplan blijft 15 januari."],
     actions: [["Stadsas", "Programma v3 aanleveren", "klaar", "2026-12-02"]],
     doc: "hk-sg-sep",
   },

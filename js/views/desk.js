@@ -40,97 +40,317 @@ function deskNumbers() {
   return { open, extraSignals, actions, dueThisWeek, late, upcoming, thisWeek, portfolio, pressured };
 }
 
-function renderStat({ label, value, note, href, alert = false, glyph, attrs = "" }) {
-  return `<a class="stat ${alert ? "stat--alert" : ""}" href="${href}" ${attrs}>
-    <span>${icon(glyph)}${label}</span><b>${value}</b><small>${note}</small>${icon("arrow", "stat-go")}
+/* ---------- Overzicht: briefing, één ding eerst, wat klaarligt ---------- */
+const deskDaysLeft = (deadline) => (deadline ? planDaysBetween(demoToday, deadline) : null);
+const lowerFirst = (text) => text.charAt(0).toLowerCase() + text.slice(1);
+const deskWeekdayLong = new Intl.DateTimeFormat("nl-NL", { weekday: "long", timeZone: "UTC" });
+
+function deskCountLabel(days) {
+  if (days == null) return "geen deadline";
+  if (days < 0) return Math.abs(days) === 1 ? "dag te laat" : "dagen te laat";
+  if (days === 0) return "vandaag";
+  return days === 1 ? "dag" : "dagen";
+}
+
+/* Wat voor soort actie stelt Vicki voor? Bepaalt icoon, woord en knop. */
+function signalActionKind(step) {
+  const intent = step?.intent ?? "";
+  if (intent.startsWith("meeting")) return { kind: "agenda", glyph: "cal", noun: "Agendapunt", verb: "Zet op de agenda" };
+  if (intent.startsWith("draft")) return { kind: "mail", glyph: "send", noun: "Conceptmail", verb: "Bekijk concept" };
+  if (intent.startsWith("vooruitwerken")) return { kind: "planning", glyph: "forward", noun: "Vooruitwerken", verb: "Reken de tijdwinst door" };
+  if (intent === "planning") return { kind: "planning", glyph: "gantt", noun: "Planning", verb: "Reken door" };
+  return { kind: "check", glyph: "search", noun: "Controle", verb: "Laat Vicki controleren" };
+}
+
+function nextProjectMeeting(projectId) {
+  return meetings.filter((m) => m.project === projectId && m.date >= demoTodayIso).sort((a, b) => a.date.localeCompare(b.date))[0];
+}
+
+function signalSteps(signal) {
+  return signal.steps.map((step, index) => ({ step, index })).filter(({ step }) => !step.go)
+    .sort((a, b) => Number(Boolean(b.step.primary)) - Number(Boolean(a.step.primary)));
+}
+
+/* Rechterhelft van een signaal: wat Rise voorstelt te doen */
+function renderSignalAction(signal) {
+  const [main, ...more] = signalSteps(signal);
+  if (!main) return "";
+  const kind = signalActionKind(main.step);
+  const meeting = kind.kind === "agenda" ? nextProjectMeeting(signal.project) : null;
+  const placed = state.onAgenda?.[signal.id];
+  return `<div class="sa sa--${kind.kind} ${placed ? "is-done" : ""}">
+    <p class="sa-kind">${vickiIcon()}<span>Vicki stelt voor · ${kind.noun}</span></p>
+    <p class="sa-what">${escapeHtml(main.step.label)}</p>
+    ${meeting ? `<p class="sa-where">${escapeHtml(meeting.title)} · ${deskWeekday.format(new Date(meeting.date + "T00:00:00Z")).replace(".", "")} ${formatIsoDate(meeting.date)}</p>` : ""}
+    ${placed
+      ? `<p class="sa-done">${icon("check")}Op de agenda gezet</p><a class="btn btn--link btn--sm" href="${pageHref({ view: "project", projectId: signal.project, section: "vergaderingen", meetingId: placed })}" data-action="action-meeting" data-id="${placed}">Bekijk agenda ${icon("arrow")}</a>`
+      : `<button type="button" class="btn sa-go" data-action="signal-step" data-id="${signal.id}" data-i="${main.index}">${kind.verb}</button>`}
+    ${more.length && !placed ? `<details class="sa-more"><summary>Nog ${more.length} ${more.length === 1 ? "voorstel" : "voorstellen"}</summary>${more.map(({ step, index }) => `<button type="button" class="sa-alt" data-action="signal-step" data-id="${signal.id}" data-i="${index}">${icon(signalActionKind(step).glyph)}${escapeHtml(step.label)}</button>`).join("")}</details>` : ""}
+  </div>`;
+}
+
+function renderFirst(signal) {
+  const deadline = signalActions[signal.id]?.by;
+  const days = deskDaysLeft(deadline);
+  const { what, why } = signalDescription(signal);
+  const title = escapeHtml(signal.title);
+  return `<article class="first" aria-labelledby="first-title-${signal.id}">
+    <div class="first-signal">
+      <p class="first-meta">
+        <span class="first-count" data-urgency="${signalUrgency(deadline)}"><b>${days == null ? "–" : Math.abs(days)}</b> ${deskCountLabel(days)}</span>
+        <span>${escapeHtml(findProject(signal.project).name)}</span>${signalLinkChip(signal)}
+      </p>
+      <h2 id="first-title-${signal.id}">${title}</h2>
+      <p class="first-what">${escapeHtml(what)}</p>
+      <p class="first-why">${escapeHtml(why)}</p>
+      <div class="first-links">
+        <button type="button" id="overview-${signal.id}" class="btn btn--link btn--sm" data-action="open-signal" data-id="${signal.id}" aria-label="Onderbouwing voor ${title}">Onderbouwing</button>
+        <button type="button" class="vicki-ask" data-action="discuss-signal" data-id="${signal.id}" aria-label="Bespreek met Vicki" title="Bespreek met Vicki">${vickiIcon()}</button>
+        ${state.triage ? "" : renderVerdict(signal)}
+      </div>
+    </div>
+    ${renderSignalAction(signal)}
+  </article>`;
+}
+
+/* Eerst dit als slider: het belangrijkste staat vooraan, de rest schuift erachter. */
+const triageLabels = { ok: "Opgepakt", "Klopt niet": "Klopt niet", "Al geregeld": "Al geregeld", "Ga ik niets mee doen": "Laat je liggen" };
+
+function renderTriageBar(list) {
+  const t = state.triage;
+  const done = list.filter((signal) => t.verdicts[signal.id]).length;
+  if (done === list.length) {
+    const count = (match) => list.filter((signal) => match(t.verdicts[signal.id])).length;
+    const parts = [
+      [count((v) => v === "ok"), "pak je op"],
+      [count((v) => v === "Klopt niet"), "klopte niet"],
+      [count((v) => v === "Al geregeld"), "al geregeld"],
+      [count((v) => v === "Ga ik niets mee doen"), "laat je liggen"],
+    ].filter(([n]) => n).map(([n, text]) => `${n} ${text}`);
+    return `<div class="triage-bar is-done" role="status">
+      <img class="brief-vicki" src="${localPath("assets/vicki.svg")}" width="26" height="26" alt="">
+      <p><b>Klaar, alles doorlopen.</b> ${parts.join(" · ")}. Ik neem je oordeel mee in wat ik je voortaan laat zien.</p>
+      <button type="button" class="btn btn--pill" data-action="triage-stop">Sluit</button>
+    </div>`;
+  }
+  const current = list[Math.min(state.deskSlide || 0, list.length - 1)];
+  const verdict = t.verdicts[current.id];
+  return `<div class="triage-bar">
+    <img class="brief-vicki" src="${localPath("assets/vicki.svg")}" width="26" height="26" alt="">
+    <p>${verdict ? `Gemarkeerd als <b>${escapeHtml(triageLabels[verdict] ?? verdict)}</b>. Wil je het anders?` : "Klopt dit signaal?"}</p>
+    <div class="triage-choices">
+      <button type="button" class="triage-btn is-ok ${verdict === "ok" ? "is-on" : ""}" data-action="triage" data-v="ok">${icon("check")}Klopt, pak ik op</button>
+      <button type="button" class="triage-btn ${verdict === "Klopt niet" ? "is-on" : ""}" data-action="triage" data-v="Klopt niet">Klopt niet</button>
+      <button type="button" class="triage-btn ${verdict === "Ga ik niets mee doen" ? "is-on" : ""}" data-action="triage" data-v="Ga ik niets mee doen">Laat liggen</button>
+    </div>
+    <button type="button" class="triage-stop" data-action="triage-stop" aria-label="Stop met doorlopen" title="Stop">${icon("x")}</button>
+  </div>`;
+}
+
+function renderFirstSlider(list, total) {
+  const n = list.length;
+  const at = Math.min(state.deskSlide || 0, n - 1);
+  const label = state.triage ? `Samen doorlopen` : at === 0 ? "Eerst dit" : "Daarna";
+  return `<section class="slider ${state.triage ? "is-triage" : ""}" aria-roledescription="carrousel" aria-label="Signalen, belangrijkste eerst">
+    <header class="slider-head">
+      <p class="desk-label ${at && !state.triage ? "is-later" : ""}" ${state.triage ? "" : "data-slide-label"}>${label}</p>
+      <div class="slider-nav">
+        ${!state.triage && n > 1 ? `<button type="button" class="slider-walk" data-action="triage-start" title="Loop de signalen samen met Vicki door">${vickiIcon()}<span>Samen doorlopen</span></button>` : ""}
+        ${n > 1 ? `<span class="slider-pos" aria-hidden="true"><b data-slide-pos>${at + 1}</b>/${n}</span>
+        <span class="slider-dots">${list.map((s, i) => `<button type="button" class="slider-dot ${i === at ? "is-on" : ""}" data-slide-to="${i}" aria-label="Signaal ${i + 1} van ${n}" ${i === at ? 'aria-current="true"' : ""}></button>`).join("")}</span>
+        <button type="button" class="icon-btn icon-btn--soft slider-arrow" data-slide-dir="-1" aria-label="Vorig signaal" ${at === 0 ? "disabled" : ""}>${icon("back")}</button>
+        <button type="button" class="icon-btn icon-btn--soft slider-arrow" data-slide-dir="1" aria-label="Volgend signaal" ${at === n - 1 ? "disabled" : ""}>${icon("chev")}</button>` : ""}
+        ${total > n ? `<a class="desk-more" data-action="tab" data-view="projecten" href="${pageHref({ view: "projecten" })}" aria-label="Alle ${total} signalen">Alle ${total}${icon("chev")}</a>` : ""}
+      </div>
+    </header>
+    <div class="slider-track" tabindex="0" data-slider>
+      ${list.map((signal, i) => { const v = state.triage?.verdicts[signal.id]; return `<div class="slide ${i === at ? "is-active" : ""} ${v ? "is-judged" : ""}" data-verdict="${v ?? ""}" role="group" aria-roledescription="dia" aria-label="${i + 1} van ${n}" ${i === at ? "" : "inert"}>${v ? `<span class="slide-stamp">${v === "ok" ? icon("check") : ""}${escapeHtml(triageLabels[v] ?? v)}</span>` : ""}${renderFirst(signal)}</div>`; }).join("")}
+    </div>
+    ${state.triage ? renderTriageBar(list) : ""}
+  </section>`;
+}
+
+function syncSlider(track) {
+  const slides = [...track.children];
+  if (!slides.length) return;
+  const max = track.scrollWidth - track.clientWidth;
+  let at = 0, best = Infinity;
+  slides.forEach((slide, i) => {
+    const target = Math.min(slide.offsetLeft - slides[0].offsetLeft, max);
+    const d = Math.abs(target - track.scrollLeft);
+    if (d < best) { best = d; at = i; }
+  });
+  if (state.deskSlide === at && track.dataset.synced) return;
+  track.dataset.synced = "1";
+  state.deskSlide = at;
+  if (state.triage) return render();
+  const root = track.closest(".slider");
+  slides.forEach((slide, i) => { slide.classList.toggle("is-active", i === at); slide.toggleAttribute("inert", i !== at); });
+  root.querySelectorAll("[data-slide-to]").forEach((dot, i) => { dot.classList.toggle("is-on", i === at); dot.toggleAttribute("aria-current", i === at); });
+  const pos = root.querySelector("[data-slide-pos]"); if (pos) pos.textContent = at + 1;
+  const label = root.querySelector("[data-slide-label]");
+  if (label) { label.textContent = at === 0 ? "Eerst dit" : "Daarna"; label.classList.toggle("is-later", at > 0); }
+  const [prev, next] = root.querySelectorAll("[data-slide-dir]");
+  if (prev) prev.disabled = at === 0;
+  if (next) next.disabled = at === slides.length - 1;
+}
+
+function slideTo(track, index) {
+  const slides = [...track.children];
+  const slide = slides[Math.max(0, Math.min(index, slides.length - 1))];
+  if (!slide) return;
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  track.scrollTo({ left: slide.offsetLeft - slides[0].offsetLeft, behavior: reduce ? "auto" : "smooth" });
+}
+
+document.addEventListener("scroll", (event) => {
+  if (event.target instanceof Element && event.target.matches("[data-slider]")) syncSlider(event.target);
+}, true);
+
+document.addEventListener("click", (event) => {
+  const control = event.target.closest("[data-slide-to], [data-slide-dir]");
+  const peek = !control && event.target.closest(".slide:not(.is-active)");
+  if (!control && !peek) return;
+  const root = (control || peek).closest(".slider");
+  const track = root?.querySelector("[data-slider]");
+  if (!track) return;
+  event.preventDefault();
+  event.stopPropagation();
+  if (peek) return slideTo(track, [...track.children].indexOf(peek));
+  if (control.dataset.slideTo != null) return slideTo(track, Number(control.dataset.slideTo));
+  slideTo(track, (state.deskSlide || 0) + Number(control.dataset.slideDir));
+}, true);
+
+function renderPrepared(meeting) {
+  const date = new Date(meeting.date + "T00:00:00Z");
+  const agenda = agendaOf(meeting);
+  const adopted = agenda.stage === "sent";
+  const count = agenda.items.length + 3;
+  const route = { view: "project", projectId: meeting.project, section: "vergaderingen", meetingId: meeting.id };
+  return `<a class="prep" href="${pageHref(route)}" data-action="action-meeting" data-id="${meeting.id}" title="${adopted ? "Agenda verstuurd" : agenda.stage === "final" ? "Agenda definitief, nog niet verstuurd" : `Concept-agenda met ${count} punten`}">
+    <span class="prep-date"><small>${deskWeekday.format(date).replace(".", "")}</small><b>${date.getUTCDate()}</b></span>
+    <span class="prep-body"><b>${escapeHtml(meeting.title)}</b><em>${escapeHtml(findProject(meeting.project).name)}</em></span>
+    <span class="prep-state ${adopted ? "is-done" : ""}" aria-hidden="true">${adopted ? icon("check") : `<i>${count}</i>`}</span>
   </a>`;
 }
 
-function renderAgendaItem(meeting) {
-  const date = new Date(meeting.date + "T00:00:00Z");
-  const route = { view: "project", projectId: meeting.project, section: "vergaderingen", meetingId: meeting.id };
-  return `<a class="agenda-item" href="${pageHref(route)}" data-action="action-meeting" data-id="${meeting.id}">
-    <span class="agenda-date"><small>${deskWeekday.format(date).replace(".", "")}</small><b>${date.getUTCDate()}</b></span>
-    <span><b class="t">${escapeHtml(meeting.title)}</b><em>${escapeHtml(findProject(meeting.project).name)} · ${meeting.time ?? ""}${meeting.place ? " · " + escapeHtml(meeting.place) : ""}</em></span>
-  </a>`;
+/* Signaalregel: links het signaal, rechts de voorgestelde actie */
+function renderSignalLine(signal) {
+  const deadline = signalActions[signal.id]?.by;
+  const days = deskDaysLeft(deadline);
+  const [main] = signalSteps(signal);
+  const kind = main ? signalActionKind(main.step) : null;
+  const placed = state.onAgenda?.[signal.id];
+  return `<li class="line">
+    <button type="button" class="line-signal" data-action="open-signal" data-id="${signal.id}" id="overview-${signal.id}">
+      <span class="line-count" data-urgency="${signalUrgency(deadline)}"><b>${days == null ? "–" : Math.abs(days)}</b><small>${deskCountLabel(days)}</small></span>
+      <span class="line-body"><b>${escapeHtml(signal.title)}</b><em><span class="mini-cert cert--${signal.level}"></span>${escapeHtml(findProject(signal.project).name)} · ${certaintyLabels[signal.level]}</em></span>
+    </button>
+    ${main ? placed
+      ? `<span class="line-action is-done">${icon("check")}<span>Op de agenda</span></span>`
+      : `<button type="button" class="line-action" data-action="signal-step" data-id="${signal.id}" data-i="${main.index}" title="${escapeHtml(kind.verb)}">${icon(kind.glyph)}<span>${escapeHtml(main.step.label)}</span><i class="line-go">${icon("chev")}</i></button>` : ""}
+  </li>`;
+}
+
+/* Vooruit: mijlpalen en signaaldeadlines per project, komende vier maanden */
+function renderForward() {
+  const start = Date.parse(demoTodayIso + "T00:00:00Z");
+  const span = 120 * dayMs;
+  const pos = (date) => Math.max(0, Math.min(100, ((planDateTime(date) - start) / span) * 100));
+  const inRange = (date) => planDateTime(date) >= start && planDateTime(date) <= start + span;
+  const months = [];
+  for (let i = 0; i < 5; i += 1) {
+    const d = new Date(start); d.setUTCDate(1); d.setUTCMonth(d.getUTCMonth() + i + 1);
+    const x = ((d - start) / span) * 100;
+    if (x < 100) months.push(`<span style="left:${x.toFixed(2)}%">${new Intl.DateTimeFormat("nl-NL", { month: "short", timeZone: "UTC" }).format(d).replace(".", "")}</span>`);
+  }
+  const key = { "Onder druk": "druk", "Aandacht nodig": "aandacht", "Op koers": "koers" };
+  const lanes = projects.map((project) => {
+    const ms = projectMilestones(project.id).filter((m) => inRange(m.date) || (m.forecast && inRange(m.forecast)));
+    const sigs = openSignals().filter((s) => s.project === project.id && signalActions[s.id]?.by && inRange(signalActions[s.id].by));
+    const status = primaryProjectMilestone(project.id)?.status ?? "Op koers";
+    const route = { view: "project", projectId: project.id, section: "planning" };
+    let lastLabel = -100;
+    return `<a class="fw-lane" href="${pageHref(route)}" data-action="nav" data-view="project" data-project="${project.id}" data-section="planning">
+      <span class="fw-name"><span class="np-dot" data-status="${escapeHtml(status)}"></span>${escapeHtml(project.name)}</span>
+      <span class="fw-track">
+        ${sigs.map((s) => `<i class="fw-sig" style="left:${pos(signalActions[s.id].by).toFixed(2)}%" title="${escapeHtml(s.title)} · uiterlijk ${formatPlanDate(signalActions[s.id].by)}"></i>`).join("")}
+        ${ms.sort((a, b) => planDateTime(a.date) - planDateTime(b.date)).map((m) => {
+          const x = pos(m.date);
+          const showLabel = x - lastLabel > 22;
+          if (showLabel) lastLabel = x;
+          const slip = m.forecast && !m.approved && planDateTime(m.forecast) > planDateTime(m.date);
+          return `${slip ? `<i class="fw-slip" style="left:${pos(m.date).toFixed(2)}%;width:${(pos(m.forecast) - pos(m.date)).toFixed(2)}%"></i><i class="fw-ms fw-ms--ghost" style="left:${pos(m.forecast).toFixed(2)}%" title="Mogelijk ${formatPlanDate(m.forecast)}"></i>` : ""}
+          <i class="fw-ms" data-s="${key[m.status] ?? "koers"}" style="left:${pos(m.date).toFixed(2)}%" title="${escapeHtml(m.name)} · ${formatPlanDate(m.date)} · ${escapeHtml(m.status)}"></i>
+          ${showLabel ? `<em class="fw-label" style="left:${x.toFixed(2)}%">${escapeHtml(m.name)}</em>` : ""}`;
+        }).join("")}
+      </span>
+    </a>`;
+  }).join("");
+  return `<div class="fw" aria-label="Mijlpalen en signalen in de komende vier maanden">
+    <div class="fw-axis"><span class="fw-now">Nu</span>${months.join("")}</div>
+    ${lanes}
+    <div class="fw-key" aria-hidden="true"><span><i class="fw-ms" data-s="druk"></i>Mijlpaal onder druk</span><span><i class="fw-ms fw-ms--ghost"></i>Mogelijk later</span><span><i class="fw-sig"></i>Signaal: uiterlijk handelen</span></div>
+  </div>`;
+}
+
+function deskBriefing(n, first, second) {
+  if (!first) return "Er vraagt deze week niets om een besluit. Vicki houdt de stukken bij en meldt zich als er iets verandert.";
+  const days = deskDaysLeft(signalActions[first.id]?.by);
+  const kans = openSignals().find((signal) => signalLinks[signal.id]?.soort === "vooruitwerken");
+  const slip = projects.map((p) => ({ p, m: primaryProjectMilestone(p.id) })).find(({ m }) => m?.forecast && !m.approved);
+  const parts = [
+    `Het belangrijkste deze week: ${lowerFirst(first.title)} bij <b>${escapeHtml(findProject(first.project).name)}</b>${days != null ? `, nog ${days} ${days === 1 ? "dag" : "dagen"}` : ""}.`,
+    kans ? `Vooruitwerken: bij <b>${escapeHtml(findProject(kans.project).name)}</b> ${signalLinks[kans.id].brief}` : second ? `Daarna ${lowerFirst(second.title)} bij <b>${escapeHtml(findProject(second.project).name)}</b>.` : "",
+    slip ? `Vooruitkijkend: ${lowerFirst(slip.m.name)} van <b>${escapeHtml(slip.p.name)}</b> schuift mogelijk van ${formatPlanDate(slip.m.date)} naar ${formatPlanDate(slip.m.forecast)}.` : "",
+  ];
+  return parts.filter(Boolean).join(" ");
 }
 
 function renderDesk() {
   const n = deskNumbers();
-  const visible = n.open.slice(0, 4);
+  const live = !["laden", "leeg", "fout"].includes(currentScenario());
+  const first = live ? n.open[0] : null;
   const totalSignals = n.open.length + n.extraSignals;
-  const otherCount = totalSignals - visible.length;
-  const projectCount = n.portfolio.length;
-  const nextMeeting = n.upcoming[0];
+  const prepared = n.upcoming.filter((m) => m.proposal?.length).slice(0, 3);
 
   return `<section class="desk">
-    <header class="desk-head">
-      <div class="desk-hello">
-        <p class="kicker">${deskDay.format(new Date(demoTodayIso + "T00:00:00Z"))}</p>
-        <h1>${deskGreeting()}, ${profile.first}</h1>
-        <p class="lede">Rise las <b>14 nieuwe stukken</b> in je ${projectCount === 4 ? "vier" : projectCount} projecten. ${totalSignals ? `${totalSignals === 1 ? "Eén signaal vraagt" : `${totalSignals} signalen vragen`} om een besluit.` : "Er vraagt niets om een besluit."}</p>
+    <h1 class="visually-hidden">Overzicht</h1>
+
+    <section class="brief" aria-labelledby="brief-title">
+      <div class="brief-head">
+        <img class="brief-vicki" src="${localPath("assets/vicki.svg")}" width="28" height="28" alt="">
+        <h2 id="brief-title">Je briefing</h2>
+        <span class="brief-src">${deskDay.format(new Date(demoTodayIso + "T00:00:00Z"))} · 14 nieuwe stukken gelezen</span>
       </div>
-    </header>
+      ${withDataState(
+        () => `<p class="brief-text">${deskBriefing(n, first, n.open[1])}</p>`,
+        { empty: { title: "Nog geen projecten gekoppeld", text: "Koppel een SharePoint-map of Outlook-agenda. Vicki leest de stukken en maakt hier je briefing.", glyph: "layers", action: '<button class="btn btn--sm btn--rise" data-action="toast" data-text="Bronnen koppelen (niet in deze demo)">Bron koppelen</button>' }, rows: 2, wrap: "brief-text" },
+      )}
+      <div class="desk-ask">
+        <h2><label for="ta-home">Vraag door</label></h2>
+        ${renderComposer("home", { placeholder: "Vraag door op je briefing…" })}
+      </div>
+    </section>
 
-    <div class="desk-ask">
-      <h2><label for="ta-home">Waar wil je mee beginnen?</label></h2>
-      ${renderComposer("home", { big: true, placeholder: "Vraag Vicki iets over je projecten, of geef een opdracht…" })}
-      <div class="desk-suggest">${deskSuggestions.map((text) => `<button type="button" data-action="desk-suggest" data-text="${escapeHtml(text)}">${icon("spark")}${escapeHtml(text)}</button>`).join("")}</div>
-    </div>
+    ${first || state.triage ? `${renderFirstSlider(state.triage ? state.triage.ids.map(findSignal) : n.open, totalSignals)}${state.triage ? "" : renderHiddenSignals()}` : `<section class="desk-block" aria-labelledby="later-title">
+      <header class="desk-sec"><h2 id="later-title">Signalen</h2></header>
+      ${renderHiddenSignals()}
+      ${withDataState(
+        () => renderState({ title: "Niets dat nu aandacht vraagt", text: "Vicki meldt het zodra een stuk afwijkt van een afspraak of een mijlpaal raakt.", glyph: "check", plain: true }),
+        { empty: { title: "Geen open signalen", text: "Vicki meldt het zodra een stuk afwijkt van een afspraak of een mijlpaal raakt.", glyph: "check" }, rows: 3, wrap: "line-list" },
+      )}
+    </section>`}
 
-    <div class="desk-stats">${withDataState(
-      () => `<div class="stats">
-      ${renderStat({ label: "Open signalen", value: totalSignals, note: `${n.open.filter((s) => signalUrgency(signalActions[s.id]?.by) === "Hoog").length} met hoge urgentie`, href: pageHref({ view: "projecten" }), glyph: "pulse", attrs: 'data-action="tab" data-view="projecten"' })}
-      ${renderStat({ label: "Acties deze week", value: n.dueThisWeek.length, note: n.late.length ? `${n.late.length} over de deadline` : "Alles op schema", alert: n.late.length > 0, href: pageHref({ view: "acties" }), glyph: "task", attrs: 'data-action="nav" data-view="acties"' })}
-      ${renderStat({ label: "Overleggen deze week", value: n.thisWeek.length, note: nextMeeting ? `Eerstvolgende: ${escapeHtml(nextMeeting.title)}, ${formatIsoDate(nextMeeting.date)}` : "Geen overleg gepland", href: nextMeeting ? pageHref({ view: "project", projectId: nextMeeting.project, section: "vergaderingen", meetingId: nextMeeting.id }) : "#", glyph: "cal", attrs: nextMeeting ? `data-action="action-meeting" data-id="${nextMeeting.id}"` : "" })}
-      ${renderStat({ label: "Mijlpalen onder druk", value: `${n.pressured.length}<small> / ${projectCount}</small>`, note: "projecten met een risico", href: pageHref({ view: "projecten" }), glyph: "gantt", attrs: 'data-action="tab" data-view="projecten"' })}
-    </div>`,
-      { empty: { title: "Nog geen projecten gekoppeld", text: "Koppel een SharePoint-map of Outlook-agenda. Rise leest de stukken en toont hier wat aandacht vraagt.", glyph: "layers", action: '<button class="btn btn--sm btn--rise" data-action="toast" data-text="Bronnen koppelen (niet in deze demo)">Bron koppelen</button>' }, rows: 1, wrap: "signal-register" },
-    )}</div>
+    <section class="desk-block" aria-labelledby="fw-title">
+      <header class="desk-sec"><h2 id="fw-title">Vooruit</h2><span class="desk-hint">Komende vier maanden</span></header>
+      ${withDataState(() => renderForward(), { empty: { title: "Nog geen planning", text: "Koppel een planning, dan ziet Vicki welke mijlpalen in de knel komen.", glyph: "gantt" }, rows: 4, wrap: "fw" })}
+    </section>
 
-    <div class="desk-grid">
-      <section class="outlook" aria-labelledby="outlook-title">
-        <header class="outlook-head">
-          <div><h2 id="outlook-title">Signalen</h2><p>Op volgorde van het eerstvolgende actiemoment</p></div>
-          ${otherCount > 0 ? `<a class="btn btn--quiet btn--sm" data-action="tab" data-view="projecten" href="${pageHref({ view: "projecten" })}">Alle ${totalSignals} bekijken ${icon("chev")}</a>` : ""}
-        </header>
-        ${renderHiddenSignals()}
-        ${withDataState(
-          () => visible.length
-            ? `<div class="signal-register">${visible.map(renderSignalCard).join("")}</div>`
-            : renderState({ title: "Niets dat nu aandacht vraagt", text: "Rise meldt het zodra een stuk afwijkt van een afspraak of een mijlpaal raakt.", glyph: "check" }),
-          { empty: { title: "Geen open signalen", text: "Rise meldt het zodra een stuk afwijkt van een afspraak of een mijlpaal raakt.", glyph: "check" }, rows: 4 },
-        )}
-      </section>
-
-      <aside class="desk-side">
-        <section aria-labelledby="agenda-title">
-          <header class="outlook-head"><div><h2 id="agenda-title">Komende overleggen</h2></div></header>
-          ${withDataState(
-            () => n.upcoming.length
-              ? `<div class="agenda-list">${n.upcoming.slice(0, 4).map(renderAgendaItem).join("")}</div>`
-              : renderState({ title: "Geen overleg gepland", glyph: "cal" }),
-            { empty: { title: "Geen overleg gepland", text: "Gekoppelde agenda’s verschijnen hier.", glyph: "cal" }, rows: 3, wrap: "agenda-list" },
-          )}
-        </section>
-        <section aria-labelledby="health-title">
-          <header class="outlook-head"><div><h2 id="health-title">Projecten</h2></div>
-            ${projectCount > 6 ? `<a class="btn btn--quiet btn--sm" data-action="tab" data-view="projecten" href="${pageHref({ view: "projecten" })}">Alle ${projectCount} ${icon("chev")}</a>` : ""}</header>
-          ${withDataState(
-            () => `<div class="health">${n.portfolio.slice(0, 6).map(({ project, status }) => {
-              const real = projects.includes(project);
-              const route = { view: "project", projectId: project.id, section: "planning" };
-              return `<a href="${real ? pageHref(route) : "#"}" ${real ? `data-action="nav" data-view="project" data-project="${project.id}" data-section="planning"` : 'data-action="scale-item"'}>
-                <span class="np-mono">${escapeHtml((real ? project.id : project.name.slice(0, 2)).toUpperCase())}</span>
-                <span><b>${escapeHtml(project.name)}</b><em>${escapeHtml(project.phase)} · ${escapeHtml(project.place)}</em></span>
-                ${renderMilestoneStatus(status)}
-              </a>`;
-            }).join("")}</div>`,
-            { empty: { title: "Geen projecten", glyph: "grid" }, rows: 4, wrap: "health" },
-          )}
-        </section>
-      </aside>
-    </div>
+    ${prepared.length && live ? `<section class="desk-block desk-block--quiet" aria-labelledby="prep-title">
+      <header class="desk-sec"><h2 id="prep-title">Vicki heeft voorbereid</h2></header>
+      <div class="prep-list">${prepared.map(renderPrepared).join("")}</div>
+    </section>` : ""}
   </section>`;
 }
 
@@ -141,3 +361,17 @@ document.addEventListener("click", (event) => {
   state.comp.home.projects = projectsFromMentions(trigger.dataset.text);
   submitComposer("home");
 });
+
+/* Na een oordeel schuift de slider naar het volgende signaal dat nog niet is beoordeeld. */
+function triageAdvance() {
+  const t = state.triage;
+  if (!t) return;
+  const next = t.ids.findIndex((id, i) => i > (state.deskSlide || 0) && !t.verdicts[id]);
+  const fallback = t.ids.findIndex((id) => !t.verdicts[id]);
+  const to = next >= 0 ? next : fallback;
+  if (to < 0) return;
+  setTimeout(() => {
+    const track = document.querySelector("[data-slider]");
+    if (track) slideTo(track, to);
+  }, 380);
+}

@@ -194,7 +194,7 @@ const milestoneDefinitions = {
       ],
     ],
     [
-      "Indiening ontwerp-bestemmingsplan",
+      "Ontwerpbesluit omgevingsplan",
       "Onder druk",
       "De afwijking in het woningprogramma kan aanpassing van de stukken vragen.",
       "Maartje Hoekstra",
@@ -249,7 +249,7 @@ const milestoneDefinitions = {
       "Onder druk",
       "De offerte verloopt op 12 december. De opdracht moet uiterlijk rond 5 januari starten.",
       "Joost de Wit",
-      ["s-pz"],
+      ["s-pz", "s-pz2"],
       [
         [
           "Offerte bodemonderzoek",
@@ -301,7 +301,25 @@ const milestoneDefinitions = {
   ],
 };
 
+/* Waarom een signaal telt, afgeleid uit het procesmodel (Bedrijfsdossier · Procesmodel vastgoedontwikkeling). */
+const signalLinks = {
+  "s-dk2": { soort: "blokkeert", label: "Houdt de vergunningaanvraag tegen", passage: "pm-brand" },
+  "s-dk": { soort: "blokkeert", label: "Houdt het DO op", passage: "pm-onderzoek" },
+  "s-pz": { soort: "termijn", label: "Offerte verloopt 12 dec", passage: "pm-onderzoek" },
+  "s-hk": { soort: "herziening", label: "Exploitatie en anterieure overeenkomst moeten mee", passage: "pm-programma" },
+  "s-hk2": { soort: "herziening", label: "Raakt het mobiliteitsplan", passage: "pm-parkeren" },
+  "s-mw": { soort: "herziening", label: "Raakt de haalbaarheidsberekening", passage: "pm-programma" },
+  "s-pz2": { soort: "vooruitwerken", label: "Scheelt ± 8 weken", passage: "pm-ao", brief: "kan de anterieure overeenkomst nu al starten. Dat scheelt ongeveer 8 weken." },
+};
+const signalLinkIcons = { blokkeert: "alert", herziening: "refresh", termijn: "clock", vooruitwerken: "forward" };
+
 const signalActions = {
+  "s-pz2": {
+    owner: "Maartje Hoekstra",
+    by: [11, 18, 2026],
+    action: "Start het gesprek over de anterieure overeenkomst met de gemeente Amersfoort.",
+    impact: 1,
+  },
   "s-dk2": {
     owner: "Kroon Architecten",
     by: [10, 27, 2026],
@@ -345,7 +363,7 @@ const followupStatuses = [
   "Wacht op reactie",
   "Afgerond",
 ];
-const feedbackReasons = ["Klopt niet", "Al geregeld", "Niet van toepassing"];
+const feedbackReasons = ["Klopt niet", "Al geregeld", "Ga ik niets mee doen"];
 const signalFollowup = (id) => ({
   owner: signalActions[id]?.owner ?? "",
   deadline: signalActions[id]?.by ? planDateIso(signalActions[id].by) : "",

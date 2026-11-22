@@ -93,7 +93,7 @@ function renderConversations() {
             : "";
         })
         .join("") + (a.length ? "" : renderState({ title: "Geen gesprekken gevonden", text: n ? "Probeer een andere zoekterm." : "", glyph: "search", plain: true })),
-        { empty: { title: "Nog geen gesprekken", text: "Je gesprekken met Rise verschijnen hier.", glyph: "talk", plain: true }, rows: 5, wrap: "skeleton-list" })}
+        { empty: { title: "Nog geen gesprekken", text: "Je gesprekken met Vicki verschijnen hier.", glyph: "talk", plain: true }, rows: 5, wrap: "skeleton-list" })}
     </aside>
     <div class="conv-main">
       ${
@@ -103,11 +103,10 @@ function renderConversations() {
         <div class="conv-compose">${renderComposer("chat", { placeholder: "Stel een vervolgvraag of geef een nieuwe opdracht. Typ @ voor een project.", base: e.projects })}</div>`
           : `<div class="conv-empty">
         <h1>Geef Vicki een opdracht</h1>
-        <p>Geef Vicki je opdracht. Rise kiest zelf welke skills erbij passen en laat zien welke bronnen het gebruikt.</p>
         ${renderComposer("chat", { big: true, placeholder: "Beschrijf wat je wilt laten uitzoeken of maken." })}
         <section class="conversation-skills" aria-labelledby="conversation-skills">
           <h2 id="conversation-skills">Start met een voorbeeld</h2>
-          <div class="skill-grid">${skills.map(({ id, name, desc }) => `<button class="skill-card" data-action="chat-skill" data-id="${id}">${icon("spark")}<span><b>${escapeHtml(name)}</b><small>${escapeHtml(desc)}</small></span>${icon("chev")}</button>`).join("")}</div>
+          <div class="skill-grid">${skills.map(({ id, name, desc }) => `<button class="skill-card" data-action="chat-skill" data-id="${id}">${icon("spark")}<span><b title="${escapeHtml(desc)}">${escapeHtml(name)}</b></span>${icon("chev")}</button>`).join("")}</div>
         </section>
         </div>`
       }
@@ -152,8 +151,8 @@ function renderDock() {
       </footer>
     </section>` : ""}
     <div class="vicki-presence">
-      ${!open && tip && !tipDismissed ? `<div class="vicki-bubble">
-        <button id="vicki-tip-open" class="vicki-tip-open" data-action="dock-open"><strong>Vicki</strong><span>${escapeHtml(tip.text)}</span></button>
+      ${!open && tip && !tipDismissed ? `<div class="vicki-bubble ${tip.ask ? "is-ask" : ""}">
+        <button id="vicki-tip-open" class="vicki-tip-open" data-action="${tip.run ?? "dock-open"}"><strong>Vicki</strong><span>${escapeHtml(tip.text)}</span>${tip.ask ? `<em class="vicki-tip-go">${escapeHtml(tip.action)}${icon("chev")}</em>` : ""}</button>
         <button class="icon-btn vicki-tip-close" data-action="vicki-tip-dismiss" aria-label="Verberg Vicki-tip">${icon("x")}</button>
       </div>` : ""}
       <button type="button" class="dock-trigger" id="dock-trigger" data-action="dock-toggle" aria-expanded="${open}"${open ? ' aria-controls="rise-assistant"' : ""} aria-keyshortcuts="/">

@@ -124,7 +124,7 @@ function renderLibrary(demoDossier) {
     .join("");
 
   return `<section class="page library">
-    <header class="page-head"><div><p class="kicker">Dossier</p><h1>Beleidsdossier</h1>
+    <header class="page-head"><div><h1>Beleidsdossier</h1>
     <p>Zoek in de lokale documentcatalogus.</p></div></header>
     <div class="library-tools">
       <label for="library-search">Zoek documenten</label>
@@ -142,6 +142,6 @@ function renderLibrary(demoDossier) {
     </nav>`
         : ""
     }
-    <details class="library-demo"><summary>Demobronnen gebruikt in Rise-gesprekken</summary>${demoDossier}</details>
+    <details class="library-demo"><summary>Demobronnen gebruikt in gesprekken met Vicki</summary>${demoDossier}</details>
   </section>`;
 }

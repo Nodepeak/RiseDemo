@@ -49,40 +49,40 @@
     <nav class="nav-projects" aria-label="Projecten">
       <div class="np ">
           <button class="np-head" data-action="toggle-project" data-id="hk" aria-expanded="false">
-            <span class="np-mono">HK</span><span class="np-name">Havenkwartier</span>
+            <span class="np-dot" data-status="Onder druk" aria-hidden="true"></span><span class="np-name">Havenkwartier</span>
             <svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
           </button>
-          
+
         </div><div class="np ">
           <button class="np-head" data-action="toggle-project" data-id="dk" aria-expanded="false">
-            <span class="np-mono">DK</span><span class="np-name">De Kade</span>
-            <span class="np-count">2</span><svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+            <span class="np-dot" data-status="Onder druk" aria-hidden="true"></span><span class="np-name">De Kade</span>
+            <span class="np-count" aria-label="2 open signalen">2</span><svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
           </button>
-          
+
         </div><div class="np ">
           <button class="np-head" data-action="toggle-project" data-id="pz" aria-expanded="false">
-            <span class="np-mono">PZ</span><span class="np-name">Parkzijde</span>
+            <span class="np-dot" data-status="Onder druk" aria-hidden="true"></span><span class="np-name">Parkzijde</span>
             <svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
           </button>
-          
+
         </div><div class="np ">
           <button class="np-head" data-action="toggle-project" data-id="mw" aria-expanded="false">
-            <span class="np-mono">MW</span><span class="np-name">Molenweide</span>
+            <span class="np-dot" data-status="Aandacht nodig" aria-hidden="true"></span><span class="np-name">Molenweide</span>
             <svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
           </button>
-          
+
         </div>
-      
+
     </nav>
     <div class="nav-foot">
       <a class="nav-item " data-action="nav" href="../instellingen.html" data-view="instellingen"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7h-9M14 17H5"></path><circle cx="17" cy="17" r="3"></circle><circle cx="7" cy="7" r="3"></circle></svg><span>Instellingen</span></a>
     </div>
   </aside>
-  
+
   <main class="main view-doc">
     <header class="top">
     <button class="mobile-menu icon-btn" data-action="mobile-nav" aria-label="Navigatiemenu" aria-controls="demo-navigation" aria-expanded="false"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg></button>
-    <div class="crumbs"><span class="">Dossier</span><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg><span class="">Bedrijfsdossier</span><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg><span class="is-last">Werkwijze ontwikkelproces</span></div>
+    <div class="crumbs"><span class="">Dossier</span><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg><span class="">Bedrijfsdossier</span><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg><span class="is-last">Procesmodel vastgoedontwikkeling</span></div>
     <div class="top-actions">
       <button class="icon-btn top-search" type="button" data-action="palette-open" aria-label="Zoeken" title="Zoeken  ⌘K"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg></button>
       <button class="icon-btn" type="button" data-action="theme" data-value="dark" aria-label="Donker thema" title="Donker thema"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></button>
@@ -93,24 +93,23 @@
     <a class="back" data-action="doc-back" href="../dossier/bedrijf.html"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg>Terug</a>
     <div class="doc-wrap">
       <article class="paper">
-        <p class="kicker">Werkwijze · jan 2026 · Stadsas</p>
-        <h1>Werkwijze ontwikkelproces</h1>
-        <p>Elke fase eindigt met een go/no-go in het investeringscomité.</p><p>Afwijkingen van gemaakte afspraken met overheden worden binnen twee weken gemeld aan de directie.</p>
+        <p class="kicker">Procesmodel · 21 nov 2026 · Stadsas</p>
+        <h1>Procesmodel vastgoedontwikkeling</h1>
+        <p>Elke fase eindigt met een besluit (gate) van directie of investeringscommissie. Per stap legt het model vast welke stukken nodig zijn om te starten en welke pas om af te ronden.</p><table class="doc-table " id="pm-fasen"><tbody><tr class=""><th>Fase</th><th>Besluit aan het eind</th></tr><tr class=""><td>1 Initiatief</td><td>Initiatiebesluit</td></tr><tr class=""><td>2 Haalbaarheid</td><td>Haalbaarheidsbesluit</td></tr><tr class=""><td>3 Planvorming</td><td>Ontwikkelbesluit</td></tr><tr class=""><td>4 Ontwerp, vergunning &amp; contractering</td><td>Investeringsbesluit (start bouw)</td></tr><tr class=""><td>5 Realisatie</td><td>–</td></tr><tr class=""><td>6 Oplevering &amp; nazorg</td><td>Projectafsluiting</td></tr><tr class=""><td>7 Exploitatie (optioneel)</td><td>–</td></tr></tbody></table><h3>Hard, concept of pas bij afronding</h3><p>Hard betekent: de definitieve versie is nodig om te starten. Concept: een tussenversie volstaat, je kunt vooruitwerken. Afronding: niet nodig om te starten, wel om af te ronden.</p><p class="passage " id="pm-brand">Aanvraag omgevingsvergunning: het brandveiligheidsadvies is een harde voorwaarde. Vooroverleg met de brandweer kan al op het VO; late brandweereisen dwingen vaak tot herontwerp van trappenhuizen of gevels.</p><p class="passage " id="pm-onderzoek">Definitief ontwerp: vraagt definitieve onderzoeksrapporten (geluid, bodem, ecologie). Ook de aanvraag omgevingsvergunning heeft ze hard nodig. Rapporten verlopen: actualiseer ze vóór indiening als de procedure lang duurt.</p><p class="passage " id="pm-programma">Programma en exploitatie sturen elkaar: de programmamix bepaalt het rendement en andersom. De anterieure overeenkomst legt programma en kostenverhaal vast en is nodig voordat de omgevingsplanwijziging ter inzage gaat.</p><p class="passage " id="pm-parkeren">Mobiliteits- en parkeerplan: start op het VO, zodat de parkeeroplossing in het DO landt. Risico: de gemeente accepteert een lagere parkeernorm niet.</p><p class="passage " id="pm-kaders">Gemeentelijke kaders, zoals welstandsnota en woonvisie, zijn harde input voor programma en haalbaarheidsberekening. Die berekening is de basis voor het bod en de intentieovereenkomst met de grondeigenaar.</p><h3>Vooruitwerken</h3><p class="passage " id="pm-ao">Anterieure overeenkomst: de onderhandeling kan parallel aan het VO starten, zonder te wachten op de definitieve VO-raming en exploitatie. Risico: toezeggingen over het programma komen terug als het VO nog wijzigt.</p>
       </article>
       <aside class="doc-side">
-        <div class="side-card"><h5>Vicki over dit document</h5><p>Hoe Stadsas een project doorloopt, van acquisitie tot oplevering, met beslismomenten per fase.</p>
-          <button class="btn btn--rise btn--sm" data-action="dock-open"><img class="vicki-avatar" src="../assets/vicki.svg" width="22" height="22" alt="">Vraag Vicki hierover</button></div>
-        
-        
-        
-        
-        <div class="side-card"><h5>Locatie</h5><p>Bedrijfsdossier · Werkwijzen</p></div>
+        <div class="side-card side-card--vicki"><h5><img class="vicki-avatar" src="../assets/vicki.svg" width="22" height="22" alt="">In het kort</h5><p>Ons ontwikkelproces van initiatief tot exploitatie: 7 fasen, 5 besluitmomenten en 109 stappen, met per stap wat hard nodig is, wat al op een concept kan en wat elkaar beïnvloedt. Vicki gebruikt dit om te zien welke verbanden er zijn.</p>
+          <button class="btn btn--link btn--sm" data-action="dock-open">Vraag Vicki hierover <svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button></div>
+
+
+
+        <div class="side-card"><h5>Gebruikt in signalen</h5><button class="side-link" data-action="open-signal" data-id="s-hk"><span class="cert cert--vast"></span>11 sociale huurwoningen onder de afspraak</button><button class="side-link" data-action="open-signal" data-id="s-dk"><span class="cert cert--vermoed"></span>Akoestisch rapport schuift vier weken op</button><button class="side-link" data-action="open-signal" data-id="s-pz"><span class="cert cert--check"></span>Bodemonderzoek nog niet bevestigd</button><button class="side-link" data-action="open-signal" data-id="s-pz2"><span class="cert cert--vermoed"></span>Anterieure overeenkomst kan nu al starten</button><button class="side-link" data-action="open-signal" data-id="s-hk2"><span class="cert cert--vermoed"></span>Mogelijk zijn minder parkeerplaatsen nodig</button><button class="side-link" data-action="open-signal" data-id="s-dk2"><span class="cert cert--check"></span>Brandweeradvies trappenhuis staat open</button><button class="side-link" data-action="open-signal" data-id="s-mw"><span class="cert cert--vast"></span>Nieuwe welstandsnota niet verwerkt</button></div>
       </aside>
     </div></section></div>
     <div class="dock ">
-    
+
     <div class="vicki-presence">
-      <div class="vicki-bubble">
+      <div class="vicki-bubble ">
         <button id="vicki-tip-open" class="vicki-tip-open" data-action="dock-open"><strong>Vicki</strong><span>Ik kan de kern van dit document voor je op een rij zetten.</span></button>
         <button class="icon-btn vicki-tip-close" data-action="vicki-tip-dismiss" aria-label="Verberg Vicki-tip"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"></path></svg></button>
       </div>
@@ -175,14 +174,14 @@
     </div>
   </div>
   </main>
-  
-  
-  
+
+
+
   <div class="routes ">
-    
+
     <button class="routes-btn" id="demo-routes-trigger" aria-expanded="false" aria-controls="demo-route-options" data-action="routes">Demo</button>
   </div>
   </div>
-  
+
 </body>
 </html>

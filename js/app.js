@@ -203,6 +203,31 @@ function runMessageAction(e, n) {
 
 function runSignalStep(e, n) {
   if (n.go) return navigate(n.go);
+  // Een agendapunt gaat direct op de agenda van het eerstvolgende overleg.
+  if ((n.intent ?? "").startsWith("meeting") && !/bereid/i.test(n.label)) {
+    const meeting = nextProjectMeeting(e.project);
+    if (meeting) {
+      state.onAgenda[e.id] = meeting.id;
+      const agenda = agendaOf(meeting);
+      const entry = addAgendaItem(meeting, { title: e.title, note: signalDescription(e).why, source: e.id, by: "vicki" });
+      if (entry && agenda.stage === "sent") {
+        entry.late = true;
+        agenda.late.push(entry.id);
+        saveTrackingProgress();
+        return showToast(`De agenda van ${meeting.title} is al verstuurd. Vicki zette dit klaar als aanvulling.`, { action: "undo-agenda", id: e.id });
+      }
+      saveTrackingProgress();
+      return showToast(`Op de agenda van ${meeting.title} gezet, met de onderbouwing erbij`, { action: "undo-agenda", id: e.id });
+    }
+  }
+  // Concepten, doorrekeningen en controles: Rise heeft het al uitgewerkt, je ziet het in het zijpaneel.
+  if (n.intent && demoReplies[n.intent] && !(n.intent ?? "").startsWith("meeting")) {
+    state.drawer = e.id;
+    state.drawerWork = n.intent;
+    state.drawerSection = null;
+    state.nextFocus = "close-signal-drawer";
+    return render();
+  }
   let a = startConversation({
     text: n.label,
     projects: [e.project],
@@ -270,6 +295,7 @@ function setDockOpen(open) {
 
 function closeSignalDrawer() {
   state.drawer = null;
+  state.drawerWork = null;
   state.drawerSection = null;
   state.nextFocus = state.drawerTrigger;
   state.drawerTrigger = null;
@@ -335,7 +361,7 @@ document.addEventListener("click", (e) => {
     case "tab":
       return navigate({ view: o.view, projectId: null });
     case "toggle-project":
-      return ((state.expanded[o.id] = !state.expanded[o.id]), render());
+      return ((state.expanded[o.id] = !(state.expanded[o.id] ?? ((state.view === "project" || state.view === "doc") && state.projectId === o.id))), render());
     case "toggle-dossier":
       return ((state.dossierOpen = !state.dossierOpen), render());
     case "avatar":
@@ -345,6 +371,7 @@ document.addEventListener("click", (e) => {
       return render();
     case "open-signal":
       state.drawer = o.id;
+      state.drawerWork = null;
       state.drawerSection = null;
       state.drawerTrigger = a.id;
       state.nextFocus = "close-signal-drawer";
@@ -392,6 +419,50 @@ document.addEventListener("click", (e) => {
       return render();
     case "preset-followup":
       return saveDemoFollowup(o.id);
+    case "undo-agenda": {
+      const meeting = findMeeting(state.onAgenda[o.id]);
+      if (meeting) {
+        const agenda = agendaOf(meeting);
+        const item = agenda.items.find((entry) => entry.source === o.id);
+        agenda.items = agenda.items.filter((entry) => entry !== item);
+        agenda.late = agenda.late.filter((id) => id !== item?.id);
+      }
+      delete state.onAgenda[o.id];
+      saveTrackingProgress();
+      state.toast = null;
+      return render();
+    }
+    case "signal-verdict":
+      state.dismissed[o.id] = o.reason;
+      if (state.drawer === o.id) { state.drawer = null; state.drawerWork = null; }
+      saveTrackingProgress();
+      return showToast(`Afgewezen: ${o.reason.toLowerCase()}. Vicki leert ervan.`, { action: "restore-signal", id: o.id });
+    case "triage-start": {
+      const ids = sortSignalsByAction(openSignals()).map((signal) => signal.id);
+      if (!ids.length) return;
+      state.triage = { ids, verdicts: {} };
+      state.deskSlide = 0;
+      state.dock.tipIndex = 0;
+      if (state.view !== "bureau") return navigate({ view: "bureau" });
+      render();
+      document.querySelector("[data-slider]")?.scrollTo({ left: 0 });
+      return document.querySelector(".slider")?.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "center" });
+    }
+    case "triage": {
+      const t = state.triage;
+      if (!t) return;
+      const id = t.ids[Math.min(state.deskSlide || 0, t.ids.length - 1)];
+      t.verdicts[id] = o.v;
+      if (o.v === "ok") delete state.dismissed[id];
+      else state.dismissed[id] = o.v;
+      saveTrackingProgress();
+      render();
+      return triageAdvance();
+    }
+    case "triage-stop":
+      state.triage = null;
+      state.deskSlide = 0;
+      return render();
     case "restore-signal":
       delete state.dismissed[o.id];
       return showToast("Signaal teruggezet");
@@ -447,6 +518,124 @@ document.addEventListener("click", (e) => {
     }
     case "select-meeting":
       return toggleProjectDetail("meetingId", state.selMeeting, o.id);
+    case "open-meeting": {
+      const meeting = findMeeting(o.id);
+      return navigate({ view: "project", projectId: meeting.project, section: "vergaderingen", meetingId: meeting.id });
+    }
+    case "close-meeting":
+      return navigate({ view: "project", projectId: o.id, section: "vergaderingen" });
+    case "meeting-notes": {
+      const meeting = findMeeting(o.id);
+      const conversation = startConversation({ text: `Wat is er besloten in ${meeting.title} van @${findProject(meeting.project).name.replace(/\s/g, "")}?`, skill: "notulen" });
+      return navigate({ view: "gesprekken", convId: conversation.id });
+    }
+    case "agenda-remove": {
+      const agenda = agendaOf(findMeeting(o.id));
+      const item = agenda.items.find((entry) => entry.id === o.item);
+      agenda.items = agenda.items.filter((entry) => entry !== item);
+      if (item?.source) delete state.onAgenda[item.source];
+      saveTrackingProgress();
+      return showToast(`Weggehaald: ${item?.title ?? "agendapunt"}`);
+    }
+    case "agenda-suggest": {
+      const meeting = findMeeting(o.id);
+      const agenda = agendaOf(meeting);
+      const signal = findSignal(o.signal);
+      if (o.kind === "actie") {
+        agenda.actions.push(signal.id);
+        saveTrackingProgress();
+        return showToast("Op de actielijst gezet");
+      }
+      if (agenda.stage === "sent") {
+        state.agendaLock = { id: meeting.id, title: signal.title, signal: signal.id };
+        state.nextFocus = null;
+        return render();
+      }
+      addAgendaItem(meeting, { title: signal.title, note: signalDescription(signal).why, source: signal.id, by: "vicki" });
+      state.onAgenda[signal.id] = meeting.id;
+      saveTrackingProgress();
+      return showToast(`Op de agenda gezet: ${signal.title}`);
+    }
+    case "agenda-locked":
+      state.agendaLock = { id: o.id };
+      state.nextFocus = "lock-title-input";
+      return render();
+    case "agenda-lock-cancel":
+      state.agendaLock = null;
+      return render();
+    case "agenda-lock-choice": {
+      const pending = state.agendaLock;
+      const meeting = findMeeting(pending.id);
+      const agenda = agendaOf(meeting);
+      const title = pending.title ?? select("#lock-title-input")?.value.trim();
+      if (!title) { select("#lock-title-input")?.focus(); return; }
+      const signal = findSignal(pending.signal);
+      state.agendaLock = null;
+      if (o.choice === "rondvraag") {
+        agenda.rondvraag.push(title);
+        saveTrackingProgress();
+        return showToast("Bewaard voor de rondvraag");
+      }
+      const entry = addAgendaItem(meeting, { title, note: signal ? signalDescription(signal).why : "", source: signal?.id, by: signal ? "vicki" : "jij" });
+      if (signal) state.onAgenda[signal.id] = meeting.id;
+      if (o.choice === "reopen") {
+        agenda.stage = "concept";
+        agenda.resend = true;
+        saveTrackingProgress();
+        return showToast("Agenda heropend. Maak hem weer definitief en verstuur hem opnieuw.");
+      }
+      if (entry) { entry.late = true; agenda.late.push(entry.id); }
+      state.agendaMail = meeting.id;
+      saveTrackingProgress();
+      return showToast("Klaargezet als aanvulling. Vicki heeft de mail al geschreven.");
+    }
+    case "agenda-finalize": {
+      const id = o.id;
+      const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      state.agendaCheck = { id, step: reduce ? 4 : 0 };
+      state.agendaMail = null;
+      render();
+      const tick = () => {
+        if (state.agendaCheck?.id !== id || state.agendaCheck.step >= 4) return;
+        state.agendaCheck.step += 1;
+        render();
+        setTimeout(tick, 560);
+      };
+      if (!reduce) setTimeout(tick, 560);
+      return;
+    }
+    case "agenda-check-cancel":
+      state.agendaCheck = null;
+      return render();
+    case "agenda-confirm":
+      agendaOf(findMeeting(o.id)).stage = "final";
+      state.agendaCheck = null;
+      saveTrackingProgress();
+      return showToast("De agenda is definitief");
+    case "agenda-reopen":
+      agendaOf(findMeeting(o.id)).stage = "concept";
+      state.agendaMail = null;
+      saveTrackingProgress();
+      return render();
+    case "agenda-send": {
+      const meeting = findMeeting(o.id);
+      Object.assign(agendaOf(meeting), { stage: "sent", sentAt: demoTodayIso, late: [], resend: false });
+      state.agendaMail = null;
+      saveTrackingProgress();
+      return showToast(`Agenda verstuurd naar ${meeting.people.length} deelnemers`);
+    }
+    case "agenda-send-late": {
+      const meeting = findMeeting(o.id);
+      agendaOf(meeting).late = [];
+      state.agendaMail = null;
+      saveTrackingProgress();
+      return showToast(`Aanvulling verstuurd naar ${meeting.people.length} deelnemers`);
+    }
+    case "agenda-mail":
+      state.agendaMail = state.agendaMail === o.id ? null : o.id;
+      return render();
+    case "agenda-pdf":
+      return window.print();
     case "adopt-agenda":
       return (
         (state.agendaAdopted[o.id] = !0),
@@ -651,6 +840,14 @@ document.addEventListener("submit", (e) => {
     state.nextFocus = n.dataset.returnFocus;
     return showToast("Opvolging opgeslagen in deze demo");
   }
+  if (actionSubmit === "agenda-add") {
+    const title = new FormData(n).get("title")?.trim();
+    if (!title) return;
+    addAgendaItem(findMeeting(id), { title, by: "jij" });
+    state.nextFocus = "agenda-add-" + id;
+    n.reset();
+    return render();
+  }
   if (actionSubmit === "signal-feedback") {
     state.dismissed[id] = new FormData(n).get("reason") || true;
     state.drawer = null;
@@ -699,6 +896,11 @@ document.addEventListener("input", (e) => {
 
 document.addEventListener("keydown", (e) => {
   let n = e.target;
+  if (e.key === "Escape" && (state.agendaLock || state.agendaMail)) {
+    state.agendaLock = null;
+    state.agendaMail = null;
+    return render();
+  }
   if (n.closest(".choice-pop") && state.pop?.type !== "mention") {
     const options = [...document.querySelectorAll(".choice-options .pop-item")];
     const index = options.indexOf(n);

@@ -43,42 +43,42 @@
       <a class="nav-item " data-action="nav" href="gesprekken.html" data-view="gesprekken"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg><span>Gesprekken</span></a>
       <a class="nav-item is-on" data-action="nav" href="acties.html" data-view="acties"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"></rect><path d="m8.5 12 2.5 2.5 4.5-5"></path></svg><span>Acties</span></a>
       <button class="nav-item " data-action="toggle-dossier" aria-expanded="false"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"></path></svg><span>Dossier</span><svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button>
-      
+
     </nav>
     <div class="nav-label"><span>Projecten</span><a data-action="tab" href="projecten/index.html" data-view="projecten">Alle</a></div>
     <nav class="nav-projects" aria-label="Projecten">
       <div class="np ">
           <button class="np-head" data-action="toggle-project" data-id="hk" aria-expanded="false">
-            <span class="np-mono">HK</span><span class="np-name">Havenkwartier</span>
+            <span class="np-dot" data-status="Onder druk" aria-hidden="true"></span><span class="np-name">Havenkwartier</span>
             <svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
           </button>
-          
+
         </div><div class="np ">
           <button class="np-head" data-action="toggle-project" data-id="dk" aria-expanded="false">
-            <span class="np-mono">DK</span><span class="np-name">De Kade</span>
-            <span class="np-count">2</span><svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+            <span class="np-dot" data-status="Onder druk" aria-hidden="true"></span><span class="np-name">De Kade</span>
+            <span class="np-count" aria-label="2 open signalen">2</span><svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
           </button>
-          
+
         </div><div class="np ">
           <button class="np-head" data-action="toggle-project" data-id="pz" aria-expanded="false">
-            <span class="np-mono">PZ</span><span class="np-name">Parkzijde</span>
+            <span class="np-dot" data-status="Onder druk" aria-hidden="true"></span><span class="np-name">Parkzijde</span>
             <svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
           </button>
-          
+
         </div><div class="np ">
           <button class="np-head" data-action="toggle-project" data-id="mw" aria-expanded="false">
-            <span class="np-mono">MW</span><span class="np-name">Molenweide</span>
+            <span class="np-dot" data-status="Aandacht nodig" aria-hidden="true"></span><span class="np-name">Molenweide</span>
             <svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
           </button>
-          
+
         </div>
-      
+
     </nav>
     <div class="nav-foot">
       <a class="nav-item " data-action="nav" href="instellingen.html" data-view="instellingen"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7h-9M14 17H5"></path><circle cx="17" cy="17" r="3"></circle><circle cx="7" cy="7" r="3"></circle></svg><span>Instellingen</span></a>
     </div>
   </aside>
-  
+
   <main class="main view-acties">
     <header class="top">
     <button class="mobile-menu icon-btn" data-action="mobile-nav" aria-label="Navigatiemenu" aria-controls="demo-navigation" aria-expanded="false"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg></button>
@@ -89,53 +89,62 @@
       <button class="avatar" id="account-trigger" aria-expanded="false" data-action="avatar" aria-label="Account van Maartje Hoekstra">MH</button>
     </div>
   </header>
-    <div class="content" id="content"><section class="page actions-page"><header class="page-head"><div><h1>Acties</h1><p>Volg acties en deadlines uit alle projecten.</p></div></header>
-    
+    <div class="content" id="content"><section class="page actions-page"><header class="page-head"><div><h1>Acties</h1></div></header>
+
     <div class="action-toolbar">
       <div class="action-filters" role="group" aria-label="Filter op status">
         <button id="action-filter-open" class="filter is-on" type="button" data-action="actions-filter" data-key="all" data-value="open" aria-pressed="true">Openstaand <em>4</em></button><button id="action-filter-done" class="filter " type="button" data-action="actions-filter" data-key="all" data-value="done" aria-pressed="false">Afgerond <em>3</em></button><button id="action-filter-all" class="filter " type="button" data-action="actions-filter" data-key="all" data-value="all" aria-pressed="false">Alles <em>7</em></button>
       </div>
-      <label class="action-origin-filter">Herkomst <select id="action-origin-filter" data-key="all">
+      <label class="action-origin-filter"><span class="visually-hidden">Herkomst</span><select id="action-origin-filter" data-key="all">
         <option value="all" selected="">Alle herkomsten</option><option value="signal">Signaal</option><option value="meeting">Vergaderverslag</option>
       </select></label>
     </div>
-    <div class="action-table-wrap"><table class="action-table">
-      <thead><tr><th scope="col">Actie</th><th scope="col">Eigenaar</th><th scope="col">Deadline</th><th scope="col">Herkomst</th><th scope="col">Status</th><th scope="col"><span class="visually-hidden">Opvolging</span></th></tr></thead>
-      <tbody><tr>
-    <td class="action-title"><b>Kostenraming installaties</b><small>Parkzijde</small></td>
-    <td class="action-owner"><span class="mobile-cell-label">Eigenaar</span>Heijmerink Bouw</td>
-    <td class="action-deadline "><span class="mobile-cell-label">Deadline</span><time datetime="2026-11-25">25 nov</time></td>
-    <td class="action-source"><span class="mobile-cell-label">Herkomst</span><small>Verslag van vergadering</small><a class="source-link" href="projecten/parkzijde/vergaderingen.html#pz-bt6" data-action="action-meeting" data-id="pz-bt6"><span>Bouwteam #6 (28 okt)</span><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10M7 17 17 7"></path></svg></a></td>
-    <td class="action-status"><span class="action-state" data-status="Open">Open</span></td>
-    <td class="action-toggle"><button id="action-toggle-0" class="btn btn--ghost btn--sm" type="button" data-action="toggle-action" data-id="pz:Kostenraming installaties" data-status="Open" aria-label="Rond af Kostenraming installaties">Rond af</button></td>
-  </tr><tr>
-    <td class="action-title"><b>Offertes bodemonderzoek opvragen</b><small>Parkzijde</small></td>
-    <td class="action-owner"><span class="mobile-cell-label">Eigenaar</span>Joost de Wit</td>
-    <td class="action-deadline "><span class="mobile-cell-label">Deadline</span><time datetime="2026-11-25">25 nov</time></td>
-    <td class="action-source"><span class="mobile-cell-label">Herkomst</span><small>Verslag van vergadering</small><a class="source-link" href="projecten/parkzijde/vergaderingen.html#pz-bt6" data-action="action-meeting" data-id="pz-bt6"><span>Bouwteam #6 (28 okt)</span><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10M7 17 17 7"></path></svg></a></td>
-    <td class="action-status"><span class="action-state" data-status="Open">Open</span></td>
-    <td class="action-toggle"><button id="action-toggle-1" class="btn btn--ghost btn--sm" type="button" data-action="toggle-action" data-id="pz:Offertes bodemonderzoek opvragen" data-status="Open" aria-label="Rond af Offertes bodemonderzoek opvragen">Rond af</button></td>
-  </tr><tr>
-    <td class="action-title"><b>Brandweeradvies trappenhuis opvragen</b><small>De Kade</small></td>
-    <td class="action-owner"><span class="mobile-cell-label">Eigenaar</span>Kroon</td>
-    <td class="action-deadline "><span class="mobile-cell-label">Deadline</span><time datetime="2026-11-27">27 nov</time></td>
-    <td class="action-source"><span class="mobile-cell-label">Herkomst</span><small>Verslag van vergadering</small><a class="source-link" href="projecten/de-kade/vergaderingen.html#dk-ot-okt" data-action="action-meeting" data-id="dk-ot-okt"><span>Ontwerpteam (30 okt)</span><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10M7 17 17 7"></path></svg></a></td>
-    <td class="action-status"><span class="action-state" data-status="Open">Open</span></td>
-    <td class="action-toggle"><button id="action-toggle-2" class="btn btn--ghost btn--sm" type="button" data-action="toggle-action" data-id="dk:Brandweeradvies trappenhuis opvragen" data-status="Open" aria-label="Rond af Brandweeradvies trappenhuis opvragen">Rond af</button></td>
-  </tr><tr>
-    <td class="action-title"><b>Toets de welstandseisen voor de haalbaarheidsstudie</b><small>Molenweide</small></td>
-    <td class="action-owner"><span class="mobile-cell-label">Eigenaar</span>Maartje Hoekstra</td>
-    <td class="action-deadline "><span class="mobile-cell-label">Deadline</span><time datetime="2026-12-04">4 dec</time></td>
-    <td class="action-source"><span class="mobile-cell-label">Herkomst</span><small>Signaal</small><a class="source-link" href="projecten/molenweide/signalen.html#s-mw" data-action="open-signal" data-id="s-mw"><span>Nieuwe welstandsnota niet verwerkt</span><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10M7 17 17 7"></path></svg></a></td>
-    <td class="action-status"><span class="action-state" data-status="Open">Open</span></td>
-    <td class="action-toggle"><button id="action-toggle-3" class="btn btn--ghost btn--sm" type="button" data-action="toggle-action" data-id="mw:Toets de welstandseisen voor de haalbaarheidsstudie" data-status="Open" aria-label="Rond af Toets de welstandseisen voor de haalbaarheidsstudie">Rond af</button></td>
-  </tr></tbody>
-    </table></div>
+    <ul class="worklist"><li class="work  ">
+    <button id="action-toggle-0" class="work-check" type="button" data-action="toggle-action" data-id="pz:Kostenraming installaties" data-status="Open" aria-label="Rond af Kostenraming installaties" aria-pressed="false"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></button>
+    <div class="work-main">
+      <b>Kostenraming installaties</b>
+      <span class="work-meta"><span>Parkzijde</span><span class="work-owner"><i>HB</i>Heijmerink Bouw</span></span>
+    </div>
+    <a class="work-src" href="projecten/parkzijde/vergaderingen.html#pz-bt6" data-action="action-meeting" data-id="pz-bt6" title="Verslag: Bouwteam #6 (28 okt)">
+      <svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg><span>Bouwteam #6 · 28 okt</span>
+    </a>
+    <span class="work-due"><b>25 nov</b><small>over 5 d</small></span>
+  </li><li class="work  ">
+    <button id="action-toggle-1" class="work-check" type="button" data-action="toggle-action" data-id="pz:Offertes bodemonderzoek opvragen" data-status="Open" aria-label="Rond af Offertes bodemonderzoek opvragen" aria-pressed="false"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></button>
+    <div class="work-main">
+      <b>Offertes bodemonderzoek opvragen</b>
+      <span class="work-meta"><span>Parkzijde</span><span class="work-owner"><i>JD</i>Joost de Wit</span></span>
+    </div>
+    <a class="work-src" href="projecten/parkzijde/vergaderingen.html#pz-bt6" data-action="action-meeting" data-id="pz-bt6" title="Verslag: Bouwteam #6 (28 okt)">
+      <svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg><span>Bouwteam #6 · 28 okt</span>
+    </a>
+    <span class="work-due"><b>25 nov</b><small>over 5 d</small></span>
+  </li><li class="work  ">
+    <button id="action-toggle-2" class="work-check" type="button" data-action="toggle-action" data-id="dk:Brandweeradvies trappenhuis opvragen" data-status="Open" aria-label="Rond af Brandweeradvies trappenhuis opvragen" aria-pressed="false"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></button>
+    <div class="work-main">
+      <b>Brandweeradvies trappenhuis opvragen</b>
+      <span class="work-meta"><span>De Kade</span><span class="work-owner"><i>K</i>Kroon</span></span>
+    </div>
+    <a class="work-src" href="projecten/de-kade/vergaderingen.html#dk-ot-okt" data-action="action-meeting" data-id="dk-ot-okt" title="Verslag: Ontwerpteam (30 okt)">
+      <svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg><span>Ontwerpteam · 30 okt</span>
+    </a>
+    <span class="work-due"><b>27 nov</b><small>over 7 d</small></span>
+  </li><li class="work  ">
+    <button id="action-toggle-3" class="work-check" type="button" data-action="toggle-action" data-id="mw:Toets de welstandseisen voor de haalbaarheidsstudie" data-status="Open" aria-label="Rond af Toets de welstandseisen voor de haalbaarheidsstudie" aria-pressed="false"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></button>
+    <div class="work-main">
+      <b>Toets de welstandseisen voor de haalbaarheidsstudie</b>
+      <span class="work-meta"><span>Molenweide</span><span class="work-owner"><i>MH</i>Maartje Hoekstra</span></span>
+    </div>
+    <a class="work-src" href="projecten/molenweide/signalen.html#s-mw" data-action="open-signal" data-id="s-mw" title="Signaal: Nieuwe welstandsnota niet verwerkt">
+      <span class="mini-cert cert--vast"></span><span>Nieuwe welstandsnota niet verwerkt</span>
+    </a>
+    <span class="work-due"><b>4 dec</b><small>over 14 d</small></span>
+  </li></ul>
   </section></div>
     <div class="dock ">
-    
+
     <div class="vicki-presence">
-      <div class="vicki-bubble">
+      <div class="vicki-bubble ">
         <button id="vicki-tip-open" class="vicki-tip-open" data-action="dock-open"><strong>Vicki</strong><span>Ik kan laten zien welke acties nog openstaan en wanneer ze af moeten.</span></button>
         <button class="icon-btn vicki-tip-close" data-action="vicki-tip-dismiss" aria-label="Verberg Vicki-tip"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"></path></svg></button>
       </div>
@@ -200,14 +209,14 @@
     </div>
   </div>
   </main>
-  
-  
-  
+
+
+
   <div class="routes ">
-    
+
     <button class="routes-btn" id="demo-routes-trigger" aria-expanded="false" aria-controls="demo-route-options" data-action="routes">Demo</button>
   </div>
   </div>
-  
+
 </body>
 </html>

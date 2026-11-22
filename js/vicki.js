@@ -361,8 +361,11 @@ function vickiFigure(pose = "idle", look = VICKI_LOOK) {
       later(() => react("wave"), 700);
     }
   };
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start);
-  else start();
+  // Pas starten nadat de app zelf heeft gerenderd, anders typt Vicki de tekst van de voorgerenderde pagina.
+  let started = false;
+  const startOnce = () => { if (!started) { started = true; start(); } };
+  if (document.readyState === "complete") startOnce();
+  else { document.addEventListener("DOMContentLoaded", startOnce); window.addEventListener("load", startOnce); }
 
   // Heeft de pagina meer tips, dan laat Vicki er rustig nog een paar zien, en stopt dan.
   setInterval(() => {

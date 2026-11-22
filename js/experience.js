@@ -92,7 +92,7 @@ function withDataState(render, { empty, rows = 4, wrap = "signal-register" } = {
 /* ---------- Schaalvoorbeelden ("Veel data") ---------- */
 const scalePlaces = ["Utrecht", "Leiden", "Delft", "Haarlem", "Zwolle", "Breda", "Arnhem", "Nijmegen", "Tilburg", "Almere", "Deventer", "Gouda", "Alkmaar", "Hilversum", "Amstelveen", "Dordrecht"];
 const scaleNames = ["Spoorzone", "Oeverpark", "Lindehof", "De Werf", "Kanaalfront", "Stadshaven", "Molenbuurt", "Het Gasthuis", "Veemarkt", "Singelblok", "Bleekveld", "Vlietpark", "Kop van de Haven", "Tuinen van West", "Ketelhuis", "Brouwerijterrein", "De Lanen", "Schoolwerf", "Rietlanden", "Hofkwartier", "Polderpoort", "Watertoren", "Dijkzicht", "Stationsgebied Noord met de herontwikkeling van het voormalige postkantoor"];
-const scalePhases = ["Initiatief", "Haalbaarheid", "Voorlopig ontwerp", "Definitief ontwerp", "Bestemmingsplan", "Vergunning", "Realisatie"];
+const scalePhases = ["Initiatief", "Haalbaarheid", "Voorlopig ontwerp", "Definitief ontwerp", "Omgevingsplanwijziging", "Vergunning", "Realisatie"];
 const scaleOwners = ["Maartje Hoekstra", "Joost de Wit", "Ilse Bakker", "Ruben Visser", "Kroon Architecten", "Studio Rietveld", "Heijmerink Bouw", "Atelier Noord", "Sanne Mulder", "Daan Peeters"];
 const scaleTasks = ["Brandweeradvies opvragen", "Kostenraming installaties actualiseren", "Bodemonderzoek laten uitzetten", "Gevelmonster beoordelen", "Parkeerbalans herrekenen", "Stikstofberekening aanleveren", "Flora- en faunaonderzoek plannen", "Geluidsrapport spoorzijde controleren", "Verkoopbrochure laten opmaken", "Grondexploitatie bijwerken", "Addendum overeenkomst opstellen", "BENG-berekening verifiëren", "Constructief ontwerp afstemmen met aannemer, adviseurs en de gemeente vóór de indiening"];
 
@@ -167,7 +167,7 @@ function paletteItems(query = "") {
   const items = [];
   const add = (group, glyph, label, detail, run, keywords = "") => items.push({ group, glyph, label, detail, run, keywords });
 
-  add("Opdrachten", "talk", "Nieuw gesprek", "Start een opdracht voor Rise", () => navigate({ view: "gesprekken", convId: null }));
+  add("Opdrachten", "talk", "Nieuw gesprek", "Start een opdracht voor Vicki", () => navigate({ view: "gesprekken", convId: null }));
   add("Opdrachten", "spark", "Vraag Vicki op deze pagina", "Open de assistent", () => setDockOpen(true), "assistent dock");
   const dark = resolvedTheme() === "dark";
   add("Opdrachten", dark ? "sun" : "moon", dark ? "Licht thema" : "Donker thema", "Wissel het kleurthema", () => setTheme(dark ? "light" : "dark"), "thema kleur modus dark light");

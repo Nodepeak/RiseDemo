@@ -16,12 +16,8 @@ function renderDossier({ project, dossier, embedded = false }) {
       matchesChoice(query, doc.title),
   );
   const title = project
-    ? renderProjectHeader(
-        findProject(project),
-        "Projectdossier",
-        "Documenten, besluiten en stukken voor je volgende mijlpalen.",
-      )
-    : `<header class="page-head"><div><p class="kicker">Dossier</p><h1>${dossierGroups[dossier].name}</h1><p>${dossierGroups[dossier].intro}</p></div></header>`;
+    ? renderProjectHeader(findProject(project))
+    : `<header class="page-head"><div><h1>${dossierGroups[dossier].name}</h1><p>${dossierGroups[dossier].intro}</p></div></header>`;
 
   return `<section class="${embedded ? "" : "page"}">
     ${embedded ? "" : title}
@@ -92,8 +88,8 @@ function renderDocument() {
         ${e.body.map(a).join("")}
       </article>
       <aside class="doc-side">
-        <div class="side-card"><h5>Vicki over dit document</h5><p>${e.summary}</p>
-          <button class="btn btn--rise btn--sm" data-action="dock-open">${vickiIcon()}Vraag Vicki hierover</button></div>
+        <div class="side-card side-card--vicki"><h5>${vickiIcon()}In het kort</h5><p>${e.summary}</p>
+          <button class="btn btn--link btn--sm" data-action="dock-open">Vraag Vicki hierover ${icon("chev")}</button></div>
         ${
           tracking?.status
             ? `<div class="side-card"><h5>Documentstatus</h5><p>${tracking.version ? tracking.version + " · " : ""}${tracking.status}</p>
@@ -102,7 +98,7 @@ function renderDocument() {
             : ""
         }
         ${linkedMilestones.length ? `<div class="side-card"><h5>Gekoppelde mijlpalen</h5>${linkedMilestones.map((milestone) => `<p>${escapeHtml(milestone.name)} · ${formatPlanDate(milestone.date)}</p>`).join("")}</div>` : ""}
-        ${state.docPassage ? '<div class="side-card side-card--mark"><h5>Gemarkeerde passage</h5><p>Hierop baseert Rise zijn antwoord of signaal.</p></div>' : ""}
+        ${state.docPassage ? '<div class="side-card side-card--mark"><h5>Gemarkeerde passage</h5><p>Hierop baseert Vicki zijn antwoord of signaal.</p></div>' : ""}
         ${
           n.some((signal) => !state.dismissed[signal.id])
             ? `<div class="side-card"><h5>Gebruikt in signalen</h5>${n
@@ -114,7 +110,6 @@ function renderDocument() {
                 .join("")}</div>`
             : ""
         }
-        <div class="side-card"><h5>Locatie</h5><p>${e.project ? findProject(e.project).name + " · Projectdossier" : dossierGroups[e.dossier].name} · ${e.folder}</p></div>
       </aside>
     </div></section>`;
 }

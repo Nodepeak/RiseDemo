@@ -143,7 +143,7 @@ const demoReplies = {
                 ],
                 [
                   "Exploitatiebijdrage 1e termijn (€ 620.000)",
-                  "Pas als het bestemmingsplan onherroepelijk is",
+                  "Pas als de omgevingsplanwijziging onherroepelijk is",
                   "Na vaststelling",
                 ],
               ],
@@ -212,7 +212,7 @@ const demoReplies = {
             ],
             [
               "Mijlpaal",
-              "Ontwerp-bestemmingsplan, 15 jan",
+              "Ontwerpbesluit omgevingsplan, 15 jan",
               "Aanvraag omgevingsvergunning, 22 jan",
             ],
             [
@@ -541,7 +541,7 @@ const demoReplies = {
 
 In je mail van 3 oktober schreef je dat er ambtelijk ruimte is om een verschuiving tussen sociale huur en middenhuur te verkennen. Ons programma v3 komt uit op 25% sociale huur.
 
-Klopt het dat hier nog geen bestuurlijk besluit over is? Dan stel ik voor het in de stuurgroep van 2 december te bespreken, met het oog op een addendum vóór de indiening op 15 januari.
+Klopt het dat hier nog geen bestuurlijk besluit over is? Dan stel ik voor het in de stuurgroep van 2 december te bespreken, met het oog op een addendum vóór het ontwerpbesluit omgevingsplan op 15 januari.
 
 Groet,
 Maartje`,
@@ -553,6 +553,55 @@ Maartje`,
           ["hk-ao", "p42"],
         ],
       },
+    ],
+  }),
+  "draft-pz-ao": () => ({
+    title: "Concept-mail aan de gemeente Amersfoort",
+    blocks: [
+      {
+        type: "text",
+        html: "<p>Hier is een concept om de onderhandeling over de anterieure overeenkomst nu al te starten. Ik verstuur niets: kopieer het of pas het aan.</p>",
+      },
+      {
+        type: "draft",
+        to: "Projectleider ruimtelijke ontwikkeling (gemeente Amersfoort)",
+        subject: "Parkzijde — start gesprek anterieure overeenkomst",
+        body: `Beste projectleider,
+
+Voor Parkzijde vragen we een omgevingsvergunning aan met een buitenplanse omgevingsplanactiviteit. Het voorlopig ontwerp is bijna klaar.
+
+Om geen tijd te verliezen stellen we voor het gesprek over de anterieure overeenkomst (kostenverhaal, openbare ruimte en fasering) nu al te starten, parallel aan het VO. Het programma is daarbij voorlopig tot de VO-raming er ligt.
+
+Past een eerste overleg in de week van 7 december?
+
+Groet,
+Maartje`,
+      },
+      { type: "sources", items: [["pz-plan", "pzp2"], ["bd-werkwijze", "pm-ao"]] },
+    ],
+  }),
+  "vooruitwerken-pz": () => ({
+    title: "Tijdwinst anterieure overeenkomst Parkzijde",
+    blocks: [
+      {
+        type: "text",
+        html: "<p>Volgens het procesmodel heeft de anterieure overeenkomst het VO en de vastgoedexploitatie nodig, maar mag de onderhandeling al op het concept-VO starten. Met de middenwaarden uit het model:</p>",
+      },
+      {
+        type: "table",
+        head: ["Stap", "Volgens planning", "Met vooruitwerken"],
+        rows: [
+          ["Rest van het VO", "4 weken wachten", "loopt parallel"],
+          ["VO-raming", "2,5 weken wachten", "loopt parallel"],
+          ["Vastgoedexploitatie VO", "1,5 week wachten", "loopt parallel"],
+          ["<b>Start onderhandeling</b>", "<b>half januari</b>", "<b>begin december</b>"],
+        ],
+      },
+      {
+        type: "text",
+        html: "<p>Dat scheelt <strong>ongeveer 8 weken</strong>. Het risico: toezeggingen over het programma komen terug als het VO nog wijzigt. Spreek daarom af dat het programma voorlopig is tot de VO-raming er ligt.</p>",
+      },
+      { type: "sources", items: [["bd-werkwijze", "pm-ao"], ["pz-plan", "pzp2"]] },
     ],
   }),
   "draft-dk": () => ({

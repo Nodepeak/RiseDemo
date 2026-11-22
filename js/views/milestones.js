@@ -29,14 +29,14 @@ function renderMilestoneSignals(milestone) {
 
 function renderMilestoneOverview(projectId) {
   return `<section class="milestones" aria-labelledby="milestones-heading">
-    <h2 id="milestones-heading">Belangrijke mijlpalen</h2>
+    <h2 id="milestones-heading">Mijlpalen</h2>
     ${projectMilestones(projectId)
       .map((milestone, index) => {
         const open = state.milestoneOpen[projectId] === index;
         return `<div class="milestone-row">
         <button id="milestone-toggle-${index}" class="milestone-toggle" data-action="milestone-toggle" data-id="${projectId}" data-index="${index}" aria-expanded="${open}" aria-controls="milestone-detail-${index}">
           <span><b>${escapeHtml(milestone.name)}</b></span>
-          <span class="milestone-date"><b>${renderDueDate(planDateIso(milestone.date))}</b></span>
+          <span class="milestone-date"><b>${renderDueDate(planDateIso(milestone.date))}</b>${milestone.forecast && !milestone.approved ? `<em class="ms-shift" title="Mogelijk later volgens Vicki">→ ${formatPlanDate(milestone.forecast)}</em>` : ""}</span>
           ${renderMilestoneStatus(milestone.status)}${icon("chev")}
         </button>
         ${

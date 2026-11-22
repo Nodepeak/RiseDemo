@@ -13,10 +13,17 @@ const state = {
   expanded: {},
   dossierOpen: !1,
   drawer: null,
+  drawerWork: null,
+  deskSlide: 0,
+  triage: null,
   drawerSection: null,
   sigFilter: {},
   selSignal: {},
   selMeeting: {},
+  agenda: {},
+  agendaCheck: null,
+  agendaMail: null,
+  agendaLock: null,
   folder: {},
   doc: null,
   docPassage: null,
@@ -31,6 +38,7 @@ const state = {
   toastUndo: null,
   routes: !1,
   agendaAdopted: {},
+  onAgenda: {},
   planDraft: {},
   dismissed: {},
   signalFollowups: {},
@@ -266,7 +274,7 @@ function currentVickiTips(context) {
   const add = (text, action, prompt) => prompt && tips.push({ text, action, prompt });
   if (state.drawer) {
     add("Zal ik de urgentie en de eerste stap toelichten?", "Licht dit signaal toe", "Welke actie stel je voor bij dit signaal?");
-    add("Ik kan ook uitleggen waarom Rise dit signaal laat zien.", "Waarom dit signaal?", "Waarom toont Rise dit signaal?");
+    add("Ik kan ook uitleggen waarom ik dit signaal laat zien.", "Waarom dit signaal?", "Waarom toont Rise dit signaal?");
     return tips;
   }
   if (state.view === "doc") {
@@ -280,7 +288,14 @@ function currentVickiTips(context) {
       if (signal && state.section === "signalen") add(`Dit vraagt als eerste aandacht: ${signal.title}.`, "Laat zien wat voorrang heeft", context.suggestions[0]);
       add("Ik kan laten zien welke acties nog openstaan en wanneer ze af moeten.", "Bekijk openstaande acties", "Welke acties staan open?");
     }
-    if (state.section === "vergaderingen") add("Zal ik een agenda maken voor je volgende overleg?", "Bereid mijn overleg voor", context.suggestions[0]);
+    if (state.section === "vergaderingen") {
+      const next = meetings.filter((meeting) => meeting.project === state.projectId && meeting.date >= demoTodayIso).sort((a, b) => a.date.localeCompare(b.date))[0];
+      const nextAgenda = next ? agendaOf(next) : null;
+      if (nextAgenda?.stage === "final") add(`De agenda van ${next.title.toLowerCase()} is definitief. Verstuur hem via Rise, of download hem als pdf.`, "Bekijk de agenda", context.suggestions[0]);
+      else if (nextAgenda?.stage === "sent") add("De agenda staat vast. Komt er nog iets bij, dan zet ik het klaar als aanvulling.", "Bekijk de agenda", context.suggestions[0]);
+      else if (nextAgenda?.stage === "concept") add(`De agenda van ${next.title.toLowerCase()} heb ik alvast opgezet. Vul gerust aan. Maak je hem definitief, dan loop ik alles nog één keer na.`, "Bekijk de agenda", context.suggestions[0]);
+      else add("Zal ik een agenda maken voor je volgende overleg?", "Bereid mijn overleg voor", context.suggestions[0]);
+    }
     if (state.section === "planning") add("Ik houd de mijlpalen in de gaten. Zal ik laten zien welke onder druk staan?", "Bekijk de planning", context.suggestions[0]);
     if (state.section === "dossier") add("Ik kan nagaan welke stukken nog ontbreken voor de aanvraag.", "Check het dossier", context.suggestions[0]);
     add("Tip: druk op / om me vanaf elke pagina iets te vragen.", "Stel een vraag", context.suggestions.at(-1));
@@ -291,7 +306,12 @@ function currentVickiTips(context) {
   }
   if (state.view === "bureau") {
     const [signal] = sortSignalsByAction(openSignals());
-    if (signal) add(`Dit vraagt als eerste aandacht bij ${findProject(signal.project).name}. ${signal.title}.`, "Laat zien wat voorrang heeft", context.suggestions[0]);
+    const hello = `${deskGreeting()}, ${profile.first}.`;
+    const open = openSignals();
+    if (state.triage) add(state.triage.ids.every((id) => state.triage.verdicts[id]) ? "Dank je. Hier leer ik van: wat niet klopte, laat ik voortaan minder snel zien." : "Klopt dit signaal? Kies hieronder, dan pak ik het volgende.", "Doorlopen", context.suggestions[0]);
+    else if (open.length > 1) tips.push({ text: `${hello} Ik vond deze week ${open.length} signalen. Zullen we ze even samen doorlopen?`, action: "Loop ze door", prompt: context.suggestions[0], run: "triage-start", ask: true });
+    else if (signal) add(`${hello} Ik heb je briefing klaargezet. Eerst dit: ${lowerFirst(signal.title)} bij ${findProject(signal.project).name}.`, "Laat zien wat voorrang heeft", context.suggestions[0]);
+    else add(`${hello} Er vraagt vandaag niets om een besluit.`, "Stel een vraag", context.suggestions[0]);
   }
   if (state.view === "bureau" || state.view === "projecten") {
     add("Zal ik de risico’s van Havenkwartier en De Kade naast elkaar zetten?", "Vergelijk de risico’s", context.suggestions[1]);

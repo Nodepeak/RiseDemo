@@ -43,42 +43,42 @@
       <a class="nav-item " data-action="nav" href="gesprekken.html" data-view="gesprekken"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg><span>Gesprekken</span></a>
       <a class="nav-item " data-action="nav" href="acties.html" data-view="acties"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"></rect><path d="m8.5 12 2.5 2.5 4.5-5"></path></svg><span>Acties</span></a>
       <button class="nav-item " data-action="toggle-dossier" aria-expanded="false"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"></path></svg><span>Dossier</span><svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button>
-      
+
     </nav>
     <div class="nav-label"><span>Projecten</span><a data-action="tab" href="projecten/index.html" data-view="projecten">Alle</a></div>
     <nav class="nav-projects" aria-label="Projecten">
       <div class="np ">
           <button class="np-head" data-action="toggle-project" data-id="hk" aria-expanded="false">
-            <span class="np-mono">HK</span><span class="np-name">Havenkwartier</span>
+            <span class="np-dot" data-status="Onder druk" aria-hidden="true"></span><span class="np-name">Havenkwartier</span>
             <svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
           </button>
-          
+
         </div><div class="np ">
           <button class="np-head" data-action="toggle-project" data-id="dk" aria-expanded="false">
-            <span class="np-mono">DK</span><span class="np-name">De Kade</span>
-            <span class="np-count">2</span><svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+            <span class="np-dot" data-status="Onder druk" aria-hidden="true"></span><span class="np-name">De Kade</span>
+            <span class="np-count" aria-label="2 open signalen">2</span><svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
           </button>
-          
+
         </div><div class="np ">
           <button class="np-head" data-action="toggle-project" data-id="pz" aria-expanded="false">
-            <span class="np-mono">PZ</span><span class="np-name">Parkzijde</span>
+            <span class="np-dot" data-status="Onder druk" aria-hidden="true"></span><span class="np-name">Parkzijde</span>
             <svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
           </button>
-          
+
         </div><div class="np ">
           <button class="np-head" data-action="toggle-project" data-id="mw" aria-expanded="false">
-            <span class="np-mono">MW</span><span class="np-name">Molenweide</span>
+            <span class="np-dot" data-status="Aandacht nodig" aria-hidden="true"></span><span class="np-name">Molenweide</span>
             <svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
           </button>
-          
+
         </div>
-      
+
     </nav>
     <div class="nav-foot">
       <a class="nav-item " data-action="nav" href="instellingen.html" data-view="instellingen"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7h-9M14 17H5"></path><circle cx="17" cy="17" r="3"></circle><circle cx="7" cy="7" r="3"></circle></svg><span>Instellingen</span></a>
     </div>
   </aside>
-  
+
   <main class="main view-bureau">
     <header class="top">
     <button class="mobile-menu icon-btn" data-action="mobile-nav" aria-label="Navigatiemenu" aria-controls="demo-navigation" aria-expanded="false"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg></button>
@@ -90,24 +90,25 @@
     </div>
   </header>
     <div class="content" id="content"><section class="desk">
-    <header class="desk-head">
-      <div class="desk-hello">
-        <p class="kicker">vrijdag 20 november</p>
-        <h1>Goedenavond, Maartje</h1>
-        <p class="lede">Rise las <b>14 nieuwe stukken</b> in je vier projecten. 6 signalen vragen om een besluit.</p>
-      </div>
-    </header>
+    <h1 class="visually-hidden">Overzicht</h1>
 
-    <div class="desk-ask">
-      <h2><label for="ta-home">Waar wil je mee beginnen?</label></h2>
-      <form class="composer composer--big" data-comp="home" data-action-submit="send">
+    <section class="brief" aria-labelledby="brief-title">
+      <div class="brief-head">
+        <img class="brief-vicki" src="assets/vicki.svg" width="28" height="28" alt="">
+        <h2 id="brief-title">Je briefing</h2>
+        <span class="brief-src">vrijdag 20 november · 14 nieuwe stukken gelezen</span>
+      </div>
+      <p class="brief-text">Het belangrijkste deze week: brandweeradvies trappenhuis staat open bij <b>De Kade</b>, nog 7 dagen. Vooruitwerken: bij <b>Parkzijde</b> kan de anterieure overeenkomst nu al starten. Dat scheelt ongeveer 8 weken. Vooruitkijkend: aanvraag omgevingsvergunning van <b>De Kade</b> schuift mogelijk van 22 jan naar 12 feb.</p>
+      <div class="desk-ask">
+        <h2><label for="ta-home">Vraag door</label></h2>
+        <form class="composer " data-comp="home" data-action-submit="send">
     <div class="comp-ctx">
       <button type="button" id="composer-projects-home" class="comp-btn comp-project-picker" data-action="pop-projects" data-comp="home" aria-label="Projecten kiezen" aria-expanded="false" aria-controls="choice-popover">
         <b aria-hidden="true">@</b><span>Alle projecten</span><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
       </button>
-      
+
     </div>
-    <textarea id="ta-home" data-comp="home" rows="2" aria-label="Vraag of opdracht voor Vicki" placeholder="Vraag Vicki iets over je projecten, of geef een opdracht…"></textarea>
+    <textarea id="ta-home" data-comp="home" rows="1" aria-label="Vraag of opdracht voor Vicki" placeholder="Vraag door op je briefing…"></textarea>
     <div class="comp-bar">
       <button type="button" class="comp-btn" id="composer-context-home" aria-expanded="false" aria-controls="choice-popover" data-action="pop-context" data-comp="home"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5v14"></path></svg><span>Bronnen</span></button>
       <button type="button" class="comp-btn " id="composer-skill-home" aria-expanded="false" aria-controls="choice-popover" data-action="pop-skill" data-comp="home"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.9 5.8a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3z"></path></svg><span>Skill</span></button>
@@ -115,156 +116,296 @@
       <button type="submit" class="comp-send" aria-label="Verstuur"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 7-7 7 7M12 19V5"></path></svg></button>
     </div>
   </form>
-      <div class="desk-suggest"><button type="button" data-action="desk-suggest" data-text="Wat vraagt deze week mijn aandacht?"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.9 5.8a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3z"></path></svg>Wat vraagt deze week mijn aandacht?</button><button type="button" data-action="desk-suggest" data-text="Welke acties lopen achter?"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.9 5.8a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3z"></path></svg>Welke acties lopen achter?</button><button type="button" data-action="desk-suggest" data-text="Bereid Bouwteam #7 van @Parkzijde voor"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l1.9 5.8a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3z"></path></svg>Bereid Bouwteam #7 van @Parkzijde voor</button></div>
-    </div>
+      </div>
+    </section>
 
-    <div class="desk-stats"><div class="stats">
-      <a class="stat " href="projecten/index.html" data-action="tab" data-view="projecten">
-    <span><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>Open signalen</span><b>6</b><small>3 met hoge urgentie</small><svg class="ic stat-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10M7 17 17 7"></path></svg>
-  </a>
-      <a class="stat " href="acties.html" data-action="nav" data-view="acties">
-    <span><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"></rect><path d="m8.5 12 2.5 2.5 4.5-5"></path></svg>Acties deze week</span><b>3</b><small>Alles op schema</small><svg class="ic stat-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10M7 17 17 7"></path></svg>
-  </a>
-      <a class="stat " href="projecten/parkzijde/vergaderingen.html#pz-bt7" data-action="action-meeting" data-id="pz-bt7">
-    <span><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg>Overleggen deze week</span><b>2</b><small>Eerstvolgende: Bouwteam #7, 25 nov</small><svg class="ic stat-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10M7 17 17 7"></path></svg>
-  </a>
-      <a class="stat " href="projecten/index.html" data-action="tab" data-view="projecten">
-    <span><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h10M6 12h9M11 18h7"></path></svg>Mijlpalen onder druk</span><b>4<small> / 4</small></b><small>projecten met een risico</small><svg class="ic stat-go" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v10M7 17 17 7"></path></svg>
-  </a>
-    </div></div>
+    <section class="slider " aria-roledescription="carrousel" aria-label="Signalen, belangrijkste eerst">
+    <header class="slider-head">
+      <p class="desk-label " data-slide-label="">Eerst dit</p>
+      <div class="slider-nav">
+        <button type="button" class="slider-walk" data-action="triage-start" title="Loop de signalen samen met Vicki door"><img class="vicki-avatar" src="assets/vicki.svg" width="22" height="22" alt=""><span>Samen doorlopen</span></button>
+        <span class="slider-pos" aria-hidden="true"><b data-slide-pos="">1</b>/7</span>
+        <span class="slider-dots"><button type="button" class="slider-dot is-on" data-slide-to="0" aria-label="Signaal 1 van 7" aria-current="true"></button><button type="button" class="slider-dot " data-slide-to="1" aria-label="Signaal 2 van 7"></button><button type="button" class="slider-dot " data-slide-to="2" aria-label="Signaal 3 van 7"></button><button type="button" class="slider-dot " data-slide-to="3" aria-label="Signaal 4 van 7"></button><button type="button" class="slider-dot " data-slide-to="4" aria-label="Signaal 5 van 7"></button><button type="button" class="slider-dot " data-slide-to="5" aria-label="Signaal 6 van 7"></button><button type="button" class="slider-dot " data-slide-to="6" aria-label="Signaal 7 van 7"></button></span>
+        <button type="button" class="icon-btn icon-btn--soft slider-arrow" data-slide-dir="-1" aria-label="Vorig signaal" disabled=""><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg></button>
+        <button type="button" class="icon-btn icon-btn--soft slider-arrow" data-slide-dir="1" aria-label="Volgend signaal"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button>
 
-    <div class="desk-grid">
-      <section class="outlook" aria-labelledby="outlook-title">
-        <header class="outlook-head">
-          <div><h2 id="outlook-title">Signalen</h2><p>Op volgorde van het eerstvolgende actiemoment</p></div>
-          <a class="btn btn--quiet btn--sm" data-action="tab" data-view="projecten" href="projecten/index.html">Alle 6 bekijken <svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></a>
-        </header>
-        
-        <div class="signal-register"><article class="signal-entry"><div class="signal-decision">
-    <div class="signal-situation">
-      <span class="signal-project">De Kade</span><h3>Brandweeradvies trappenhuis staat open</h3>
-      <p class="signal-observation">Het advies voor het trappenhuis van blok B staat nog niet in het dossier.</p>
-      <p class="signal-impact"><strong>Impact</strong> De plattegrond van blok B kan nog wijzigen vóór het definitief ontwerp.</p>
-      <div class="signal-controls">
-        <button type="button" class="btn btn--ghost btn--sm" data-action="discuss-signal" data-id="s-dk2"><img class="vicki-avatar" src="assets/vicki.svg" width="22" height="22" alt="">Bespreek met Vicki</button>
+      </div>
+    </header>
+    <div class="slider-track" tabindex="0" data-slider="">
+      <div class="slide is-active " data-verdict="" role="group" aria-roledescription="dia" aria-label="1 van 7"><article class="first" aria-labelledby="first-title-s-dk2">
+    <div class="first-signal">
+      <p class="first-meta">
+        <span class="first-count" data-urgency="Hoog"><b>7</b> dagen</span>
+        <span>De Kade</span><span class="sig-link" data-soort="blokkeert" title="Volgens het procesmodel"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m21.7 18-8-14a2 2 0 0 0-3.4 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3"></path><path d="M12 9v4M12 17h.01"></path></svg>Houdt de vergunningaanvraag tegen</span>
+      </p>
+      <h2 id="first-title-s-dk2">Brandweeradvies trappenhuis staat open</h2>
+      <p class="first-what">Het advies voor het trappenhuis van blok B staat nog niet in het dossier.</p>
+      <p class="first-why">De plattegrond van blok B kan nog wijzigen vóór het definitief ontwerp.</p>
+      <div class="first-links">
         <button type="button" id="overview-s-dk2" class="btn btn--link btn--sm" data-action="open-signal" data-id="s-dk2" aria-label="Onderbouwing voor Brandweeradvies trappenhuis staat open">Onderbouwing</button>
+        <button type="button" class="vicki-ask" data-action="discuss-signal" data-id="s-dk2" aria-label="Bespreek met Vicki" title="Bespreek met Vicki"><img class="vicki-avatar" src="assets/vicki.svg" width="22" height="22" alt=""></button>
+        <details class="verdict">
+    <summary aria-label="Signaal afwijzen" title="Klopt dit niet?"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"></path></svg></summary>
+    <div class="verdict-menu" role="menu">
+      <p>Wat is er mis mee?</p>
+      <button type="button" role="menuitem" data-action="signal-verdict" data-id="s-dk2" data-reason="Klopt niet">Klopt niet</button><button type="button" role="menuitem" data-action="signal-verdict" data-id="s-dk2" data-reason="Al geregeld">Al geregeld</button><button type="button" role="menuitem" data-action="signal-verdict" data-id="s-dk2" data-reason="Ga ik niets mee doen">Ga ik niets mee doen</button>
+    </div>
+  </details>
       </div>
     </div>
-    <div class="signal-next">
-      <div class="signal-timing">
-        <span class="signal-urgency" data-urgency="Hoog">Hoge urgentie</span><span>Handel uiterlijk <time datetime="2026-11-27">27 nov</time></span>
-      </div>
-      <div class="signal-proposals">
-    <p>Rise stelt voor</p>
-    <ul><li><button type="button" class="signal-proposal" data-action="signal-step" data-id="s-dk2" data-i="0"><span>Maak een agendapunt voor het ontwerpteam</span><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button></li></ul>
-  </div>
-    </div>
-  </div></article><article class="signal-entry"><div class="signal-decision">
-    <div class="signal-situation">
-      <span class="signal-project">Havenkwartier</span><h3>11 sociale huurwoningen onder de afspraak</h3>
-      <p class="signal-observation">Programma v3 bevat 53 sociale huurwoningen. Afgesproken is minimaal 64.</p>
-      <p class="signal-impact"><strong>Impact</strong> Voor indiening van het ontwerp-bestemmingsplan is akkoord van de gemeente nodig.</p>
-      <div class="signal-controls">
-        <button type="button" class="btn btn--ghost btn--sm" data-action="discuss-signal" data-id="s-hk"><img class="vicki-avatar" src="assets/vicki.svg" width="22" height="22" alt="">Bespreek met Vicki</button>
-        <button type="button" id="overview-s-hk" class="btn btn--link btn--sm" data-action="open-signal" data-id="s-hk" aria-label="Onderbouwing voor 11 sociale huurwoningen onder de afspraak">Onderbouwing</button>
-      </div>
-    </div>
-    <div class="signal-next">
-      <div class="signal-timing">
-        <span class="signal-urgency" data-urgency="Hoog">Hoge urgentie</span><span>Handel uiterlijk <time datetime="2026-12-02">2 dec</time></span>
-      </div>
-      <div class="signal-proposals">
-    <p>Rise stelt voor</p>
-    <ul><li><button type="button" class="signal-proposal" data-action="signal-step" data-id="s-hk" data-i="1"><span>Maak een agendapunt voor de stuurgroep</span><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button></li><li><button type="button" class="signal-proposal" data-action="signal-step" data-id="s-hk" data-i="0"><span>Zoek een gewijzigde afspraak</span><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button></li><li><button type="button" class="signal-proposal" data-action="signal-step" data-id="s-hk" data-i="2"><span>Schrijf een conceptvraag aan Ilse</span><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button></li></ul>
-  </div>
-    </div>
-  </div></article><article class="signal-entry"><div class="signal-decision">
-    <div class="signal-situation">
-      <span class="signal-project">Molenweide</span><h3>Nieuwe welstandsnota niet verwerkt</h3>
-      <p class="signal-observation">De haalbaarheidsstudie verwerkt de nieuwe eisen voor dorpsranden nog niet.</p>
-      <p class="signal-impact"><strong>Impact</strong> Andere eisen aan kapvorm en materiaal kunnen de bouwkosten en de afgesproken grondprijs beïnvloeden.</p>
-      <div class="signal-controls">
-        <button type="button" class="btn btn--ghost btn--sm" data-action="discuss-signal" data-id="s-mw"><img class="vicki-avatar" src="assets/vicki.svg" width="22" height="22" alt="">Bespreek met Vicki</button>
-        <button type="button" id="overview-s-mw" class="btn btn--link btn--sm" data-action="open-signal" data-id="s-mw" aria-label="Onderbouwing voor Nieuwe welstandsnota niet verwerkt">Onderbouwing</button>
-      </div>
-    </div>
-    <div class="signal-next">
-      <div class="signal-timing">
-        <span class="signal-urgency" data-urgency="Hoog">Hoge urgentie</span><span>Handel uiterlijk <time datetime="2026-12-04">4 dec</time></span>
-      </div>
-      <div class="signal-proposals">
-    <p>Rise stelt voor</p>
-    <ul><li><button type="button" class="signal-proposal" data-action="signal-step" data-id="s-mw" data-i="0"><span>Toets de studie aan de welstandsnota</span><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button></li></ul>
-  </div>
-    </div>
-  </div></article><article class="signal-entry"><div class="signal-decision">
-    <div class="signal-situation">
-      <span class="signal-project">Parkzijde</span><h3>Bodemonderzoek nog niet bevestigd</h3>
-      <p class="signal-observation">De offerte verloopt op 12 december. In het dossier staat nog geen opdrachtbevestiging.</p>
-      <p class="signal-impact"><strong>Impact</strong> Het onderzoek duurt circa zeven weken. Om de aanvraag van 2 maart te halen, moet de opdracht rond 5 januari uitstaan.</p>
-      <div class="signal-controls">
-        <button type="button" class="btn btn--ghost btn--sm" data-action="discuss-signal" data-id="s-pz"><img class="vicki-avatar" src="assets/vicki.svg" width="22" height="22" alt="">Bespreek met Vicki</button>
-        <button type="button" id="overview-s-pz" class="btn btn--link btn--sm" data-action="open-signal" data-id="s-pz" aria-label="Onderbouwing voor Bodemonderzoek nog niet bevestigd">Onderbouwing</button>
-      </div>
-    </div>
-    <div class="signal-next">
-      <div class="signal-timing">
-        <span class="signal-urgency" data-urgency="Midden">Gemiddelde urgentie</span><span>Handel uiterlijk <time datetime="2026-12-12">12 dec</time></span>
-      </div>
-      <div class="signal-proposals">
-    <p>Rise stelt voor</p>
-    <ul><li><button type="button" class="signal-proposal" data-action="signal-step" data-id="s-pz" data-i="0"><span>Maak een conceptmail aan Joost</span><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button></li><li><button type="button" class="signal-proposal" data-action="signal-step" data-id="s-pz" data-i="1"><span>Koppel de opdrachtbevestiging</span><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button></li><li><button type="button" class="signal-proposal" data-action="signal-step" data-id="s-pz" data-i="2"><span>Bereid bouwteam #7 voor</span><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button></li></ul>
-  </div>
-    </div>
-  </div></article></div>
-      </section>
+    <div class="sa sa--agenda ">
+    <p class="sa-kind"><img class="vicki-avatar" src="assets/vicki.svg" width="22" height="22" alt=""><span>Vicki stelt voor · Agendapunt</span></p>
+    <p class="sa-what">Maak een agendapunt voor het ontwerpteam</p>
+    <p class="sa-where">Ontwerpteam · vr 27 nov</p>
+    <button type="button" class="btn sa-go" data-action="signal-step" data-id="s-dk2" data-i="0">Zet op de agenda</button>
 
-      <aside class="desk-side">
-        <section aria-labelledby="agenda-title">
-          <header class="outlook-head"><div><h2 id="agenda-title">Komende overleggen</h2></div></header>
-          <div class="agenda-list"><a class="agenda-item" href="projecten/parkzijde/vergaderingen.html#pz-bt7" data-action="action-meeting" data-id="pz-bt7">
-    <span class="agenda-date"><small>wo</small><b>25</b></span>
-    <span><b class="t">Bouwteam #7</b><em>Parkzijde · 10:00 · Bouwkeet Parkzijde</em></span>
-  </a><a class="agenda-item" href="projecten/de-kade/vergaderingen.html#dk-ot" data-action="action-meeting" data-id="dk-ot">
-    <span class="agenda-date"><small>vr</small><b>27</b></span>
-    <span><b class="t">Ontwerpteam</b><em>De Kade · 13:30 · Teams</em></span>
-  </a><a class="agenda-item" href="projecten/havenkwartier/vergaderingen.html#hk-sg" data-action="action-meeting" data-id="hk-sg">
-    <span class="agenda-date"><small>wo</small><b>2</b></span>
-    <span><b class="t">Stuurgroep met gemeente</b><em>Havenkwartier · 14:00 · Stadskantoor Schiedam</em></span>
-  </a><a class="agenda-item" href="projecten/molenweide/vergaderingen.html#mw-ge" data-action="action-meeting" data-id="mw-ge">
-    <span class="agenda-date"><small>vr</small><b>4</b></span>
-    <span><b class="t">Gesprek grondeigenaar</b><em>Molenweide · 16:00 · Boerderij Verbeek</em></span>
-  </a></div>
-        </section>
-        <section aria-labelledby="health-title">
-          <header class="outlook-head"><div><h2 id="health-title">Projecten</h2></div>
-            </header>
-          <div class="health"><a href="projecten/havenkwartier/planning.html" data-action="nav" data-view="project" data-project="hk" data-section="planning">
-                <span class="np-mono">HK</span>
-                <span><b>Havenkwartier</b><em>Bestemmingsplan · Schiedam</em></span>
-                <span class="milestone-status" data-status="Onder druk">Onder druk</span>
-              </a><a href="projecten/de-kade/planning.html" data-action="nav" data-view="project" data-project="dk" data-section="planning">
-                <span class="np-mono">DK</span>
-                <span><b>De Kade</b><em>Definitief ontwerp · Zaandam</em></span>
-                <span class="milestone-status" data-status="Onder druk">Onder druk</span>
-              </a><a href="projecten/parkzijde/planning.html" data-action="nav" data-view="project" data-project="pz" data-section="planning">
-                <span class="np-mono">PZ</span>
-                <span><b>Parkzijde</b><em>Voorlopig ontwerp · Amersfoort</em></span>
-                <span class="milestone-status" data-status="Onder druk">Onder druk</span>
-              </a><a href="projecten/molenweide/planning.html" data-action="nav" data-view="project" data-project="mw" data-section="planning">
-                <span class="np-mono">MW</span>
-                <span><b>Molenweide</b><em>Haalbaarheid · Houten</em></span>
-                <span class="milestone-status" data-status="Aandacht nodig">Aandacht nodig</span>
-              </a></div>
-        </section>
-      </aside>
+  </div>
+  </article></div><div class="slide  " data-verdict="" role="group" aria-roledescription="dia" aria-label="2 van 7" inert=""><article class="first" aria-labelledby="first-title-s-hk">
+    <div class="first-signal">
+      <p class="first-meta">
+        <span class="first-count" data-urgency="Hoog"><b>12</b> dagen</span>
+        <span>Havenkwartier</span><span class="sig-link" data-soort="herziening" title="Volgens het procesmodel"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15.7-6L21 8"></path><path d="M21 3v5h-5M21 12a9 9 0 0 1-15.7 6L3 16"></path><path d="M8 16H3v5"></path></svg>Exploitatie en anterieure overeenkomst moeten mee</span>
+      </p>
+      <h2 id="first-title-s-hk">11 sociale huurwoningen onder de afspraak</h2>
+      <p class="first-what">Programma v3 bevat 53 sociale huurwoningen. Afgesproken is minimaal 64.</p>
+      <p class="first-why">Het programma ligt vast in de anterieure overeenkomst. Zonder akkoord van de gemeente op de afwijking kan het ontwerpbesluit omgevingsplan niet ter inzage.</p>
+      <div class="first-links">
+        <button type="button" id="overview-s-hk" class="btn btn--link btn--sm" data-action="open-signal" data-id="s-hk" aria-label="Onderbouwing voor 11 sociale huurwoningen onder de afspraak">Onderbouwing</button>
+        <button type="button" class="vicki-ask" data-action="discuss-signal" data-id="s-hk" aria-label="Bespreek met Vicki" title="Bespreek met Vicki"><img class="vicki-avatar" src="assets/vicki.svg" width="22" height="22" alt=""></button>
+        <details class="verdict">
+    <summary aria-label="Signaal afwijzen" title="Klopt dit niet?"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"></path></svg></summary>
+    <div class="verdict-menu" role="menu">
+      <p>Wat is er mis mee?</p>
+      <button type="button" role="menuitem" data-action="signal-verdict" data-id="s-hk" data-reason="Klopt niet">Klopt niet</button><button type="button" role="menuitem" data-action="signal-verdict" data-id="s-hk" data-reason="Al geregeld">Al geregeld</button><button type="button" role="menuitem" data-action="signal-verdict" data-id="s-hk" data-reason="Ga ik niets mee doen">Ga ik niets mee doen</button>
     </div>
+  </details>
+      </div>
+    </div>
+    <div class="sa sa--agenda ">
+    <p class="sa-kind"><img class="vicki-avatar" src="assets/vicki.svg" width="22" height="22" alt=""><span>Vicki stelt voor · Agendapunt</span></p>
+    <p class="sa-what">Maak een agendapunt voor de stuurgroep</p>
+    <p class="sa-where">Stuurgroep met gemeente · wo 2 dec</p>
+    <button type="button" class="btn sa-go" data-action="signal-step" data-id="s-hk" data-i="1">Zet op de agenda</button>
+    <details class="sa-more"><summary>Nog 2 voorstellen</summary><button type="button" class="sa-alt" data-action="signal-step" data-id="s-hk" data-i="0"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>Zoek een gewijzigde afspraak</button><button type="button" class="sa-alt" data-action="signal-step" data-id="s-hk" data-i="2"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 7-7 7 7M12 19V5"></path></svg>Schrijf een conceptvraag aan Ilse</button></details>
+  </div>
+  </article></div><div class="slide  " data-verdict="" role="group" aria-roledescription="dia" aria-label="3 van 7" inert=""><article class="first" aria-labelledby="first-title-s-mw">
+    <div class="first-signal">
+      <p class="first-meta">
+        <span class="first-count" data-urgency="Hoog"><b>14</b> dagen</span>
+        <span>Molenweide</span><span class="sig-link" data-soort="herziening" title="Volgens het procesmodel"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15.7-6L21 8"></path><path d="M21 3v5h-5M21 12a9 9 0 0 1-15.7 6L3 16"></path><path d="M8 16H3v5"></path></svg>Raakt de haalbaarheidsberekening</span>
+      </p>
+      <h2 id="first-title-s-mw">Nieuwe welstandsnota niet verwerkt</h2>
+      <p class="first-what">De haalbaarheidsstudie verwerkt de nieuwe eisen voor dorpsranden nog niet.</p>
+      <p class="first-why">Andere eisen aan kapvorm en materiaal kunnen de bouwkosten en de afgesproken grondprijs beïnvloeden.</p>
+      <div class="first-links">
+        <button type="button" id="overview-s-mw" class="btn btn--link btn--sm" data-action="open-signal" data-id="s-mw" aria-label="Onderbouwing voor Nieuwe welstandsnota niet verwerkt">Onderbouwing</button>
+        <button type="button" class="vicki-ask" data-action="discuss-signal" data-id="s-mw" aria-label="Bespreek met Vicki" title="Bespreek met Vicki"><img class="vicki-avatar" src="assets/vicki.svg" width="22" height="22" alt=""></button>
+        <details class="verdict">
+    <summary aria-label="Signaal afwijzen" title="Klopt dit niet?"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"></path></svg></summary>
+    <div class="verdict-menu" role="menu">
+      <p>Wat is er mis mee?</p>
+      <button type="button" role="menuitem" data-action="signal-verdict" data-id="s-mw" data-reason="Klopt niet">Klopt niet</button><button type="button" role="menuitem" data-action="signal-verdict" data-id="s-mw" data-reason="Al geregeld">Al geregeld</button><button type="button" role="menuitem" data-action="signal-verdict" data-id="s-mw" data-reason="Ga ik niets mee doen">Ga ik niets mee doen</button>
+    </div>
+  </details>
+      </div>
+    </div>
+    <div class="sa sa--check ">
+    <p class="sa-kind"><img class="vicki-avatar" src="assets/vicki.svg" width="22" height="22" alt=""><span>Vicki stelt voor · Controle</span></p>
+    <p class="sa-what">Toets de studie aan de welstandsnota</p>
+
+    <button type="button" class="btn sa-go" data-action="signal-step" data-id="s-mw" data-i="0">Laat Vicki controleren</button>
+
+  </div>
+  </article></div><div class="slide  " data-verdict="" role="group" aria-roledescription="dia" aria-label="4 van 7" inert=""><article class="first" aria-labelledby="first-title-s-pz">
+    <div class="first-signal">
+      <p class="first-meta">
+        <span class="first-count" data-urgency="Midden"><b>22</b> dagen</span>
+        <span>Parkzijde</span><span class="sig-link" data-soort="termijn" title="Volgens het procesmodel"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>Offerte verloopt 12 dec</span>
+      </p>
+      <h2 id="first-title-s-pz">Bodemonderzoek nog niet bevestigd</h2>
+      <p class="first-what">De offerte verloopt op 12 december. In het dossier staat nog geen opdrachtbevestiging.</p>
+      <p class="first-why">Het onderzoek duurt circa zeven weken. Om de aanvraag van 2 maart te halen, moet de opdracht rond 5 januari uitstaan.</p>
+      <div class="first-links">
+        <button type="button" id="overview-s-pz" class="btn btn--link btn--sm" data-action="open-signal" data-id="s-pz" aria-label="Onderbouwing voor Bodemonderzoek nog niet bevestigd">Onderbouwing</button>
+        <button type="button" class="vicki-ask" data-action="discuss-signal" data-id="s-pz" aria-label="Bespreek met Vicki" title="Bespreek met Vicki"><img class="vicki-avatar" src="assets/vicki.svg" width="22" height="22" alt=""></button>
+        <details class="verdict">
+    <summary aria-label="Signaal afwijzen" title="Klopt dit niet?"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"></path></svg></summary>
+    <div class="verdict-menu" role="menu">
+      <p>Wat is er mis mee?</p>
+      <button type="button" role="menuitem" data-action="signal-verdict" data-id="s-pz" data-reason="Klopt niet">Klopt niet</button><button type="button" role="menuitem" data-action="signal-verdict" data-id="s-pz" data-reason="Al geregeld">Al geregeld</button><button type="button" role="menuitem" data-action="signal-verdict" data-id="s-pz" data-reason="Ga ik niets mee doen">Ga ik niets mee doen</button>
+    </div>
+  </details>
+      </div>
+    </div>
+    <div class="sa sa--mail ">
+    <p class="sa-kind"><img class="vicki-avatar" src="assets/vicki.svg" width="22" height="22" alt=""><span>Vicki stelt voor · Conceptmail</span></p>
+    <p class="sa-what">Maak een conceptmail aan Joost</p>
+
+    <button type="button" class="btn sa-go" data-action="signal-step" data-id="s-pz" data-i="0">Bekijk concept</button>
+    <details class="sa-more"><summary>Nog 2 voorstellen</summary><button type="button" class="sa-alt" data-action="signal-step" data-id="s-pz" data-i="1"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>Koppel de opdrachtbevestiging</button><button type="button" class="sa-alt" data-action="signal-step" data-id="s-pz" data-i="2"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg>Bereid bouwteam #7 voor</button></details>
+  </div>
+  </article></div><div class="slide  " data-verdict="" role="group" aria-roledescription="dia" aria-label="5 van 7" inert=""><article class="first" aria-labelledby="first-title-s-pz2">
+    <div class="first-signal">
+      <p class="first-meta">
+        <span class="first-count" data-urgency="Midden"><b>28</b> dagen</span>
+        <span>Parkzijde</span><span class="sig-link" data-soort="vooruitwerken" title="Volgens het procesmodel"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m13 17 5-5-5-5"></path><path d="m6 17 5-5-5-5"></path></svg>Scheelt ± 8 weken</span>
+      </p>
+      <h2 id="first-title-s-pz2">Anterieure overeenkomst kan nu al starten</h2>
+      <p class="first-what">De planning start de onderhandeling over de anterieure overeenkomst pas half januari, na de VO-raming en exploitatie.</p>
+      <p class="first-why">Bij een BOPA wil de gemeente het kostenverhaal geregeld hebben voordat de vergunning wordt verleend. Parallel aan het VO starten scheelt ongeveer 8 weken.</p>
+      <div class="first-links">
+        <button type="button" id="overview-s-pz2" class="btn btn--link btn--sm" data-action="open-signal" data-id="s-pz2" aria-label="Onderbouwing voor Anterieure overeenkomst kan nu al starten">Onderbouwing</button>
+        <button type="button" class="vicki-ask" data-action="discuss-signal" data-id="s-pz2" aria-label="Bespreek met Vicki" title="Bespreek met Vicki"><img class="vicki-avatar" src="assets/vicki.svg" width="22" height="22" alt=""></button>
+        <details class="verdict">
+    <summary aria-label="Signaal afwijzen" title="Klopt dit niet?"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"></path></svg></summary>
+    <div class="verdict-menu" role="menu">
+      <p>Wat is er mis mee?</p>
+      <button type="button" role="menuitem" data-action="signal-verdict" data-id="s-pz2" data-reason="Klopt niet">Klopt niet</button><button type="button" role="menuitem" data-action="signal-verdict" data-id="s-pz2" data-reason="Al geregeld">Al geregeld</button><button type="button" role="menuitem" data-action="signal-verdict" data-id="s-pz2" data-reason="Ga ik niets mee doen">Ga ik niets mee doen</button>
+    </div>
+  </details>
+      </div>
+    </div>
+    <div class="sa sa--mail ">
+    <p class="sa-kind"><img class="vicki-avatar" src="assets/vicki.svg" width="22" height="22" alt=""><span>Vicki stelt voor · Conceptmail</span></p>
+    <p class="sa-what">Maak een conceptmail aan de gemeente</p>
+
+    <button type="button" class="btn sa-go" data-action="signal-step" data-id="s-pz2" data-i="0">Bekijk concept</button>
+    <details class="sa-more"><summary>Nog 1 voorstel</summary><button type="button" class="sa-alt" data-action="signal-step" data-id="s-pz2" data-i="1"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m13 17 5-5-5-5"></path><path d="m6 17 5-5-5-5"></path></svg>Reken de tijdwinst door</button></details>
+  </div>
+  </article></div><div class="slide  " data-verdict="" role="group" aria-roledescription="dia" aria-label="6 van 7" inert=""><article class="first" aria-labelledby="first-title-s-dk">
+    <div class="first-signal">
+      <p class="first-meta">
+        <span class="first-count" data-urgency="Midden"><b>29</b> dagen</span>
+        <span>De Kade</span><span class="sig-link" data-soort="blokkeert" title="Volgens het procesmodel"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m21.7 18-8-14a2 2 0 0 0-3.4 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3"></path><path d="M12 9v4M12 17h.01"></path></svg>Houdt het DO op</span>
+      </p>
+      <h2 id="first-title-s-dk">Akoestisch rapport schuift vier weken op</h2>
+      <p class="first-what">De adviseur meldt 8 januari als opleverdatum. De planning rekent met 11 december.</p>
+      <p class="first-why">Het ontwerp van de spoorgevel wacht op het rapport. De vergunningaanvraag kan daardoor later worden ingediend.</p>
+      <div class="first-links">
+        <button type="button" id="overview-s-dk" class="btn btn--link btn--sm" data-action="open-signal" data-id="s-dk" aria-label="Onderbouwing voor Akoestisch rapport schuift vier weken op">Onderbouwing</button>
+        <button type="button" class="vicki-ask" data-action="discuss-signal" data-id="s-dk" aria-label="Bespreek met Vicki" title="Bespreek met Vicki"><img class="vicki-avatar" src="assets/vicki.svg" width="22" height="22" alt=""></button>
+        <details class="verdict">
+    <summary aria-label="Signaal afwijzen" title="Klopt dit niet?"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"></path></svg></summary>
+    <div class="verdict-menu" role="menu">
+      <p>Wat is er mis mee?</p>
+      <button type="button" role="menuitem" data-action="signal-verdict" data-id="s-dk" data-reason="Klopt niet">Klopt niet</button><button type="button" role="menuitem" data-action="signal-verdict" data-id="s-dk" data-reason="Al geregeld">Al geregeld</button><button type="button" role="menuitem" data-action="signal-verdict" data-id="s-dk" data-reason="Ga ik niets mee doen">Ga ik niets mee doen</button>
+    </div>
+  </details>
+      </div>
+    </div>
+    <div class="sa sa--mail ">
+    <p class="sa-kind"><img class="vicki-avatar" src="assets/vicki.svg" width="22" height="22" alt=""><span>Vicki stelt voor · Conceptmail</span></p>
+    <p class="sa-what">Maak een conceptmail aan Ruben</p>
+
+    <button type="button" class="btn sa-go" data-action="signal-step" data-id="s-dk" data-i="1">Bekijk concept</button>
+    <details class="sa-more"><summary>Nog 1 voorstel</summary><button type="button" class="sa-alt" data-action="signal-step" data-id="s-dk" data-i="0"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h10M6 12h9M11 18h7"></path></svg>Reken de gevolgen voor de planning door</button></details>
+  </div>
+  </article></div><div class="slide  " data-verdict="" role="group" aria-roledescription="dia" aria-label="7 van 7" inert=""><article class="first" aria-labelledby="first-title-s-hk2">
+    <div class="first-signal">
+      <p class="first-meta">
+        <span class="first-count" data-urgency="Laag"><b>56</b> dagen</span>
+        <span>Havenkwartier</span><span class="sig-link" data-soort="herziening" title="Volgens het procesmodel"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15.7-6L21 8"></path><path d="M21 3v5h-5M21 12a9 9 0 0 1-15.7 6L3 16"></path><path d="M8 16H3v5"></path></svg>Raakt het mobiliteitsplan</span>
+      </p>
+      <h2 id="first-title-s-hk2">Mogelijk zijn minder parkeerplaatsen nodig</h2>
+      <p class="first-what">De nieuwe parkeernota verlaagt de norm voor middenhuur in zone A van 0,8 naar 0,6. Het programma rekent nog met de oude norm.</p>
+      <p class="first-why">Als de locatie in zone A valt, zijn mogelijk 13 parkeerplaatsen minder nodig.</p>
+      <div class="first-links">
+        <button type="button" id="overview-s-hk2" class="btn btn--link btn--sm" data-action="open-signal" data-id="s-hk2" aria-label="Onderbouwing voor Mogelijk zijn minder parkeerplaatsen nodig">Onderbouwing</button>
+        <button type="button" class="vicki-ask" data-action="discuss-signal" data-id="s-hk2" aria-label="Bespreek met Vicki" title="Bespreek met Vicki"><img class="vicki-avatar" src="assets/vicki.svg" width="22" height="22" alt=""></button>
+        <details class="verdict">
+    <summary aria-label="Signaal afwijzen" title="Klopt dit niet?"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"></path></svg></summary>
+    <div class="verdict-menu" role="menu">
+      <p>Wat is er mis mee?</p>
+      <button type="button" role="menuitem" data-action="signal-verdict" data-id="s-hk2" data-reason="Klopt niet">Klopt niet</button><button type="button" role="menuitem" data-action="signal-verdict" data-id="s-hk2" data-reason="Al geregeld">Al geregeld</button><button type="button" role="menuitem" data-action="signal-verdict" data-id="s-hk2" data-reason="Ga ik niets mee doen">Ga ik niets mee doen</button>
+    </div>
+  </details>
+      </div>
+    </div>
+    <div class="sa sa--check ">
+    <p class="sa-kind"><img class="vicki-avatar" src="assets/vicki.svg" width="22" height="22" alt=""><span>Vicki stelt voor · Controle</span></p>
+    <p class="sa-what">Controleer welke parkeerzone geldt</p>
+
+    <button type="button" class="btn sa-go" data-action="signal-step" data-id="s-hk2" data-i="0">Laat Vicki controleren</button>
+
+  </div>
+  </article></div>
+    </div>
+
+  </section>
+
+    <section class="desk-block" aria-labelledby="fw-title">
+      <header class="desk-sec"><h2 id="fw-title">Vooruit</h2><span class="desk-hint">Komende vier maanden</span></header>
+      <div class="fw" aria-label="Mijlpalen en signalen in de komende vier maanden">
+    <div class="fw-axis"><span class="fw-now">Nu</span><span style="left:9.17%">dec</span><span style="left:35.00%">jan</span><span style="left:60.83%">feb</span><span style="left:84.17%">mrt</span></div>
+    <a class="fw-lane" href="projecten/havenkwartier/planning.html" data-action="nav" data-view="project" data-project="hk" data-section="planning">
+      <span class="fw-name"><span class="np-dot" data-status="Onder druk"></span>Havenkwartier</span>
+      <span class="fw-track">
+        <i class="fw-sig" style="left:10.00%" title="11 sociale huurwoningen onder de afspraak · uiterlijk 2 dec"></i><i class="fw-sig" style="left:46.67%" title="Mogelijk zijn minder parkeerplaatsen nodig · uiterlijk 15 jan"></i>
+
+          <i class="fw-ms" data-s="koers" style="left:10.00%" title="Stuurgroep met gemeente · 2 dec · Op koers"></i>
+          <em class="fw-label" style="left:10.00%">Stuurgroep met gemeente</em>
+          <i class="fw-ms" data-s="druk" style="left:46.67%" title="Ontwerpbesluit omgevingsplan · 15 jan · Onder druk"></i>
+          <em class="fw-label" style="left:46.67%">Ontwerpbesluit omgevingsplan</em>
+      </span>
+    </a><a class="fw-lane" href="projecten/de-kade/planning.html" data-action="nav" data-view="project" data-project="dk" data-section="planning">
+      <span class="fw-name"><span class="np-dot" data-status="Onder druk"></span>De Kade</span>
+      <span class="fw-track">
+        <i class="fw-sig" style="left:24.17%" title="Akoestisch rapport schuift vier weken op · uiterlijk 19 dec"></i><i class="fw-sig" style="left:5.83%" title="Brandweeradvies trappenhuis staat open · uiterlijk 27 nov"></i>
+        <i class="fw-slip" style="left:40.83%;width:17.50%"></i><i class="fw-ms fw-ms--ghost" style="left:58.33%" title="Mogelijk 29 jan"></i>
+          <i class="fw-ms" data-s="druk" style="left:40.83%" title="DO gereed · 8 jan · Onder druk"></i>
+          <em class="fw-label" style="left:40.83%">DO gereed</em><i class="fw-slip" style="left:52.50%;width:17.50%"></i><i class="fw-ms fw-ms--ghost" style="left:70.00%" title="Mogelijk 12 feb"></i>
+          <i class="fw-ms" data-s="druk" style="left:52.50%" title="Aanvraag omgevingsvergunning · 22 jan · Onder druk"></i>
+
+          <i class="fw-ms" data-s="aandacht" style="left:95.83%" title="Start verkoop · 15 mrt · Aandacht nodig"></i>
+          <em class="fw-label" style="left:95.83%">Start verkoop</em>
+      </span>
+    </a><a class="fw-lane" href="projecten/parkzijde/planning.html" data-action="nav" data-view="project" data-project="pz" data-section="planning">
+      <span class="fw-name"><span class="np-dot" data-status="Onder druk"></span>Parkzijde</span>
+      <span class="fw-track">
+        <i class="fw-sig" style="left:18.33%" title="Bodemonderzoek nog niet bevestigd · uiterlijk 12 dec"></i><i class="fw-sig" style="left:23.33%" title="Anterieure overeenkomst kan nu al starten · uiterlijk 18 dec"></i>
+
+          <i class="fw-ms" data-s="koers" style="left:4.17%" title="Bouwteam #7 · 25 nov · Op koers"></i>
+          <em class="fw-label" style="left:4.17%">Bouwteam #7</em>
+          <i class="fw-ms" data-s="druk" style="left:85.00%" title="Aanvraag omgevingsvergunning · 2 mrt · Onder druk"></i>
+          <em class="fw-label" style="left:85.00%">Aanvraag omgevingsvergunning</em>
+      </span>
+    </a><a class="fw-lane" href="projecten/molenweide/planning.html" data-action="nav" data-view="project" data-project="mw" data-section="planning">
+      <span class="fw-name"><span class="np-dot" data-status="Aandacht nodig"></span>Molenweide</span>
+      <span class="fw-track">
+        <i class="fw-sig" style="left:11.67%" title="Nieuwe welstandsnota niet verwerkt · uiterlijk 4 dec"></i>
+
+          <i class="fw-ms" data-s="koers" style="left:11.67%" title="Gesprek grondeigenaar · 4 dec · Onvoldoende inzicht"></i>
+          <em class="fw-label" style="left:11.67%">Gesprek grondeigenaar</em>
+          <i class="fw-ms" data-s="aandacht" style="left:70.00%" title="Intentieovereenkomst · 12 feb · Aandacht nodig"></i>
+          <em class="fw-label" style="left:70.00%">Intentieovereenkomst</em>
+      </span>
+    </a>
+    <div class="fw-key" aria-hidden="true"><span><i class="fw-ms" data-s="druk"></i>Mijlpaal onder druk</span><span><i class="fw-ms fw-ms--ghost"></i>Mogelijk later</span><span><i class="fw-sig"></i>Signaal: uiterlijk handelen</span></div>
+  </div>
+    </section>
+
+    <section class="desk-block desk-block--quiet" aria-labelledby="prep-title">
+      <header class="desk-sec"><h2 id="prep-title">Vicki heeft voorbereid</h2></header>
+      <div class="prep-list"><a class="prep" href="projecten/parkzijde/vergaderingen.html#pz-bt7" data-action="action-meeting" data-id="pz-bt7" title="Concept-agenda met 6 punten">
+    <span class="prep-date"><small>wo</small><b>25</b></span>
+    <span class="prep-body"><b>Bouwteam #7</b><em>Parkzijde</em></span>
+    <span class="prep-state " aria-hidden="true"><i>6</i></span>
+  </a><a class="prep" href="projecten/de-kade/vergaderingen.html#dk-ot" data-action="action-meeting" data-id="dk-ot" title="Concept-agenda met 5 punten">
+    <span class="prep-date"><small>vr</small><b>27</b></span>
+    <span class="prep-body"><b>Ontwerpteam</b><em>De Kade</em></span>
+    <span class="prep-state " aria-hidden="true"><i>5</i></span>
+  </a><a class="prep" href="projecten/havenkwartier/vergaderingen.html#hk-sg" data-action="action-meeting" data-id="hk-sg" title="Concept-agenda met 5 punten">
+    <span class="prep-date"><small>wo</small><b>2</b></span>
+    <span class="prep-body"><b>Stuurgroep met gemeente</b><em>Havenkwartier</em></span>
+    <span class="prep-state " aria-hidden="true"><i>5</i></span>
+  </a></div>
+    </section>
   </section></div>
     <div class="dock ">
-    
+
     <div class="vicki-presence">
-      <div class="vicki-bubble">
-        <button id="vicki-tip-open" class="vicki-tip-open" data-action="dock-open"><strong>Vicki</strong><span>Dit vraagt als eerste aandacht bij De Kade. Brandweeradvies trappenhuis staat open.</span></button>
+      <div class="vicki-bubble is-ask">
+        <button id="vicki-tip-open" class="vicki-tip-open" data-action="triage-start"><strong>Vicki</strong><span>Goedemiddag, Maartje. Ik vond deze week 7 signalen. Zullen we ze even samen doorlopen?</span><em class="vicki-tip-go">Loop ze door<svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></em></button>
         <button class="icon-btn vicki-tip-close" data-action="vicki-tip-dismiss" aria-label="Verberg Vicki-tip"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"></path></svg></button>
       </div>
       <button type="button" class="dock-trigger" id="dock-trigger" data-action="dock-toggle" aria-expanded="false" aria-keyshortcuts="/">
@@ -328,11 +469,11 @@
     </div>
   </div>
   </main>
-  
-  
-  
+
+
+
   <div class="routes ">
-    
+
     <button class="routes-btn" id="demo-routes-trigger" aria-expanded="false" aria-controls="demo-route-options" data-action="routes">Demo</button>
   </div>
   </div>

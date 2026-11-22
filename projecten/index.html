@@ -43,42 +43,42 @@
       <a class="nav-item " data-action="nav" href="../gesprekken.html" data-view="gesprekken"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg><span>Gesprekken</span></a>
       <a class="nav-item " data-action="nav" href="../acties.html" data-view="acties"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"></rect><path d="m8.5 12 2.5 2.5 4.5-5"></path></svg><span>Acties</span></a>
       <button class="nav-item " data-action="toggle-dossier" aria-expanded="false"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"></path></svg><span>Dossier</span><svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button>
-      
+
     </nav>
     <div class="nav-label"><span>Projecten</span><a data-action="tab" href="../projecten/index.html" data-view="projecten" aria-current="page">Alle</a></div>
     <nav class="nav-projects" aria-label="Projecten">
       <div class="np ">
           <button class="np-head" data-action="toggle-project" data-id="hk" aria-expanded="false">
-            <span class="np-mono">HK</span><span class="np-name">Havenkwartier</span>
+            <span class="np-dot" data-status="Onder druk" aria-hidden="true"></span><span class="np-name">Havenkwartier</span>
             <svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
           </button>
-          
+
         </div><div class="np ">
           <button class="np-head" data-action="toggle-project" data-id="dk" aria-expanded="false">
-            <span class="np-mono">DK</span><span class="np-name">De Kade</span>
-            <span class="np-count">2</span><svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+            <span class="np-dot" data-status="Onder druk" aria-hidden="true"></span><span class="np-name">De Kade</span>
+            <span class="np-count" aria-label="2 open signalen">2</span><svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
           </button>
-          
+
         </div><div class="np ">
           <button class="np-head" data-action="toggle-project" data-id="pz" aria-expanded="false">
-            <span class="np-mono">PZ</span><span class="np-name">Parkzijde</span>
+            <span class="np-dot" data-status="Onder druk" aria-hidden="true"></span><span class="np-name">Parkzijde</span>
             <svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
           </button>
-          
+
         </div><div class="np ">
           <button class="np-head" data-action="toggle-project" data-id="mw" aria-expanded="false">
-            <span class="np-mono">MW</span><span class="np-name">Molenweide</span>
+            <span class="np-dot" data-status="Aandacht nodig" aria-hidden="true"></span><span class="np-name">Molenweide</span>
             <svg class="ic caret" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
           </button>
-          
+
         </div>
-      
+
     </nav>
     <div class="nav-foot">
       <a class="nav-item " data-action="nav" href="../instellingen.html" data-view="instellingen"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7h-9M14 17H5"></path><circle cx="17" cy="17" r="3"></circle><circle cx="7" cy="7" r="3"></circle></svg><span>Instellingen</span></a>
     </div>
   </aside>
-  
+
   <main class="main view-projecten">
     <header class="top">
     <button class="mobile-menu icon-btn" data-action="mobile-nav" aria-label="Navigatiemenu" aria-controls="demo-navigation" aria-expanded="false"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg></button>
@@ -90,32 +90,32 @@
     </div>
   </header>
     <div class="content" id="content"><section class="page">
-    <header class="page-head"><div><h1>Projecten</h1><p>4 lopende projecten. Kies een project om het te openen.</p></div><button class="btn btn--ghost" data-action="toast" data-text="Project toevoegen (niet in deze demo)"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5v14"></path></svg>Project toevoegen</button></header>
+    <header class="page-head"><div><h1>Projecten <span class="page-count">4</span></h1></div><button class="icon-btn icon-btn--soft" data-action="toast" data-text="Project toevoegen (niet in deze demo)" aria-label="Project toevoegen" title="Project toevoegen"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5v14"></path></svg></button></header>
     <div class="tracking-table-wrap"><table class="ptable"><thead><tr><th>Project</th><th>Fase</th><th>Woningen</th><th>Volgende mijlpaal</th><th>Signalen</th></tr></thead><tbody>
     <tr data-action="nav" data-view="project" data-project="hk" data-section="signalen">
-        <td><span class="np-mono np-mono--light">HK</span><a href="../projecten/havenkwartier/signalen.html" data-action="nav" data-view="project" data-project="hk" data-section="signalen"><b>Havenkwartier</b></a><em>Schiedam</em></td>
-        <td>Bestemmingsplan</td><td class="tabular">212</td><td class="project-next"><a href="../projecten/havenkwartier/planning.html" data-action="nav" data-view="project" data-project="hk" data-section="planning">Indiening ontwerp-bestemmingsplan · 15 jan</a>
+        <td><span class="np-dot" data-status="Onder druk"></span><a href="../projecten/havenkwartier/signalen.html" data-action="nav" data-view="project" data-project="hk" data-section="signalen"><b>Havenkwartier</b></a><em>Schiedam</em></td>
+        <td>Omgevingsplanwijziging</td><td class="tabular">212</td><td class="project-next"><a href="../projecten/havenkwartier/planning.html" data-action="nav" data-view="project" data-project="hk" data-section="planning">Ontwerpbesluit omgevingsplan · 15 jan</a>
           <span><span class="milestone-status" data-status="Onder druk">Onder druk</span> <small>Afgesproken</small></span></td>
-        <td></td></tr><tr data-action="nav" data-view="project" data-project="dk" data-section="signalen">
-        <td><span class="np-mono np-mono--light">DK</span><a href="../projecten/de-kade/signalen.html" data-action="nav" data-view="project" data-project="dk" data-section="signalen"><b>De Kade</b></a><em>Zaandam</em></td>
+        <td><span class="mini-cert cert--vast" title="11 sociale huurwoningen onder de afspraak"></span><span class="mini-cert cert--vermoed" title="Mogelijk zijn minder parkeerplaatsen nodig"></span> <span class="muted">2</span></td></tr><tr data-action="nav" data-view="project" data-project="dk" data-section="signalen">
+        <td><span class="np-dot" data-status="Onder druk"></span><a href="../projecten/de-kade/signalen.html" data-action="nav" data-view="project" data-project="dk" data-section="signalen"><b>De Kade</b></a><em>Zaandam</em></td>
         <td>Definitief ontwerp</td><td class="tabular">148</td><td class="project-next"><a href="../projecten/de-kade/planning.html" data-action="nav" data-view="project" data-project="dk" data-section="planning">Aanvraag omgevingsvergunning · 22 jan</a>
           <span><span class="milestone-status" data-status="Onder druk">Onder druk</span> <small>Mogelijk naar 12 feb</small></span></td>
         <td><span class="mini-cert cert--vermoed" title="Akoestisch rapport schuift vier weken op"></span><span class="mini-cert cert--check" title="Brandweeradvies trappenhuis staat open"></span> <span class="muted">2</span></td></tr><tr data-action="nav" data-view="project" data-project="pz" data-section="signalen">
-        <td><span class="np-mono np-mono--light">PZ</span><a href="../projecten/parkzijde/signalen.html" data-action="nav" data-view="project" data-project="pz" data-section="signalen"><b>Parkzijde</b></a><em>Amersfoort</em></td>
+        <td><span class="np-dot" data-status="Onder druk"></span><a href="../projecten/parkzijde/signalen.html" data-action="nav" data-view="project" data-project="pz" data-section="signalen"><b>Parkzijde</b></a><em>Amersfoort</em></td>
         <td>Voorlopig ontwerp</td><td class="tabular">96</td><td class="project-next"><a href="../projecten/parkzijde/planning.html" data-action="nav" data-view="project" data-project="pz" data-section="planning">Aanvraag omgevingsvergunning · 2 mrt</a>
           <span><span class="milestone-status" data-status="Onder druk">Onder druk</span> <small>Afgesproken</small></span></td>
-        <td></td></tr><tr data-action="nav" data-view="project" data-project="mw" data-section="signalen">
-        <td><span class="np-mono np-mono--light">MW</span><a href="../projecten/molenweide/signalen.html" data-action="nav" data-view="project" data-project="mw" data-section="signalen"><b>Molenweide</b></a><em>Houten</em></td>
+        <td><span class="mini-cert cert--check" title="Bodemonderzoek nog niet bevestigd"></span><span class="mini-cert cert--vermoed" title="Anterieure overeenkomst kan nu al starten"></span> <span class="muted">2</span></td></tr><tr data-action="nav" data-view="project" data-project="mw" data-section="signalen">
+        <td><span class="np-dot" data-status="Aandacht nodig"></span><a href="../projecten/molenweide/signalen.html" data-action="nav" data-view="project" data-project="mw" data-section="signalen"><b>Molenweide</b></a><em>Houten</em></td>
         <td>Haalbaarheid</td><td class="tabular">64</td><td class="project-next"><a href="../projecten/molenweide/planning.html" data-action="nav" data-view="project" data-project="mw" data-section="planning">Intentieovereenkomst grondeigenaar · 12 feb</a>
           <span><span class="milestone-status" data-status="Aandacht nodig">Aandacht nodig</span> <small>Afgesproken</small></span></td>
-        <td></td></tr>
-    
+        <td><span class="mini-cert cert--vast" title="Nieuwe welstandsnota niet verwerkt"></span> <span class="muted">1</span></td></tr>
+
     </tbody></table></div>
   </section></div>
     <div class="dock ">
-    
+
     <div class="vicki-presence">
-      <div class="vicki-bubble">
+      <div class="vicki-bubble ">
         <button id="vicki-tip-open" class="vicki-tip-open" data-action="dock-open"><strong>Vicki</strong><span>Zal ik de risico’s van Havenkwartier en De Kade naast elkaar zetten?</span></button>
         <button class="icon-btn vicki-tip-close" data-action="vicki-tip-dismiss" aria-label="Verberg Vicki-tip"><svg class="ic " viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"></path></svg></button>
       </div>
@@ -180,14 +180,14 @@
     </div>
   </div>
   </main>
-  
-  
-  
+
+
+
   <div class="routes ">
-    
+
     <button class="routes-btn" id="demo-routes-trigger" aria-expanded="false" aria-controls="demo-route-options" data-action="routes">Demo</button>
   </div>
   </div>
-  
+
 </body>
 </html>

@@ -15,6 +15,12 @@ function signalDescription(signal) {
   };
 }
 
+function signalLinkChip(signal) {
+  const link = signalLinks[signal.id];
+  if (!link) return signal.milestone ? `<span class="sig-ms">${icon("gantt")}${escapeHtml(signal.milestone)}</span>` : "";
+  return `<span class="sig-link" data-soort="${link.soort}" title="Volgens het procesmodel">${icon(signalLinkIcons[link.soort])}${escapeHtml(link.label)}</span>`;
+}
+
 function renderSignalBrief(signal, { overview = false, drawer = false } = {}) {
   const { what, why } = signalDescription(signal);
   const deadline = signalActions[signal.id]?.by;
@@ -46,8 +52,24 @@ function renderSignalCard(signal) {
 
 function renderSignalEntry(signal) {
   const expanded = state.selSignal[signal.project] === signal.id;
-  return `<article class="signal-entry" id="${signal.id}">
-    ${renderSignalBrief(signal)}
+  const deadline = signalActions[signal.id]?.by;
+  const days = deadline ? planDaysBetween(demoToday, deadline) : null;
+  const { what, why } = signalDescription(signal);
+  const done = signalFollowup(signal.id).status === "Afgerond";
+  return `<article class="signal-entry signal-entry--split" id="${signal.id}">
+    <div class="sig-split">
+      <div class="sig-left">
+        <p class="first-meta">
+          ${done ? renderActionStatus("Afgerond") : `<span class="first-count" data-urgency="${signalUrgency(deadline)}"><b>${days == null ? "–" : Math.abs(days)}</b> ${deskCountLabel(days)}</span>`}
+          ${certaintyBadge(signal.level)}${signalLinkChip(signal)}
+        </p>
+        <h2>${escapeHtml(signal.title)}</h2>
+        <p class="first-what">${escapeHtml(what)}</p>
+        <p class="first-why">${escapeHtml(why)}</p>
+        <div class="first-links"><button type="button" class="vicki-ask" data-action="discuss-signal" data-id="${signal.id}" aria-label="Bespreek met Vicki" title="Bespreek met Vicki">${vickiIcon()}<span>Bespreek</span></button>${done ? "" : renderVerdict(signal)}</div>
+      </div>
+      ${done ? "" : renderSignalAction(signal)}
+    </div>
     <button class="signal-disclosure" id="signal-toggle-${signal.id}" data-action="select-signal" data-id="${signal.id}" aria-expanded="${expanded}" aria-controls="signal-detail-${signal.id}">
       ${expanded ? "Sluit details" : "Onderbouwing en vervolg"} ${icon("chev")}
     </button>
@@ -84,7 +106,7 @@ function renderSignalProposals(signal) {
     .sort((a, b) => Number(Boolean(b.step.primary)) - Number(Boolean(a.step.primary)));
   if (!steps.length) return "";
   return `<div class="signal-proposals">
-    <p>Rise stelt voor</p>
+    <p>Vicki stelt voor</p>
     <ul>${steps.map(({ step, index }) => `<li><button type="button" class="signal-proposal" data-action="signal-step" data-id="${signal.id}" data-i="${index}"><span>${escapeHtml(step.label)}</span>${icon("chev")}</button></li>`).join("")}</ul>
   </div>`;
 }
@@ -97,7 +119,8 @@ function renderSignalFollowupControls(signal) {
 }
 
 function renderSignalEvidence(signal) {
-  return `<ul class="claims">${signal.claims.map(([level, claim, doc]) => {
+  const claims = [...signal.claims].sort((a, b) => (a[2] === "bd-werkwijze") - (b[2] === "bd-werkwijze"));
+  return `<ul class="claims">${claims.map(([level, claim, doc]) => {
       const text = signal.id === "s-dk" && doc === "dk-plan"
         ? `De basisplanning v7 rekent met ${formatPlanDate(deKadeReport.end)}.` : claim;
       const passage = signal.sources.find(([id]) => id === doc)?.[1];
@@ -150,6 +173,52 @@ function renderSignalDrawerSection(key, label, content, hint = "") {
   </section>`;
 }
 
+/* Wat Rise al heeft uitgewerkt voor een voorstel: concept, doorrekening of controle */
+function renderDrawerWork(signal, intent) {
+  const step = signal.steps.find((item) => item.intent === intent);
+  const kind = signalActionKind(step);
+  const reply = demoReplies[intent]({ projects: [signal.project], origin: { signal: signal.id, intent } }, [signal.project]);
+  const keep = ["text", "draft", "table", "chain", "sources", "agenda", "note"];
+  const blocks = reply.blocks.filter((block) => keep.includes(block.type));
+  return `<section class="work-panel">
+    <p class="sa-kind">${vickiIcon()}<span>Vicki heeft het uitgewerkt · ${kind.noun}</span></p>
+    <h2 id="signal-drawer-title">${escapeHtml(reply.title ?? step?.label ?? signal.title)}</h2>
+    <p class="work-panel-for">Bij signaal <button class="btn btn--link btn--sm" data-action="open-signal" data-id="${signal.id}">${escapeHtml(signal.title)}</button></p>
+    <div class="work-panel-body">${blocks.map((block) => renderMessageBlock(block, 0, { blocks })).join("")}</div>
+    <div class="work-panel-foot"><button type="button" class="btn btn--ghost btn--sm" data-action="discuss-signal" data-id="${signal.id}">${vickiIcon()}Werk verder uit met Vicki</button></div>
+  </section>`;
+}
+
+/* Zijpaneel: zelfde taal als Overzicht, signaal boven, Rise' voorstel eronder */
+function renderDrawerBrief(signal) {
+  const deadline = signalActions[signal.id]?.by;
+  const days = deadline ? planDaysBetween(demoToday, deadline) : null;
+  const { what, why } = signalDescription(signal);
+  const done = signalFollowup(signal.id).status === "Afgerond";
+  return `<div class="drawer-brief">
+    <p class="first-meta">
+      ${done ? renderActionStatus("Afgerond") : `<span class="first-count" data-urgency="${signalUrgency(deadline)}"><b>${days == null ? "–" : Math.abs(days)}</b> ${deskCountLabel(days)}</span>`}
+      ${certaintyBadge(signal.level)}${signalLinkChip(signal)}
+    </p>
+    <h2 id="signal-drawer-title">${escapeHtml(signal.title)}</h2>
+    <p class="first-what">${escapeHtml(what)}</p>
+    <p class="first-why">${escapeHtml(why)}</p>
+    <div class="first-links"><button type="button" class="vicki-ask" data-action="discuss-signal" data-id="${signal.id}" aria-label="Bespreek met Vicki" title="Bespreek met Vicki">${vickiIcon()}<span>Bespreek</span></button>${done ? "" : renderVerdict(signal)}</div>
+    ${done ? "" : `<div class="signal-entry--split drawer-sa">${renderSignalAction(signal)}</div>`}
+  </div>`;
+}
+
+/* Afwijzen: klein, altijd binnen handbereik. Rise leert van de reden. */
+function renderVerdict(signal) {
+  return `<details class="verdict">
+    <summary aria-label="Signaal afwijzen" title="Klopt dit niet?">${icon("x")}</summary>
+    <div class="verdict-menu" role="menu">
+      <p>Wat is er mis mee?</p>
+      ${feedbackReasons.map((reason) => `<button type="button" role="menuitem" data-action="signal-verdict" data-id="${signal.id}" data-reason="${escapeHtml(reason)}">${escapeHtml(reason)}</button>`).join("")}
+    </div>
+  </details>`;
+}
+
 function renderSignalDrawer() {
   const signal = findSignal(state.drawer);
   if (!signal) return "";
@@ -163,7 +232,7 @@ function renderSignalDrawer() {
       <span class="drawer-project">${riseIcon}${escapeHtml(project.name)}</span>
       <button id="close-signal-drawer" class="icon-btn" data-action="close-drawer" aria-label="Sluit signaal">${icon("x")}</button>
     </header>
-    ${renderSignalBrief(signal, { drawer: true })}
+    ${state.drawerWork ? renderDrawerWork(signal, state.drawerWork) : renderDrawerBrief(signal)}
     <div class="drawer-sections">
       ${renderSignalDrawerSection("sources", "Bronnen en onderbouwing", renderSignalEvidence(signal), `${sourceCount} ${sourceCount === 1 ? "bron" : "bronnen"}`)}
       ${renderSignalDrawerSection("impact", "Gevolg voor de planning", renderSignalImpact(signal))}
@@ -232,13 +301,13 @@ function renderHiddenSignals(project) {
   );
   return hidden.length
     ? `<details class="hidden-signals" id="hidden-signals">
-    <summary>Verborgen signalen (${hidden.length})</summary>
+    <summary>Afgewezen signalen (${hidden.length})</summary>
     ${hidden
       .map(
         (
           signal,
         ) => `<div><span>${escapeHtml(signal.title)}${typeof state.dismissed[signal.id] === "string" ? " · " + escapeHtml(state.dismissed[signal.id]) : ""}</span>
-      <button class="btn btn--link btn--sm" data-action="restore-signal" data-id="${signal.id}">Maak verbergen ongedaan</button></div>`,
+      <button class="btn btn--link btn--sm" data-action="restore-signal" data-id="${signal.id}">Zet terug</button></div>`,
       )
       .join("")}
   </details>`

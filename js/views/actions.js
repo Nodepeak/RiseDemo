@@ -81,8 +81,8 @@ function renderActions(project = null) {
     ? "Volg acties uit signalen en vergaderverslagen."
     : "Volg acties en deadlines uit alle projecten.";
   const header = project
-    ? renderProjectHeader(project, "Acties", intro)
-    : `<header class="page-head"><div><h1>Acties</h1><p>${intro}</p></div></header>`;
+    ? renderProjectHeader(project)
+    : `<header class="page-head"><div><h1>Acties</h1></div></header>`;
 
   return `<section class="page actions-page">${header}
     ${signal ? `<div class="action-signal-scope"><span>Bij signaal <strong>${escapeHtml(signal.title)}</strong></span>
@@ -95,16 +95,13 @@ function renderActions(project = null) {
           ["all", "Alles", actions.length],
         ].map(([value, label, count]) => `<button id="action-filter-${value}" class="filter ${filter === value ? "is-on" : ""}" type="button" data-action="actions-filter" data-key="${key}" data-value="${value}" aria-pressed="${filter === value}">${label} <em>${count}</em></button>`).join("")}
       </div>
-      <label class="action-origin-filter">Herkomst <select id="action-origin-filter" data-key="${key}">
+      <label class="action-origin-filter"><span class="visually-hidden">Herkomst</span><select id="action-origin-filter" data-key="${key}">
         ${[["all", "Alle herkomsten"], ["signal", "Signaal"], ["meeting", "Vergaderverslag"]].map(([value, label]) =>
           `<option value="${value}" ${origin === value ? "selected" : ""}>${label}</option>`,
         ).join("")}
       </select></label>
     </div>
-    ${withDataState(() => visible.length ? `<div class="action-table-wrap"><table class="action-table">
-      <thead><tr><th scope="col">Actie</th><th scope="col">Eigenaar</th><th scope="col">Deadline</th><th scope="col">Herkomst</th><th scope="col">Status</th><th scope="col"><span class="visually-hidden">Opvolging</span></th></tr></thead>
-      <tbody>${visible.map((action, index) => renderProjectAction(action, index, Boolean(project))).join("")}</tbody>
-    </table>${visible.length > 12 ? `<div class="list-foot"><span>${visible.length} acties</span><span>Op deadline, eerstvolgende eerst</span></div>` : ""}</div>` : renderState({ title: filter === "done" ? "Nog niets afgerond" : "Geen open acties", text: filter === "done" ? "Afgeronde acties verschijnen hier, met hun herkomst." : "Alles is opgepakt. Nieuwe acties uit verslagen en signalen komen hier binnen.", glyph: "task" }), { empty: { title: "Nog geen acties", text: "Rise haalt acties uit vergaderverslagen en signalen. Zodra er een verslag is, verschijnen ze hier.", glyph: "task" }, rows: 6, wrap: "action-table-wrap" })}
+    ${withDataState(() => visible.length ? `<ul class="worklist">${visible.map((action, index) => renderWorkItem(action, index, Boolean(project))).join("")}</ul>` : renderState({ title: filter === "done" ? "Nog niets afgerond" : "Geen open acties", text: filter === "done" ? "Afgeronde acties verschijnen hier, met hun herkomst." : "Alles is opgepakt. Nieuwe acties uit verslagen en signalen komen hier binnen.", glyph: "task" }), { empty: { title: "Nog geen acties", text: "Vicki haalt acties uit vergaderverslagen en signalen. Zodra er een verslag is, verschijnen ze hier.", glyph: "task" }, rows: 6, wrap: "worklist" })}
   </section>`;
 }
 
@@ -116,6 +113,29 @@ function renderActionSource(action) {
   }
   const route = { view: "project", projectId: project, section: "vergaderingen", meetingId: meeting.id };
   return `<small>${meeting.doc ? "Verslag van vergadering" : "Vergaderagenda"}</small><a class="source-link" href="${pageHref(route)}" data-action="action-meeting" data-id="${meeting.id}"><span>${escapeHtml(meeting.title)} (${formatIsoDate(meeting.date)})</span>${icon("arrow")}</a>`;
+}
+
+function renderWorkItem(action, index, scoped) {
+  const { id, title, status, owner, deadline, check, project, meeting, signal } = action;
+  const complete = status === "Afgerond";
+  const days = deadline ? Math.round((Date.parse(deadline + "T00:00:00Z") - Date.parse(demoTodayIso + "T00:00:00Z")) / dayMs) : null;
+  const late = days != null && days < 0 && !complete;
+  const fromSignal = actionOrigin(action) === "signal";
+  const route = fromSignal
+    ? { view: "project", projectId: project, section: "signalen", signalId: signal.id }
+    : { view: "project", projectId: project, section: "vergaderingen", meetingId: meeting.id };
+  const initials = (owner || "?").split(/\s+/).map((w) => w[0]).join("").slice(0, 2).toUpperCase();
+  return `<li class="work ${complete ? "is-done" : ""} ${late ? "is-late" : ""}">
+    <button id="action-toggle-${index}" class="work-check" type="button" data-action="toggle-action" data-id="${escapeHtml(id)}" data-status="${escapeHtml(status)}" aria-label="${complete ? "Heropen" : "Rond af"} ${escapeHtml(title)}" aria-pressed="${complete}">${icon("check")}</button>
+    <div class="work-main">
+      <b>${escapeHtml(title)}</b>
+      <span class="work-meta">${scoped ? "" : `<span>${escapeHtml(findProject(project).name)}</span>`}<span class="work-owner"><i>${escapeHtml(initials)}</i>${escapeHtml(owner || "Nog niet toegewezen")}</span>${check ? `<span>Controle ${formatIsoDate(check)}</span>` : ""}</span>
+    </div>
+    <a class="work-src" href="${pageHref(route)}" ${fromSignal ? `data-action="open-signal" data-id="${signal.id}"` : `data-action="action-meeting" data-id="${meeting.id}"`} title="${fromSignal ? "Signaal: " + escapeHtml(signal.title) : (meeting.doc ? "Verslag: " : "Agenda: ") + escapeHtml(meeting.title) + " (" + formatIsoDate(meeting.date) + ")"}">
+      ${fromSignal ? `<span class="mini-cert cert--${signal.level}"></span>` : icon("cal")}<span>${fromSignal ? escapeHtml(signal.title) : `${escapeHtml(meeting.title)} · ${formatIsoDate(meeting.date)}`}</span>
+    </a>
+    <span class="work-due">${deadline ? `<b>${formatIsoDate(deadline)}</b><small>${complete ? "afgerond" : late ? `${Math.abs(days)} d te laat` : days === 0 ? "vandaag" : `over ${days} d`}</small>` : '<small>geen deadline</small>'}</span>
+  </li>`;
 }
 
 function renderProjectAction(action, index, scoped) {

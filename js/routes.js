@@ -89,9 +89,12 @@ function setPageFragment(page, fragment) {
   state.meetingId = null;
   state.signalId = null;
   if (page.view !== "project") return;
-  if (page.section === "vergaderingen" && findMeeting(fragment)?.project === page.projectId) {
-    state.meetingId = fragment;
-    state.selMeeting[page.projectId] = fragment;
+  if (page.section === "vergaderingen") {
+    const meeting = findMeeting(fragment);
+    state.meetingId = meeting?.project === page.projectId ? fragment : null;
+    state.selMeeting[page.projectId] = state.meetingId;
+    state.agendaMail = null;
+    state.agendaLock = null;
   }
   const signal = page.section === "signalen" && findSignal(fragment);
   if (signal && signal.project === page.projectId) {

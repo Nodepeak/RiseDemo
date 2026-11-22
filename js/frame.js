@@ -33,12 +33,12 @@ function renderNavigation() {
     <nav class="nav-projects" aria-label="Projecten">
       ${projects
         .map((a) => {
-          let s = state.expanded[a.id],
+          let s = state.expanded[a.id] ?? e(a.id),
             o = a.id === attentionProjectId ? openSignals().filter((signal) => signal.project === a.id).length : 0;
           return `<div class="np ${e(a.id) ? "is-current" : ""}">
           <button class="np-head" data-action="toggle-project" data-id="${a.id}" aria-expanded="${!!s}">
-            <span class="np-mono">${a.id.toUpperCase()}</span><span class="np-name">${a.name}</span>
-            ${o && !s ? `<span class="np-count">${o}</span>` : ""}${icon("chev", "caret" + (s ? " is-open" : ""))}
+            <span class="np-dot" data-status="${escapeHtml(primaryProjectMilestone(a.id)?.status ?? "Op koers")}" aria-hidden="true"></span><span class="np-name">${a.name}</span>
+            ${o && !s ? `<span class="np-count" aria-label="${o} open signalen">${o}</span>` : ""}${icon("chev", "caret" + (s ? " is-open" : ""))}
           </button>
           ${s ? `<div class="np-sub">${n.map(([r, i, d]) => `<a class="nav-subitem ${e(a.id, r) ? "is-on" : ""}" data-action="nav" href="${pageHref({ view: "project", projectId: a.id, section: r })}" data-view="project" data-project="${a.id}" data-section="${r}">${d}<span>${i}</span>${r === "signalen" && o ? `<em>${o}</em>` : ""}</a>`).join("")}</div>` : ""}
         </div>`;
@@ -56,7 +56,7 @@ function renderTopbar() {
   const page = findPage(state);
   let labels = [page.title];
   if (state.view === "project" || (state.view === "doc" && state.projectId)) {
-    labels = [findProject(state.projectId).name, projectSections[state.section]];
+    labels = state.view === "doc" ? [findProject(state.projectId).name, projectSections[state.section]] : ["Projecten", findProject(state.projectId).name];
   } else if (state.view === "dossier" || state.view === "doc") {
     labels = ["Dossier", dossierGroups[state.dossierKey].name];
   }
@@ -92,7 +92,7 @@ const demoWalkthroughs = [
   ],
   [
     "Assistent bij een projectonderdeel",
-    "Rise weet dat je naar de planning van De Kade kijkt. Kies een vraag of klik op het Vicki-poppetje naast een taak.",
+    "Vicki weet dat je naar de planning van De Kade kijkt. Kies een vraag of klik op het Vicki-poppetje naast een taak.",
     () => {
       (navigate({ view: "project", projectId: "dk", section: "planning" }),
         (state.dock.open = !0),
@@ -101,7 +101,7 @@ const demoWalkthroughs = [
     },
   ],
   [
-    "Rise schakelt een agent in",
+    "Vicki schakelt een agent in",
     "Kijk hoe de afsprakenagent werkt en wat hij van je nodig heeft.",
     () => {
       let e = startConversation({
@@ -213,7 +213,7 @@ function renderPopover() {
     if (matchesChoice(query, "Automatisch Rise kiest zelf")) {
       choices.unshift({
         label: "Automatisch",
-        detail: "Rise kiest wat bij je opdracht past",
+        detail: "Vicki kiest wat bij je opdracht past",
         leading: icon("spark"),
         selected: !current,
         action: "choose-skill",
@@ -222,7 +222,7 @@ function renderPopover() {
     }
     return renderChoicePopover(
       e, "Skills", "Zoek een skill", choices,
-      "Rise kiest standaard zelf de juiste skill. Kies er zelf een als je een specifieke aanpak wilt meegeven. Via Context kun je ook kaders toevoegen.",
+      "Vicki kiest standaard zelf de juiste skill. Kies er zelf een als je een specifieke aanpak wilt meegeven. Via Context kun je ook kaders toevoegen.",
     );
   }
   if (["context", "mention", "projects"].includes(e.type)) {
@@ -328,7 +328,7 @@ function renderFrame() {
   </main>
   ${renderSignalDrawer()}
   ${renderPopover()}
-  ${state.toast ? `<div class="toast" role="status">${escapeHtml(state.toast)}${state.toastUndo ? ` <button class="toast-undo" data-action="restore-signal" data-id="${state.toastUndo}">Ongedaan maken</button>` : ""}</div>` : ""}
+  ${state.toast ? `<div class="toast" role="status">${escapeHtml(state.toast)}${state.toastUndo ? ` <button class="toast-undo" data-action="${state.toastUndo.action ?? "restore-signal"}" data-id="${state.toastUndo.id ?? state.toastUndo}">Ongedaan maken</button>` : ""}</div>` : ""}
   ${renderWalkthroughMenu()}
   ${renderPalette()}`;
 }
@@ -337,6 +337,6 @@ function renderScaledNavProjects() {
   if (!isScaled()) return "";
   const extra = scaleData().extraProjects;
   const shown = state.navAllProjects ? extra : extra.slice(0, 4);
-  return `${shown.map((project) => `<div class="np"><button class="np-head" data-action="scale-item"><span class="np-mono">${escapeHtml(project.name.slice(0, 2))}</span><span class="np-name">${escapeHtml(project.name)}</span></button></div>`).join("")}
+  return `${shown.map((project) => `<div class="np"><button class="np-head" data-action="scale-item"><span class="np-dot" data-status="${escapeHtml(project.status ?? "Op koers")}" aria-hidden="true"></span><span class="np-name">${escapeHtml(project.name)}</span></button></div>`).join("")}
     <button class="nav-subitem nav-more" data-action="nav-more" aria-expanded="${!!state.navAllProjects}">${icon(state.navAllProjects ? "back" : "chev", "nav-more-ic")}<span>${state.navAllProjects ? "Minder tonen" : `Nog ${extra.length - shown.length} projecten`}</span></button>`;
 }

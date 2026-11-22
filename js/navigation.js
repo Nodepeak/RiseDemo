@@ -11,6 +11,8 @@ function saveTrackingProgress() {
         signalFollowups: state.signalFollowups,
         actionStatus: state.actionStatus,
         agendaAdopted: state.agendaAdopted,
+        onAgenda: state.onAgenda,
+        agenda: state.agenda,
         dismissed: state.dismissed,
         deskComposerExpanded: state.deskComposerExpanded,
         scenario: state.scenario,
